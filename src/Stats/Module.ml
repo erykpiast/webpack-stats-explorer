@@ -1,0 +1,61 @@
+open Json.Decode
+
+type t = {
+  assets              : string array;
+  built               : bool;
+  cacheable           : bool;
+  chunks              : int array;
+  depth               : int;
+  errors              : int;
+  failed              : bool;
+  id                  : int option;
+  identifier          : string;
+  index               : int;
+  index2              : int;
+  issuer              : string option;
+  issuerId            : string option;
+  issuerName          : string option;
+  issuerPath          : string array option;
+  modules             : t array option;
+  name                : string;
+  optimizationBailout : string array;
+  optional            : bool;
+  prefetched          : bool;
+  profile             : Profile.t option;
+  providedExports     : string array;
+  reasons             : Reason.t array;
+  size                : int;
+  source              : string option;
+  usedExports         : bool option;
+  warnings            : int;
+};;
+
+let rec decode json = {
+  assets              = (json |> field "assets" (array string));
+  built               = (json |> field "built" bool);
+  cacheable           = (json |> field "cacheable" bool);
+  chunks              = (json |> field "chunks" (array int));
+  depth               = (json |> field "depth" int);
+  errors              = (json |> field "errors" int);
+  failed              = (json |> field "failed" bool);
+  id                  = (json |> field "id" (optional int));
+  identifier          = (json |> field "identifier" string);
+  index               = (json |> field "index" int);
+  index2              = (json |> field "index2" int);
+  issuer              = (json |> field "issuer" (optional string));
+  issuerId            = (json |> field "issuerId" (optional string));
+  issuerName          = (json |> field "issuerName" (optional string));
+  issuerPath          = (json |> field "issuerPath" (optional (array string)));
+  modules             = (json |> optional (field "modules" (array decode)));
+  name                = (json |> field "name" string);
+  optimizationBailout = (json |> field "optimizationBailout" (array string));
+  optional            = (json |> field "optional" bool);
+  prefetched          = (json |> field "prefetched" bool);
+  profile             = (json |> optional (field "profile" Profile.decode));
+  providedExports     = (json |> field "providedExports" (array string));
+  reasons             = (json |> field "reasons" (array Reason.decode));
+  size                = (json |> field "size" int);
+  source              = (json |> optional (field "source" string));
+  usedExports         = (json |> optional (field "usedExports" bool));
+  warnings            = (json |> field "warnings" int);
+};;
