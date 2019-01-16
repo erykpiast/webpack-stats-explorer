@@ -28,11 +28,13 @@
   "bs-dependencies": [
     "reason-react",
     "@glennsl/rebase",
-    "@glennsl/bs-json"
+    "@glennsl/bs-json",
+    "rationale"
   ],
   "bs-dev-dependencies": [
     "@glennsl/bs-jest",
-    "bs-enzyme"
+    "bs-enzyme",
+    "bs-jsverify"
   ],
   "refmt": 3,
   "warnings": {
