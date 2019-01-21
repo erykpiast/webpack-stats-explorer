@@ -16,6 +16,9 @@
       },
       {
         "dir": "Stats"
+      },
+      {
+        "dir": "App"
       }
     ]
   },
@@ -29,7 +32,8 @@
     "reason-react",
     "@glennsl/rebase",
     "@glennsl/bs-json",
-    "rationale"
+    "rationale",
+    "bs-css"
   ],
   "bs-dev-dependencies": [
     "@glennsl/bs-jest",

@@ -29,6 +29,7 @@
   "dependencies": {
     "@glennsl/bs-json": "3.0.0",
     "@glennsl/rebase": "0.2.1",
+    "bs-css": "8.0.0",
     "bs-jsverify": "0.10.0",
     "rationale": "0.1.10",
     "react": "16.7.0",
@@ -39,7 +40,7 @@
     "@babel/cli": "7.2.3",
     "@babel/core": "7.2.2",
     "@babel/preset-env": "7.2.3",
-    "@glennsl/bs-jest": "0.4.6",
+    "@glennsl/bs-jest": "0.4.7",
     "babel-jest": "24.0.0-alpha.11",
     "bs-enzyme": "0.6.0",
     "bs-platform": "4.0.18",

@@ -162,7 +162,7 @@ describe("Utils", () => {
             let isEqual = (a, b) => a == b;
 
             property2("idempotent", list, list, (a, b) => {
-              intersect(isEqual, a, b) == intersect(isEqual, b, a);
+              List.sort(compare, intersect(isEqual, a, b)) == List.sort(compare, intersect(isEqual, b, a));
             });
           });
         };

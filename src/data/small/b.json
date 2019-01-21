@@ -1,0 +1,927 @@
+{
+  "errors": [],
+  "warnings": [
+    "configuration\nThe 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.\nYou can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/concepts/mode/"
+  ],
+  "version": "4.28.4",
+  "hash": "370c61ed65cdd41273dd",
+  "time": 370,
+  "builtAt": 1548106929679,
+  "publicPath": "",
+  "outputPath": "/Users/eryk.napierala/Projects/webpack-stats-playground/dist",
+  "assetsByChunkName": {
+    "index": "index.f2ca10a2.js"
+  },
+  "assets": [
+    {
+      "name": "1.cf3f270a.js",
+      "size": 112,
+      "chunks": [
+        1
+      ],
+      "chunkNames": [],
+      "emitted": true
+    },
+    {
+      "name": "index.f2ca10a2.js",
+      "size": 2104,
+      "chunks": [
+        0
+      ],
+      "chunkNames": [
+        "index"
+      ],
+      "emitted": true
+    }
+  ],
+  "filteredAssets": 0,
+  "entrypoints": {
+    "index": {
+      "chunks": [
+        0
+      ],
+      "assets": [
+        "index.f2ca10a2.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "namedChunkGroups": {
+    "index": {
+      "chunks": [
+        0
+      ],
+      "assets": [
+        "index.f2ca10a2.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "chunks": [
+    {
+      "id": 0,
+      "rendered": true,
+      "initial": true,
+      "entry": true,
+      "size": 218,
+      "names": [
+        "index"
+      ],
+      "files": [
+        "index.f2ca10a2.js"
+      ],
+      "hash": "7c6e6be67685e53f9c84",
+      "siblings": [],
+      "parents": [],
+      "children": [
+        1
+      ],
+      "childrenByOrder": {},
+      "modules": [
+        {
+          "id": 0,
+          "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js caba2665dd8a64c4f4fc6e87b5b99d53",
+          "name": "./src/index.js + 4 modules",
+          "index": 0,
+          "index2": 4,
+          "size": 218,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "issuer": null,
+          "issuerId": null,
+          "issuerName": null,
+          "issuerPath": null,
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": null,
+              "module": null,
+              "moduleName": null,
+              "type": "single entry",
+              "userRequest": "./src/index.js",
+              "loc": "index"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": [],
+          "optimizationBailout": [],
+          "depth": 0,
+          "modules": [
+            {
+              "id": null,
+              "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+              "name": "./src/index.js",
+              "index": 0,
+              "index2": 4,
+              "size": 140,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [],
+              "issuer": null,
+              "issuerId": null,
+              "issuerName": null,
+              "issuerPath": null,
+              "profile": {
+                "factory": 40,
+                "building": 13
+              },
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": null,
+                  "module": null,
+                  "moduleName": null,
+                  "type": "single entry",
+                  "userRequest": "./src/index.js",
+                  "loc": "index"
+                }
+              ],
+              "usedExports": true,
+              "providedExports": [],
+              "optimizationBailout": [
+                "ModuleConcatenation bailout: Module is an entry point"
+              ],
+              "depth": 0,
+              "source": "import a from './a';\nimport b from './b';\nimport c from './c';\nimport d from './d';\n\nimport('./e').then(e => console.log([a, b, c, d, e]));\n"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/a.js",
+              "name": "./src/a.js",
+              "index": 1,
+              "index2": 0,
+              "size": 19,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [],
+              "issuer": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+              "issuerId": null,
+              "issuerName": "./src/index.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+                  "name": "./src/index.js",
+                  "profile": {
+                    "factory": 40,
+                    "building": 13
+                  }
+                }
+              ],
+              "profile": {
+                "factory": 5,
+                "building": 7
+              },
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+                  "module": "./src/index.js",
+                  "moduleName": "./src/index.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./a",
+                  "loc": "1:0-20"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+                  "module": "./src/index.js",
+                  "moduleName": "./src/index.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./a",
+                  "loc": "6:37-38"
+                }
+              ],
+              "usedExports": [
+                "default"
+              ],
+              "providedExports": [
+                "default"
+              ],
+              "optimizationBailout": [],
+              "depth": 1,
+              "source": "export default 'a';"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/b.js",
+              "name": "./src/b.js",
+              "index": 2,
+              "index2": 1,
+              "size": 20,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [],
+              "issuer": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+              "issuerId": null,
+              "issuerName": "./src/index.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+                  "name": "./src/index.js",
+                  "profile": {
+                    "factory": 40,
+                    "building": 13
+                  }
+                }
+              ],
+              "profile": {
+                "factory": 5,
+                "building": 7
+              },
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+                  "module": "./src/index.js",
+                  "moduleName": "./src/index.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./b",
+                  "loc": "2:0-20"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+                  "module": "./src/index.js",
+                  "moduleName": "./src/index.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./b",
+                  "loc": "6:40-41"
+                }
+              ],
+              "usedExports": [
+                "default"
+              ],
+              "providedExports": [
+                "default"
+              ],
+              "optimizationBailout": [],
+              "depth": 1,
+              "source": "export default 'b';\n"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/c.js",
+              "name": "./src/c.js",
+              "index": 3,
+              "index2": 2,
+              "size": 20,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [],
+              "issuer": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+              "issuerId": null,
+              "issuerName": "./src/index.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+                  "name": "./src/index.js",
+                  "profile": {
+                    "factory": 40,
+                    "building": 13
+                  }
+                }
+              ],
+              "profile": {
+                "factory": 5,
+                "building": 7
+              },
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+                  "module": "./src/index.js",
+                  "moduleName": "./src/index.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./c",
+                  "loc": "3:0-20"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+                  "module": "./src/index.js",
+                  "moduleName": "./src/index.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./c",
+                  "loc": "6:43-44"
+                }
+              ],
+              "usedExports": [
+                "default"
+              ],
+              "providedExports": [
+                "default"
+              ],
+              "optimizationBailout": [],
+              "depth": 1,
+              "source": "export default 'c';\n"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/d.js",
+              "name": "./src/d.js",
+              "index": 4,
+              "index2": 3,
+              "size": 19,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [],
+              "issuer": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+              "issuerId": null,
+              "issuerName": "./src/index.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+                  "name": "./src/index.js",
+                  "profile": {
+                    "factory": 40,
+                    "building": 13
+                  }
+                }
+              ],
+              "profile": {
+                "factory": 5,
+                "building": 7
+              },
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+                  "module": "./src/index.js",
+                  "moduleName": "./src/index.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./d",
+                  "loc": "4:0-20"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+                  "module": "./src/index.js",
+                  "moduleName": "./src/index.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./d",
+                  "loc": "6:46-47"
+                }
+              ],
+              "usedExports": [
+                "default"
+              ],
+              "providedExports": [
+                "default"
+              ],
+              "optimizationBailout": [],
+              "depth": 1,
+              "source": "export default 'b';"
+            }
+          ],
+          "filteredModules": 0
+        }
+      ],
+      "filteredModules": 0,
+      "origins": [
+        {
+          "module": "",
+          "moduleIdentifier": "",
+          "moduleName": "",
+          "loc": "index",
+          "request": "./src/index.js",
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "size": 20,
+      "names": [],
+      "files": [
+        "1.cf3f270a.js"
+      ],
+      "hash": "7c1fd39d7db9bbc00fba",
+      "siblings": [],
+      "parents": [
+        0
+      ],
+      "children": [],
+      "childrenByOrder": {},
+      "modules": [
+        {
+          "id": 1,
+          "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/e.js",
+          "name": "./src/e.js",
+          "index": 5,
+          "index2": 5,
+          "size": 20,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            1
+          ],
+          "issuer": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+          "issuerId": null,
+          "issuerName": "./src/index.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+              "name": "./src/index.js",
+              "profile": {
+                "factory": 40,
+                "building": 13
+              }
+            }
+          ],
+          "profile": {
+            "factory": 5,
+            "building": 7
+          },
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+              "module": "./src/index.js",
+              "moduleName": "./src/index.js",
+              "type": "import()",
+              "userRequest": "./e",
+              "loc": "6:0-13"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [
+            "ModuleConcatenation bailout: Module is referenced from these modules with unsupported syntax: ./src/index.js (referenced with import())"
+          ],
+          "depth": 1,
+          "source": "export default 'e';\n"
+        }
+      ],
+      "filteredModules": 0,
+      "origins": [
+        {
+          "moduleId": null,
+          "module": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+          "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+          "moduleName": "./src/index.js",
+          "loc": "6:0-13",
+          "request": "./e",
+          "reasons": []
+        }
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "id": 0,
+      "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js caba2665dd8a64c4f4fc6e87b5b99d53",
+      "name": "./src/index.js + 4 modules",
+      "index": 0,
+      "index2": 4,
+      "size": 218,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "issuer": null,
+      "issuerId": null,
+      "issuerName": null,
+      "issuerPath": null,
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "assets": [],
+      "reasons": [
+        {
+          "moduleId": null,
+          "moduleIdentifier": null,
+          "module": null,
+          "moduleName": null,
+          "type": "single entry",
+          "userRequest": "./src/index.js",
+          "loc": "index"
+        }
+      ],
+      "usedExports": true,
+      "providedExports": [],
+      "optimizationBailout": [],
+      "depth": 0,
+      "modules": [
+        {
+          "id": null,
+          "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+          "name": "./src/index.js",
+          "index": 0,
+          "index2": 4,
+          "size": 140,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [],
+          "issuer": null,
+          "issuerId": null,
+          "issuerName": null,
+          "issuerPath": null,
+          "profile": {
+            "factory": 40,
+            "building": 13
+          },
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": null,
+              "module": null,
+              "moduleName": null,
+              "type": "single entry",
+              "userRequest": "./src/index.js",
+              "loc": "index"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": [],
+          "optimizationBailout": [
+            "ModuleConcatenation bailout: Module is an entry point"
+          ],
+          "depth": 0,
+          "source": "import a from './a';\nimport b from './b';\nimport c from './c';\nimport d from './d';\n\nimport('./e').then(e => console.log([a, b, c, d, e]));\n"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/a.js",
+          "name": "./src/a.js",
+          "index": 1,
+          "index2": 0,
+          "size": 19,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [],
+          "issuer": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+          "issuerId": null,
+          "issuerName": "./src/index.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+              "name": "./src/index.js",
+              "profile": {
+                "factory": 40,
+                "building": 13
+              }
+            }
+          ],
+          "profile": {
+            "factory": 5,
+            "building": 7
+          },
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+              "module": "./src/index.js",
+              "moduleName": "./src/index.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./a",
+              "loc": "1:0-20"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+              "module": "./src/index.js",
+              "moduleName": "./src/index.js",
+              "type": "harmony import specifier",
+              "userRequest": "./a",
+              "loc": "6:37-38"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [],
+          "depth": 1,
+          "source": "export default 'a';"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/b.js",
+          "name": "./src/b.js",
+          "index": 2,
+          "index2": 1,
+          "size": 20,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [],
+          "issuer": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+          "issuerId": null,
+          "issuerName": "./src/index.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+              "name": "./src/index.js",
+              "profile": {
+                "factory": 40,
+                "building": 13
+              }
+            }
+          ],
+          "profile": {
+            "factory": 5,
+            "building": 7
+          },
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+              "module": "./src/index.js",
+              "moduleName": "./src/index.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./b",
+              "loc": "2:0-20"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+              "module": "./src/index.js",
+              "moduleName": "./src/index.js",
+              "type": "harmony import specifier",
+              "userRequest": "./b",
+              "loc": "6:40-41"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [],
+          "depth": 1,
+          "source": "export default 'b';\n"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/c.js",
+          "name": "./src/c.js",
+          "index": 3,
+          "index2": 2,
+          "size": 20,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [],
+          "issuer": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+          "issuerId": null,
+          "issuerName": "./src/index.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+              "name": "./src/index.js",
+              "profile": {
+                "factory": 40,
+                "building": 13
+              }
+            }
+          ],
+          "profile": {
+            "factory": 5,
+            "building": 7
+          },
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+              "module": "./src/index.js",
+              "moduleName": "./src/index.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./c",
+              "loc": "3:0-20"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+              "module": "./src/index.js",
+              "moduleName": "./src/index.js",
+              "type": "harmony import specifier",
+              "userRequest": "./c",
+              "loc": "6:43-44"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [],
+          "depth": 1,
+          "source": "export default 'c';\n"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/d.js",
+          "name": "./src/d.js",
+          "index": 4,
+          "index2": 3,
+          "size": 19,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [],
+          "issuer": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+          "issuerId": null,
+          "issuerName": "./src/index.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+              "name": "./src/index.js",
+              "profile": {
+                "factory": 40,
+                "building": 13
+              }
+            }
+          ],
+          "profile": {
+            "factory": 5,
+            "building": 7
+          },
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+              "module": "./src/index.js",
+              "moduleName": "./src/index.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./d",
+              "loc": "4:0-20"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+              "module": "./src/index.js",
+              "moduleName": "./src/index.js",
+              "type": "harmony import specifier",
+              "userRequest": "./d",
+              "loc": "6:46-47"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [],
+          "depth": 1,
+          "source": "export default 'b';"
+        }
+      ],
+      "filteredModules": 0
+    },
+    {
+      "id": 1,
+      "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/e.js",
+      "name": "./src/e.js",
+      "index": 5,
+      "index2": 5,
+      "size": 20,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        1
+      ],
+      "issuer": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+      "issuerId": null,
+      "issuerName": "./src/index.js",
+      "issuerPath": [
+        {
+          "id": null,
+          "identifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+          "name": "./src/index.js",
+          "profile": {
+            "factory": 40,
+            "building": 13
+          }
+        }
+      ],
+      "profile": {
+        "factory": 5,
+        "building": 7
+      },
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "assets": [],
+      "reasons": [
+        {
+          "moduleId": null,
+          "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-playground/src/index.js",
+          "module": "./src/index.js",
+          "moduleName": "./src/index.js",
+          "type": "import()",
+          "userRequest": "./e",
+          "loc": "6:0-13"
+        }
+      ],
+      "usedExports": true,
+      "providedExports": [
+        "default"
+      ],
+      "optimizationBailout": [
+        "ModuleConcatenation bailout: Module is referenced from these modules with unsupported syntax: ./src/index.js (referenced with import())"
+      ],
+      "depth": 1,
+      "source": "export default 'e';\n"
+    }
+  ],
+  "filteredModules": 0,
+  "children": []
+}

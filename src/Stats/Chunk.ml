@@ -11,7 +11,7 @@ type t = {
   origins         : Origin.t list;
   parents         : int list;
   rendered        : bool;
-  siblings        : string list;
+  siblings        : int list;
   size            : int;
 };;
 
@@ -28,7 +28,7 @@ let decode json = Json.Decode.({
   origins         = (json |> field "origins" (list Origin.decode));
   parents         = (json |> field "parents" (list int));
   rendered        = (json |> field "rendered" bool);
-  siblings        = (json |> field "siblings" (list string));
+  siblings        = (json |> field "siblings" (list int));
   size            = (json |> field "size" int);
 });;
 
@@ -45,6 +45,6 @@ let encode r = Json.Encode.(object_ [
   ("origins",         r.origins |> list Origin.encode);
   ("parents",         r.parents |> list int);
   ("rendered",        r.rendered |> bool);
-  ("siblings",        r.siblings |> list string);
+  ("siblings",        r.siblings |> list int);
   ("size",            r.size |> int);
 ]);;

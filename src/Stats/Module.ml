@@ -20,7 +20,7 @@ type t = {
   optional            : bool;
   prefetched          : bool;
   profile             : Profile.t option;
-  providedExports     : string list;
+  providedExports     : string list option;
   reasons             : Reason.t list;
   size                : int;
   source              : string option;
@@ -50,7 +50,7 @@ let rec decode json = Json.Decode.({
   optional            = (json |> field "optional" bool);
   prefetched          = (json |> field "prefetched" bool);
   profile             = (json |> optional (field "profile" Profile.decode));
-  providedExports     = (json |> field "providedExports" (list string));
+  providedExports     = (json |> field "providedExports" (optional (list string)));
   reasons             = (json |> field "reasons" (list Reason.decode));
   size                = (json |> field "size" int);
   source              = (json |> optional (field "source" string));
@@ -80,7 +80,7 @@ let rec encode r = Json.Encode.(object_ [
   ("optional",            r.optional |> bool);
   ("prefetched",          r.prefetched |> bool);
   ("profile",             r.profile |> nullable Profile.encode);
-  ("providedExports",     r.providedExports |> list string);
+  ("providedExports",     r.providedExports |> nullable (list string));
   ("reasons",             r.reasons |> list Reason.encode);
   ("size",                r.size |> int);
   ("source",              r.source |> nullable string);
