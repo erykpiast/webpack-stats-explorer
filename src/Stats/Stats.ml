@@ -54,3 +54,37 @@ let encode r = Json.Encode.(object_ [
   ("version",           r.version |> string);
   ("warnings",          r.warnings |> list string);
 ]);;
+
+let make
+  assets
+  assetsByChunkName
+  builtAt
+  children
+  chunks
+  entrypoints
+  errors
+  filteredAssets
+  hash
+  modules
+  namedChunkGroups
+  outputPath
+  time
+  version
+  warnings
+= {
+  assets            = assets;
+  assetsByChunkName = assetsByChunkName;
+  builtAt           = builtAt;
+  children          = children;
+  chunks            = chunks;
+  entrypoints       = entrypoints;
+  errors            = errors;
+  filteredAssets    = filteredAssets;
+  hash              = hash;
+  modules           = modules;
+  namedChunkGroups  = namedChunkGroups;
+  outputPath        = outputPath;
+  time              = time;
+  version           = version;
+  warnings          = warnings;
+};;

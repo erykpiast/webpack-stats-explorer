@@ -5,9 +5,11 @@ type t = {
 
 let calcSize = List.fold_left (fun acc (a: Chunk.t) -> a.size + acc) 0;;
 
-let diffChunks = Diff.create (fun (a: Chunk.t) (b: Chunk.t) ->
-  (Utils.List.isEqual a.names b.names) || (Utils.List.isEqual a.files b.files)
-);;
+let chunksSimilar (a: Chunk.t) (b: Chunk.t) =
+  (Utils.List.isEqual a.files b.files) ||
+  ((Utils.List.isEqual a.names b.names) && ((List.length a.names) != 0))
+
+let diffChunks = Diff.create chunksSimilar Chunk.eql;;
 
 let compare (a : Stats.t) (b : Stats.t) = {
   chunks = diffChunks a.chunks b.chunks;

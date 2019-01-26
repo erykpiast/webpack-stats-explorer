@@ -21,5 +21,7 @@ let de = Compare.compare(Data.d, Data.e);
 
 logComp("a VS b", ab);
 logComp("b VS c", bc);
+logComp("c VS d", cd);
+logComp("d VS e", de);
 
 ReactDOMRe.renderToElementWithId(<App comparisons=[ab, bc, cd, de] />, "app");

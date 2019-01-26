@@ -48,3 +48,40 @@ let encode r = Json.Encode.(object_ [
   ("siblings",        r.siblings |> list int);
   ("size",            r.size |> int);
 ]);;
+
+let make
+  childrenByOrder
+  entry
+  files
+  filteredModules
+  hash
+  id
+  initial
+  modules
+  names
+  origins
+  parents
+  rendered
+  siblings
+  size
+= {
+  childrenByOrder = childrenByOrder;
+  entry           = entry;
+  files           = files;
+  filteredModules = filteredModules;
+  hash            = hash;
+  id              = id;
+  initial         = initial;
+  modules         = modules;
+  names           = names;
+  origins         = origins;
+  parents         = parents;
+  rendered        = rendered;
+  siblings        = siblings;
+  size            = size;
+};;
+
+let eql a b = a.size = b.size &&
+  (Utils.List.isEqual a.names b.names) &&
+  (Utils.List.isEqual a.files b.files)
+;;

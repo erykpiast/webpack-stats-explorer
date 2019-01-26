@@ -33,13 +33,19 @@ let displayValue = (value, unit) =>
     |> float_of_int
     |> (x) => ((x /. 1024.0) /. 1024.0)
     |> Js.Float.toFixedWithPrecision(~digits=2)
-  } |> ReasonReact.string
+  } |> ReasonReact.string;
+
+let guessUnit = (value) => {
+  if (value < 10) B
+  else if (value < (10 * 1024)) KB
+  else MB
+};
 
 let displayUnit = (unit) => switch (unit) {
   | B => "B"
   | KB => "kB"
   | MB => "MB"
-  } |> ReasonReact.string
+  } |> ReasonReact.string;
 
 let component = ReasonReact.statelessComponent("NumericDiff");
 
@@ -47,28 +53,26 @@ let make = (
   _children,
   ~after,
   ~before,
-  ~label,
-  ~unit,
 ) => {
   ...component,
   render: _self => {
     let diff = after - before;
     let className = if (diff > 0) Styles.worse else Styles.better;
+    let valueUnit = guessUnit(after);
+    let diffUnit = guessUnit(Js.Math.abs_int(diff));
 
-    <div>
-      {ReasonReact.string(label)}
-      {ReasonReact.string(": ")}
-      {displayValue(after, unit)}
+    <span>
+      {displayValue(after, valueUnit)}
       {ReasonReact.string(" ")}
-      {displayUnit(unit)}
+      {displayUnit(valueUnit)}
       {ReasonReact.string(" ")}
       {diff != 0 ? (
         <span className=className>
-          {displayValue(Js.Math.abs_int(diff), unit)}
+          {displayValue(Js.Math.abs_int(diff), diffUnit)}
           {ReasonReact.string(" ")}
-          {displayUnit(unit)}
+          {displayUnit(diffUnit)}
         </span>
       ) : ReasonReact.null}
-    </div>;
+    </span>;
   },
 };
