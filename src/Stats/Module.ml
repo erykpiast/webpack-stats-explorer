@@ -87,3 +87,79 @@ let rec encode r = Json.Encode.(object_ [
   ("usedExports",         r.usedExports |> nullable bool);
   ("warnings",            r.warnings |> int);
 ]);;
+
+let make
+  assets
+  built
+  cacheable
+  chunks
+  depth
+  errors
+  failed
+  id
+  identifier
+  index
+  index2
+  issuer
+  issuerId
+  issuerName
+  issuerPath
+  modules
+  name
+  optimizationBailout
+  optional
+  prefetched
+  profile
+  providedExports
+  reasons
+  size
+  source
+  usedExports
+  warnings
+= {
+  assets              = assets;
+  built               = built;
+  cacheable           = cacheable;
+  chunks              = chunks;
+  depth               = depth;
+  errors              = errors;
+  failed              = failed;
+  id                  = id;
+  identifier          = identifier;
+  index               = index;
+  index2              = index2;
+  issuer              = issuer;
+  issuerId            = issuerId;
+  issuerName          = issuerName;
+  issuerPath          = issuerPath;
+  modules             = modules;
+  name                = name;
+  optimizationBailout = optimizationBailout;
+  optional            = optional;
+  prefetched          = prefetched;
+  profile             = profile;
+  providedExports     = providedExports;
+  reasons             = reasons;
+  size                = size;
+  source              = source;
+  usedExports         = usedExports;
+  warnings            = warnings;
+};;
+
+let rec eql a b =
+  (a.name = b.name) &&
+  (a.size = b.size) &&
+  (a.source = b.source) &&
+  (match (a.modules, b.modules) with
+    | (None, None) -> true
+    | (None, Some(_)) -> false
+    | (Some(_), None) -> false
+    | (Some(ams), Some(bms)) ->
+      (List.length(ams) = List.length(bms))
+      && (List.fold_left2
+        (fun acc a b -> acc && (eql a b))
+        true
+        ams
+        bms)
+  )
+;;

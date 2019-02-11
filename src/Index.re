@@ -14,10 +14,10 @@ logStats("c", Data.c);
 logStats("d", Data.d);
 logStats("e", Data.e);
 
-let ab = Compare.compare(Data.a, Data.b);
-let bc = Compare.compare(Data.b, Data.c);
-let cd = Compare.compare(Data.c, Data.d);
-let de = Compare.compare(Data.d, Data.e);
+let ab = Compare.make(Data.a, Data.b);
+let bc = Compare.make(Data.b, Data.c);
+let cd = Compare.make(Data.c, Data.d);
+let de = Compare.make(Data.d, Data.e);
 
 logComp("a VS b", ab);
 logComp("b VS c", bc);

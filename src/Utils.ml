@@ -1,5 +1,10 @@
 let tap fn = (fun  arg -> let _ = (fn arg) in arg);;
 
+let defaultTo value option = (match option with
+| Some s -> s
+| None -> value
+);;
+
 module List = struct
   let rec isEqual a b = match (a, b) with
     | ([], []) -> true

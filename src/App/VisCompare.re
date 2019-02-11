@@ -1,9 +1,4 @@
-let getChunkName = (chunk: Chunk.t) => switch (chunk.names) {
-| [] => List.nth(chunk.files, 0);
-| [name, ..._] => name
-};
-
-let getFilename = (chunk: Chunk.t) => List.nth(chunk.files, 0);
+open Compare.Chunks;
 
 let renderChunksDiff = (mapper, title, chunks) => <ChunksDiff
   chunks=(chunks |> List.map(mapper))
@@ -12,32 +7,32 @@ let renderChunksDiff = (mapper, title, chunks) => <ChunksDiff
 
 let component = ReasonReact.statelessComponent("Compare");
 
-let make = (~size, ~chunks: Diff.t(Chunk.t), _children) => {
+let make = (~size, ~chunks: t, _children) => {
   ...component,
   render: _self => {
-    let added = renderChunksDiff((chunk: Chunk.t) => {
+    let added = renderChunksDiff((chunk: Summary.t) => {
       after: chunk.size,
       before: 0,
-      chunkname: getChunkName(chunk),
-      filenames: [getFilename(chunk)]
+      chunkname: chunk.name,
+      filenames: [chunk.filename]
     }, L10N.added, chunks.added);
-    let removed = renderChunksDiff((chunk: Chunk.t) => {
+    let removed = renderChunksDiff((chunk: Summary.t) => {
       after: 0,
       before: chunk.size,
-      chunkname: getChunkName(chunk),
-      filenames: [getFilename(chunk)]
+      chunkname: chunk.name,
+      filenames: [chunk.filename]
     }, L10N.removed, chunks.removed);
-    let intact = renderChunksDiff((chunk: Chunk.t) => {
+    let intact = renderChunksDiff((chunk: Summary.t) => {
       after: chunk.size,
       before: chunk.size,
-      chunkname: getChunkName(chunk),
-      filenames: [getFilename(chunk)]
+      chunkname: chunk.name,
+      filenames: [chunk.filename]
     }, L10N.intact, chunks.intact);
-    let modified = renderChunksDiff(((a: Chunk.t, b: Chunk.t)) => {
-      after: b.size,
-      before: a.size,
-      chunkname: getChunkName(a),
-      filenames: [a, b] |> List.map(getFilename)
+    let modified = renderChunksDiff((chunk: ModifiedSummary.t) => {
+      after: snd(chunk.size),
+      before: fst(chunk.size),
+      chunkname: chunk.name,
+      filenames: [fst(chunk.filename), snd(chunk.filename)]
     }, L10N.modified, chunks.modified);
 
     <>

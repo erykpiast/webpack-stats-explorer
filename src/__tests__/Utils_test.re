@@ -1,5 +1,3 @@
-/* Component_test.re */
-
 open Jest;
 open ExpectJs;
 open BsJsverify;
