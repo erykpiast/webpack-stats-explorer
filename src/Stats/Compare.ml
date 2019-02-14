@@ -134,6 +134,10 @@ module Chunks = struct
     ]);;
   end
 
+  type chunk =
+    | Summary of Summary.t
+    | ModifiedSummary of ModifiedSummary.t;;
+
   type t = {
     added     : Summary.t list;
     removed   : Summary.t list;

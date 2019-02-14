@@ -10,20 +10,27 @@ type props = {
   after: int,
   before: int,
   chunkname: string,
-  filenames: list(string)
+  filenames: list(string),
+  chunk: Compare.Chunks.chunk
 };
 
 let component = ReasonReact.statelessComponent("ChunksDiff");
 
-let make = (~title, ~chunks, _children) => {
+let make = (~title, ~chunks, ~onChunk, _children) => {
   ...component,
   render: _self => switch (chunks) {
   | [] => ReasonReact.null
   | _ => <>
     <h3>{ReasonReact.string(title)}</h3>
     <ul>
-      ...(chunks |> List.map(({ after, before, chunkname, filenames }) => {
-        <li>
+      ...(chunks |> List.map(({
+        after,
+        before,
+        chunk,
+        chunkname,
+        filenames
+      }) => {
+        <li onClick=((_) => onChunk(chunk))>
           <strong>{ReasonReact.string(chunkname)}</strong>
           <br/>
           <NumericDiff

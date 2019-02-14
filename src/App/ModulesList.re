@@ -1,10 +1,10 @@
-type props = {
+type m = {
   name: string,
   size: int,
   source: string,
 };
 
-let component = ReasonReact.statelessComponent("ModulesDiff");
+let component = ReasonReact.statelessComponent("ModulesList");
 
 let make = (~title, ~modules, _children) => {
   ...component,
@@ -18,7 +18,8 @@ let make = (~title, ~modules, _children) => {
       }) => {
         <li>
           <strong>{ReasonReact.string(name)}</strong>
-          <strong>{size |> string_of_int |> ReasonReact.string}</strong>
+          <br />
+          <Size value=size />
           <pre>{ReasonReact.string(source)}</pre>
         </li>
       }) |> Array.of_list)
