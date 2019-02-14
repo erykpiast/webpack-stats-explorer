@@ -64,6 +64,13 @@ let make = (~comparisons, _children) => {
 
   render: self => {
     let comp = List.nth(self.state.comparisons, self.state.index);
+    let rec mapNotModifiedModules = (modules) => modules
+      |> List.map((m: Compare.Modules.Summary.t) => ModulesList.({
+        name: m.name,
+        size: m.size,
+        source: m.source,
+        modules: m.modules |> mapNotModifiedModules
+      }));
 
     <>
       <button onClick=(_ => self.send(Prev))>
@@ -88,12 +95,8 @@ let make = (~comparisons, _children) => {
           | None => ReasonReact.null
           | Some(chunk) => (switch chunk {
             | Summary(chunk) => <ModulesList
-            title="Modules"
-              modules={chunk.modules |> List.map((m: Compare.Modules.Summary.t) => ModulesList.({
-                name: m.name,
-                size: m.size,
-                source: m.source,
-              }))}
+              title="Modules"
+              modules={chunk.modules |> mapNotModifiedModules}
             />
             | ModifiedSummary(_) => ReasonReact.null
             })
