@@ -6,3 +6,4 @@ let modified = "Modified";
 let overalSize = "Overal size"
 let removed = "Removed";
 let modules = "Modules";
+let submodules = "Submodules";

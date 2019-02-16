@@ -60,6 +60,14 @@ module Modules = struct
     modified  : t ModifiedSummary.t list;
   };;
 
+  type module_ =
+    | Summary of Summary.t
+    | ModifiedSummary of (t ModifiedSummary.t);;
+
+  type modules =
+    | ModifiedModules of t
+    | NotModifiedModules of Summary.t list;;
+
   let similar (a: Module.t) (b: Module.t) = a.name = b.name;;
   let diffModules = Diff.create similar Module.eql;;
   let rec make xs ys =
@@ -134,16 +142,16 @@ module Chunks = struct
     ]);;
   end
 
-  type chunk =
-    | Summary of Summary.t
-    | ModifiedSummary of ModifiedSummary.t;;
-
   type t = {
     added     : Summary.t list;
     removed   : Summary.t list;
     intact    : Summary.t list;
     modified  : ModifiedSummary.t list;
   };;
+
+  type chunk =
+    | Summary of Summary.t
+    | ModifiedSummary of ModifiedSummary.t;;
 
   let similar (a: Chunk.t) (b: Chunk.t) =
     (Utils.List.isEqual a.files b.files) ||

@@ -17,7 +17,7 @@ module type ModulesList = {
     ReasonReact.noRetainedProps,
     ReasonReact.actionless
   )
-}
+};
 
 module rec ModulesList: ModulesList = {
   let component = ReasonReact.statelessComponent("ModulesList");
@@ -40,7 +40,7 @@ module rec ModulesList: ModulesList = {
             <pre>{ReasonReact.string(source)}</pre>
             {List.length(modules) > 0
               ? <ModulesList
-                title="Submodules"
+                title={L10N.submodules}
                 modules={modules}
               />
               : ReasonReact.null}
@@ -49,6 +49,6 @@ module rec ModulesList: ModulesList = {
       </ul>
     </>
   };
-}
+};
 
 let make = ModulesList.make;

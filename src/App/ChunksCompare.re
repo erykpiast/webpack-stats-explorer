@@ -1,6 +1,6 @@
 open Compare.Chunks;
 
-let component = ReasonReact.statelessComponent("Compare");
+let component = ReasonReact.statelessComponent("ChunksCompare");
 
 let make = (~size, ~chunks: t, ~onChunk, _children) => {
   let renderChunksDiff = (mapper, title, chunks) => <ChunksDiff
