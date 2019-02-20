@@ -68,7 +68,10 @@ module rec ModulesCompare: ModulesCompare = {
                   before={fst(module_.size)}
                 />
                 <br/>
-                <pre>{module_.source |> fst |> ReasonReact.string}</pre>
+                <CodeDiff
+                  before={fst(module_.source)}
+                  after={snd(module_.source)}
+                />
                 {switch module_.modules {
                 | None => ReasonReact.null
                 | Some(submodules) => <ModulesCompare

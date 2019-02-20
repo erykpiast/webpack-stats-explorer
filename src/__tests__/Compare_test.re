@@ -194,8 +194,6 @@ describe("Compare", () => {
       let modules2 = [bar2, baz2, taz2, faz2];
       let result = make(modules1, modules2);
 
-      result |> encode |> Json.stringify |> Js.log
-
       test("added", () => {
         expect(result.added) |> toEqual([Summary.make(bar2)])
       });
