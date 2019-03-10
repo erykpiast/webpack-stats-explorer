@@ -45,10 +45,30 @@ module Styles = {
     display(block),
     width(`percent(50.0)),
   ]);
+
+  let dropzone = style([
+    display(`flex),
+    justifyContent(`center),
+    alignItems(`center),
+    position(`absolute),
+    height(`percent(100.0)),
+    width(`percent(100.0)),
+    zIndex(-1),
+  ]);
 };
 
-/* greeting and children are props. `children` isn't used, therefore ignored.
-    We ignore it by prepending it with an underscore */
+let getLabel = (~isDragAccept, ~isDragActive, ~isDragReject) => {
+  if (!isDragActive) {
+    "Drop files here"
+  } else if (isDragAccept) {
+    "Great, drop it now!"
+  } else if (isDragReject) {
+    "Nope, we need JSON here."
+  } else {
+    "Here, here!"
+  }
+};
+
 let make = (~comparisons, _children) => {
   /* spread the other default fields of component here and override a few */
   ...component,
@@ -66,6 +86,43 @@ let make = (~comparisons, _children) => {
     let comp = List.nth(self.state.comparisons, self.state.index);
 
     <>
+      <Dropzone
+        accept=Dropzone.Single("application/json")
+        multiple=true
+        onDrop=((a, b) => Js.log((a, b)))
+      >
+      ...(({ getInputProps, getRootProps, isDragAccept, isDragActive, isDragReject }) => {
+        let inputProps = getInputProps();
+        let rootProps = getRootProps();
+        let label = getLabel(~isDragAccept, ~isDragActive, ~isDragReject);
+        <div
+          className=Styles.dropzone
+          onBlur=rootProps.onBlur
+          onClick=rootProps.onClick
+          onDragEnter=rootProps.onDragEnter
+          onDragLeave=rootProps.onDragLeave
+          onDragOver=rootProps.onDragOver
+          onDragStart=rootProps.onDragStart
+          onDrop=rootProps.onDrop
+          onFocus=rootProps.onFocus
+          onKeyDown=rootProps.onKeyDown
+          ref=rootProps.ref
+          tabIndex=rootProps.tabIndex
+        >
+          <span>
+            <label>{ReasonReact.string(label)}</label>
+            <input
+              autoComplete=inputProps.autoComplete
+              onChange=inputProps.onChange
+              onClick=inputProps.onClick
+              ref=inputProps.ref
+              style=inputProps.style
+              tabIndex=inputProps.tabIndex
+              type_=inputProps.type_
+            />
+          </span>
+        </div>
+      })</Dropzone>
       <button onClick=(_ => self.send(Prev))>
         {ReasonReact.string("<<")}
       </button>
