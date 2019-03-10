@@ -69,3 +69,4 @@ src/**/*.js
 /build
 /lib/bs/
 /node_modules/
+.merlin

@@ -31,6 +31,7 @@
     "@glennsl/rebase": "0.2.1",
     "bs-css": "8.0.2",
     "bs-jsverify": "0.10.0",
+    "bs-react-dropzone": "0.1.0",
     "diff": "4.0.1",
     "rationale": "0.1.10",
     "react": "16.8.4",

@@ -86,8 +86,8 @@ let make = (~comparisons, _children) => {
     let comp = List.nth(self.state.comparisons, self.state.index);
 
     <>
-      <Dropzone
-        accept=Dropzone.Single("application/json")
+      <ReactDropzone
+        accept=ReactDropzone.Single("application/json")
         multiple=true
         onDrop=((a, b) => Js.log((a, b)))
       >
@@ -122,7 +122,7 @@ let make = (~comparisons, _children) => {
             />
           </span>
         </div>
-      })</Dropzone>
+      })</ReactDropzone>
       <button onClick=(_ => self.send(Prev))>
         {ReasonReact.string("<<")}
       </button>
