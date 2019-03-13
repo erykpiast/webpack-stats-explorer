@@ -60,6 +60,7 @@ let compareStats = (stats) => stats
     switch(acc) {
     | (None, []) => (Some(a), [])
     | (Some(b), acc) => (Some(b), [Compare.make(b, a), ...acc])
+    | _ => acc
     }, (None, [])
   )
   |> snd
