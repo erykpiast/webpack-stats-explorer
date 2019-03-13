@@ -31,6 +31,7 @@
   "bs-dependencies": [
     "@glennsl/rebase",
     "@glennsl/bs-json",
+    "@zpnester/bs-filereader",
     "rationale",
     "reason-react",
     "bs-css",
