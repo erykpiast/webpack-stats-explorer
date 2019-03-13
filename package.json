@@ -29,9 +29,10 @@
   "dependencies": {
     "@glennsl/bs-json": "3.0.0",
     "@glennsl/rebase": "0.2.1",
+    "@zpnester/bs-filereader": "0.2.2",
     "bs-css": "8.0.2",
     "bs-jsverify": "0.10.0",
-    "bs-react-dropzone": "0.1.0",
+    "bs-react-dropzone": "0.2.0",
     "diff": "4.0.1",
     "rationale": "0.1.10",
     "react": "16.8.4",
