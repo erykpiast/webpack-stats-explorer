@@ -1,27 +1,37 @@
-type parsingStatus =
+type failReason =
+  | NotEnoughFiles
+  | WrongFormat
+  | ParsingFailed;
+
+type status =
   | Success
-  | Fail
+  | Fail(failReason)
   | Unknown;
 
 type state = {
-  parsingStatus: parsingStatus,
+  status: status,
   resetParsingStatusTimeout: option(Js.Global.timeoutId)
 };
 
 type action =
-  | ParsingSucceed(Js.Global.timeoutId)
-  | ParsingFailed(Js.Global.timeoutId)
-  | ParsingReset;
+  | UploadSuccess(Js.Global.timeoutId)
+  | UploadFail(failReason, Js.Global.timeoutId)
+  | StatusReset;
 
 let getLabel = (
   ~isDragAccept,
   ~isDragActive,
   ~isDragReject,
-  ~parsingStatus
+  ~status
 ) => {
-  switch parsingStatus {
-  | Success => "Webpack stats parsed successfully!"
-  | Fail    => "Parsing failed miserably!"
+  switch status {
+  | Success => "Webpack stats uploaded successfully!"
+  | Fail(reason) =>
+    switch reason {
+    | NotEnoughFiles => "Dude, there is no point in comparing less than two files."
+    | WrongFormat => "Drag JSON files, please!"
+    | ParsingFailed => "It doesn't seem to be valid Webpack stats."
+    }
   | Unknown => if (!isDragActive) {
       "Drop files here"
     } else if (isDragAccept) {
@@ -47,10 +57,14 @@ let parseStats = (~onSuccess, ~onFailure, files) =>
   )
   |> Js.Promise.all
   |> Js.Promise.then_((files) => {
-    onSuccess(files);
+    if (Array.length(files) > 0) {
+      onSuccess(files);
+    }
+
     Js.Promise.resolve();
   })
   |> Js.Promise.catch((err) => {
+    Js.log(err);
     onFailure(err);
     Js.Promise.resolve();
   });
@@ -69,73 +83,74 @@ module Styles = {
   ]);
 };
 
-let reducer = (action, state) =>
+let reducer = (action, _state) =>
   switch action {
-  | ParsingSucceed(timeoutId) => ReasonReact.Update({
-      parsingStatus: Success,
+  | UploadSuccess(timeoutId) => ReasonReact.Update({
+      status: Success,
       resetParsingStatusTimeout: Some(timeoutId)
     })
-  | ParsingFailed(timeoutId) => ReasonReact.Update({
-      parsingStatus: Fail,
+  | UploadFail(reason, timeoutId) => ReasonReact.Update({
+      status: Fail(reason),
       resetParsingStatusTimeout: Some(timeoutId)
     })
-  | ParsingReset => ReasonReact.Update({
-      parsingStatus: Unknown,
+  | StatusReset => ReasonReact.Update({
+      status: Unknown,
       resetParsingStatusTimeout: None
     })
 };
 
-let component = ReasonReact.reducerComponent("Dropzone");
+let fail = (reason, timeoutId) => UploadFail(reason, timeoutId);
 
-let resetTimeout = (previousTimeout, send) => {
-  switch previousTimeout {
-  | Some(timeoutId) => Js.Global.clearTimeout(timeoutId)
-  | _ => ()
-  };
-  Js.Global.setTimeout(() => send(ParsingReset), 1000)
-};
+let success = (timeoutId) => UploadSuccess(timeoutId);
+
+let component = ReasonReact.reducerComponent("Dropzone");
 
 let make = (~onStats, _children) => {
   ...component,
   initialState: () => {
-    parsingStatus: Unknown,
+    status: Unknown,
     resetParsingStatusTimeout: None,
   },
   reducer,
   render: self => {
+    let updateStatus = (actionCreator) => {
+      switch self.state.resetParsingStatusTimeout {
+        | Some(timeoutId) => Js.Global.clearTimeout(timeoutId)
+        | _ => ()
+        };
+      let timeoutId = Js.Global.setTimeout(() => {
+        self.send(StatusReset);
+      }, 1000);
+
+      self.send(actionCreator(timeoutId));
+    };
+
     <>
       <ReactDropzone
         accept=ReactDropzone.Single("application/json")
         multiple=true
-        onDrop=((acceptedFiles, _) => acceptedFiles
-          |> parseStats(
+        onDrop=((acceptedFiles, _) => switch acceptedFiles {
+        | [||] => updateStatus(fail(NotEnoughFiles))
+        | [|_|] => updateStatus(fail(NotEnoughFiles))
+        | files => files |> parseStats(
             ~onSuccess = (stats) => {
-              let timeout = resetTimeout(
-                self.state.resetParsingStatusTimeout,
-                self.send
-              );
-              self.send(ParsingSucceed(timeout));
+              updateStatus(success)
               onStats(stats);
             },
             ~onFailure = (_) => {
-              let timeout = resetTimeout(
-                self.state.resetParsingStatusTimeout,
-                self.send
-              );
-              self.send(ParsingFailed(timeout));
+              updateStatus(fail(ParsingFailed))
             },
-          )
-          |> ignore
-        )
+          ) |> ignore
+        })
       >
-      ...(({ getInputProps, getRootProps, isDragAccept, isDragActive, isDragReject }) => {
+      ...(({ getInputProps, getRootProps, isDragAccept, isDragActive, isDragReject, rejectedFiles, acceptedFiles }) => {
         let inputProps = getInputProps();
         let rootProps = getRootProps();
         let label = getLabel(
           ~isDragAccept,
           ~isDragActive,
           ~isDragReject,
-          ~parsingStatus = self.state.parsingStatus,
+          ~status = self.state.status,
         );
         <div
           className=Styles.dropzone
