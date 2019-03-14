@@ -1,6 +1,8 @@
 webpack-stats-explorer
 ======================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/erykpiast/webpack-stats-explorer.svg)](https://greenkeeper.io/)
+
 Tool for exploring webpack stats and comparing them between builds.
 
 ## Development
