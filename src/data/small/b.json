@@ -6,7 +6,7 @@
   "version": "4.28.4",
   "hash": "370c61ed65cdd41273dd",
   "time": 370,
-  "builtAt": 1548106929679,
+  "builtAt": 2,
   "publicPath": "",
   "outputPath": "/Users/eryk.napierala/Projects/webpack-stats-playground/dist",
   "assetsByChunkName": {

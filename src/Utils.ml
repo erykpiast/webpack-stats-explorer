@@ -28,3 +28,8 @@ module List = struct
         ))
       |> uniq isEqual;;
 end
+
+module Function = struct
+  let unary (fn: 'a) : 'a = [%raw "(a) => fn(a)" ];;
+  let binary (fn: 'a) : 'a = [%raw "(a, b) => fn(a, b)" ];;
+end

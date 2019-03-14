@@ -29,11 +29,13 @@
   "suffix": ".bs.js",
   "namespace": true,
   "bs-dependencies": [
-    "reason-react",
     "@glennsl/rebase",
     "@glennsl/bs-json",
+    "@zpnester/bs-filereader",
     "rationale",
-    "bs-css"
+    "reason-react",
+    "bs-css",
+    "bs-react-dropzone"
   ],
   "bs-dev-dependencies": [
     "@glennsl/bs-jest",

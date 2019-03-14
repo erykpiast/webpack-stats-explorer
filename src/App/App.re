@@ -11,7 +11,8 @@ type state = {
 type action =
   | Next
   | Prev
-  | ChooseChunk(Compare.Chunks.chunk);
+  | ChooseChunk(Compare.Chunks.chunk)
+  | UpdateComparisons(list(Compare.t));
 
 let component = ReasonReact.reducerComponent("App");
 let reducer = (action, state) =>
@@ -31,6 +32,11 @@ let reducer = (action, state) =>
     comparisons: state.comparisons,
     activeChunk: Some(chunk)
   })
+  | UpdateComparisons(comparisons) => ReasonReact.Update({
+    index: 0,
+    comparisons: comparisons,
+    activeChunk: None
+  })
 };
 
 module Styles = {
@@ -47,10 +53,20 @@ module Styles = {
   ]);
 };
 
-/* greeting and children are props. `children` isn't used, therefore ignored.
-    We ignore it by prepending it with an underscore */
+let compareStats = (stats) => stats
+  |> Array.to_list
+  |> List.sort((a: Stats.t, b: Stats.t) => a.builtAt - b.builtAt)
+  |> List.fold_left((acc: (option(Stats.t), list(Compare.t)), a) =>
+    switch(acc) {
+    | (None, []) => (Some(a), [])
+    | (Some(b), acc) => (Some(b), [Compare.make(b, a), ...acc])
+    | _ => acc
+    }, (None, [])
+  )
+  |> snd
+  |> List.rev;
+
 let make = (~comparisons, _children) => {
-  /* spread the other default fields of component here and override a few */
   ...component,
 
   initialState: () => {
@@ -59,13 +75,13 @@ let make = (~comparisons, _children) => {
     activeChunk: None
   },
 
-  /* State transitions */
   reducer,
 
   render: self => {
     let comp = List.nth(self.state.comparisons, self.state.index);
 
     <>
+      <Dropzone onStats=(stats => self.send(UpdateComparisons(compareStats(stats)))) />
       <button onClick=(_ => self.send(Prev))>
         {ReasonReact.string("<<")}
       </button>
