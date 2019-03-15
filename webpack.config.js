@@ -7,7 +7,7 @@ module.exports = {
   entry: './src/Index.bs.js',
   mode: isProd ? 'production' : 'development',
   output: {
-    path: path.join(__dirname, 'build/'),
+    path: path.join(__dirname, 'dist/'),
   },
   plugins: [new HtmlWebpackPlugin({ template: './src/index.html' })],
 };

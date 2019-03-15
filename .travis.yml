@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+- '11'
+cache: npm
+jobs:
+  include:
+    - stage: test
+      script: npm test
+    - stage: deploy
+      script: npm run build
+      deploy:
+        provider: pages
+        skip-cleanup: true
+        github-token: $GITHUB_TOKEN
+        keep-history: true
+        on:
+          branch: master
+stages:
+  - test
+  - deploy
