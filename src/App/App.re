@@ -1,41 +1,33 @@
-type activeChunk =
-  | Some(Compare.Chunks.chunk)
-  | None;
-
-type state = {
-  index: int,
-  comparisons: list(Compare.t),
-  activeChunk: activeChunk
-};
+open State;
 
 type action =
   | Next
   | Prev
-  | ChooseChunk(Compare.Chunks.chunk)
+  | Navigate(NavigationPath.segment)
   | UpdateComparisons(list(Compare.t));
 
 let component = ReasonReact.reducerComponent("App");
-let reducer = (action, state) =>
-  switch (action) {
+
+let reducer = (action, state) => switch (action) {
   | Next => ReasonReact.Update({
       index: (state.index + 1) mod List.length(state.comparisons),
       comparisons: state.comparisons,
-      activeChunk: None
+      navigationPath: []
     })
   | Prev => ReasonReact.Update({
       index: (state.index - 1 + List.length(state.comparisons)) mod List.length(state.comparisons),
       comparisons: state.comparisons,
-      activeChunk: None
+      navigationPath: []
     })
-  | ChooseChunk(chunk) => ReasonReact.Update({
+  | Navigate(segment) => ReasonReact.Update({
     index: state.index,
     comparisons: state.comparisons,
-    activeChunk: Some(chunk)
+    navigationPath: [segment]
   })
   | UpdateComparisons(comparisons) => ReasonReact.Update({
     index: 0,
     comparisons: comparisons,
-    activeChunk: None
+    navigationPath: []
   })
 };
 
@@ -66,13 +58,27 @@ let compareStats = (stats) => stats
   |> snd
   |> List.rev;
 
+let getModules = (item) => switch (item) {
+  | Chunk(chunk) => switch (chunk) {
+    | Summary(chunk) => Compare.Modules.NotModifiedModules(chunk.modules)
+    | ModifiedSummary(chunk) => Compare.Modules.ModifiedModules(chunk.modules)
+  }
+  | Module(module_) => switch (module_) {
+    | Summary(module_) => Compare.Modules.NotModifiedModules(module_.modules)
+    | ModifiedSummary(module_) => switch (module_.modules) {
+      | Some(modules) => Compare.Modules.ModifiedModules(modules)
+      | None => Compare.Modules.NotModifiedModules([])
+    }
+  }
+};
+
 let make = (~comparisons, _children) => {
   ...component,
 
   initialState: () => {
     index: 0,
     comparisons: comparisons,
-    activeChunk: None
+    navigationPath: [],
   },
 
   reducer,
@@ -91,25 +97,28 @@ let make = (~comparisons, _children) => {
       <button onClick=(_ => self.send(Next))>
         {ReasonReact.string(">>")}
       </button>
+      <Breadcrumbs items=self.state.navigationPath />
       <div className=Styles.wrapper>
         <div className=Styles.column>
           <ChunksCompare
             size=comp.size
             chunks=comp.chunks
-            onChunk=((chunk) => self.send(ChooseChunk(chunk)))
+            onChunk=((chunk) => self.send(Navigate(chunk)))
           />
         </div>
         <div className=Styles.column>
-          {switch self.state.activeChunk {
-          | None => ReasonReact.null
-          | Some(chunk) => Compare.Modules.(<ModulesCompare
-            modules={switch chunk {
-            | Summary(chunk) => NotModifiedModules(chunk.modules)
-            | ModifiedSummary(chunk) => ModifiedModules(chunk.modules)
+          {switch self.state.navigationPath {
+          | [] => ReasonReact.null
+          | [chunk] => <ModulesCompare
+            modules={switch (chunk) {
+            | NavigationPath.Added(item) => getModules(item)
+            | NavigationPath.Removed(item) => getModules(item)
+            | NavigationPath.Modified(item) => getModules(item)
+            | NavigationPath.Intact(item) => getModules(item)
             }}
             onModule={(_) => ()}
             title={L10N.modules}
-          />)}}
+          />}}
         </div>
       </div>
     </>
