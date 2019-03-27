@@ -175,6 +175,14 @@ module Chunks = struct
   ]);;
 end
 
+module Kind = struct
+  type t =
+    | Added
+    | Intact
+    | Modified
+    | Removed;;
+end
+
 type t = {
   chunks  : Chunks.t;
   size    : int * int;

@@ -40,28 +40,30 @@ module Styles = {
   };
 };
 
-open State;
+let renderName = (item) => State.NavigationPath.Segment.Item.(switch (item) {
+  | Chunk(chunk) => Compare.Chunks.(switch (chunk) {
+    | Summary(summary) => summary.name
+    | ModifiedSummary(summary) => summary.name
+  })
+  | Module(module_) => Compare.Modules.(switch (module_) {
+    | Summary(summary) => summary.name
+    | ModifiedSummary(summary) => summary.name
+  })
+});
 
-let renderName = (item) => switch (item) {
-  | Chunk(chunk) => switch (chunk) {
-    | Compare.Chunks.Summary(summary) => summary.name
-    | Compare.Chunks.ModifiedSummary(summary) => summary.name
-  }
-  | Module(module_) => switch (module_) {
-    | Compare.Modules.Summary(summary) => summary.name
-    | Compare.Modules.ModifiedSummary(summary) => summary.name
-  }
-};
+let renderItem = Compare.Kind.((item, kind) => {
+  let (badgeClassName, badgeText) = switch (kind) {
+  | Added => (Styles.Badge.added, "A")
+  | Removed => (Styles.Badge.removed, "R")
+  | Intact => (Styles.Badge.intact, "I")
+  | Modified => (Styles.Badge.modified, "M")
+  };
 
-let renderItem = (item) => switch (item) {
-  | NavigationPath.Added(item) => (item, Styles.Badge.added, "A")
-  | NavigationPath.Removed(item) => (item, Styles.Badge.removed, "R")
-  | NavigationPath.Intact(item) => (item, Styles.Badge.intact, "I")
-  | NavigationPath.Modified(item) => (item, Styles.Badge.modified, "M")
-  } |> ((segment, badgeClassName, badgeText)) => <>
+  <>
     <span className=badgeClassName>{badgeText |> ReasonReact.string}</span>
-    {renderName(segment) |> ReasonReact.string}
-  </>;
+    {renderName(item) |> ReasonReact.string}
+  </>
+});
 
 let component = ReasonReact.statelessComponent("Breadcrumbs");
 
@@ -70,7 +72,7 @@ let make = (~items, _children) => {
   render: (_self) => {
     <ul className=Styles.wrapper>
       ...(items |> List.map(item => {
-        <li className=Styles.item>{renderItem(item)}</li>
+        <li className=Styles.item>{renderItem(fst(item), snd(item))}</li>
       }) |> Array.of_list)
     </ul>
   }

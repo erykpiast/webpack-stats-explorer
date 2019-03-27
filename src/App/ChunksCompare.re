@@ -1,8 +1,10 @@
 open Compare.Chunks;
+open Compare.Kind;
+open State.NavigationPath;
 
 let component = ReasonReact.statelessComponent("ChunksCompare");
 
-let make = (~size, ~chunks: t, ~onChunk, _children) => {
+let make = (~size, ~chunks, ~onChunk, _children) => {
   let renderChunksDiff = (mapper, title, onChunk, chunks) => <ChunksDiff
     chunks=(chunks |> List.map(mapper))
     title=title
@@ -20,7 +22,7 @@ let make = (~size, ~chunks: t, ~onChunk, _children) => {
           chunk: Summary(chunk)
         },
         L10N.added,
-        (chunk) => onChunk(State.NavigationPath.Added(State.Chunk(chunk))), chunks.added);
+        (chunk) => onChunk(Segment.of_chunk(chunk, Added)), chunks.added);
       let removed = renderChunksDiff(
         (chunk: Summary.t) => {
           after: 0,
@@ -30,7 +32,7 @@ let make = (~size, ~chunks: t, ~onChunk, _children) => {
           chunk: Summary(chunk)
         },
         L10N.removed,
-        (chunk) => onChunk(State.NavigationPath.Removed(State.Chunk(chunk))), chunks.removed);
+        (chunk) => onChunk(Segment.of_chunk(chunk, Removed)), chunks.removed);
       let intact = renderChunksDiff(
         (chunk: Summary.t) => {
           after: chunk.size,
@@ -40,7 +42,7 @@ let make = (~size, ~chunks: t, ~onChunk, _children) => {
           chunk: Summary(chunk)
         },
         L10N.intact,
-        (chunk) => onChunk(State.NavigationPath.Intact(State.Chunk(chunk))), chunks.intact);
+        (chunk) => onChunk(Segment.of_chunk(chunk, Intact)), chunks.intact);
       let modified = renderChunksDiff(
         (chunk: ModifiedSummary.t) => {
           after: snd(chunk.size),
@@ -50,7 +52,7 @@ let make = (~size, ~chunks: t, ~onChunk, _children) => {
           chunk: ModifiedSummary(chunk)
         },
         L10N.modified,
-        (chunk) => onChunk(State.NavigationPath.Modified(State.Chunk(chunk))), chunks.modified);
+        (chunk) => onChunk(Segment.of_chunk(chunk, Modified)), chunks.modified);
       <>
         {ReasonReact.string(L10N.overalSize ++ " ")}
         <NumericDiff

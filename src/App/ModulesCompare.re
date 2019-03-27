@@ -39,50 +39,50 @@ module rec ModulesCompare: ModulesCompare = {
           />
         }}
       | ModifiedModules(diff) => <>
-        <h2>{ReasonReact.string(title)}</h2>
-          <ModulesCompare
-            modules={NotModifiedModules(diff.added)}
-            onModule={onModule}
-            title={L10N.added}
-          />
-          <ModulesCompare
-            modules={NotModifiedModules(diff.removed)}
-            onModule={onModule}
-            title={L10N.removed}
-          />
-          <ModulesCompare
-            modules={NotModifiedModules(diff.intact)}
-            onModule={onModule}
-            title={L10N.intact}
-          />
-          {switch (diff.modified) {
-          | [] => ReasonReact.null
-          | modified => <>
-            <h3>{ReasonReact.string(L10N.modified)}</h3>
-            <ul>...(modified |> List.map((module_: ModifiedSummary.t(t)) => {
-              <li>
-                <strong>{ReasonReact.string(module_.name)}</strong>
-                <br/>
-                <NumericDiff
-                  after={snd(module_.size)}
-                  before={fst(module_.size)}
-                />
-                <br/>
-                <CodeDiff
-                  before={fst(module_.source)}
-                  after={snd(module_.source)}
-                />
-                {switch module_.modules {
-                | None => ReasonReact.null
-                | Some(submodules) => <ModulesCompare
-                  modules={ModifiedModules(submodules)}
-                  onModule={onModule}
-                  title={L10N.submodules}
-                />
-                }}
-              </li>
-            }) |> Array.of_list)
-            </ul>
+        <h3>{ReasonReact.string(title)}</h3>
+        <ModulesCompare
+          modules={NotModifiedModules(diff.added)}
+          onModule={onModule}
+          title={L10N.added}
+        />
+        <ModulesCompare
+          modules={NotModifiedModules(diff.removed)}
+          onModule={onModule}
+          title={L10N.removed}
+        />
+        <ModulesCompare
+          modules={NotModifiedModules(diff.intact)}
+          onModule={onModule}
+          title={L10N.intact}
+        />
+        {switch (diff.modified) {
+        | [] => ReasonReact.null
+        | modified => <>
+          <h3>{ReasonReact.string(L10N.modified)}</h3>
+          <ul>...(modified |> List.map((module_: ModifiedSummary.t(t)) => {
+            <li>
+              <strong>{ReasonReact.string(module_.name)}</strong>
+              <br/>
+              <NumericDiff
+                after={snd(module_.size)}
+                before={fst(module_.size)}
+              />
+              <br/>
+              <CodeDiff
+                before={fst(module_.source)}
+                after={snd(module_.source)}
+              />
+              {switch module_.modules {
+              | None => ReasonReact.null
+              | Some(submodules) => <ModulesCompare
+                modules={ModifiedModules(submodules)}
+                onModule={onModule}
+                title={L10N.submodules}
+              />
+              }}
+            </li>
+          }) |> Array.of_list)
+          </ul>
           </>
         }}
       </>

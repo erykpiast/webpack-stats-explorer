@@ -3,6 +3,7 @@ let renderFilenames = (filenames) => <>
   {switch (filenames) {
   | [a] => ReasonReact.string(a);
   | [_, b] => ReasonReact.string(b ++ {j|❗|j});
+  | _ => ReasonReact.null
   }}
 </>;
 

@@ -1,15 +1,20 @@
-type activeItem =
-  | Chunk of Compare.Chunks.chunk
-  | Module of Compare.Modules.module_;;
+
 
 module NavigationPath = struct
-  type segment =
-    | Added of activeItem
-    | Removed of activeItem
-    | Intact of activeItem
-    | Modified of activeItem;;
+  module Segment = struct
+    module Item = struct
+      type t =
+        | Chunk of Compare.Chunks.chunk
+        | Module of Compare.Modules.module_;;
+    end
 
-  type t = segment list;;
+    type t = (Item.t * Compare.Kind.t);;
+
+    let of_chunk item (kind: Compare.Kind.t) = (Item.Chunk item, kind);;
+    let of_module item (kind: Compare.Kind.t) = (Item.Module item, kind);;
+  end
+
+  type t = Segment.t list;;
 end
 
 type t = {

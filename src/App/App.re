@@ -3,7 +3,7 @@ open State;
 type action =
   | Next
   | Prev
-  | Navigate(NavigationPath.segment)
+  | Navigate(NavigationPath.Segment.t)
   | UpdateComparisons(list(Compare.t));
 
 let component = ReasonReact.reducerComponent("App");
@@ -31,20 +31,6 @@ let reducer = (action, state) => switch (action) {
   })
 };
 
-module Styles = {
-  open Css;
-
-  let wrapper = style([
-    display(`flex),
-    width(`percent(100.0)),
-  ]);
-
-  let column = style([
-    display(block),
-    width(`percent(50.0)),
-  ]);
-};
-
 let compareStats = (stats) => stats
   |> Array.to_list
   |> List.sort((a: Stats.t, b: Stats.t) => a.builtAt - b.builtAt)
@@ -58,18 +44,12 @@ let compareStats = (stats) => stats
   |> snd
   |> List.rev;
 
-let getModules = (item) => switch (item) {
-  | Chunk(chunk) => switch (chunk) {
-    | Summary(chunk) => Compare.Modules.NotModifiedModules(chunk.modules)
-    | ModifiedSummary(chunk) => Compare.Modules.ModifiedModules(chunk.modules)
-  }
-  | Module(module_) => switch (module_) {
-    | Summary(module_) => Compare.Modules.NotModifiedModules(module_.modules)
-    | ModifiedSummary(module_) => switch (module_.modules) {
-      | Some(modules) => Compare.Modules.ModifiedModules(modules)
-      | None => Compare.Modules.NotModifiedModules([])
-    }
-  }
+let renderMainContent = (navigationPath) => switch (navigationPath) {
+  | [] => ReasonReact.null
+  | [(item, kind), ..._] => NavigationPath.Segment.Item.(switch (item) {
+    | Module(_) => ReasonReact.null
+    | Chunk(chunk) => <ChunkSummary chunk=chunk kind=kind />
+    })
 };
 
 let make = (~comparisons, _children) => {
@@ -86,6 +66,13 @@ let make = (~comparisons, _children) => {
   render: self => {
     let comp = List.nth(self.state.comparisons, self.state.index);
 
+    let sideContent = <ChunksCompare
+      size=comp.size
+      chunks=comp.chunks
+      onChunk=((chunk) => self.send(Navigate(chunk)))
+    />;
+    let mainContent = renderMainContent(self.state.navigationPath);
+
     <>
       <Dropzone onStats=(stats => self.send(UpdateComparisons(compareStats(stats)))) />
       <button onClick=(_ => self.send(Prev))>
@@ -98,29 +85,7 @@ let make = (~comparisons, _children) => {
         {ReasonReact.string(">>")}
       </button>
       <Breadcrumbs items=self.state.navigationPath />
-      <div className=Styles.wrapper>
-        <div className=Styles.column>
-          <ChunksCompare
-            size=comp.size
-            chunks=comp.chunks
-            onChunk=((chunk) => self.send(Navigate(chunk)))
-          />
-        </div>
-        <div className=Styles.column>
-          {switch self.state.navigationPath {
-          | [] => ReasonReact.null
-          | [chunk] => <ModulesCompare
-            modules={switch (chunk) {
-            | NavigationPath.Added(item) => getModules(item)
-            | NavigationPath.Removed(item) => getModules(item)
-            | NavigationPath.Modified(item) => getModules(item)
-            | NavigationPath.Intact(item) => getModules(item)
-            }}
-            onModule={(_) => ()}
-            title={L10N.modules}
-          />}}
-        </div>
-      </div>
+      <NavigationLayout side=sideContent main=mainContent />
     </>
   }
 };
