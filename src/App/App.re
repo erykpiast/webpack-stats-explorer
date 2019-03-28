@@ -4,6 +4,7 @@ type action =
   | Next
   | Prev
   | Navigate(NavigationPath.Segment.t)
+  | NavigateThroughBreadcrumbs(int)
   | UpdateComparisons(list(Compare.t));
 
 let component = ReasonReact.reducerComponent("App");
@@ -23,6 +24,11 @@ let reducer = (action, state) => switch (action) {
     index: state.index,
     comparisons: state.comparisons,
     navigationPath: [segment]
+  })
+  | NavigateThroughBreadcrumbs(index) => ReasonReact.Update({
+    index: state.index,
+    comparisons: state.comparisons,
+    navigationPath: Belt.List.take(state.navigationPath, index) |> Utils.defaultTo([])
   })
   | UpdateComparisons(comparisons) => ReasonReact.Update({
     index: 0,
@@ -84,7 +90,10 @@ let make = (~comparisons, _children) => {
       <button onClick=(_ => self.send(Next))>
         {ReasonReact.string(">>")}
       </button>
-      <Breadcrumbs items=self.state.navigationPath />
+      <Breadcrumbs
+        items=self.state.navigationPath
+        onClick=(index => self.send(NavigateThroughBreadcrumbs(index)))
+      />
       <NavigationLayout side=sideContent main=mainContent />
     </>
   }

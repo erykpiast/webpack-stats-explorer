@@ -3,6 +3,7 @@ module Styles = {
 
   let wrapper = style([
     display(`flex),
+    alignItems(`center),
     width(`percent(100.0)),
   ]);
 
@@ -10,15 +11,21 @@ module Styles = {
     display(block),
   ]);
 
+  let segmentRules = [
+    display(`inlineBlock),
+    padding(px(2)),
+    width(em(1.2)),
+    textAlign(`center),
+    marginRight(px(4)),
+  ];
+
+  let separator = style(segmentRules);
+
   module Badge = {
     let badgeRules = [
-      display(`inlineBlock),
-      padding(px(2)),
       border(px(1), solid, rgb(0, 0, 0)),
       borderRadius(px(2)),
-      width(em(1.2)),
-      textAlign(`center),
-      marginRight(px(4)),
+      ...segmentRules
     ];
 
     let added = style([
@@ -67,13 +74,21 @@ let renderItem = Compare.Kind.((item, kind) => {
 
 let component = ReasonReact.statelessComponent("Breadcrumbs");
 
-let make = (~items, _children) => {
+let make = (~items, ~onClick, _children) => {
   ...component,
   render: (_self) => {
+    let head = <li className=Styles.item onClick=((_) => onClick(0))>
+      {L10N.breadcrumbsRoot |> ReasonReact.string}
+    </li>;
+    let tail = items |> List.map2((index, item) => {
+      <li className=Styles.item onClick=((_) => onClick(index))>
+        {renderItem(fst(item), snd(item))}
+      </li>
+    }, Rebase.List.range(1, List.length(items)));
+    let separator = <li className=Styles.separator>{">" |> ReasonReact.string}</li>;
+
     <ul className=Styles.wrapper>
-      ...(items |> List.map(item => {
-        <li className=Styles.item>{renderItem(fst(item), snd(item))}</li>
-      }) |> Array.of_list)
+      ...([head, ...tail] |> Utils.List.join(separator) |> Array.of_list)
     </ul>
   }
 }

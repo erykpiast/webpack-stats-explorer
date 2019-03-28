@@ -27,6 +27,12 @@ module List = struct
           |> (List.exists (fun y -> (isEqual x y)))
         ))
       |> uniq isEqual;;
+
+  let rec join separator list = match list with
+    | [] -> []
+    | head::[] -> [head]
+    | head::tail -> head::separator::(join separator tail)
+  ;;
 end
 
 module Function = struct

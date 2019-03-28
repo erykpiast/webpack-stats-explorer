@@ -1,5 +1,6 @@
 let added = "Added";
 let assets = "Assets";
+let breadcrumbsRoot = "Stats";
 let chunks = "Chunks";
 let intact = "Intact";
 let modified = "Modified";
