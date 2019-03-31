@@ -86,9 +86,10 @@ let make = (~items, ~onClick, _children) => {
       </li>
     }, Rebase.List.range(1, List.length(items)));
     let separator = <li className=Styles.separator>{">" |> ReasonReact.string}</li>;
+    let breadcrumbs = [head, ...tail] |> Utils.List.join(separator);
 
     <ul className=Styles.wrapper>
-      ...([head, ...tail] |> Utils.List.join(separator) |> Array.of_list)
+      ...(breadcrumbs |> Array.of_list)
     </ul>
   }
 }

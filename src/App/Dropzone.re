@@ -23,26 +23,23 @@ let getLabel = (
   ~isDragActive,
   ~isDragReject,
   ~status
-) => {
-  switch status {
-  | Success => "Webpack stats uploaded successfully!"
-  | Fail(reason) =>
-    switch reason {
-    | NotEnoughFiles => "Dude, there is no point in comparing less than two files."
-    | WrongFormat => "Drag JSON files, please!"
-    | ParsingFailed => "It doesn't seem to be valid Webpack stats."
+) => switch status {
+  | Success => Some(L10N.Validation.success)
+  | Fail(reason) => switch reason {
+    | NotEnoughFiles => Some(L10N.Validation.notEnough)
+    | WrongFormat => Some(L10N.Validation.json)
+    | ParsingFailed => Some(L10N.Validation.stats)
     }
   | Unknown => if (!isDragActive) {
-      "Drop files here"
+      None
     } else if (isDragAccept) {
-      "Great, drop it now!"
+      Some(L10N.drop)
     } else if (isDragReject) {
-      "Nope, we need JSON here."
+      Some(L10N.Validation.json)
     } else {
-      "Here, here!"
+      None
     }
   };
-};
 
 let parseStats = (~onSuccess, ~onFailure, files) =>
   files
@@ -72,14 +69,20 @@ let parseStats = (~onSuccess, ~onFailure, files) =>
 module Styles = {
   open Css;
 
-  let dropzone = style([
+  let input = style([
+  ]);
+
+  let label = style([
     display(`flex),
     justifyContent(`center),
     alignItems(`center),
     position(`absolute),
-    height(`percent(100.0)),
-    width(`percent(100.0)),
-    zIndex(-1),
+    bottom(px(0)),
+    left(px(0)),
+    right(px(0)),
+    top(px(0)),
+    zIndex(1),
+    backgroundColor(rgba(255, 255, 255, 0.5)),
   ]);
 };
 
@@ -105,7 +108,7 @@ let success = (timeoutId) => UploadSuccess(timeoutId);
 
 let component = ReasonReact.reducerComponent("Dropzone");
 
-let make = (~onStats, _children) => {
+let make = (~onStats, children) => {
   ...component,
   initialState: () => {
     status: Unknown,
@@ -120,7 +123,7 @@ let make = (~onStats, _children) => {
         };
       let timeoutId = Js.Global.setTimeout(() => {
         self.send(StatusReset);
-      }, 1000);
+      }, 2000);
 
       self.send(actionCreator(timeoutId));
     };
@@ -153,9 +156,7 @@ let make = (~onStats, _children) => {
           ~status = self.state.status,
         );
         <div
-          className=Styles.dropzone
           onBlur=rootProps.onBlur
-          onClick=rootProps.onClick
           onDragEnter=rootProps.onDragEnter
           onDragLeave=rootProps.onDragLeave
           onDragOver=rootProps.onDragOver
@@ -166,19 +167,29 @@ let make = (~onStats, _children) => {
           ref=rootProps.ref
           tabIndex=rootProps.tabIndex
         >
-          <span>
-            <label>{ReasonReact.string(label)}</label>
-            <input
-              autoComplete=inputProps.autoComplete
-              onChange=inputProps.onChange
-              onClick=inputProps.onClick
-              ref=inputProps.ref
-              style=inputProps.style
-              tabIndex=inputProps.tabIndex
-              type_=inputProps.type_
-              multiple=inputProps.multiple
-            />
-          </span>
+          ...(Array.append([|
+            <div className=Styles.input>
+              <label onClick=rootProps.onClick>
+                {L10N.upload |> ReasonReact.string}
+              </label>
+              <input
+                autoComplete=inputProps.autoComplete
+                onChange=inputProps.onChange
+                onClick=inputProps.onClick
+                ref=inputProps.ref
+                style=inputProps.style
+                tabIndex=inputProps.tabIndex
+                type_=inputProps.type_
+                multiple=inputProps.multiple
+              />
+            </div>,
+            switch (label) {
+            | Some(label) => (<span className=Styles.label>
+                {label |> ReasonReact.string}
+              </span>)
+            | None => ReasonReact.null
+            }
+          |], children))
         </div>
       })</ReactDropzone>
     </>

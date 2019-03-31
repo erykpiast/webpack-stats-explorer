@@ -79,8 +79,7 @@ let make = (~comparisons, _children) => {
     />;
     let mainContent = renderMainContent(self.state.navigationPath);
 
-    <>
-      <Dropzone onStats=(stats => self.send(UpdateComparisons(compareStats(stats)))) />
+    <Dropzone onStats=(stats => self.send(UpdateComparisons(compareStats(stats))))>
       <button onClick=(_ => self.send(Prev))>
         {ReasonReact.string("<<")}
       </button>
@@ -95,6 +94,6 @@ let make = (~comparisons, _children) => {
         onClick=(index => self.send(NavigateThroughBreadcrumbs(index)))
       />
       <NavigationLayout side=sideContent main=mainContent />
-    </>
+    </Dropzone>
   }
 };
