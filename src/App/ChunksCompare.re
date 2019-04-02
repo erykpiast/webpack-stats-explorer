@@ -22,7 +22,7 @@ let make = (~size, ~chunks, ~onChunk, _children) => {
           chunk: Summary(chunk)
         },
         L10N.added,
-        (chunk) => onChunk(Segment.of_chunk(chunk, Added)), chunks.added);
+        (chunk) => onChunk(Segment.of_chunk(Added, chunk)), chunks.added);
       let removed = renderChunksDiff(
         (chunk: Summary.t) => {
           after: 0,
@@ -32,7 +32,7 @@ let make = (~size, ~chunks, ~onChunk, _children) => {
           chunk: Summary(chunk)
         },
         L10N.removed,
-        (chunk) => onChunk(Segment.of_chunk(chunk, Removed)), chunks.removed);
+        (chunk) => onChunk(Segment.of_chunk(Removed, chunk)), chunks.removed);
       let intact = renderChunksDiff(
         (chunk: Summary.t) => {
           after: chunk.size,
@@ -42,7 +42,7 @@ let make = (~size, ~chunks, ~onChunk, _children) => {
           chunk: Summary(chunk)
         },
         L10N.intact,
-        (chunk) => onChunk(Segment.of_chunk(chunk, Intact)), chunks.intact);
+        (chunk) => onChunk(Segment.of_chunk(Intact, chunk)), chunks.intact);
       let modified = renderChunksDiff(
         (chunk: ModifiedSummary.t) => {
           after: snd(chunk.size),
@@ -52,7 +52,7 @@ let make = (~size, ~chunks, ~onChunk, _children) => {
           chunk: ModifiedSummary(chunk)
         },
         L10N.modified,
-        (chunk) => onChunk(Segment.of_chunk(chunk, Modified)), chunks.modified);
+        (chunk) => onChunk(Segment.of_chunk(Modified, chunk)), chunks.modified);
       <>
         {ReasonReact.string(L10N.overalSize ++ " ")}
         <NumericDiff

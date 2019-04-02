@@ -68,7 +68,7 @@ let renderItem = Compare.Kind.((item, kind) => {
 
   <>
     <span className=badgeClassName>{badgeText |> ReasonReact.string}</span>
-    {renderName(item) |> ReasonReact.string}
+    {item |> renderName |> ReasonReact.string}
   </>
 });
 
@@ -80,9 +80,9 @@ let make = (~items, ~onClick, _children) => {
     let head = <li className=Styles.item onClick=((_) => onClick(0))>
       {L10N.breadcrumbsRoot |> ReasonReact.string}
     </li>;
-    let tail = items |> List.map2((index, item) => {
+    let tail = items |> List.map2((index, (item, kind)) => {
       <li className=Styles.item onClick=((_) => onClick(index))>
-        {renderItem(fst(item), snd(item))}
+        {renderItem(item, kind)}
       </li>
     }, Rebase.List.range(1, List.length(items)));
     let separator = <li className=Styles.separator>{">" |> ReasonReact.string}</li>;

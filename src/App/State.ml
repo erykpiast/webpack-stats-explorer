@@ -10,8 +10,8 @@ module NavigationPath = struct
 
     type t = (Item.t * Compare.Kind.t);;
 
-    let of_chunk item (kind: Compare.Kind.t) = (Item.Chunk item, kind);;
-    let of_module item (kind: Compare.Kind.t) = (Item.Module item, kind);;
+    let of_chunk (kind: Compare.Kind.t) item = (Item.Chunk item, kind);;
+    let of_module (kind: Compare.Kind.t) item = (Item.Module item, kind);;
   end
 
   type t = Segment.t list;;

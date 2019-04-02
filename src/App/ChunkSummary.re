@@ -1,4 +1,6 @@
 open Compare.Chunks;
+open Compare.Kind;
+open State.NavigationPath;
 
 let getModules = (chunk) => switch (chunk) {
   | Summary(chunk) => Compare.Modules.NotModifiedModules(chunk.modules)
@@ -16,10 +18,10 @@ let getSize = (chunk) => switch (chunk) {
 };
 
 let getKindMessage = Compare.Kind.((kind) => switch (kind) {
-  | Added => "Added"
-  | Removed => "Removed"
-  | Intact => "Intact"
-  | Modified => "Modified"
+  | Added => L10N.Kind.added
+  | Removed => L10N.Kind.removed
+  | Intact => L10N.Kind.intact
+  | Modified => L10N.Kind.modified
 });
 
 module Styles = {
@@ -34,7 +36,7 @@ module Styles = {
 
 let component = ReasonReact.statelessComponent("ChunkSummary");
 
-let make = (~chunk, ~kind, _children) => {
+let make = (~chunk, ~kind, ~onModule, _children) => {
   ...component,
   render: (_self) => <>
     <header>
@@ -51,10 +53,18 @@ let make = (~chunk, ~kind, _children) => {
         </dd>
       </dl>
     </header>
-    <ModulesCompare
-      modules={chunk |> getModules}
-      onModule={(_) => ()}
-      title={L10N.modules}
-    />
+    (switch (getModules(chunk)) {
+    | NotModifiedModules(modules) => <ModulesList
+        modules=modules
+        onModule=((module_) => Compare.Modules.Summary(module_)
+          |> Segment.of_module(kind)
+          |> onModule
+        )
+      />
+    | ModifiedModules(modules) => <ModulesCompare
+        modules=modules
+        onModule=onModule
+      />
+    })
   </>
 };

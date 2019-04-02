@@ -16,6 +16,18 @@ module Chunk = {
   let size = "Size";
   let status = "Status";
 };
+module Kind = {
+   let added = "Added";
+  let removed = "Removed";
+  let intact = "Intact";
+  let modified = "Modified";
+};
+module Module = {
+  let code = "Code";
+  let name = "Name";
+  let size = "Size";
+  let status = "Status";
+};
 module Validation = {
   let json = "We need JSON here";
   let notEnough = "There is no point in comparing less than two files";

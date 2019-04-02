@@ -3,9 +3,16 @@ open State;
 type action =
   | Next
   | Prev
-  | Navigate(NavigationPath.Segment.t)
+  | Navigate(NavigationPath.Segment.t, int)
   | NavigateThroughBreadcrumbs(int)
   | UpdateComparisons(list(Compare.t));
+
+let updateNavigationPath = (path: list('a), segment, depth): list('a) => {
+  let tail = if (List.length(path) < depth) path else
+    Belt.List.take(path, depth) |> Utils.defaultTo([]);
+
+  [segment, ...(tail |> List.rev)] |> List.rev;
+};
 
 let component = ReasonReact.reducerComponent("App");
 
@@ -20,10 +27,10 @@ let reducer = (action, state) => switch (action) {
       comparisons: state.comparisons,
       navigationPath: []
     })
-  | Navigate(segment) => ReasonReact.Update({
+  | Navigate(segment, depth) => ReasonReact.Update({
     index: state.index,
     comparisons: state.comparisons,
-    navigationPath: [segment]
+    navigationPath: updateNavigationPath(state.navigationPath, segment, depth)
   })
   | NavigateThroughBreadcrumbs(index) => ReasonReact.Update({
     index: state.index,
@@ -50,14 +57,6 @@ let compareStats = (stats) => stats
   |> snd
   |> List.rev;
 
-let renderMainContent = (navigationPath) => switch (navigationPath) {
-  | [] => ReasonReact.null
-  | [(item, kind), ..._] => NavigationPath.Segment.Item.(switch (item) {
-    | Module(_) => ReasonReact.null
-    | Chunk(chunk) => <ChunkSummary chunk=chunk kind=kind />
-    })
-};
-
 let make = (~comparisons, _children) => {
   ...component,
 
@@ -75,9 +74,27 @@ let make = (~comparisons, _children) => {
     let sideContent = <ChunksCompare
       size=comp.size
       chunks=comp.chunks
-      onChunk=((chunk) => self.send(Navigate(chunk)))
+      onChunk=((chunk) => self.send(Navigate(chunk, 0)))
     />;
-    let mainContent = renderMainContent(self.state.navigationPath);
+    let mainContent = switch (self.state.navigationPath) {
+      | [] => ReasonReact.null
+      | [(item, kind)] => switch (item) {
+        | Module(_) => ReasonReact.null
+        | Chunk(chunk) => <ChunkSummary
+            chunk=chunk
+            kind=kind
+            onModule=((module_) => self.send(Navigate(module_, 1)))
+          />
+        }
+      | [_, ...segments] => segments |> List.rev |> List.hd |> ((item, kind)) => switch (item) {
+        | Chunk(_) => ReasonReact.null
+        | Module(module_) => <ModuleSummary
+            module_=module_
+            kind=kind
+            onModule=((module_) => self.send(Navigate(module_, 2)))
+          />
+        }
+    };
 
     <Dropzone onStats=(stats => self.send(UpdateComparisons(compareStats(stats))))>
       <button onClick=(_ => self.send(Prev))>
