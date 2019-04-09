@@ -1,39 +1,40 @@
 open Jest;
 open ExpectJs;
 
-describe("Module", () => {
+describe("Module", () =>
   describe("eql", () => {
     open Module;
 
-    let fakeModule = (name, size, source, modules) => make(
-      [],
-      false,
-      false,
-      [],
-      0,
-      0,
-      false,
-      None,
-      "",
-      0,
-      0,
-      None,
-      None,
-      None,
-      None,
-      modules,
-      name,
-      [],
-      false,
-      false,
-      None,
-      None,
-      [],
-      size,
-      source,
-      None,
-      0
-    );
+    let fakeModule = (name, size, source, modules) =>
+      make(
+        [],
+        false,
+        false,
+        [],
+        0,
+        0,
+        false,
+        None,
+        "",
+        0,
+        0,
+        None,
+        None,
+        None,
+        None,
+        modules,
+        name,
+        [],
+        false,
+        false,
+        None,
+        None,
+        [],
+        size,
+        source,
+        None,
+        0,
+      );
 
     test("module with different name", () => {
       let a = fakeModule("foo", 0, None, None);
@@ -58,9 +59,13 @@ describe("Module", () => {
 
     test("module with different modules", () => {
       let a = fakeModule("foo", 0, Some("bar"), Some([]));
-      let b = fakeModule("foo", 0, Some("bar"), Some([
-        fakeModule("bar", 0, None, None)
-      ]));
+      let b =
+        fakeModule(
+          "foo",
+          0,
+          Some("bar"),
+          Some([fakeModule("bar", 0, None, None)]),
+        );
 
       expect(Module.eql(a, b)) |> toEqual(false);
     });
@@ -72,5 +77,5 @@ describe("Module", () => {
 
       expect(Module.eql(a, b)) |> toEqual(true);
     });
-  });
-});
+  })
+);

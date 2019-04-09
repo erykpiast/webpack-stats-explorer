@@ -6,7 +6,7 @@ let logStats = (title, stats) => {
 let logComp = (title, comp) => {
   Js.log(title);
   comp |> Compare.encode |> Js.log;
-}
+};
 
 logStats("a", Data.a);
 logStats("b", Data.b);
@@ -24,4 +24,7 @@ logComp("b VS c", bc);
 logComp("c VS d", cd);
 logComp("d VS e", de);
 
-ReactDOMRe.renderToElementWithId(<App comparisons=[ab, bc, cd, de] />, "app");
+ReactDOMRe.renderToElementWithId(
+  <App comparisons=[ab, bc, cd, de] />,
+  "app",
+);
