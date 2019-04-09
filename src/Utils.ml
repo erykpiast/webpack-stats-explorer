@@ -5,6 +5,8 @@ let defaultTo value option = (match option with
 | None -> value
 );;
 
+let identity (a: 'a) = a;;
+
 module List = struct
   let rec isEqual a b = match (a, b) with
     | ([], []) -> true
@@ -33,6 +35,8 @@ module List = struct
     | head::[] -> [head]
     | head::tail -> head::separator::(join separator tail)
   ;;
+
+  let nth index list = List.nth list index;;
 end
 
 module Function = struct

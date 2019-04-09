@@ -1,5 +1,4 @@
 open Compare.Chunks;
-open Compare.Kind;
 open State.NavigationPath;
 
 let getModules = (chunk) => switch (chunk) {

@@ -2,14 +2,6 @@ open Compare.Modules;
 open Compare.Kind;
 open State.NavigationPath;
 
-let getModules = (module_) => switch (module_) {
-  | Summary(module_) => Some(Compare.Modules.NotModifiedModules(module_.modules))
-  | ModifiedSummary(module_) => switch (module_.modules) {
-    | Some(modules) => Some(Compare.Modules.ModifiedModules(modules))
-    | None => None
-  }
-};
-
 let getName = (module_) => switch (module_) {
   | Summary(module_) => module_.name
   | ModifiedSummary(module_) => module_.name
@@ -21,8 +13,28 @@ let getSize = (module_) => switch (module_) {
 };
 
 let getSource = (module_) => switch (module_) {
-  | Summary(module_) => module_.source
+  | Summary(module_) => {
+    let source = module_.source;
+    if (String.length(source) > 0) {
+      source
+    } else if (List.length(module_.modules) > 0) {
+      List.hd(module_.modules).source
+    } else {
+      source
+    }
+  }
   | ModifiedSummary(module_) => fst(module_.source)
+};
+
+let getModules = (module_) => switch (module_) {
+  | Summary(module_) => {
+    let modules = if (String.length(module_.source) > 0) module_.modules else List.tl(module_.modules);
+    Some(Compare.Modules.NotModifiedModules(modules));
+  }
+  | ModifiedSummary(module_) => switch (module_.modules) {
+    | Some(modules) => Some(Compare.Modules.ModifiedModules(modules))
+    | None => None
+  }
 };
 
 let getKindMessage = Compare.Kind.((kind) => switch (kind) {

@@ -21,7 +21,7 @@ let make = (~title, ~modules, ~onModule, _children) => {
   render: _self => switch (modules) {
   | [] => ReasonReact.null
   | _ => <>
-    <h3>{ReasonReact.string(title)}</h3>
+    <h3>{title |> ReasonReact.string}</h3>
     <ul>
       ...(modules |> List.map(({
         after,
@@ -30,8 +30,8 @@ let make = (~title, ~modules, ~onModule, _children) => {
         name,
       }) => {
         <li onClick=((_) => onModule(module_))>
-          <strong>{ReasonReact.string(name)}</strong>
-          <br/>
+          <strong>{name |> ReasonReact.string}</strong>
+          {" " |> ReasonReact.string}
           <NumericDiff
             after=after
             before=before

@@ -70,24 +70,46 @@ let make = (~comparisons, _children) => {
 
   render: self => {
     let comp = List.nth(self.state.comparisons, self.state.index);
+    let revPath = List.rev(self.state.navigationPath);
 
-    let sideContent = <ChunksCompare
-      size=comp.size
-      chunks=comp.chunks
-      onChunk=((chunk) => self.send(Navigate(chunk, 0)))
-    />;
-    let mainContent = switch (self.state.navigationPath) {
+    let sideContent = NavigationPath.Segment.(switch (revPath) {
+    | [(Item.Module(_leaf), kind), (Item.Chunk(chunk), _kind), ..._] => switch (chunk) {
+      | Compare.Chunks.Summary(chunk) => <ModulesList
+          modules=chunk.modules
+          onModule=((sth) => self.send(Navigate(of_module(kind, Compare.Modules.Summary(sth)), 1)))
+        />
+      | Compare.Chunks.ModifiedSummary(chunk) => <ModulesCompare
+          modules=chunk.modules
+          onModule=((segment) => self.send(Navigate(segment, 1)))
+        />
+      }
+    | [(Item.Module(leaf), kind), (Item.Module(parent), _kind2), ..._] => switch (parent) {
+      | Compare.Modules.Summary(module_) => <ModulesList
+          modules=module_.modules
+          onModule=((sth) => self.send(Navigate(of_module(kind, Compare.Modules.Summary(sth)), 1)))
+        />
+      | Compare.Modules.ModifiedSummary(module_) => switch (module_.modules) {
+        | Some(modules) => <ModulesCompare
+            modules=modules
+            onModule=((segment) => self.send(Navigate(segment, 1)))
+          />
+        | None => ReasonReact.null
+        }
+      }
+    | _ => <ChunksCompare
+        size=comp.size
+        chunks=comp.chunks
+        onChunk=((chunk) => self.send(Navigate(chunk, 0)))
+      />
+    });
+    let mainContent = switch (revPath) {
       | [] => ReasonReact.null
-      | [(item, kind)] => switch (item) {
-        | Module(_) => ReasonReact.null
+      | segments => segments |> List.hd |> ((item, kind)) => switch (item) {
         | Chunk(chunk) => <ChunkSummary
             chunk=chunk
             kind=kind
             onModule=((module_) => self.send(Navigate(module_, 1)))
           />
-        }
-      | [_, ...segments] => segments |> List.rev |> List.hd |> ((item, kind)) => switch (item) {
-        | Chunk(_) => ReasonReact.null
         | Module(module_) => <ModuleSummary
             module_=module_
             kind=kind
