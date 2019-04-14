@@ -1,5 +1,4 @@
 open Compare.Modules;
-open Compare.Kind;
 open State.NavigationPath;
 
 let getName = module_ =>

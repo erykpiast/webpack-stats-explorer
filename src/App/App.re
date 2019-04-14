@@ -102,7 +102,7 @@ let make = (~comparisons, _children) => {
               onModule=(segment => self.send(Navigate(segment, 1)))
             />
           }
-        | [(Item.Module(leaf), kind), (Item.Module(parent), _kind2), ..._] =>
+        | [(Item.Module(_leaf), kind), (Item.Module(parent), _kind2), ..._] =>
           switch (parent) {
           | Compare.Modules.Summary(module_) =>
             <ModulesList

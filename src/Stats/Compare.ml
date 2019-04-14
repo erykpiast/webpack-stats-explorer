@@ -139,7 +139,7 @@ module Chunks = struct
       ; modules : Modules.t
       }
 
-    let make diff (a : Chunk.t) (b : Chunk.t) =
+    let make (a : Chunk.t) (b : Chunk.t) =
       { name = getName a
       ; filename = getName a, getName b
       ; size = a.size, b.size
@@ -176,16 +176,16 @@ module Chunks = struct
 
   let diffChunks = Diff.create similar Chunk.eql
 
-  let rec make xs ys =
+  let make xs ys =
     let d = diffChunks xs ys in
     { added = d.added |> List.map Summary.make
     ; removed = d.removed |> List.map Summary.make
     ; intact = d.intact |> List.map Summary.make
-    ; modified = d.modified |> List.map (fun (a, b) -> ModifiedSummary.make make a b)
+    ; modified = d.modified |> List.map (fun (a, b) -> ModifiedSummary.make a b)
     }
   ;;
 
-  let rec encode r =
+  let encode r =
     Json.Encode.(
       object_
         [ "added", r.added |> list Summary.encode

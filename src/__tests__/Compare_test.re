@@ -112,7 +112,7 @@ describe("Compare", () => {
 
         test("chunks existing in both sets and changed", () =>
           expect(result.modified)
-          |> toEqual([ModifiedSummary.make(Summary.make, foo1, foo2)])
+          |> toEqual([ModifiedSummary.make(foo1, foo2)])
         );
 
         test("chunks existing in both sets and not changed", () =>
