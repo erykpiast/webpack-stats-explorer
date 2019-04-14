@@ -77,6 +77,7 @@ let make = (~comparisons, _children) => {
   render: self => {
     let comp = List.nth(self.state.comparisons, self.state.index);
     let revPath = List.rev(self.state.navigationPath);
+    let pathDepth = List.length(self.state.navigationPath);
 
     let sideContent =
       NavigationPath.Segment.(
@@ -86,43 +87,47 @@ let make = (~comparisons, _children) => {
           | Compare.Chunks.Summary(chunk) =>
             <ModulesList
               modules={chunk.modules}
-              onModule=(
-                sth =>
-                  self.send(
-                    Navigate(
-                      of_module(kind, Compare.Modules.Summary(sth)),
-                      1,
-                    ),
-                  )
-              )
+              onModule={sth =>
+                self.send(
+                  Navigate(
+                    of_module(kind, Compare.Modules.Summary(sth)),
+                    1,
+                  ),
+                )
+              }
             />
           | Compare.Chunks.ModifiedSummary(chunk) =>
             <ModulesCompare
               modules={chunk.modules}
-              onModule=(segment => self.send(Navigate(segment, 1)))
+              onModule={segment => self.send(Navigate(segment, 1))}
             />
           }
-        | [(Item.Module(_leaf), kind), (Item.Module(parent), _kind2), ..._] =>
+        | [
+            (Item.Module(_leaf), kind),
+            (Item.Module(parent), _kind2),
+            ..._,
+          ] =>
           switch (parent) {
           | Compare.Modules.Summary(module_) =>
             <ModulesList
               modules={module_.modules}
-              onModule=(
-                sth =>
-                  self.send(
-                    Navigate(
-                      of_module(kind, Compare.Modules.Summary(sth)),
-                      1,
-                    ),
-                  )
-              )
+              onModule={sth =>
+                self.send(
+                  Navigate(
+                    of_module(kind, Compare.Modules.Summary(sth)),
+                    pathDepth - 1,
+                  ),
+                )
+              }
             />
           | Compare.Modules.ModifiedSummary(module_) =>
             switch (module_.modules) {
             | Some(modules) =>
               <ModulesCompare
                 modules
-                onModule=(segment => self.send(Navigate(segment, 1)))
+                onModule={segment =>
+                  self.send(Navigate(segment, pathDepth - 1))
+                }
               />
             | None => ReasonReact.null
             }
@@ -131,7 +136,7 @@ let make = (~comparisons, _children) => {
           <ChunksCompare
             size={comp.size}
             chunks={comp.chunks}
-            onChunk=(chunk => self.send(Navigate(chunk, 0)))
+            onChunk={chunk => self.send(Navigate(chunk, 0))}
           />
         }
       );
