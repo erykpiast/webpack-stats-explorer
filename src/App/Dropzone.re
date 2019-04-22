@@ -108,7 +108,7 @@ let success = timeoutId => UploadSuccess(timeoutId);
 
 let component = ReasonReact.reducerComponent("Dropzone");
 
-let make = (~onStats, children) => {
+let make = (~onStats, ~className="", children) => {
   ...component,
   initialState: () => {status: Unknown, resetParsingStatusTimeout: None},
   reducer,
@@ -166,6 +166,7 @@ let make = (~onStats, children) => {
               ~status=self.state.status,
             );
           <div
+            className
             onBlur={rootProps.onBlur}
             onDragEnter={rootProps.onDragEnter}
             onDragLeave={rootProps.onDragLeave}

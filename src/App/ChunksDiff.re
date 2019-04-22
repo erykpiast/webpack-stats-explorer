@@ -1,3 +1,11 @@
+module Styles = {
+  open Css;
+
+  let list = style([listStyleType(`none), padding(px(0))]);
+
+  let item = style([marginTop(Theme.Space.default)]);
+};
+
 let renderFilenames = filenames =>
   <>
     {ReasonReact.string(L10N.assets ++ ": ")}
@@ -26,11 +34,11 @@ let make = (~title, ~chunks, ~onChunk, _children) => {
     | _ =>
       <>
         <h3> {ReasonReact.string(title)} </h3>
-        <ul>
+        <ul className=Styles.list>
           ...{
                chunks
                |> List.map(({after, before, chunk, chunkname, filenames}) =>
-                    <li onClick={_ => onChunk(chunk)}>
+                    <li onClick={_ => onChunk(chunk)} className=Styles.item>
                       <strong> {ReasonReact.string(chunkname)} </strong>
                       <br />
                       <NumericDiff after before />

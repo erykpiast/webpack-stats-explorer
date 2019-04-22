@@ -1,5 +1,11 @@
 open State;
 
+module Styles = {
+  open Css;
+
+  let dropzone = style([height(`percent(100.0))]);
+};
+
 type action =
   | Next
   | Prev
@@ -153,31 +159,30 @@ let make = (~comparisons, _children) => {
               <ChunkSummary
                 chunk
                 kind
-                onModule=(module_ => self.send(Navigate(module_, 1)))
+                onModule={module_ => self.send(Navigate(module_, 1))}
               />
             | Module(module_) =>
               <ModuleSummary
                 module_
                 kind
-                onModule=(module_ => self.send(Navigate(module_, 2)))
+                onModule={module_ => self.send(Navigate(module_, 2))}
               />
             }
         )
       };
 
     <Dropzone
+      className=Styles.dropzone
       onStats={stats => self.send(UpdateComparisons(compareStats(stats)))}>
       <button onClick={_ => self.send(Prev)}>
         {ReasonReact.string("<<")}
       </button>
       {self.state.index + 1 |> string_of_int |> ReasonReact.string}
       {ReasonReact.string(" of ")}
-      {
-        self.state.comparisons
-        |> List.length
-        |> string_of_int
-        |> ReasonReact.string
-      }
+      {self.state.comparisons
+       |> List.length
+       |> string_of_int
+       |> ReasonReact.string}
       <button onClick={_ => self.send(Next)}>
         {ReasonReact.string(">>")}
       </button>

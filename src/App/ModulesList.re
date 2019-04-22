@@ -1,5 +1,11 @@
 open Compare.Modules.Summary;
 
+module Styles = {
+  open Css;
+
+  let list = style([listStyleType(`none)]);
+};
+
 let component = ReasonReact.statelessComponent("ModulesList");
 
 let make = (~modules, ~onModule, _children) => {
@@ -10,7 +16,7 @@ let make = (~modules, ~onModule, _children) => {
     | modules =>
       <>
         <h3> {L10N.modules |> ReasonReact.string} </h3>
-        <ul>
+        <ul className=Styles.list>
           ...{
                modules
                |> List.map(module_ =>
