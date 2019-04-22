@@ -34,7 +34,7 @@
     "@zpnester/bs-filereader": "0.2.4",
     "bs-css": "8.0.4",
     "bs-jsverify": "0.10.0",
-    "bs-react-dropzone": "0.3.2",
+    "bs-react-dropzone": "0.3.3",
     "diff": "4.0.1",
     "rationale": "0.1.10",
     "react": "16.8.6",
