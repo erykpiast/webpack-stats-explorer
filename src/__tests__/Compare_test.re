@@ -8,22 +8,23 @@ describe("Compare", () => {
     open Chunks;
 
     describe("chunksSimilar", () => {
-      let fakeChunk = (files, names) => Chunk.make(
-        Js.Dict.empty(),
-        false,
-        files,
-        0,
-        "",
-        0,
-        false,
-        [],
-        names,
-        [],
-        [],
-        false,
-        [],
-        0
-      );
+      let fakeChunk = (files, names) =>
+        Chunk.make(
+          Js.Dict.empty(),
+          false,
+          files,
+          0,
+          "",
+          0,
+          false,
+          [],
+          names,
+          [],
+          [],
+          false,
+          [],
+          0,
+        );
 
       test("equal files and different names", () => {
         let a = fakeChunk(["foo", "bar"], ["bar"]);
@@ -72,22 +73,23 @@ describe("Compare", () => {
     });
 
     describe("compare", () => {
-      let fakeChunk = (files, names, size) => Chunk.make(
-        Js.Dict.empty(),
-        false,
-        files,
-        0,
-        "",
-        0,
-        false,
-        [],
-        names,
-        [],
-        [],
-        false,
-        [],
-        size
-      );
+      let fakeChunk = (files, names, size) =>
+        Chunk.make(
+          Js.Dict.empty(),
+          false,
+          files,
+          0,
+          "",
+          0,
+          false,
+          [],
+          names,
+          [],
+          [],
+          false,
+          [],
+          size,
+        );
       let foo1 = fakeChunk(["foo123"], ["foo"], 100);
       let foo2 = fakeChunk(["foo456"], ["foo"], 200);
       let bar1 = fakeChunk(["bar123"], ["bar"], 200);
@@ -108,21 +110,22 @@ describe("Compare", () => {
         let b = [foo2, bar2, taz2];
         let result = make(a, b);
 
-        test("chunks existing in both sets and changed", () => {
-          expect(result.modified) |> toEqual([ModifiedSummary.make(Summary.make, foo1, foo2)]);
-        });
+        test("chunks existing in both sets and changed", () =>
+          expect(result.modified)
+          |> toEqual([ModifiedSummary.make(foo1, foo2)])
+        );
 
-        test("chunks existing in both sets and not changed", () => {
-          expect(result.intact) |> toEqual([Summary.make(bar2)]);
-        });
+        test("chunks existing in both sets and not changed", () =>
+          expect(result.intact) |> toEqual([Summary.make(bar2)])
+        );
 
-        test("chunks present only in the second set", () => {
-          expect(result.added) |> toEqual([Summary.make(taz2)]);
-        });
+        test("chunks present only in the second set", () =>
+          expect(result.added) |> toEqual([Summary.make(taz2)])
+        );
 
-        test("chunks present only in the first set", () => {
-          expect(result.removed) |> toEqual([Summary.make(baz1)]);
-        });
+        test("chunks present only in the first set", () =>
+          expect(result.removed) |> toEqual([Summary.make(baz1)])
+        );
       });
     });
   });
@@ -130,35 +133,36 @@ describe("Compare", () => {
   describe("Modules", () => {
     open Modules;
 
-    let fakeModule = (name, size, source, modules) => Module.make(
-      [],
-      false,
-      false,
-      [],
-      0,
-      0,
-      false,
-      None,
-      "",
-      0,
-      0,
-      None,
-      None,
-      None,
-      None,
-      modules,
-      name,
-      [],
-      false,
-      false,
-      None,
-      None,
-      [],
-      size,
-      source,
-      None,
-      0
-    );
+    let fakeModule = (name, size, source, modules) =>
+      Module.make(
+        [],
+        false,
+        false,
+        [],
+        0,
+        0,
+        false,
+        None,
+        "",
+        0,
+        0,
+        None,
+        None,
+        None,
+        None,
+        modules,
+        name,
+        [],
+        false,
+        false,
+        None,
+        None,
+        [],
+        size,
+        source,
+        None,
+        0,
+      );
 
     let foo = fakeModule("foo", 100, Some("foo"), None);
     let foo2 = fakeModule("foo", 200, Some("foo2"), None);
@@ -177,16 +181,13 @@ describe("Compare", () => {
       let withSource = make(foo);
       let withSubmodules = make(taz);
 
-      test("source", () => {
-        expect(withSource.source) |> toEqual("foo");
-      });
+      test("source", () =>
+        expect(withSource.source) |> toEqual("foo")
+      );
 
-      test("modules", () => {
-        expect(withSubmodules.modules) |> toEqual([
-          make(foo),
-          make(baz)
-        ]);
-      });
+      test("modules", () =>
+        expect(withSubmodules.modules) |> toEqual([make(foo), make(baz)])
+      );
     });
 
     describe("diff simple case", () => {
@@ -194,17 +195,17 @@ describe("Compare", () => {
       let modules2 = [bar2, baz2, taz2, faz2];
       let result = make(modules1, modules2);
 
-      test("added", () => {
+      test("added", () =>
         expect(result.added) |> toEqual([Summary.make(bar2)])
-      });
+      );
 
-      test("removed", () => {
+      test("removed", () =>
         expect(result.removed) |> toEqual([Summary.make(foo)])
-      });
+      );
 
-      test("intact", () => {
+      test("intact", () =>
         expect(result.intact) |> toEqual([Summary.make(faz2)])
-      });
+      );
     });
   });
 });
