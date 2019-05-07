@@ -28,6 +28,8 @@ type t =
   ; warnings : int
   }
 
+let normalizeName name = name |> Js.String.replaceByRe [%re "/ \+ \d+ modules?$/"] "";;
+
 let rec decode json =
   Json.Decode.
     { assets = json |> field "assets" (list string)
@@ -46,7 +48,7 @@ let rec decode json =
     ; issuerName = json |> field "issuerName" (optional string)
     ; issuerPath = json |> field "issuerPath" (optional (list string))
     ; modules = json |> optional (field "modules" (list decode))
-    ; name = json |> field "name" string
+    ; name = json |> field "name" string |> normalizeName
     ; optimizationBailout = json |> field "optimizationBailout" (list string)
     ; optional = json |> field "optional" bool
     ; prefetched = json |> field "prefetched" bool
