@@ -1,9 +1,25 @@
+// TODO: unify with ModulesDiff
+
 module Styles = {
   open Css;
 
-  let list = style([listStyleType(`none), padding(px(0))]);
+  let list =
+    style([listStyleType(`none), padding(px(0)), margin(px(0))]);
 
-  let item = style([marginTop(Theme.Space.default)]);
+  let item =
+    style([
+      display(`flex),
+      justifyContent(`spaceBetween),
+      marginBottom(Theme.Space.double),
+      marginTop(Theme.Space.double),
+    ]);
+
+  let size =
+    style([
+      marginLeft(`auto),
+      marginRight(Theme.Space.default),
+      color(Theme.Color.Text.secondary),
+    ]);
 };
 
 let renderFilenames = filenames =>
@@ -22,33 +38,32 @@ type props = {
   chunkname: string,
   filenames: list(string),
   chunk: Compare.Chunks.chunk,
+  onChunk: Compare.Chunks.chunk => unit,
 };
 
 let component = ReasonReact.statelessComponent("ChunksDiff");
 
-let make = (~title, ~chunks, ~onChunk, _children) => {
+let make = (~chunks, _children) => {
   ...component,
   render: _self =>
     switch (chunks) {
     | [] => ReasonReact.null
     | _ =>
-      <>
-        <h3> {ReasonReact.string(title)} </h3>
-        <ul className=Styles.list>
-          ...{
-               chunks
-               |> List.map(({after, before, chunk, chunkname, filenames}) =>
-                    <li onClick={_ => onChunk(chunk)} className=Styles.item>
-                      <strong> {ReasonReact.string(chunkname)} </strong>
-                      <br />
-                      <NumericDiff after before />
-                      <br />
-                      {renderFilenames(filenames)}
-                    </li>
-                  )
-               |> Array.of_list
-             }
-        </ul>
-      </>
+      <ul className=Styles.list>
+        ...{
+             chunks
+             |> List.map(
+                  ({after, before, chunk, onChunk, chunkname, filenames}) =>
+                  <li onClick={_ => onChunk(chunk)} className=Styles.item>
+                    <strong> {ReasonReact.string(chunkname)} </strong>
+                    {before !== 0
+                       ? <Size className=Styles.size value=before />
+                       : ReasonReact.null}
+                    <NumericDiff after before />
+                  </li>
+                )
+             |> Array.of_list
+           }
+      </ul>
     },
 };

@@ -35,7 +35,8 @@
     "rationale",
     "reason-react",
     "bs-css",
-    "bs-react-dropzone"
+    "bs-react-dropzone",
+    "re-classnames"
   ],
   "bs-dev-dependencies": [
     "@glennsl/bs-jest",
