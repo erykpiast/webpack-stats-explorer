@@ -156,13 +156,13 @@ let make = (~comparisons, _children) => {
             switch (item) {
             | Chunk(chunk) =>
               <ChunkSummary
-                chunk
+                data=chunk
                 kind
                 onModule={module_ => self.send(Navigate(module_, 1))}
               />
             | Module(module_) =>
               <ModuleSummary
-                module_
+                data=module_
                 kind
                 onModule={module_ => self.send(Navigate(module_, 2))}
               />

@@ -10,76 +10,76 @@ let mapChunksToProps = (chunks, onChunk) => {
   let added =
     chunks.added
     |> List.map((chunk: Summary.t) =>
-         ChunksDiff.{
-           after: chunk.size,
-           before: 0,
-           chunkname: chunk.name,
-           filenames: [chunk.filename],
-           chunk: Summary(chunk),
-           onChunk: chunk => onChunk(Segment.of_chunk(Added, chunk)),
-         }
+         (
+           {
+             after: chunk.size,
+             before: 0,
+             name: chunk.name,
+             value: Summary(chunk),
+             onChange: chunk => onChunk(Segment.of_chunk(Added, chunk)),
+           }: ChunksDiff.props
+         )
        );
   let removed =
     chunks.removed
     |> List.map((chunk: Summary.t) =>
-         ChunksDiff.{
-           after: 0,
-           before: chunk.size,
-           chunkname: chunk.name,
-           filenames: [chunk.filename],
-           chunk: Summary(chunk),
-           onChunk: chunk => onChunk(Segment.of_chunk(Removed, chunk)),
-         }
+         (
+           {
+             after: 0,
+             before: chunk.size,
+             name: chunk.name,
+             value: Summary(chunk),
+             onChange: chunk => onChunk(Segment.of_chunk(Removed, chunk)),
+           }: ChunksDiff.props
+         )
        );
   let intact =
     chunks.intact
     |> List.map((chunk: Summary.t) =>
-         ChunksDiff.{
-           after: chunk.size,
-           before: chunk.size,
-           chunkname: chunk.name,
-           filenames: [chunk.filename],
-           chunk: Summary(chunk),
-           onChunk: chunk => onChunk(Segment.of_chunk(Intact, chunk)),
-         }
+         (
+           {
+             after: chunk.size,
+             before: chunk.size,
+             name: chunk.name,
+             value: Summary(chunk),
+             onChange: chunk => onChunk(Segment.of_chunk(Intact, chunk)),
+           }: ChunksDiff.props
+         )
        );
   let modified =
     chunks.modified
     |> List.map((chunk: ModifiedSummary.t) =>
-         ChunksDiff.{
-           after: snd(chunk.size),
-           before: fst(chunk.size),
-           chunkname: chunk.name,
-           filenames: [fst(chunk.filename), snd(chunk.filename)],
-           chunk: ModifiedSummary(chunk),
-           onChunk: chunk => onChunk(Segment.of_chunk(Modified, chunk)),
-         }
+         (
+           {
+             after: snd(chunk.size),
+             before: fst(chunk.size),
+             name: chunk.name,
+             value: ModifiedSummary(chunk),
+             onChange: chunk => onChunk(Segment.of_chunk(Modified, chunk)),
+           }: ChunksDiff.props
+         )
        );
 
   // TODO: test
   Belt.List.concatMany([|added, modified, removed, intact|])
-  |> List.sort(
-       ChunksDiff.(
-         (a, b) => {
-           let aDiff = a.after - a.before;
-           let bDiff = b.after - b.before;
-           let diffOfDiffs = bDiff - aDiff;
+  |> List.sort((a: ChunksDiff.props, b: ChunksDiff.props) => {
+       let aDiff = a.after - a.before;
+       let bDiff = b.after - b.before;
+       let diffOfDiffs = bDiff - aDiff;
 
-           if (diffOfDiffs === 0) {
-             0;
-           } else if (aDiff === 0) {
-             1;
-           } else if (bDiff === 0) {
-             (-1);
-           } else {
-             diffOfDiffs;
-           };
-         }
-       ),
-     );
+       if (diffOfDiffs === 0) {
+         0;
+       } else if (aDiff === 0) {
+         1;
+       } else if (bDiff === 0) {
+         (-1);
+       } else {
+         diffOfDiffs;
+       };
+     });
 };
 
 let make = (~chunks, ~onChunk, _children) => {
   ...component,
-  render: _self => <ChunksDiff chunks={mapChunksToProps(chunks, onChunk)} />,
+  render: _self => <ChunksDiff data={mapChunksToProps(chunks, onChunk)} />,
 };

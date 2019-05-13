@@ -207,7 +207,7 @@ end
 type t =
   { chunks : Chunks.t
   ; size : int * int
-;count : int
+  ;count : int
   }
 
 let calcSize = List.fold_left (fun acc (a : Chunk.t) -> a.size + acc) 0
