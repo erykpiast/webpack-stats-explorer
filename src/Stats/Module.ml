@@ -28,7 +28,15 @@ type t =
   ; warnings : int
   }
 
-let normalizeName name = name |> Js.String.replaceByRe [%re "/ \+ \d+ modules?$/"] "";;
+let removeSubmodules = Js.String.replaceByRe [%re "/ \+ \d+ modules?$/"] "";;
+
+let removePrefix = Js.String.replaceByRe [%re "/^\w+ /"] "";;
+
+let removeLoaders = Js.String.replaceByRe [%re "/.*\!([^!]+)$/"] "$1";;
+
+let normalizeName = Rationale.Function.Infix.(
+  removeSubmodules ||> removePrefix ||> removeLoaders
+);;
 
 let rec decode json =
   Json.Decode.

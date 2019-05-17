@@ -17,6 +17,18 @@ describe("Module", () => {
       expect(normalizeName("foo + 3 modules"))
       |> toEqual(normalizeName("foo + 1 module"))
     );
+
+    test("same name but with different compiler prefix", () =>
+      expect(normalizeName("multi foo")) |> toEqual("foo")
+    );
+
+    test("same name but with different plugin prefix", () =>
+      expect(normalizeName("css foo")) |> toEqual("foo")
+    );
+
+    test("same name but with different loader prefix", () =>
+      expect(normalizeName("bar!baz!foo")) |> toEqual("foo")
+    );
   });
 
   describe("eql", () => {
