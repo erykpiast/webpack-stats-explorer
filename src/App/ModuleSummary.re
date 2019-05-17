@@ -55,8 +55,10 @@ module ModuleSummary =
         let modules =
           if (String.length(module_.source) > 0) {
             module_.modules;
-          } else {
+          } else if (List.length(module_.modules) > 0) {
             List.tl(module_.modules);
+          } else {
+            [];
           };
         Some(Compare.Modules.NotModifiedModules(modules));
       | ModifiedSummary(module_) =>
