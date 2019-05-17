@@ -34,7 +34,7 @@ let rec decode json =
   Json.Decode.
     { assets = json |> field "assets" (list string)
     ; built = json |> field "built" bool
-    ; cacheable = json |> field "cacheable" bool
+    ; cacheable = json |> optional (field "cacheable" bool) |> Utils.defaultTo(false)
     ; chunks = json |> field "chunks" (list int)
     ; depth = json |> field "depth" int
     ; errors = json |> field "errors" int

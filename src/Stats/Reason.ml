@@ -10,13 +10,13 @@ type t =
 
 let decode json =
   Json.Decode.
-    { loc = json |> field "loc" string
+    { loc = json |> optional (field "loc" string) |> Utils.defaultTo("")
     ; module_ = json |> field "module" (optional string)
     ; moduleId = json |> field "moduleId" (optional string)
     ; moduleIdentifier = json |> field "moduleIdentifier" (optional string)
     ; moduleName = json |> field "moduleName" (optional string)
-    ; type_ = json |> field "type" string
-    ; userRequest = json |> field "userRequest" string
+    ; type_ = json |> optional (field "type" string) |> Utils.defaultTo("")
+    ; userRequest = json |> optional (field "userRequest" string) |> Utils.defaultTo("")
     }
 ;;
 
