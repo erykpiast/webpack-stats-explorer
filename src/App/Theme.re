@@ -45,6 +45,8 @@ module Space = {
     let tenfold = default * 10;
     let hexfold = default * 16;
     let doublehexfold = hexfold * 2;
+    let triplehexfold = hexfold * 3;
+    let quadruplehexfold = hexfold * 4;
   };
 
   let default = `px(Raw.default);
@@ -58,6 +60,10 @@ module Space = {
   let hexfold = `px(Raw.hexfold);
 
   let doublehexfold = `px(Raw.doublehexfold);
+
+  let triplehexfold = `px(Raw.triplehexfold);
+
+  let quadruplehexfold = `px(Raw.quadruplehexfold);
 };
 let betterColor = rgb(205, 255, 216);
 let changeColor = rgb(247, 202, 136);

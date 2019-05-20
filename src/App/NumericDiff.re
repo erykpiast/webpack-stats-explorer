@@ -28,7 +28,7 @@ let make = (~className="", ~after, ~before, _children) => {
       ReasonReact.null;
     } else {
       <Size
-        className={kindClassName ++ " " ++ className}
+        className={Cn.make([className, kindClassName])}
         value={Js.Math.abs_int(diff)}
       />;
     };

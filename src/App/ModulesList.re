@@ -13,6 +13,16 @@ module Styles = {
       marginBottom(Theme.Space.double),
       marginTop(Theme.Space.double),
     ]);
+
+  let name =
+    style([
+      overflow(`hidden),
+      flexShrink(1),
+      marginRight(Theme.Space.default),
+      textOverflow(`ellipsis),
+    ]);
+
+  let size = style([flexShrink(0)]);
 };
 
 let component = ReasonReact.statelessComponent("ModulesList");
@@ -23,14 +33,16 @@ let make = (~modules, ~onModule, ~className="", _children) => {
     switch (modules) {
     | [] => ReasonReact.null
     | modules =>
-      <ul className=Cn.make([Styles.list, className])>
+      <ul className={Cn.make([Styles.list, className])}>
         ...{
              modules
              |> List.map(module_ =>
                   <li onClick={_ => onModule(module_)} className=Styles.item>
-                    <strong> {module_.name |> ReasonReact.string} </strong>
+                    <strong className=Styles.name>
+                      {module_.name |> ReasonReact.string}
+                    </strong>
                     {" " |> ReasonReact.string}
-                    <Size value={module_.size} />
+                    <Size className=Styles.size value={module_.size} />
                   </li>
                 )
              |> Array.of_list

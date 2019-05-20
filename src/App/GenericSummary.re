@@ -37,7 +37,7 @@ module Styles = {
   let modules =
     style([
       backgroundColor(Theme.Color.Background.default),
-      width(Theme.Space.doublehexfold),
+      width(Theme.Space.triplehexfold),
       marginLeft(`auto),
       height(`percent(100.0)),
       padding(Theme.Space.default),

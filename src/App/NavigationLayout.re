@@ -21,7 +21,7 @@ module Styles = {
   let side =
     style([
       display(`block),
-      width(Theme.Space.doublehexfold),
+      width(Theme.Space.triplehexfold),
       backgroundColor(Theme.Color.Background.default),
       padding(Theme.Space.default),
     ]);

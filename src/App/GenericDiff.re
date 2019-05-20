@@ -12,12 +12,24 @@ module Styles = {
       marginTop(Theme.Space.double),
     ]);
 
+  let name =
+    style([
+      overflow(`hidden),
+      flexShrink(1),
+      marginRight(Theme.Space.default),
+      textOverflow(`ellipsis),
+      whiteSpace(`nowrap),
+    ]);
+
   let size =
     style([
       marginLeft(`auto),
       marginRight(Theme.Space.default),
       color(Theme.Color.Text.secondary),
+      flexShrink(0),
     ]);
+
+  let diff = style([flexShrink(0)]);
 };
 
 let renderFilenames = filenames =>
@@ -57,11 +69,13 @@ module Make = (ToDiff: Interface) => {
                data
                |> List.map(({after, before, value, name, onChange}) =>
                     <li onClick={_ => onChange(value)} className=Styles.item>
-                      <strong> {ReasonReact.string(name)} </strong>
+                      <strong className=Styles.name title=name>
+                        {ReasonReact.string(name)}
+                      </strong>
                       {before !== 0
                          ? <Size className=Styles.size value=before />
                          : ReasonReact.null}
-                      <NumericDiff after before />
+                      <NumericDiff className=Styles.diff after before />
                     </li>
                   )
                |> Array.of_list
