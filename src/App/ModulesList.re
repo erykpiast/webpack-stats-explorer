@@ -25,21 +25,6 @@ let mapModulesToProps = (modules, kind, onModule) => {
            },
          }: ModulesDiff.props
        );
-     })
-  |> List.sort((a: ModulesDiff.props, b: ModulesDiff.props) => {
-       let aDiff = a.after - a.before;
-       let bDiff = b.after - b.before;
-       let diffOfDiffs = bDiff - aDiff;
-
-       if (diffOfDiffs === 0) {
-         0;
-       } else if (aDiff === 0) {
-         1;
-       } else if (bDiff === 0) {
-         (-1);
-       } else {
-         diffOfDiffs;
-       };
      });
 };
 

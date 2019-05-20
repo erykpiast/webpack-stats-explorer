@@ -67,6 +67,21 @@ module Make = (ToDiff: Interface) => {
         <ul className={Cn.make([Styles.list, className])}>
           ...{
                data
+               |> List.sort((a: props, b: props) => {
+                    let aDiff = a.after - a.before;
+                    let bDiff = b.after - b.before;
+                    let diffOfDiffs = bDiff - aDiff;
+
+                    if (diffOfDiffs === 0) {
+                      0;
+                    } else if (aDiff === 0) {
+                      1;
+                    } else if (bDiff === 0) {
+                      (-1);
+                    } else {
+                      diffOfDiffs;
+                    };
+                  })
                |> List.map(({after, before, value, name, onChange}) =>
                     <li onClick={_ => onChange(value)} className=Styles.item>
                       <strong className=Styles.name title=name>
