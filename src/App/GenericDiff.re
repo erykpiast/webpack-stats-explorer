@@ -72,8 +72,8 @@ module Make = (ToDiff: Interface) => {
                       <strong className=Styles.name title=name>
                         {ReasonReact.string(name)}
                       </strong>
-                      {before !== 0
-                         ? <Size className=Styles.size value=before />
+                      {after !== 0
+                         ? <Size className=Styles.size value=after />
                          : ReasonReact.null}
                       <NumericDiff className=Styles.diff after before />
                     </li>
