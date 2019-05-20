@@ -93,14 +93,8 @@ let make = (~comparisons, _children) => {
           | Compare.Chunks.Summary(chunk) =>
             <ModulesList
               modules={chunk.modules}
-              onModule={sth =>
-                self.send(
-                  Navigate(
-                    of_module(kind, Compare.Modules.Summary(sth)),
-                    1,
-                  ),
-                )
-              }
+              kind
+              onModule={segment => self.send(Navigate(segment, 1))}
             />
           | Compare.Chunks.ModifiedSummary(chunk) =>
             <ModulesCompare
@@ -117,13 +111,9 @@ let make = (~comparisons, _children) => {
           | Compare.Modules.Summary(module_) =>
             <ModulesList
               modules={module_.modules}
-              onModule={sth =>
-                self.send(
-                  Navigate(
-                    of_module(kind, Compare.Modules.Summary(sth)),
-                    pathDepth - 1,
-                  ),
-                )
+              kind
+              onModule={segment =>
+                self.send(Navigate(segment, pathDepth - 1))
               }
             />
           | Compare.Modules.ModifiedSummary(module_) =>

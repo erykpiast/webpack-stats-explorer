@@ -129,15 +129,7 @@ module Make = (ToSummarize: Interface) => {
            | Some(modules) =>
              switch (modules) {
              | NotModifiedModules(modules) =>
-               <ModulesList
-                 className=Styles.modules
-                 modules
-                 onModule={module_ =>
-                   Compare.Modules.Summary(module_)
-                   |> Segment.of_module(kind)
-                   |> onModule
-                 }
-               />
+               <ModulesList className=Styles.modules modules kind onModule />
              | ModifiedModules(modules) =>
                <ModulesCompare className=Styles.modules modules onModule />
              }
