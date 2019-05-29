@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.4.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.3.0...v1.4.0) (2019-05-29)
+
+
+### Bug Fixes
+
+* **data:** Handle module without neither source and submodules ([1d16881](https://github.com/erykpiast/webpack-stats-explorer/commit/1d16881))
+* **package:** update @zpnester/bs-filereader to version 0.3.0 ([9c059ea](https://github.com/erykpiast/webpack-stats-explorer/commit/9c059ea))
+* **package:** update react-dropzone to version 10.1.5 ([bea35e8](https://github.com/erykpiast/webpack-stats-explorer/commit/bea35e8))
+
+
+### Features
+
+* **data:** Add support for stats with children ([b934b7b](https://github.com/erykpiast/webpack-stats-explorer/commit/b934b7b))
+* **data:** Normalize module name ([141fa4c](https://github.com/erykpiast/webpack-stats-explorer/commit/141fa4c))
+* **data:** Normalize module name more ([16af9d5](https://github.com/erykpiast/webpack-stats-explorer/commit/16af9d5))
+* **tests:** transform re-* modules with babel ([8197383](https://github.com/erykpiast/webpack-stats-explorer/commit/8197383))
+* **ui:** show after size only when both after and before are present ([fc779f1](https://github.com/erykpiast/webpack-stats-explorer/commit/fc779f1))
+* **ui:** show size after on diff lists ([a8e0d57](https://github.com/erykpiast/webpack-stats-explorer/commit/a8e0d57))
+* **ui:** style app a bit, show entries in more compact way ([0708283](https://github.com/erykpiast/webpack-stats-explorer/commit/0708283))
+* **ui:** style diff lists ([579913e](https://github.com/erykpiast/webpack-stats-explorer/commit/579913e))
+
+
+
 # [1.3.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.2.0...v1.3.0) (2019-05-04)
 
 
