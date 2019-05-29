@@ -1,10 +1,37 @@
 open Jest;
 open ExpectJs;
 
-describe("Module", () =>
-  describe("eql", () => {
-    open Module;
+describe("Module", () => {
+  open Module;
 
+  describe("normalize name", () => {
+    test("same name for already normalized", () =>
+      expect(normalizeName("foo")) |> toEqual("foo")
+    );
+
+    test("just a name for name with submodules", () =>
+      expect(normalizeName("foo + 3 modules")) |> toEqual("foo")
+    );
+
+    test("same name for the same module with different submodules", () =>
+      expect(normalizeName("foo + 3 modules"))
+      |> toEqual(normalizeName("foo + 1 module"))
+    );
+
+    test("same name but with different compiler prefix", () =>
+      expect(normalizeName("multi foo")) |> toEqual("foo")
+    );
+
+    test("same name but with different plugin prefix", () =>
+      expect(normalizeName("css foo")) |> toEqual("foo")
+    );
+
+    test("same name but with different loader prefix", () =>
+      expect(normalizeName("bar!baz!foo")) |> toEqual("foo")
+    );
+  });
+
+  describe("eql", () => {
     let fakeModule = (name, size, source, modules) =>
       make(
         [],
@@ -77,5 +104,5 @@ describe("Module", () =>
 
       expect(Module.eql(a, b)) |> toEqual(true);
     });
-  })
-);
+  });
+});

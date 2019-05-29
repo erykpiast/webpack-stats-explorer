@@ -28,11 +28,21 @@ type t =
   ; warnings : int
   }
 
+let removeSubmodules = Js.String.replaceByRe [%re "/ \+ \d+ modules?$/"] "";;
+
+let removePrefix = Js.String.replaceByRe [%re "/^\w+ /"] "";;
+
+let removeLoaders = Js.String.replaceByRe [%re "/.*\!([^!]+)$/"] "$1";;
+
+let normalizeName = Rationale.Function.Infix.(
+  removeSubmodules ||> removePrefix ||> removeLoaders
+);;
+
 let rec decode json =
   Json.Decode.
     { assets = json |> field "assets" (list string)
     ; built = json |> field "built" bool
-    ; cacheable = json |> field "cacheable" bool
+    ; cacheable = json |> optional (field "cacheable" bool) |> Utils.defaultTo(false)
     ; chunks = json |> field "chunks" (list int)
     ; depth = json |> field "depth" int
     ; errors = json |> field "errors" int
@@ -46,7 +56,7 @@ let rec decode json =
     ; issuerName = json |> field "issuerName" (optional string)
     ; issuerPath = json |> field "issuerPath" (optional (list string))
     ; modules = json |> optional (field "modules" (list decode))
-    ; name = json |> field "name" string
+    ; name = json |> field "name" string |> normalizeName
     ; optimizationBailout = json |> field "optimizationBailout" (list string)
     ; optional = json |> field "optional" bool
     ; prefetched = json |> field "prefetched" bool

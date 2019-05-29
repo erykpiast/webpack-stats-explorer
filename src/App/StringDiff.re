@@ -4,14 +4,14 @@ module Styles = {
   let before =
     style([
       display(inlineBlock),
-      backgroundColor(Theme.worseColor),
+      backgroundColor(Theme.Color.Added.default),
       padding(Theme.padding),
     ]);
 
   let after =
     style([
       display(inlineBlock),
-      backgroundColor(Theme.betterColor),
+      backgroundColor(Theme.Color.Removed.default),
       padding(Theme.padding),
     ]);
 };

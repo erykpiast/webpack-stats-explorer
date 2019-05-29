@@ -3,9 +3,9 @@ type compilation_warning = string
 
 type t =
   { assets : Asset.t list
-  ; assetsByChunkName : string Js.Dict.t
+  ; assetsByChunkName : AssetsGroup.t Js.Dict.t
   ; builtAt : int
-  ; children : string list
+  ; children : Child.t list
   ; chunks : Chunk.t list
   ; entrypoints : Entrypoint.t Js.Dict.t
   ; errors : string list
@@ -22,9 +22,9 @@ type t =
 let decode json =
   Json.Decode.
     { assets = json |> field "assets" (list Asset.decode)
-    ; assetsByChunkName = json |> field "assetsByChunkName" (dict string)
+    ; assetsByChunkName = json |> field "assetsByChunkName" (dict AssetsGroup.decode)
     ; builtAt = json |> field "builtAt" int
-    ; children = json |> field "children" (list string)
+    ; children = json |> field "children" (list Child.decode)
     ; chunks = json |> field "chunks" (list Chunk.decode)
     ; entrypoints = json |> field "entrypoints" (dict Entrypoint.decode)
     ; errors = json |> field "errors" (list string)
@@ -44,9 +44,9 @@ let encode r =
     object_
       [ "assets", r.assets |> list Asset.encode
       ; ( "assetsByChunkName"
-        , r.assetsByChunkName |> Js.Dict.map (fun [@bs] x -> x |> string) |> dict )
+        , r.assetsByChunkName |> Js.Dict.map (fun [@bs] x -> x |> AssetsGroup.encode) |> dict )
       ; "builtAt", r.builtAt |> int
-      ; "children", r.children |> list string
+      ; "children", r.children |> list Child.encode
       ; "chunks", r.chunks |> list Chunk.encode
       ; ( "entrypoints"
         , r.entrypoints |> Js.Dict.map (fun [@bs] x -> x |> Entrypoint.encode) |> dict )

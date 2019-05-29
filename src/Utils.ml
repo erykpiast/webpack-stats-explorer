@@ -54,3 +54,5 @@ module Function = struct
   let unary (fn : 'a) : 'a = [%raw "(a) => fn(a)"]
   let binary (fn : 'a) : 'a = [%raw "(a, b) => fn(a, b)"]
 end
+
+let pluralize singular plural n = (string_of_int n) ^ " " ^ (if n == 1 then singular else plural);;

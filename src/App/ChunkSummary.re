@@ -1,82 +1,33 @@
-open Compare.Chunks;
-open State.NavigationPath;
+module ChunkSummary =
+  GenericSummary.Make({
+    open Compare.Chunks;
 
-let getModules = chunk =>
-  switch (chunk) {
-  | Summary(chunk) => Compare.Modules.NotModifiedModules(chunk.modules)
-  | ModifiedSummary(chunk) => Compare.Modules.ModifiedModules(chunk.modules)
-  };
+    type a = chunk;
 
-let getName = chunk =>
-  switch (chunk) {
-  | Summary(chunk) => chunk.name
-  | ModifiedSummary(chunk) => chunk.name
-  };
+    let componentName = "ChunkSummary";
 
-let getSize = chunk =>
-  switch (chunk) {
-  | Summary(chunk) => chunk.size
-  | ModifiedSummary(chunk) => fst(chunk.size)
-  };
+    let getName = chunk =>
+      switch (chunk) {
+      | Summary(chunk) => chunk.name
+      | ModifiedSummary(chunk) => chunk.name
+      };
 
-let getKindMessage =
-  Compare.Kind.(
-    kind =>
-      switch (kind) {
-      | Added => L10N.Kind.added
-      | Removed => L10N.Kind.removed
-      | Intact => L10N.Kind.intact
-      | Modified => L10N.Kind.modified
-      }
-  );
+    let getSize = chunk =>
+      switch (chunk) {
+      | Summary(chunk) => chunk.size
+      | ModifiedSummary(chunk) => fst(chunk.size)
+      };
 
-module Styles = {
-  open Css;
+    let getModules = chunk =>
+      (
+        switch (chunk) {
+        | Summary(chunk) => Compare.Modules.NotModifiedModules(chunk.modules)
+        | ModifiedSummary(chunk) =>
+          Compare.Modules.ModifiedModules(chunk.modules)
+        }
+      )
+      |> (module_ => Some(module_));
+    let getSource = _ => ReasonReact.null;
+  });
 
-  let term = style([fontWeight(`bold)]);
-
-  let definition = style([]);
-};
-
-let component = ReasonReact.statelessComponent("ChunkSummary");
-
-let make = (~chunk, ~kind, ~onModule, _children) => {
-  ...component,
-  render: _self =>
-    <>
-      <header>
-        <dl>
-          <dt className=Styles.term>
-            {L10N.Chunk.status |> ReasonReact.string}
-          </dt>
-          <dd className=Styles.definition>
-            {kind |> getKindMessage |> ReasonReact.string}
-          </dd>
-          <dt className=Styles.term>
-            {L10N.Chunk.name |> ReasonReact.string}
-          </dt>
-          <dd className=Styles.definition>
-            {chunk |> getName |> ReasonReact.string}
-          </dd>
-          <dt className=Styles.term>
-            {L10N.Chunk.size |> ReasonReact.string}
-          </dt>
-          <dd className=Styles.definition>
-            <Size value={chunk |> getSize} />
-          </dd>
-        </dl>
-      </header>
-      {switch (getModules(chunk)) {
-       | NotModifiedModules(modules) =>
-         <ModulesList
-           modules
-           onModule={module_ =>
-             Compare.Modules.Summary(module_)
-             |> Segment.of_module(kind)
-             |> onModule
-           }
-         />
-       | ModifiedModules(modules) => <ModulesCompare modules onModule />
-       }}
-    </>,
-};
+let make = ChunkSummary.make;

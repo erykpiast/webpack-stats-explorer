@@ -4,7 +4,7 @@ type t =
   ; moduleIdentifier : string
   ; moduleName : string
   ; reasons : Reason.t list
-  ; request : string
+  ; request : string option
   }
 
 let decode json =
@@ -14,7 +14,7 @@ let decode json =
     ; moduleIdentifier = json |> field "moduleIdentifier" string
     ; moduleName = json |> field "moduleName" string
     ; reasons = json |> field "reasons" (list Reason.decode)
-    ; request = json |> field "request" string
+    ; request = json |> field "request" (optional string)
     }
 ;;
 
@@ -26,6 +26,6 @@ let encode r =
       ; "moduleIdentifier", r.moduleIdentifier |> string
       ; "moduleName", r.moduleName |> string
       ; "reasons", r.reasons |> list Reason.encode
-      ; "request", r.request |> string
+      ; "request", r.request |> nullable string
       ])
 ;;

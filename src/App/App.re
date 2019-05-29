@@ -93,14 +93,8 @@ let make = (~comparisons, _children) => {
           | Compare.Chunks.Summary(chunk) =>
             <ModulesList
               modules={chunk.modules}
-              onModule={sth =>
-                self.send(
-                  Navigate(
-                    of_module(kind, Compare.Modules.Summary(sth)),
-                    1,
-                  ),
-                )
-              }
+              kind
+              onModule={segment => self.send(Navigate(segment, 1))}
             />
           | Compare.Chunks.ModifiedSummary(chunk) =>
             <ModulesCompare
@@ -117,13 +111,9 @@ let make = (~comparisons, _children) => {
           | Compare.Modules.Summary(module_) =>
             <ModulesList
               modules={module_.modules}
-              onModule={sth =>
-                self.send(
-                  Navigate(
-                    of_module(kind, Compare.Modules.Summary(sth)),
-                    pathDepth - 1,
-                  ),
-                )
+              kind
+              onModule={segment =>
+                self.send(Navigate(segment, pathDepth - 1))
               }
             />
           | Compare.Modules.ModifiedSummary(module_) =>
@@ -140,7 +130,6 @@ let make = (~comparisons, _children) => {
           }
         | _ =>
           <ChunksCompare
-            size={comp.size}
             chunks={comp.chunks}
             onChunk={chunk => self.send(Navigate(chunk, 0))}
           />
@@ -148,7 +137,7 @@ let make = (~comparisons, _children) => {
       );
     let mainContent =
       switch (revPath) {
-      | [] => ReasonReact.null
+      | [] => <ChunksOverview size={comp.size} count={comp.count} />
       | segments =>
         segments
         |> List.hd
@@ -157,19 +146,27 @@ let make = (~comparisons, _children) => {
             switch (item) {
             | Chunk(chunk) =>
               <ChunkSummary
-                chunk
+                data=chunk
                 kind
                 onModule={module_ => self.send(Navigate(module_, 1))}
               />
             | Module(module_) =>
               <ModuleSummary
-                module_
+                data=module_
                 kind
                 onModule={module_ => self.send(Navigate(module_, 2))}
               />
             }
         )
       };
+    let topContent =
+      <>
+        <Logo onClick={index => self.send(NavigateThroughBreadcrumbs(0))} />
+        <Breadcrumbs
+          items={self.state.navigationPath}
+          onClick={index => self.send(NavigateThroughBreadcrumbs(index))}
+        />
+      </>;
 
     <Dropzone
       className=Styles.dropzone
@@ -186,11 +183,7 @@ let make = (~comparisons, _children) => {
       <button onClick={_ => self.send(Next)}>
         {ReasonReact.string(">>")}
       </button>
-      <Breadcrumbs
-        items={self.state.navigationPath}
-        onClick={index => self.send(NavigateThroughBreadcrumbs(index))}
-      />
-      <NavigationLayout side=sideContent main=mainContent />
+      <NavigationLayout side=sideContent main=mainContent top=topContent />
     </Dropzone>;
   },
 };

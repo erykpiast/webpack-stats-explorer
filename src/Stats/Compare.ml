@@ -207,12 +207,13 @@ end
 type t =
   { chunks : Chunks.t
   ; size : int * int
+  ;count : int
   }
 
 let calcSize = List.fold_left (fun acc (a : Chunk.t) -> a.size + acc) 0
 
 let make (a : Stats.t) (b : Stats.t) =
-  { chunks = Chunks.make a.chunks b.chunks; size = calcSize a.chunks, calcSize b.chunks }
+  { chunks = Chunks.make a.chunks b.chunks; size = calcSize a.chunks, calcSize b.chunks; count = List.length b.chunks }
 ;;
 
 let encode r =

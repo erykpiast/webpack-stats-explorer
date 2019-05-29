@@ -2,12 +2,14 @@ let added = "Added";
 let assets = "Assets";
 let breadcrumbsRoot = "Stats";
 let chunks = "Chunks";
+let chunk = "Chunk";
 let drop = "Drop files here";
 let intact = "Intact";
 let modified = "Modified";
 let overalSize = "Overal size";
 let removed = "Removed";
 let modules = "Modules";
+let module_ = "Module";
 let submodules = "Submodules";
 let upload = "Click to upload webpack stats";
 

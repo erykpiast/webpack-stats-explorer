@@ -1,41 +1,36 @@
 module Styles = {
   open Css;
 
-  let better =
+  let less =
     style([
-      display(inlineBlock),
-      backgroundColor(Theme.betterColor),
-      padding(Theme.padding),
+      color(Theme.Color.Removed.default),
       before([contentRule("-")]),
     ]);
 
-  let worse =
-    style([
-      display(inlineBlock),
-      backgroundColor(Theme.worseColor),
-      padding(Theme.padding),
-      before([contentRule("+")]),
-    ]);
+  let more =
+    style([color(Theme.Color.Added.default), before([contentRule("+")])]);
 };
 
 let component = ReasonReact.statelessComponent("NumericDiff");
 
-let make = (_children, ~after, ~before) => {
+let make = (~className="", ~after, ~before, _children) => {
   ...component,
   render: _self => {
     let diff = after - before;
-    let className =
+    let kindClassName =
       if (diff > 0) {
-        Styles.worse;
+        Styles.more;
       } else {
-        Styles.better;
+        Styles.less;
       };
 
-    <span>
-      <Size value=after />
-      {ReasonReact.string(" ")}
-      {diff != 0
-         ? <Size className value={Js.Math.abs_int(diff)} /> : ReasonReact.null}
-    </span>;
+    if (diff == 0) {
+      ReasonReact.null;
+    } else {
+      <Size
+        className={Cn.make([className, kindClassName])}
+        value={Js.Math.abs_int(diff)}
+      />;
+    };
   },
 };

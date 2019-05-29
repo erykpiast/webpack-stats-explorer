@@ -1,34 +1,40 @@
+open Compare.Kind;
 open Compare.Modules.Summary;
+open State.NavigationPath;
 
-module Styles = {
-  open Css;
+let mapModulesToProps = (modules, kind, onModule) => {
+  modules
+  |> List.map(module_ => {
+       let [after, before] =
+         switch (kind) {
+         | Added => [module_.size, 0]
+         | Removed => [0, module_.size]
+         | Intact => [module_.size, module_.size]
+         | Modified => [0, 0]
+         };
 
-  let list = style([listStyleType(`none)]);
+       (
+         {
+           after,
+           before,
+           name: module_.name,
+           value: Summary(module_),
+           onChange: module_ => {
+             onModule(Segment.of_module(kind, module_));
+             ();
+           },
+         }: ModulesDiff.props
+       );
+     });
 };
 
 let component = ReasonReact.statelessComponent("ModulesList");
 
-let make = (~modules, ~onModule, _children) => {
+let make = (~modules, ~onModule, ~kind, ~className="", _children) => {
   ...component,
   render: _self =>
-    switch (modules) {
-    | [] => ReasonReact.null
-    | modules =>
-      <>
-        <h3> {L10N.modules |> ReasonReact.string} </h3>
-        <ul className=Styles.list>
-          ...{
-               modules
-               |> List.map(module_ =>
-                    <li onClick={_ => onModule(module_)}>
-                      <strong> {module_.name |> ReasonReact.string} </strong>
-                      {" " |> ReasonReact.string}
-                      <Size value={module_.size} />
-                    </li>
-                  )
-               |> Array.of_list
-             }
-        </ul>
-      </>
-    },
+    <ModulesDiff
+      className
+      data={mapModulesToProps(modules, kind, onModule)}
+    />,
 };

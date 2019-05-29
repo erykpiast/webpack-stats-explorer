@@ -1,80 +1,85 @@
+// TODO: unify with ModulesCompare
+
 open Compare.Chunks;
 open Compare.Kind;
 open State.NavigationPath;
 
 let component = ReasonReact.statelessComponent("ChunksCompare");
 
-let make = (~size, ~chunks, ~onChunk, _children) => {
-  let renderChunksDiff = (mapper, title, onChunk, chunks) =>
-    <ChunksDiff chunks={chunks |> List.map(mapper)} title onChunk />;
-  {
-    ...component,
-    render: _self => {
-      let added =
-        renderChunksDiff(
-          (chunk: Summary.t) =>
-            {
-              after: chunk.size,
-              before: 0,
-              chunkname: chunk.name,
-              filenames: [chunk.filename],
-              chunk: Summary(chunk),
-            },
-          L10N.added,
-          chunk => onChunk(Segment.of_chunk(Added, chunk)),
-          chunks.added,
-        );
-      let removed =
-        renderChunksDiff(
-          (chunk: Summary.t) =>
-            {
-              after: 0,
-              before: chunk.size,
-              chunkname: chunk.name,
-              filenames: [chunk.filename],
-              chunk: Summary(chunk),
-            },
-          L10N.removed,
-          chunk => onChunk(Segment.of_chunk(Removed, chunk)),
-          chunks.removed,
-        );
-      let intact =
-        renderChunksDiff(
-          (chunk: Summary.t) =>
-            {
-              after: chunk.size,
-              before: chunk.size,
-              chunkname: chunk.name,
-              filenames: [chunk.filename],
-              chunk: Summary(chunk),
-            },
-          L10N.intact,
-          chunk => onChunk(Segment.of_chunk(Intact, chunk)),
-          chunks.intact,
-        );
-      let modified =
-        renderChunksDiff(
-          (chunk: ModifiedSummary.t) =>
-            {
-              after: snd(chunk.size),
-              before: fst(chunk.size),
-              chunkname: chunk.name,
-              filenames: [fst(chunk.filename), snd(chunk.filename)],
-              chunk: ModifiedSummary(chunk),
-            },
-          L10N.modified,
-          chunk => onChunk(Segment.of_chunk(Modified, chunk)),
-          chunks.modified,
-        );
-      <>
-        {ReasonReact.string(L10N.overalSize ++ " ")}
-        <NumericDiff after={snd(size)} before={fst(size)} />
-        <h2> {ReasonReact.string(L10N.chunks)} </h2>
-        added
-        removed
-        intact
-        modified
-      </>;
-    },
-  };
+let mapChunksToProps = (chunks, onChunk) => {
+  let added =
+    chunks.added
+    |> List.map((chunk: Summary.t) =>
+         (
+           {
+             after: chunk.size,
+             before: 0,
+             name: chunk.name,
+             value: Summary(chunk),
+             onChange: chunk => onChunk(Segment.of_chunk(Added, chunk)),
+           }: ChunksDiff.props
+         )
+       );
+  let removed =
+    chunks.removed
+    |> List.map((chunk: Summary.t) =>
+         (
+           {
+             after: 0,
+             before: chunk.size,
+             name: chunk.name,
+             value: Summary(chunk),
+             onChange: chunk => onChunk(Segment.of_chunk(Removed, chunk)),
+           }: ChunksDiff.props
+         )
+       );
+  let intact =
+    chunks.intact
+    |> List.map((chunk: Summary.t) =>
+         (
+           {
+             after: chunk.size,
+             before: chunk.size,
+             name: chunk.name,
+             value: Summary(chunk),
+             onChange: chunk => onChunk(Segment.of_chunk(Intact, chunk)),
+           }: ChunksDiff.props
+         )
+       );
+  let modified =
+    chunks.modified
+    |> List.map((chunk: ModifiedSummary.t) =>
+         (
+           {
+             after: snd(chunk.size),
+             before: fst(chunk.size),
+             name: chunk.name,
+             value: ModifiedSummary(chunk),
+             onChange: chunk => onChunk(Segment.of_chunk(Modified, chunk)),
+           }: ChunksDiff.props
+         )
+       );
+
+  // TODO: test
+  Belt.List.concatMany([|added, modified, removed, intact|])
+  |> List.sort((a: ChunksDiff.props, b: ChunksDiff.props) => {
+       let aDiff = a.after - a.before;
+       let bDiff = b.after - b.before;
+       let diffOfDiffs = bDiff - aDiff;
+
+       if (diffOfDiffs === 0) {
+         0;
+       } else if (aDiff === 0) {
+         1;
+       } else if (bDiff === 0) {
+         (-1);
+       } else {
+         diffOfDiffs;
+       };
+     });
+};
+
+let make = (~chunks, ~onChunk, _children) => {
+  ...component,
+  render: _self => <ChunksDiff data={mapChunksToProps(chunks, onChunk)} />,
 };
