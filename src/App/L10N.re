@@ -11,7 +11,11 @@ let removed = "Removed";
 let modules = "Modules";
 let module_ = "Module";
 let submodules = "Submodules";
-let upload = "Click to upload webpack stats";
+let drag = "Click button bellow or drag some files here to";
+
+let upload = "load your own stats";
+let loadExample = "load example data";
+let or_ = "or";
 
 module Chunk = {
   let name = "Name";

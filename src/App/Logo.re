@@ -13,7 +13,7 @@ module Styles = {
     ]);
 };
 
-let make = (~onClick, _children) => {
+let make = (~onClick=() => (), _children) => {
   ...component,
   render: _self => {
     <svg
