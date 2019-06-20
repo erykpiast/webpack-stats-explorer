@@ -1,6 +1,20 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.5.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.4.0...v1.5.0) (2019-06-20)
+
+
+### Bug Fixes
+
+* **package:** update @glennsl/bs-json to version 4.0.0 ([dfb54e2](https://github.com/erykpiast/webpack-stats-explorer/commit/dfb54e2))
+
+
+### Features
+
+* **ui:** Add welcome screen to upload data or load example one ([80f7d3f](https://github.com/erykpiast/webpack-stats-explorer/commit/80f7d3f))
+
+
 
 # [1.4.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.3.0...v1.4.0) (2019-05-29)
 
