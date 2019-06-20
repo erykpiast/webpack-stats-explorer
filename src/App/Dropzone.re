@@ -180,9 +180,6 @@ let make = (~onStats, ~className="", children) => {
             ...{Array.append(
               [|
                 <div className=Styles.input>
-                  <label onClick={rootProps.onClick}>
-                    {L10N.upload |> ReasonReact.string}
-                  </label>
                   <input
                     autoComplete={inputProps.autoComplete}
                     onChange={inputProps.onChange}
@@ -202,7 +199,7 @@ let make = (~onStats, ~className="", children) => {
                 | None => ReasonReact.null
                 },
               |],
-              children,
+              children(rootProps.onClick),
             )}
           </div>;
         }}
