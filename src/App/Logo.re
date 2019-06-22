@@ -9,7 +9,7 @@ module Styles = {
       transformOrigin(`percent(50.0), `percent(50.0)),
       height(`percent(100.0)),
       marginLeft(Theme.Space.default),
-      transform(`rotate(`deg(180))),
+      transform(`rotate(`deg(180.0))),
     ]);
 };
 

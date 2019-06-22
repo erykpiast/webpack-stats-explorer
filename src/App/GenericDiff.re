@@ -15,7 +15,7 @@ module Styles = {
   let name =
     style([
       overflow(`hidden),
-      flexShrink(1),
+      flexShrink(1.0),
       marginRight(Theme.Space.default),
       textOverflow(`ellipsis),
       whiteSpace(`nowrap),
@@ -26,10 +26,10 @@ module Styles = {
       marginLeft(`auto),
       marginRight(Theme.Space.default),
       color(Theme.Color.Text.secondary),
-      flexShrink(0),
+      flexShrink(0.0),
     ]);
 
-  let diff = style([flexShrink(0)]);
+  let diff = style([flexShrink(0.0)]);
 };
 
 let renderFilenames = filenames =>
