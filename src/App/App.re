@@ -146,9 +146,7 @@ let make = (~comparisons, _children) => {
         };
       let topContent =
         <>
-          <Logo
-            onClick={index => self.send(NavigateThroughBreadcrumbs(0))}
-          />
+          <Logo onClick={_ => self.send(NavigateThroughBreadcrumbs(0))} />
           <Breadcrumbs
             items={self.state.navigationPath}
             onClick={index => self.send(NavigateThroughBreadcrumbs(index))}

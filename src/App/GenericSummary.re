@@ -1,5 +1,3 @@
-open State.NavigationPath;
-
 module type Interface = {
   type a;
 
