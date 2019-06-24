@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.5.0...v1.6.0) (2019-06-24)
+
+
+### Features
+
+* **analytics:** add Google Analytics snippet ([3ee6a90](https://github.com/erykpiast/webpack-stats-explorer/commit/3ee6a90))
+* **ui:** add GitHub icon ([058ded1](https://github.com/erykpiast/webpack-stats-explorer/commit/058ded1))
+
+
+
 ## [1.5.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.4.0...v1.5.0) (2019-06-20)
 
 
