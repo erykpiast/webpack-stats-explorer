@@ -11,7 +11,7 @@ module Styles = {
     ]);
 
   let nextButtonLabel =
-    style([display(`inlineBlock), transform(rotate(deg(180)))]);
+    style([display(`inlineBlock), transform(rotate(deg(180.0)))]);
 
   let value = style([margin(Theme.Space.double)]);
 };

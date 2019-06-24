@@ -54,7 +54,7 @@ let make = (~items, ~onClick, _children) => {
     let breadcrumbs =
       items
       |> List.map2(
-           (index, (item, kind)) =>
+           (index, (item, _)) =>
              <li className=Styles.item onClick={_ => onClick(index)}>
                {item |> renderName |> ReasonReact.string}
              </li>,
