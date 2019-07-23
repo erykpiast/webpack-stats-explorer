@@ -11,7 +11,7 @@ module Styles = {
       padding(px(0)),
     ]);
 
-  let item = style([display(block)]);
+  let item = style([display(block), cursor(`pointer)]);
 
   let separator =
     style([

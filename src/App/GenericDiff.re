@@ -13,6 +13,7 @@ module Styles = {
   let item =
     style([
       display(`flex),
+      cursor(`pointer),
       justifyContent(`spaceBetween),
       marginBottom(Theme.Space.double),
       marginTop(Theme.Space.double),
