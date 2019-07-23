@@ -1,7 +1,12 @@
 module Styles = {
   open Css;
 
-  let code = style([padding(Theme.Space.default)]);
+  let code =
+    style([
+      padding(Theme.Space.default),
+      whiteSpace(`preWrap),
+      wordBreak(`breakAll),
+    ]);
 };
 
 module ModuleSummary =

@@ -41,6 +41,7 @@ module Styles = {
         ~blur=`px(4),
         Theme.Color.Shadow.default,
       ),
+      overflowX(`hidden)
     ]);
 };
 
