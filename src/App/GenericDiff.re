@@ -2,7 +2,13 @@ module Styles = {
   open Css;
 
   let list =
-    style([listStyleType(`none), padding(px(0)), margin(px(0))]);
+    style([
+      listStyleType(`none),
+      padding(px(0)),
+      margin(px(0)),
+      maxHeight(`percent(100.0)),
+      overflowY(`auto),
+    ]);
 
   let item =
     style([
