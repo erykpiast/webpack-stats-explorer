@@ -32,18 +32,20 @@ let logComp = (title, comp) => {
   comp |> Compare.encode |> Js.log;
 };
 
-logStats("a", Data.a);
-logStats("b", Data.b);
-logStats("c", Data.c);
-logStats("d", Data.d);
-logStats("e", Data.e);
+let loadExampleData = () => {
+  // logStats("a", Data.a);
+  // logStats("b", Data.b);
+  // logStats("c", Data.c);
+  // logStats("d", Data.d);
+  // logStats("e", Data.e);
 
-let ab = Compare.make(Data.a, Data.b);
-let bc = Compare.make(Data.b, Data.c);
-let cd = Compare.make(Data.c, Data.d);
-let de = Compare.make(Data.d, Data.e);
-
-let exampleData = [ab, bc, cd, de];
+  [
+    Compare.make(Data.a, Data.b),
+    Compare.make(Data.b, Data.c),
+    Compare.make(Data.c, Data.d),
+    Compare.make(Data.d, Data.e),
+  ];
+};
 
 let compareStats = stats =>
   stats
@@ -80,7 +82,8 @@ let make = (~onStats, children) => {
               <p> {L10N.or_ |> ReasonReact.string} </p>
               <div>
                 <Button
-                  onClick={_ => onStats(exampleData)} className=Styles.action>
+                  onClick={_ => onStats(loadExampleData())}
+                  className=Styles.action>
                   {L10N.loadExample |> ReasonReact.string}
                 </Button>
               </div>

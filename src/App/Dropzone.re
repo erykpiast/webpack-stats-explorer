@@ -1,7 +1,11 @@
 type failReason =
   | NotEnoughFiles
   | WrongFormat
-  | ParsingFailed;
+  | ParsingFailed
+  | UnsupportedVersion;
+
+exception UnsupportedVersionExn;
+exception ParsingFailedExn;
 
 type status =
   | Success
@@ -26,6 +30,7 @@ let getLabel = (~isDragAccept, ~isDragActive, ~isDragReject, ~status) =>
     | NotEnoughFiles => Some(L10N.Validation.notEnough)
     | WrongFormat => Some(L10N.Validation.json)
     | ParsingFailed => Some(L10N.Validation.stats)
+    | UnsupportedVersion => Some(L10N.Validation.version)
     }
   | Unknown =>
     if (!isDragActive) {
@@ -47,9 +52,26 @@ let parseStats = (~onSuccess, ~onFailure, files) =>
        |> (
          blob =>
            FileReader.toText(blob, ())
-           |> Js.Promise.then_(text =>
-                text |> Json.parseOrRaise |> Stats.decode |> Js.Promise.resolve
-              )
+           |> Js.Promise.then_(text => {
+                let version =
+                  text
+                  |> Json.parseOrRaise
+                  |> Stats.Version.decode
+                  |> Stats.Version.isSupported;
+
+                if (version) {
+                  try (
+                    text
+                    |> Json.parseOrRaise
+                    |> Stats.decode
+                    |> Js.Promise.resolve
+                  ) {
+                  | _ => Js.Promise.reject(ParsingFailedExn)
+                  };
+                } else {
+                  Js.Promise.reject(UnsupportedVersionExn);
+                };
+              })
        )
      )
   |> Js.Promise.all
@@ -124,6 +146,18 @@ let make = (~onStats, ~className="", children) => {
       self.send(actionCreator(timeoutId));
     };
 
+    let failureHandler =
+      Rationale.Function.Infix.(
+        [@bs.open]
+        (
+          fun
+          | UnsupportedVersionExn => UnsupportedVersion
+          | ParsingFailedExn => ParsingFailed
+        )
+        ||> Utils.defaultTo(ParsingFailed)
+        ||> (err => updateStatus(fail(err)))
+      );
+
     <>
       <ReactDropzone
         accept={ReactDropzone.Single("application/json")}
@@ -140,7 +174,7 @@ let make = (~onStats, ~className="", children) => {
                      updateStatus(success);
                      onStats(stats);
                    },
-                 ~onFailure=_ => updateStatus(fail(ParsingFailed)),
+                 ~onFailure=failureHandler,
                )
             |> ignore
           }
@@ -152,8 +186,6 @@ let make = (~onStats, ~className="", children) => {
             isDragAccept,
             isDragActive,
             isDragReject,
-            rejectedFiles,
-            acceptedFiles,
           },
         ) => {
           let inputProps = getInputProps();

@@ -99,3 +99,15 @@ let make
   ; warnings
   }
 ;;
+
+module Version = struct
+  let decode json = Json.Decode.(json |> field "version" string)
+  ;;
+
+  let isSupported = Rationale.Function.Infix.(
+    Js.String.split "."
+    ||> Array.to_list
+    ||> Utils.List.nth 0
+    ||> (=) "4"
+  );;
+end;;
