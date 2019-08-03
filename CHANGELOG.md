@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.2](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.6.1...v1.6.2) (2019-08-03)
+
+
+### Bug Fixes
+
+* **package:** update bs-react-dropzone to version 0.4.1 ([56c3138](https://github.com/erykpiast/webpack-stats-explorer/commit/56c3138))
+* **package:** update react-dropzone to version 10.1.6 ([ad83caa](https://github.com/erykpiast/webpack-stats-explorer/commit/ad83caa))
+* **package:** update react-dropzone to version 10.1.7 ([7cdb913](https://github.com/erykpiast/webpack-stats-explorer/commit/7cdb913))
+* **ui:** add cursor pointer on clickable list elements and breadcrumbs ([9434b14](https://github.com/erykpiast/webpack-stats-explorer/commit/9434b14))
+* **ui:** prevent content overflow on long code listings ([fb65105](https://github.com/erykpiast/webpack-stats-explorer/commit/fb65105))
+* **ui:** prevent content overflow on long lists ([f8bf58f](https://github.com/erykpiast/webpack-stats-explorer/commit/f8bf58f))
+
+
+
 ### [1.6.1](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.6.0...v1.6.1) (2019-07-19)
 
 
