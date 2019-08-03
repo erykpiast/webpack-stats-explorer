@@ -14,6 +14,7 @@ module Styles = {
       display(`flex),
       height(Theme.Space.tenfold),
       backgroundColor(Theme.Color.Background.default),
+      flexShrink(0.0)
     ]);
 
   let contentWrapper = style([display(`flex), flexGrow(1.0)]);
@@ -24,6 +25,7 @@ module Styles = {
       width(Theme.Space.triplehexfold),
       backgroundColor(Theme.Color.Background.default),
       padding(Theme.Space.default),
+      maxHeight(`percent(100.0))
     ]);
 
   let main =
@@ -39,6 +41,7 @@ module Styles = {
         ~blur=`px(4),
         Theme.Color.Shadow.default,
       ),
+      overflowX(`hidden)
     ]);
 };
 

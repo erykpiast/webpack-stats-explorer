@@ -43,10 +43,16 @@ module Styles = {
 
   let status = style([textTransform(`uppercase)]);
 
-  let name = style([fontSize(rem(2.0))]);
+  let name = style([fontSize(rem(2.0)), wordBreak(`breakAll)]);
   let size = style([fontSize(rem(1.2))]);
 
-  let content = style([display(`flex), flexGrow(1.0)]);
+  let content =
+    style([
+      display(`flex),
+      flexGrow(1.0),
+      overflow(`auto),
+      maxHeight(`percent(100.0)),
+    ]);
 
   module Kind = {
     let added = style([color(Theme.Color.Added.default)]);
