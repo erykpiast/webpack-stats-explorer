@@ -66,7 +66,9 @@ let parseStats = (~onSuccess, ~onFailure, files) =>
                     |> Stats.decode
                     |> Js.Promise.resolve
                   ) {
-                  | _ => Js.Promise.reject(ParsingFailedExn)
+                  | err =>
+                    Js.log(err);
+                    Js.Promise.reject(ParsingFailedExn);
                   };
                 } else {
                   Js.Promise.reject(UnsupportedVersionExn);
