@@ -39,4 +39,5 @@ module Validation = {
   let notEnough = "There is no point in comparing less than two files";
   let stats = "It doesn't seem to be valid Webpack stats";
   let success = "Webpack stats uploaded successfully";
+  let version = "Only Webpack 4 stats are supported";
 };

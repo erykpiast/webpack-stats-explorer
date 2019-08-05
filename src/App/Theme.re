@@ -5,7 +5,12 @@ module Color = {
     let default = rgb(235, 235, 235);
 
     let button = rgb(224, 224, 224);
+
     let primaryButton = rgb(33, 150, 243);
+
+    let dark = rgb(50, 50, 50);
+    
+    let danger = rgb(211, 47, 47);
   };
 
   module Border = {
@@ -86,6 +91,12 @@ module Size = {
   module Text = {
     let default = px(16);
     let big = px(28);
+  };
+
+  module Border = {
+    module Radius = {
+      let default = Space.half;
+    };
   };
 };
 
