@@ -93,19 +93,7 @@ module Styles = {
 
   let input = style([]);
 
-  let label =
-    style([
-      display(`flex),
-      justifyContent(`center),
-      alignItems(`center),
-      position(`absolute),
-      bottom(px(0)),
-      left(px(0)),
-      right(px(0)),
-      top(px(0)),
-      zIndex(1),
-      backgroundColor(rgba(255, 255, 255, 0.5)),
-    ]);
+  let label = style([backgroundColor(Theme.Color.Background.danger)]);
 };
 
 let reducer = (action, _state) =>
@@ -141,7 +129,7 @@ let make = (~onStats, ~className="", children) => {
       | _ => ()
       };
       let timeoutId =
-        Js.Global.setTimeout(() => self.send(StatusReset), 2000);
+        Js.Global.setTimeout(() => self.send(StatusReset), 5000);
 
       self.send(actionCreator(timeoutId));
     };
@@ -225,9 +213,9 @@ let make = (~onStats, ~className="", children) => {
                 </div>,
                 switch (label) {
                 | Some(label) =>
-                  <span className=Styles.label>
+                  <Snackbar className=Styles.label>
                     {label |> ReasonReact.string}
-                  </span>
+                  </Snackbar>
                 | None => ReasonReact.null
                 },
               |],
