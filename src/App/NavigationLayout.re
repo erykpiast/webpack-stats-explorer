@@ -25,7 +25,6 @@ module Styles = {
       display(`block),
       width(Theme.Space.triplehexfold),
       backgroundColor(Theme.Color.Background.default),
-      padding(Theme.Space.default),
       maxHeight(`percent(100.0)),
     ]);
 

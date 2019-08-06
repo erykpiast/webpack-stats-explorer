@@ -79,7 +79,10 @@ let mapChunksToProps = (chunks, onChunk) => {
      });
 };
 
-let make = (~chunks, ~onChunk, _children) => {
+let make = (~chunks, ~onChunk, ~selected, _children) => {
   ...component,
-  render: _self => <ChunksDiff data={mapChunksToProps(chunks, onChunk)} />,
+  render: _self => <ChunksDiff
+    data={mapChunksToProps(chunks, onChunk)}
+    selected
+  />,
 };

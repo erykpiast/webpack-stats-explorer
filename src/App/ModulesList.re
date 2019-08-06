@@ -30,11 +30,12 @@ let mapModulesToProps = (modules, kind, onModule) => {
 
 let component = ReasonReact.statelessComponent("ModulesList");
 
-let make = (~modules, ~onModule, ~kind, ~className="", _children) => {
+let make = (~modules, ~onModule, ~kind, ~selected, ~className="", _children) => {
   ...component,
   render: _self =>
     <ModulesDiff
       className
       data={mapModulesToProps(modules, kind, onModule)}
+      selected
     />,
 };

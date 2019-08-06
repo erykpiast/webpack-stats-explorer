@@ -38,7 +38,6 @@ module Styles = {
       width(Theme.Space.triplehexfold),
       marginLeft(`auto),
       height(`percent(100.0)),
-      padding(Theme.Space.default),
     ]);
 
   let status = style([textTransform(`uppercase)]);
@@ -89,7 +88,7 @@ let getKindClassName =
 module Make = (ToSummarize: Interface) => {
   let component = ReasonReact.statelessComponent(ToSummarize.componentName);
 
-  let make = (~data, ~kind, ~onModule, _children) => {
+  let make = (~data, ~kind, ~onModule, ~selected, _children) => {
     ...component,
     render: _self =>
       <div className=Styles.wrapper>
@@ -131,12 +130,25 @@ module Make = (ToSummarize: Interface) => {
           {data |> ToSummarize.getSource}
           {switch (ToSummarize.getModules(data)) {
            | Some(modules) =>
-             switch (modules) {
-             | NotModifiedModules(modules) =>
-               <ModulesList className=Styles.modules modules kind onModule />
-             | ModifiedModules(modules) =>
-               <ModulesCompare className=Styles.modules modules onModule />
-             }
+             Rationale.Option.Infix.(
+               switch (modules) {
+               | NotModifiedModules(modules) =>
+                 <ModulesList
+                   className=Styles.modules
+                   modules
+                   kind
+                   onModule
+                   selected={selected <$> ToSummarize.getName}
+                 />
+               | ModifiedModules(modules) =>
+                 <ModulesCompare
+                   className=Styles.modules
+                   modules
+                   onModule
+                   selected={selected <$> ToSummarize.getName}
+                 />
+               }
+             )
            | None => ReasonReact.null
            }}
         </div>
