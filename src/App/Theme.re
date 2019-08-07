@@ -9,7 +9,9 @@ module Color = {
     let primaryButton = rgb(33, 150, 243);
 
     let dark = rgb(50, 50, 50);
-    
+
+    let selected = rgb(224, 224, 224);
+
     let danger = rgb(211, 47, 47);
   };
 

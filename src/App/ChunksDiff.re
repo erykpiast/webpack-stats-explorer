@@ -5,6 +5,11 @@ module ChunksDiff =
     type a = chunk;
 
     let componentName = "ChunksDiff";
+    let getName = chunk =>
+      switch (chunk) {
+      | Summary(chunk) => chunk.name
+      | ModifiedSummary(chunk) => chunk.name
+      };
   });
 
 let make = ChunksDiff.make;

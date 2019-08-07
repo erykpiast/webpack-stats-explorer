@@ -76,8 +76,12 @@ let mapModulesToProps = (modules, onModule) => {
   Belt.List.concatMany([|added, modified, removed, intact|]);
 };
 
-let make = (~modules, ~onModule, ~className="", _children) => {
+let make = (~modules, ~onModule, ~selected, ~className="", _children) => {
   ...component,
   render: _self =>
-    <ModulesDiff className data={mapModulesToProps(modules, onModule)} />,
+    <ModulesDiff
+      className
+      data={mapModulesToProps(modules, onModule)}
+      selected
+    />,
 };

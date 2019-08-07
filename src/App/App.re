@@ -73,25 +73,38 @@ let make = (~comparisons, _children) => {
       let sideContent =
         NavigationPath.Segment.(
           switch (revPath) {
-          | [(Item.Module(_leaf), kind), (Item.Chunk(chunk), _kind), ..._] =>
+          | [(Item.Module(leaf), kind), (Item.Chunk(chunk), _kind), ..._] =>
+            let leafName =
+              switch (leaf) {
+              | Summary(module_) => module_.name
+              | ModifiedSummary(module_) => module_.name
+              };
             switch (chunk) {
             | Compare.Chunks.Summary(chunk) =>
               <ModulesList
                 modules={chunk.modules}
                 kind
                 onModule={segment => self.send(Navigate(segment, 1))}
+                selected={Some(leafName)}
               />
             | Compare.Chunks.ModifiedSummary(chunk) =>
               <ModulesCompare
                 modules={chunk.modules}
                 onModule={segment => self.send(Navigate(segment, 1))}
+                selected={Some(leafName)}
               />
-            }
+            };
           | [
-              (Item.Module(_leaf), kind),
+              (Item.Module(leaf), kind),
               (Item.Module(parent), _kind2),
               ..._,
             ] =>
+            let leafName =
+              switch (leaf) {
+              | Summary(module_) => module_.name
+              | ModifiedSummary(module_) => module_.name
+              };
+
             switch (parent) {
             | Compare.Modules.Summary(module_) =>
               <ModulesList
@@ -100,6 +113,7 @@ let make = (~comparisons, _children) => {
                 onModule={segment =>
                   self.send(Navigate(segment, pathDepth - 1))
                 }
+                selected={Some(leafName)}
               />
             | Compare.Modules.ModifiedSummary(module_) =>
               switch (module_.modules) {
@@ -109,14 +123,27 @@ let make = (~comparisons, _children) => {
                   onModule={segment =>
                     self.send(Navigate(segment, pathDepth - 1))
                   }
+                  selected={Some(leafName)}
                 />
               | None => ReasonReact.null
               }
-            }
+            };
+          | [(Item.Chunk(leaf), _kind)] =>
+            let leafName =
+              switch (leaf) {
+              | Summary(chunk) => chunk.name
+              | ModifiedSummary(chunk) => chunk.name
+              };
+            <ChunksCompare
+              chunks={comp.chunks}
+              onChunk={chunk => self.send(Navigate(chunk, 0))}
+              selected={Some(leafName)}
+            />;
           | _ =>
             <ChunksCompare
               chunks={comp.chunks}
               onChunk={chunk => self.send(Navigate(chunk, 0))}
+              selected=None
             />
           }
         );
@@ -134,12 +161,14 @@ let make = (~comparisons, _children) => {
                   data=chunk
                   kind
                   onModule={module_ => self.send(Navigate(module_, 1))}
+                  selected={Some(chunk)}
                 />
               | Module(module_) =>
                 <ModuleSummary
                   data=module_
                   kind
                   onModule={module_ => self.send(Navigate(module_, 2))}
+                  selected={Some(module_)}
                 />
               }
           )

@@ -15,9 +15,11 @@ module Styles = {
       display(`flex),
       cursor(`pointer),
       justifyContent(`spaceBetween),
-      marginBottom(Theme.Space.double),
-      marginTop(Theme.Space.double),
+      padding(Theme.Space.default),
     ]);
+
+  let selectedItem =
+    style([backgroundColor(Theme.Color.Background.selected)]);
 
   let name =
     style([
@@ -52,6 +54,7 @@ let renderFilenames = filenames =>
 module type Interface = {
   type a;
   let componentName: string;
+  let getName: a => string;
 };
 
 module Make = (ToDiff: Interface) => {
@@ -65,7 +68,7 @@ module Make = (ToDiff: Interface) => {
 
   let component = ReasonReact.statelessComponent(ToDiff.componentName);
 
-  let make = (~data, ~className="", _children) => {
+  let make = (~data, ~className="", ~selected: option(string), _children) => {
     ...component,
     render: _self =>
       switch (data) {
@@ -90,7 +93,18 @@ module Make = (ToDiff: Interface) => {
                     };
                   })
                |> List.map(({after, before, value, name, onChange}) =>
-                    <li onClick={_ => onChange(value)} className=Styles.item>
+                    <li
+                      onClick={_ => onChange(value)}
+                      className={Cn.make([
+                        Styles.item,
+                        Cn.ifTrue(
+                          Styles.selectedItem,
+                          switch (selected) {
+                          | Some(selected) => selected === name
+                          | None => false
+                          },
+                        ),
+                      ])}>
                       <strong className=Styles.name title=name>
                         {ReasonReact.string(name)}
                       </strong>

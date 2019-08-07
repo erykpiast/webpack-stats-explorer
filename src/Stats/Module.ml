@@ -8,8 +8,8 @@ type t =
   ; failed : bool
   ; id : int option
   ; identifier : string
-  ; index : int
-  ; index2 : int
+  ; index : int option
+  ; index2 : int option
   ; issuer : string option
   ; issuerId : string option
   ; issuerName : string option
@@ -49,8 +49,8 @@ let rec decode json =
     ; failed = json |> field "failed" bool
     ; id = json |> field "id" (optional int)
     ; identifier = json |> field "identifier" string
-    ; index = json |> field "index" int
-    ; index2 = json |> field "index2" int
+    ; index = json |> field "index" (optional int)
+    ; index2 = json |> field "index2" (optional int)
     ; issuer = json |> field "issuer" (optional string)
     ; issuerId = json |> field "issuerId" (optional string)
     ; issuerName = json |> field "issuerName" (optional string)
@@ -82,8 +82,8 @@ let rec encode r =
       ; "failed", r.failed |> bool
       ; "id", r.id |> nullable int
       ; "identifier", r.identifier |> string
-      ; "index", r.index |> int
-      ; "index2", r.index2 |> int
+      ; "index", r.index |> nullable int
+      ; "index2", r.index2 |> nullable int
       ; "issuer", r.issuer |> nullable string
       ; "issuerId", r.issuerId |> nullable string
       ; "issuerName", r.issuerName |> nullable string

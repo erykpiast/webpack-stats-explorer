@@ -5,12 +5,12 @@ open State.NavigationPath;
 let mapModulesToProps = (modules, kind, onModule) => {
   modules
   |> List.map(module_ => {
-       let [after, before] =
+       let (after, before) =
          switch (kind) {
-         | Added => [module_.size, 0]
-         | Removed => [0, module_.size]
-         | Intact => [module_.size, module_.size]
-         | Modified => [0, 0]
+         | Added => (module_.size, 0)
+         | Removed => (0, module_.size)
+         | Intact => (module_.size, module_.size)
+         | Modified => (0, 0)
          };
 
        (
@@ -30,11 +30,12 @@ let mapModulesToProps = (modules, kind, onModule) => {
 
 let component = ReasonReact.statelessComponent("ModulesList");
 
-let make = (~modules, ~onModule, ~kind, ~className="", _children) => {
+let make = (~modules, ~onModule, ~kind, ~selected, ~className="", _children) => {
   ...component,
   render: _self =>
     <ModulesDiff
       className
       data={mapModulesToProps(modules, kind, onModule)}
+      selected
     />,
 };
