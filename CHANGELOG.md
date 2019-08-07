@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.7.0...v1.8.0) (2019-08-07)
+
+
+### Bug Fixes
+
+* **format:** make index and index2 module fields optional ([68c922c](https://github.com/erykpiast/webpack-stats-explorer/commit/68c922c))
+* **log:** restore logging of parsing errors ([771b98d](https://github.com/erykpiast/webpack-stats-explorer/commit/771b98d))
+* **ui:** make modules list scrollable by its own ([52a569f](https://github.com/erykpiast/webpack-stats-explorer/commit/52a569f))
+
+
+### Features
+
+* **ui:** highlight selected item on the list ([680b611](https://github.com/erykpiast/webpack-stats-explorer/commit/680b611))
+
+
+
 ## [1.7.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.6.2...v1.7.0) (2019-08-05)
 
 
