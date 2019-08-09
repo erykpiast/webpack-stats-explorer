@@ -95,7 +95,7 @@ describe("Compare", () => {
       let bar1 = fakeChunk(["bar123"], ["bar"], 200);
       let bar2 = fakeChunk(["bar123"], ["bar"], 200);
       let baz1 = fakeChunk(["baz123"], ["baz"], 300);
-      let baz2 = fakeChunk(["baz456"], ["baz"], 400);
+      // let baz2 = fakeChunk(["baz456"], ["baz"], 400);
       let taz1 = fakeChunk(["taz123"], ["taz"], 400);
       let taz2 = fakeChunk(["taz456"], ["taz"], 300);
 
@@ -108,7 +108,7 @@ describe("Compare", () => {
       describe("make", () => {
         let a = [baz1, foo1, bar1];
         let b = [foo2, bar2, taz2];
-        let result = make(a, b);
+        let result = Chunks.make(a, b);
 
         test("chunks existing in both sets and changed", () =>
           expect(result.modified)
@@ -165,7 +165,7 @@ describe("Compare", () => {
       );
 
     let foo = fakeModule("foo", 100, Some("foo"), None);
-    let foo2 = fakeModule("foo", 200, Some("foo2"), None);
+    // let foo2 = fakeModule("foo", 200, Some("foo2"), None);
     let bar = fakeModule("bar", 200, Some("bar"), Some([]));
     let bar2 = fakeModule("bar", 400, Some("bar2"), Some([]));
     let baz = fakeModule("baz", 100, Some("baz"), Some([bar]));
@@ -178,22 +178,22 @@ describe("Compare", () => {
     describe("summary", () => {
       open Summary;
 
-      let withSource = make(foo);
-      let withSubmodules = make(taz);
+      let withSource = Summary.make(foo);
+      let withSubmodules = Summary.make(taz);
 
       test("source", () =>
         expect(withSource.source) |> toEqual("foo")
       );
 
       test("modules", () =>
-        expect(withSubmodules.modules) |> toEqual([make(foo), make(baz)])
+        expect(withSubmodules.modules) |> toEqual([Summary.make(foo), Summary.make(baz)])
       );
     });
 
     describe("diff simple case", () => {
       let modules1 = [foo, baz, taz, faz];
       let modules2 = [bar2, baz2, taz2, faz2];
-      let result = make(modules1, modules2);
+      let result = Modules.make(modules1, modules2);
 
       test("added", () =>
         expect(result.added) |> toEqual([Summary.make(bar2)])

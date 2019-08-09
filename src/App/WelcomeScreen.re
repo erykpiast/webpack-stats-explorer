@@ -18,7 +18,10 @@ module Styles = {
   let action =
     style([
       fontSize(em(1.5)),
-      padding2(Theme.Space.double, Theme.Space.quadruple),
+      padding2(
+        ~v=Theme.Space.double,
+        ~h=Theme.Space.quadruple
+      ),
     ]);
 };
 

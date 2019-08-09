@@ -33,7 +33,10 @@ module Styles = {
       cursor(`pointer),
       lineHeight(`em(1.75)),
       margin(Theme.Space.default),
-      padding2(Theme.Space.default, Theme.Space.double),
+      padding2(
+        ~v=Theme.Space.default,
+        ~h=Theme.Space.double
+      ),
       textTransform(`uppercase),
     ]);
 

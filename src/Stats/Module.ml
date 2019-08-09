@@ -28,11 +28,11 @@ type t =
   ; warnings : int
   }
 
-let removeSubmodules = Js.String.replaceByRe [%re "/ \+ \d+ modules?$/"] "";;
+let removeSubmodules = Js.String.replaceByRe [%re "/ \\+ \\d+ modules?$/"] "";;
 
-let removePrefix = Js.String.replaceByRe [%re "/^\w+ /"] "";;
+let removePrefix = Js.String.replaceByRe [%re "/^\\w+ /"] "";;
 
-let removeLoaders = Js.String.replaceByRe [%re "/.*\!([^!]+)$/"] "$1";;
+let removeLoaders = Js.String.replaceByRe [%re "/.*\\!([^!]+)$/"] "$1";;
 
 let normalizeName = Rationale.Function.Infix.(
   removeSubmodules ||> removePrefix ||> removeLoaders
