@@ -104,10 +104,11 @@ module Make = (ToDiff: Interface) => {
                           | None => false
                           },
                         ),
-                      ])}>
-                      <strong className=Styles.name title=name>
-                        {ReasonReact.string(name)}
-                      </strong>
+                      ])}
+                      title=name>
+                      <ReversedText className=Styles.name>
+                        ...{name |> ReasonReact.string}
+                      </ReversedText>
                       {before !== 0 && after !== 0
                          ? <Size className=Styles.size value=after />
                          : ReasonReact.null}
