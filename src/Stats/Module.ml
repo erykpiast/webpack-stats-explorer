@@ -30,12 +30,19 @@ type t =
 
 let removeSubmodules = Js.String.replaceByRe [%re "/ \\+ \\d+ modules?$/"] "";;
 
-let removePrefix = Js.String.replaceByRe [%re "/^\\w+ /"] "";;
+let tapAndLog a =
+  Js.log a;
+  a;
+;;
 
-let removeLoaders = Js.String.replaceByRe [%re "/.*\\!([^!]+)$/"] "$1";;
-
+(* inspired by https://github.com/webpack-contrib/webpack-bundle-analyzer/blob/fe3c71e25238a1f9c557180404e9ef1d98e3801f/src/tree/utils.js#L10-L18 *)
 let normalizeName = Rationale.Function.Infix.(
-  removeSubmodules ||> removePrefix ||> removeLoaders
+  (Js.String.split "!")
+  ||> Utils.Array.last
+  ||> (Js.String.split "/")
+  ||> (Array.map (fun part -> if part == "~" then "node_modules" else part))
+  ||> (Js.Array.joinWith "/")
+  ||> removeSubmodules
 );;
 
 let rec decode json =

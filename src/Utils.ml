@@ -47,7 +47,15 @@ module List = struct
     | head :: tail -> head :: separator :: join separator tail
   ;;
 
-  let nth index list = List.nth list index
+  let nth index list = List.nth list index;;
+end
+
+module Array = struct
+  let nth index array = Array.get array index;;
+
+  let last array = nth (Array.length array - 1) array;;
+
+  let trimLeft amount array = Js.Array.slice ~start:amount ~end_:(Js.Array.length array) array;;
 end
 
 module Function = struct
