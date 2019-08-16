@@ -13,7 +13,7 @@ let make = (~after, ~before, ~className, _children) => {
   render: _self =>
     <pre className>
       ...JsDiff.(
-           make(before, after)
+           make(after, before)
            |> List.map(diff =>
                 switch (diff) {
                 | Intact(value) => ReasonReact.string(value)
