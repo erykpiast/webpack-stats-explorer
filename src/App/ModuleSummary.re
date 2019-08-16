@@ -29,6 +29,12 @@ module ModuleSummary =
       | ModifiedSummary(module_) => fst(module_.size)
       };
 
+    let getOwnSize = module_ =>
+      switch (module_) {
+      | Summary(module_) => module_.ownSize
+      | ModifiedSummary(module_) => fst(module_.ownSize)
+      };
+
     let getSource = module_ =>
       switch (module_) {
       | Summary(module_) =>

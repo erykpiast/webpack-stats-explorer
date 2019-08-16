@@ -48,6 +48,8 @@ module List = struct
   ;;
 
   let nth index list = List.nth list index;;
+
+  let findOpt isEqual list = Belt.List.getBy list isEqual;;
 end
 
 module Array = struct

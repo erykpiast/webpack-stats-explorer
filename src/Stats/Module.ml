@@ -23,17 +23,13 @@ type t =
   ; providedExports : string list option
   ; reasons : Reason.t list
   ; size : int
+  ; ownSize : int
   ; source : string option
   ; usedExports : bool option
   ; warnings : int
   }
 
 let removeSubmodules = Js.String.replaceByRe [%re "/ \\+ \\d+ modules?$/"] "";;
-
-let tapAndLog a =
-  Js.log a;
-  a;
-;;
 
 (* inspired by https://github.com/webpack-contrib/webpack-bundle-analyzer/blob/fe3c71e25238a1f9c557180404e9ef1d98e3801f/src/tree/utils.js#L10-L18 *)
 let normalizeName = Rationale.Function.Infix.(
@@ -71,6 +67,7 @@ let rec decode json =
     ; providedExports = json |> field "providedExports" (optional (list string))
     ; reasons = json |> field "reasons" (list Reason.decode)
     ; size = json |> field "size" int
+    ; ownSize = json |> field "size" int
     ; source = json |> optional (field "source" string)
     ; usedExports = json |> optional (field "usedExports" bool)
     ; warnings = json |> field "warnings" int
@@ -104,6 +101,7 @@ let rec encode r =
       ; "providedExports", r.providedExports |> nullable (list string)
       ; "reasons", r.reasons |> list Reason.encode
       ; "size", r.size |> int
+      ; "ownSize", r.ownSize |> int
       ; "source", r.source |> nullable string
       ; "usedExports", r.usedExports |> nullable bool
       ; "warnings", r.warnings |> int
@@ -135,6 +133,7 @@ let make
     providedExports
     reasons
     size
+    ownSize
     source
     usedExports
     warnings
@@ -163,6 +162,7 @@ let make
   ; providedExports
   ; reasons
   ; size
+  ; ownSize
   ; source
   ; usedExports
   ; warnings

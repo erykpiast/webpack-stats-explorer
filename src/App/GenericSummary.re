@@ -4,6 +4,7 @@ module type Interface = {
   let componentName: string;
   let getName: a => string;
   let getSize: a => int;
+  let getOwnSize: a => int;
   let getSource: a => ReasonReact.reactElement;
   let getModules: a => option(Compare.Modules.modules);
 };
@@ -90,7 +91,38 @@ module Make = (ToSummarize: Interface) => {
 
   let make = (~data, ~kind, ~onModule, ~selected, _children) => {
     ...component,
-    render: _self =>
+    render: _self => {
+      let ownSize = data |> ToSummarize.getOwnSize;
+      let totalSize = data |> ToSummarize.getSize;
+      let (modules, modulesCount) =
+        switch (data |> ToSummarize.getModules) {
+        | Some(modules) =>
+          Rationale.Option.Infix.(
+            switch (modules) {
+            | NotModifiedModules(modules) => (
+                <ModulesList
+                  className=Styles.modules
+                  modules
+                  kind
+                  onModule
+                  selected={selected <$> ToSummarize.getName}
+                />,
+                modules |> List.length,
+              )
+            | ModifiedModules(modules) => (
+                <ModulesCompare
+                  className=Styles.modules
+                  modules
+                  onModule
+                  selected={selected <$> ToSummarize.getName}
+                />,
+                modules |> Compare.Modules.count |> snd,
+              )
+            }
+          )
+        | None => (ReasonReact.null, 0)
+        };
+
       <div className=Styles.wrapper>
         <header className=Styles.header>
           <dl className=Styles.list>
@@ -121,37 +153,29 @@ module Make = (ToSummarize: Interface) => {
                 {L10N.Chunk.size |> ReasonReact.string}
               </dt>
               <dd className=Styles.definition>
-                <Size value={data |> ToSummarize.getSize} />
+                <Size value=totalSize />
+                {if (totalSize != ownSize) {
+                   <>
+                     {" (" |> ReasonReact.string}
+                     <Size value=ownSize />
+                     {" + " |> ReasonReact.string}
+                     {modulesCount |> string_of_int |> ReasonReact.string}
+                     {" " |> ReasonReact.string}
+                     {L10N.modules |> ReasonReact.string}
+                     {")" |> ReasonReact.string}
+                   </>;
+                 } else {
+                   ReasonReact.null;
+                 }}
               </dd>
             </div>
           </dl>
         </header>
         <div className=Styles.content>
           {data |> ToSummarize.getSource}
-          {switch (ToSummarize.getModules(data)) {
-           | Some(modules) =>
-             Rationale.Option.Infix.(
-               switch (modules) {
-               | NotModifiedModules(modules) =>
-                 <ModulesList
-                   className=Styles.modules
-                   modules
-                   kind
-                   onModule
-                   selected={selected <$> ToSummarize.getName}
-                 />
-               | ModifiedModules(modules) =>
-                 <ModulesCompare
-                   className=Styles.modules
-                   modules
-                   onModule
-                   selected={selected <$> ToSummarize.getName}
-                 />
-               }
-             )
-           | None => ReasonReact.null
-           }}
+          modules
         </div>
-      </div>,
+      </div>;
+    },
   };
 };

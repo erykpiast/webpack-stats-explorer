@@ -159,13 +159,14 @@ describe("Compare", () => {
         None,
         [],
         size,
+        size,
         source,
         None,
         0,
       );
 
     let foo = fakeModule("foo", 100, Some("foo"), None);
-    // let foo2 = fakeModule("foo", 200, Some("foo2"), None);
+    let foo2 = fakeModule("foo", 200, Some("foo2"), None);
     let bar = fakeModule("bar", 200, Some("bar"), Some([]));
     let bar2 = fakeModule("bar", 400, Some("bar2"), Some([]));
     let baz = fakeModule("baz", 100, Some("baz"), Some([bar]));
@@ -186,7 +187,8 @@ describe("Compare", () => {
       );
 
       test("modules", () =>
-        expect(withSubmodules.modules) |> toEqual([Summary.make(foo), Summary.make(baz)])
+        expect(withSubmodules.modules)
+        |> toEqual([Summary.make(foo), Summary.make(baz)])
       );
     });
 
@@ -205,6 +207,20 @@ describe("Compare", () => {
 
       test("intact", () =>
         expect(result.intact) |> toEqual([Summary.make(faz2)])
+      );
+    });
+
+    describe("count", () => {
+      let modules1 = [foo, baz, taz, faz];
+      let modules2 = [foo2, bar2, baz2, taz2, faz2];
+      let result = Modules.count(Modules.make(modules1, modules2));
+
+      test("before", () =>
+        expect(fst(result)) |> toEqual(4)
+      );
+
+      test("after", () =>
+        expect(snd(result)) |> toEqual(5)
       );
     });
   });

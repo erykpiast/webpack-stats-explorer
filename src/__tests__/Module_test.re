@@ -58,6 +58,7 @@ describe("Module", () => {
         None,
         [],
         size,
+        size,
         source,
         None,
         0,

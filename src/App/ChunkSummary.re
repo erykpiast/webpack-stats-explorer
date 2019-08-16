@@ -18,6 +18,8 @@ module ChunkSummary =
       | ModifiedSummary(chunk) => fst(chunk.size)
       };
 
+    let getOwnSize = getSize;
+
     let getModules = chunk =>
       (
         switch (chunk) {
