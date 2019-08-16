@@ -78,18 +78,26 @@ module Modules = struct
     | ModifiedModules of t
     | NotModifiedModules of Summary.t list
 
-  let similar (a : Module.t) (b : Module.t) = a.name = b.name
+  let nameEqual (a : Module.t) (b : Module.t) = a.name = b.name
+  let builtEqual (a : Module.t) (b : Module.t) = a.built = b.built
+  let similar = Utils.Function.(allPass [
+    uncurry2 nameEqual;
+    uncurry2 builtEqual
+  ] |> curry2)
   let diffModules = Diff.create similar Module.eql
 
-  let normalize = List.map(fun (module_: Module.t) -> match module_.modules with
-  | None -> module_
-  | Some modules -> match Utils.List.findOpt (similar module_) modules with
+  let normalize = Rationale.Function.Infix.(
+    List.map (fun (module_: Module.t) -> match module_.modules with
     | None -> module_
-    | Some mainSubmodule -> { module_ with source = mainSubmodule.source
-    ; modules = Some(List.filter ((!=) mainSubmodule) modules)
-    ; ownSize = mainSubmodule.size
-    }
-  )
+    | Some modules -> match Utils.List.findOpt (nameEqual module_) modules with
+      | None -> module_
+      | Some mainSubmodule -> { module_ with source = mainSubmodule.source
+      ; modules = Some(List.filter ((!=) mainSubmodule) modules)
+      ; ownSize = mainSubmodule.size
+      }
+    )
+    ||> List.filter (fun (module_: Module.t) -> module_.built)
+  );;
 
   let rec make xs ys =
     let d = diffModules (normalize xs) (normalize ys) in

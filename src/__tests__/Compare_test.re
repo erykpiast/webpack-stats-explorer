@@ -136,7 +136,7 @@ describe("Compare", () => {
     let fakeModule = (name, size, source, modules) =>
       Module.make(
         [],
-        false,
+        true,
         false,
         [],
         0,

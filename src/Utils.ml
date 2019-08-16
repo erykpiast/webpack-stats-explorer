@@ -11,6 +11,16 @@ let defaultTo value option =
 
 let identity (a : 'a) = a
 
+module Function = struct
+  let unary (fn : 'a) : 'a = [%raw "(a) => fn(a)"]
+  let binary (fn : 'a) : 'a = [%raw "(a, b) => fn(a, b)"]
+  let converge agg fns args = agg (List.map (fun fn -> fn args) fns)
+  let all =  (List.fold_left (&&) true)
+  let allPass (fns: (('a -> bool) list)) (args: 'a) = converge all fns args
+  let curry2 fn arg1 arg2 = fn (arg1, arg2);;
+  let uncurry2 fn (arg1, arg2) = fn arg1 arg2;;
+end
+
 module List = struct
   let rec isEqual a b =
     match a, b with
@@ -58,11 +68,6 @@ module Array = struct
   let last array = nth (Array.length array - 1) array;;
 
   let trimLeft amount array = Js.Array.slice ~start:amount ~end_:(Js.Array.length array) array;;
-end
-
-module Function = struct
-  let unary (fn : 'a) : 'a = [%raw "(a) => fn(a)"]
-  let binary (fn : 'a) : 'a = [%raw "(a, b) => fn(a, b)"]
 end
 
 let pluralize singular plural n = (string_of_int n) ^ " " ^ (if n == 1 then singular else plural);;
