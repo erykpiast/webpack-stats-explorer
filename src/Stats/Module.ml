@@ -182,3 +182,8 @@ let rec eql a b =
     List.length ams = List.length bms
     && List.fold_left2 (fun acc a b -> acc && eql a b) true ams bms
 ;;
+
+let isEntryPoint module_ = match module_.reasons with
+  | [reason] -> reason.module_ = None
+  | _ -> false
+;;

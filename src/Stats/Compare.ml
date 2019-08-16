@@ -96,7 +96,9 @@ module Modules = struct
       ; ownSize = mainSubmodule.size
       }
     )
-    ||> List.filter (fun (module_: Module.t) -> module_.built)
+    ||> List.filter (fun (module_: Module.t) ->
+      module_.built && not (Module.isEntryPoint module_)
+    )
   );;
 
   let rec make xs ys =
