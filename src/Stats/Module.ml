@@ -23,19 +23,28 @@ type t =
   ; providedExports : string list option
   ; reasons : Reason.t list
   ; size : int
+  ; ownSize : int
   ; source : string option
   ; usedExports : bool option
   ; warnings : int
   }
 
-let removeSubmodules = Js.String.replaceByRe [%re "/ \+ \d+ modules?$/"] "";;
+let removeSubmodules = Js.String.replaceByRe [%re "/ \\+ \\d+ modules?$/"] "";;
 
-let removePrefix = Js.String.replaceByRe [%re "/^\w+ /"] "";;
-
-let removeLoaders = Js.String.replaceByRe [%re "/.*\!([^!]+)$/"] "$1";;
+(* inspired by https://github.com/webpack-contrib/webpack-bundle-analyzer/blob/fe3c71e25238a1f9c557180404e9ef1d98e3801f/src/tree/utils.js#L10-L18 *)
 
 let normalizeName = Rationale.Function.Infix.(
-  removeSubmodules ||> removePrefix ||> removeLoaders
+  Js.String.split "!"
+  ||> Utils.Array.last
+  ||> Js.String.split "/"
+  ||> Array.map (fun part -> match part with
+  | "~" -> "node_modules"
+  | "." -> ""
+  | part -> part
+  )
+  ||> Js.Array.filter (fun part -> String.length part > 0)
+  ||> Js.Array.joinWith "/"
+  ||> removeSubmodules
 );;
 
 let rec decode json =
@@ -64,6 +73,7 @@ let rec decode json =
     ; providedExports = json |> field "providedExports" (optional (list string))
     ; reasons = json |> field "reasons" (list Reason.decode)
     ; size = json |> field "size" int
+    ; ownSize = json |> field "size" int
     ; source = json |> optional (field "source" string)
     ; usedExports = json |> optional (field "usedExports" bool)
     ; warnings = json |> field "warnings" int
@@ -97,6 +107,7 @@ let rec encode r =
       ; "providedExports", r.providedExports |> nullable (list string)
       ; "reasons", r.reasons |> list Reason.encode
       ; "size", r.size |> int
+      ; "ownSize", r.ownSize |> int
       ; "source", r.source |> nullable string
       ; "usedExports", r.usedExports |> nullable bool
       ; "warnings", r.warnings |> int
@@ -128,6 +139,7 @@ let make
     providedExports
     reasons
     size
+    ownSize
     source
     usedExports
     warnings
@@ -156,6 +168,7 @@ let make
   ; providedExports
   ; reasons
   ; size
+  ; ownSize
   ; source
   ; usedExports
   ; warnings
@@ -174,4 +187,9 @@ let rec eql a b =
   | Some ams, Some bms ->
     List.length ams = List.length bms
     && List.fold_left2 (fun acc a b -> acc && eql a b) true ams bms
+;;
+
+let isEntryPoint module_ = match module_.reasons with
+  | [reason] -> reason.module_ = None
+  | _ -> false
 ;;

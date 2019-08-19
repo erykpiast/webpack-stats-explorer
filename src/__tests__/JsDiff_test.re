@@ -1,6 +1,5 @@
 open Jest;
 open ExpectJs;
-open BsJsverify;
 
 describe("JsDiff", () =>
   JsDiff.(

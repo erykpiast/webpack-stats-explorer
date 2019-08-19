@@ -19,11 +19,11 @@ describe("Module", () => {
     );
 
     test("same name but with different compiler prefix", () =>
-      expect(normalizeName("multi foo")) |> toEqual("foo")
+      expect(normalizeName("multi foo")) |> toEqual("multi foo")
     );
 
     test("same name but with different plugin prefix", () =>
-      expect(normalizeName("css foo")) |> toEqual("foo")
+      expect(normalizeName("css foo")) |> toEqual("css foo")
     );
 
     test("same name but with different loader prefix", () =>
@@ -57,6 +57,7 @@ describe("Module", () => {
         None,
         None,
         [],
+        size,
         size,
         source,
         None,
