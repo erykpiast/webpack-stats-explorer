@@ -193,3 +193,13 @@ let isEntryPoint module_ = match module_.reasons with
   | [reason] -> reason.module_ = None
   | _ -> false
 ;;
+
+let hasSubmodules module_ = match module_.modules with
+  | None -> false
+  | Some(modules) -> List.length modules > 0
+;;
+
+let hasCode module_ = match module_.source with
+  | None -> false
+  | Some(_) -> true
+;;

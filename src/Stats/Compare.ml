@@ -97,7 +97,12 @@ module Modules = struct
       }
     )
     ||> List.filter (fun (module_: Module.t) ->
-      module_.built && not (Module.isEntryPoint module_)
+      module_.built &&
+      (
+        module_ |> Module.hasCode
+        || module_ |> Module.hasSubmodules
+        || module_ |> Module.isEntryPoint |> not
+      )
     )
   );;
 
