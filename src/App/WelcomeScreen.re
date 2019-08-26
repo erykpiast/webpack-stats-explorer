@@ -18,10 +18,7 @@ module Styles = {
   let action =
     style([
       fontSize(em(1.5)),
-      padding2(
-        ~v=Theme.Space.double,
-        ~h=Theme.Space.quadruple
-      ),
+      padding2(~v=Theme.Space.double, ~h=Theme.Space.quadruple),
     ]);
 };
 
@@ -41,12 +38,12 @@ let loadExampleData = () => {
   // logStats("c", Data.c);
   // logStats("d", Data.d);
   // logStats("e", Data.e);
-
+  
   [
     Compare.make(Data.a, Data.b),
     Compare.make(Data.b, Data.c),
     Compare.make(Data.c, Data.d),
-    Compare.make(Data.d, Data.e),
+    Compare.make(Data.d, Data.e)
   ];
 };
 

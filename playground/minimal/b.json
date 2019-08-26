@@ -5,10 +5,10 @@
   ],
   "version": "4.37.0",
   "hash": "a4c986b80f18d11b3917",
-  "time": 131,
-  "builtAt": 1566422929909,
+  "time": 118,
+  "builtAt": 1566741360460,
   "publicPath": "",
-  "outputPath": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/4.39.2/minimal/v2/dist",
+  "outputPath": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/minimal/b/dist",
   "assetsByChunkName": {
     "main": "main.js"
   },
@@ -71,7 +71,7 @@
       "modules": [
         {
           "id": 0,
-          "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/4.39.2/minimal/v2/src/index.js",
+          "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/minimal/b/src/index.js",
           "name": "./src/index.js",
           "index": 0,
           "index2": 0,
@@ -127,7 +127,7 @@
   "modules": [
     {
       "id": 0,
-      "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/4.39.2/minimal/v2/src/index.js",
+      "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/minimal/b/src/index.js",
       "name": "./src/index.js",
       "index": 0,
       "index2": 0,
