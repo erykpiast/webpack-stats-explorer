@@ -8,19 +8,19 @@ describe("Utils", () =>
 
     describe("equal", () => {
       test("false for lists with different length", () => {
-        let result = isEqual([1, 2], [1, 2, 3]);
+        let result = isEqual([1, 2], [1, 2, 3], ());
 
         expect(result) |> toEqual(false);
       });
 
       test("false for lists with the same length but different elements", () => {
-        let result = isEqual([1, 2], [3, 4]);
+        let result = isEqual([1, 2], [3, 4], ());
 
         expect(result) |> toEqual(false);
       });
 
       test("false for lists with the same elements in different order", () => {
-        let result = isEqual([1, 2], [2, 1]);
+        let result = isEqual([1, 2], [2, 1], ());
 
         expect(result) |> toEqual(false);
       });
@@ -28,13 +28,36 @@ describe("Utils", () =>
       test(
         "true for lists with the same length and the same elements in the same order",
         () => {
-        let result = isEqual([1, 2], [1, 2]);
+        let result = isEqual([1, 2], [1, 2], ());
 
         expect(result) |> toEqual(true);
       });
 
       test("true for two empty lists", () => {
-        let result = isEqual([], []);
+        let result = isEqual([], [], ());
+
+        expect(result) |> toEqual(true);
+      });
+
+      test(
+        "false for two equal lists and eql function always returning false", () => {
+        let result = isEqual([1, 2], [1, 2], ~eql=(_, _) => false, ());
+
+        expect(result) |> toEqual(false);
+      });
+
+      test(
+        "false for two lists with different length and eql function always returning true",
+        () => {
+        let result = isEqual([1, 2], [3, 4, 5], ~eql=(_, _) => true, ());
+
+        expect(result) |> toEqual(false);
+      });
+
+      test(
+        "true for two different lists with the same length and eql function always returning true",
+        () => {
+        let result = isEqual([1, 2, 3], [4, 5, 6], ~eql=(_, _) => true, ());
 
         expect(result) |> toEqual(true);
       });
@@ -55,7 +78,7 @@ describe("Utils", () =>
                 );
 
               property1("true for the same list", list, a =>
-                isEqual(a, a) == true
+                isEqual(a, a, ()) == true
               );
 
               property1(
@@ -63,7 +86,7 @@ describe("Utils", () =>
                 list,
                 a => {
                   let b = List.map(Rebase.Fn.id, a);
-                  isEqual(a, b) == true;
+                  isEqual(a, b, ()) == true;
                 },
               );
 
@@ -71,11 +94,11 @@ describe("Utils", () =>
                 "false for lists with different lengths",
                 listsWithDifferentLengths,
                 ((a, b)) =>
-                isEqual(a, b) == false
+                isEqual(a, b, ()) == false
               );
 
               property2("idempotent", list, list, (a, b) =>
-                isEqual(a, b) == isEqual(b, a)
+                isEqual(a, b, ()) == isEqual(b, a, ())
               );
             },
           );

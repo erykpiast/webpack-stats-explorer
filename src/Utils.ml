@@ -22,11 +22,11 @@ module Function = struct
 end
 
 module List = struct
-  let rec isEqual a b =
+  let rec isEqual a b ?eql:(eql=(=)) () =
     match a, b with
     | [], [] -> true
-    | [ a ], [ b ] -> a = b
-    | aHead :: aTail, bHead :: bTail -> aHead = bHead && isEqual aTail bTail
+    | [ a ], [ b ] -> eql a b
+    | aHead :: aTail, bHead :: bTail -> eql aHead bHead && isEqual aTail bTail ~eql ()
     | _, _ -> false
   ;;
 

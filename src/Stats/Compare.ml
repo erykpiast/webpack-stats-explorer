@@ -217,8 +217,8 @@ module Chunks = struct
     | ModifiedSummary of ModifiedSummary.t
 
   let similar (a : Chunk.t) (b : Chunk.t) =
-    Utils.List.isEqual a.files b.files
-    || (Utils.List.isEqual a.names b.names && List.length a.names != 0)
+    Utils.List.isEqual a.files b.files ()
+    || (List.length a.names != 0 && Utils.List.isEqual a.names b.names ())
   ;;
 
   let diffChunks = Diff.create similar Chunk.eql

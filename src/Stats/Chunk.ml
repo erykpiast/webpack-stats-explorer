@@ -90,6 +90,7 @@ let make
 
 let eql a b =
   a.size = b.size
-  && Utils.List.isEqual a.names b.names
-  && Utils.List.isEqual a.files b.files
+  && Utils.List.isEqual a.names b.names ()
+  && Utils.List.isEqual a.files b.files ()
+  && Utils.List.isEqual a.modules b.modules ~eql:Module.eql ()
 ;;
