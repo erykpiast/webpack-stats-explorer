@@ -5,8 +5,8 @@
   ],
   "version": "4.37.0",
   "hash": "83da033ac7fbc946f394",
-  "time": 129,
-  "builtAt": 1566741362352,
+  "time": 346,
+  "builtAt": 1566941002728,
   "publicPath": "",
   "outputPath": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/minimal/c/dist",
   "assetsByChunkName": {
