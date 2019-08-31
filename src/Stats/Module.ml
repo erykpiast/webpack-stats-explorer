@@ -179,17 +179,28 @@ let rec eql a b =
   a.name = b.name
   && a.size = b.size
   && a.source = b.source
-  &&
-  match a.modules, b.modules with
-  | None, None -> true
-  | None, Some _ -> false
-  | Some _, None -> false
-  | Some ams, Some bms ->
-    List.length ams = List.length bms
-    && List.fold_left2 (fun acc a b -> acc && eql a b) true ams bms
+  && (
+    match a.modules, b.modules with
+    | None, None -> true
+    | None, Some _ -> false
+    | Some _, None -> false
+    | Some ams, Some bms ->
+      List.length ams = List.length bms
+      && List.fold_left2 (fun acc a b -> acc && eql a b) true ams bms
+  )
 ;;
 
 let isEntryPoint module_ = match module_.reasons with
   | [reason] -> reason.module_ = None
   | _ -> false
+;;
+
+let hasSubmodules module_ = match module_.modules with
+  | None -> false
+  | Some(modules) -> List.length modules > 0
+;;
+
+let hasCode module_ = match module_.source with
+  | None -> false
+  | Some(_) -> true
 ;;

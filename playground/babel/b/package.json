@@ -1,0 +1,18 @@
+{
+  "name": "webpack-stats-explorer-playground-babel",
+  "version": "2.0.0",
+  "description": "Babel loader playground for Webpack Stats Explorer",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js --verbose --json 1> ../$(basename $(pwd)).json"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "7.5.5",
+    "@babel/preset-env": "7.5.5",
+    "babel-loader": "8.0.6",
+    "webpack": "4.39.3"
+  }
+}

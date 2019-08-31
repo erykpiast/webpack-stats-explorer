@@ -21,7 +21,8 @@
     "test": "TEST=true jest",
     "webpack": "webpack-dev-server",
     "format": "find src -name '*.ml' -exec xargs ocamlformat -i -p janestreet {} \\;",
-    "release": "standard-version"
+    "release": "standard-version",
+    "play": "./playground/play.sh"
   },
   "keywords": [
     "BuckleScript"
