@@ -1,8 +1,9 @@
 webpack-stats-explorer
 ======================
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/erykpiast/webpack-stats-explorer.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/erykpiast/webpack-stats-explorer.svg?branch=master)](https://travis-ci.org/erykpiast/webpack-stats-explorer)
+[![dependencies Status](https://david-dm.org/erykpiast/webpack-stats-explorer/status.svg)](https://david-dm.org/erykpiast/webpack-stats-explorer)
+[![Greenkeeper badge](https://badges.greenkeeper.io/erykpiast/webpack-stats-explorer.svg)](https://greenkeeper.io/)
 
 Tool for exploring webpack stats and comparing them between builds.
 
