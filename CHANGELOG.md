@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.8.0...v1.9.0) (2019-08-31)
+
+
+### Bug Fixes
+
+* **format:** fix module name normalization ([51c30ae](https://github.com/erykpiast/webpack-stats-explorer/commit/51c30ae))
+* **format:** omit a dot in module path ([3abd85c](https://github.com/erykpiast/webpack-stats-explorer/commit/3abd85c))
+* **package:** update react to version 16.9.0 ([05d1989](https://github.com/erykpiast/webpack-stats-explorer/commit/05d1989))
+* **package:** update react-dom to version 16.9.0 ([93f6066](https://github.com/erykpiast/webpack-stats-explorer/commit/93f6066))
+* **package:** update react-dropzone to version 10.1.8 ([dd3373b](https://github.com/erykpiast/webpack-stats-explorer/commit/dd3373b))
+* **ui:** do not show entry point modules ([18c4475](https://github.com/erykpiast/webpack-stats-explorer/commit/18c4475))
+* **ui:** fix code diff coloring ([9456c2d](https://github.com/erykpiast/webpack-stats-explorer/commit/9456c2d))
+
+
+### Features
+
+* **format:** mark module as intact when all its submodules are equal ([bcc8b9a](https://github.com/erykpiast/webpack-stats-explorer/commit/bcc8b9a))
+* **ui:** cut long module names from the left side ([2648589](https://github.com/erykpiast/webpack-stats-explorer/commit/2648589))
+* **ui:** show contents of the main submodule for the first-level modules ([f29554f](https://github.com/erykpiast/webpack-stats-explorer/commit/f29554f))
+
+
+
 ## [1.8.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.7.0...v1.8.0) (2019-08-07)
 
 
