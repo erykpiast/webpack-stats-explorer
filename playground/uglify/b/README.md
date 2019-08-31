@@ -1,4 +1,5 @@
-Minimal example - "b" version
-=============================
+Uglify example - "b" version
+============================
 
-Some code was added to the only entrypoint.
+Making names that are minified in the output bundle significantly longer breaks the reporting.
+The tool will show increase of the module size, but the bundle itself stays exactly the same.

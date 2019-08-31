@@ -1,4 +1,4 @@
-Minimal example - "a" version
-=============================
+Babel example - "a" version
+===========================
 
-It's the simplest config with single empty entrypoint.
+Making the function async produces huge amount of ES5 code and adds quite big `regenerator-runtime` module to produced bundle.

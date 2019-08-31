@@ -1,4 +1,4 @@
-Minimal example - "b" version
-=============================
+Uglify example - "c" version
+============================
 
-Some code was added to the only entrypoint.
+Similarly, dead code that is cut off by compressor, is displayed as added one in the tool.

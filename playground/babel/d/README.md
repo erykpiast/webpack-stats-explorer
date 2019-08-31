@@ -1,4 +1,4 @@
-Minimal example - "a" version
-=============================
+Babel example - "a" version
+===========================
 
-It's the simplest config with single empty entrypoint.
+Array spread added. It should produce simple `.concat` operation on the returned array.

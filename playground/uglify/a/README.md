@@ -1,4 +1,4 @@
-Minimal example - "a" version
-=============================
+Uglify example - "a" version
+============================
 
-It's the simplest config with single empty entrypoint.
+It's the base config.

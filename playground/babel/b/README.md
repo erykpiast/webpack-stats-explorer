@@ -1,4 +1,5 @@
-Minimal example - "a" version
-=============================
+Babel example - "a" version
+===========================
 
-It's the simplest config with single empty entrypoint.
+The first transpilable code was added - default function argument.
+It should produce a couple of lines of code, despite it's adding three letters to the source.
