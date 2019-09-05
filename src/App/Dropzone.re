@@ -51,7 +51,7 @@ let parseStats = (~onSuccess, ~onFailure, files) =>
        |> FileReader.File.asBlob
        |> (
          blob =>
-           FileReader.toText(blob, ())
+           FileReader.toText2(blob, ~encoding="UTF-8")
            |> Js.Promise.then_(text => {
                 let version =
                   text
