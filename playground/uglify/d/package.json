@@ -1,0 +1,17 @@
+{
+  "name": "webpack-stats-explorer-playground-uglify",
+  "version": "4.0.0",
+  "description": "Uglify configuration playground for Webpack Stats Explorer",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js && cp dist/stats.json ../$(basename $(pwd)).json"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "terser-webpack-plugin": "1.4.1",
+    "webpack": "4.39.3",
+    "webpack-enhanced-stats-plugin": "1.0.1"
+  }
+}
