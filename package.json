@@ -45,7 +45,7 @@
     "reason-react": "0.7.0"
   },
   "devDependencies": {
-    "@babel/cli": "7.5.5",
+    "@babel/cli": "7.6.0",
     "@babel/core": "7.5.5",
     "@babel/preset-env": "7.5.5",
     "@glennsl/bs-jest": "0.4.9",
