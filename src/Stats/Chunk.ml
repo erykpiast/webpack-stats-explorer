@@ -37,8 +37,7 @@ let decode json =
 let encode r =
   Json.Encode.(
     object_
-      [ ( "childrenByOrder"
-        , r.childrenByOrder |> Js.Dict.map (fun [@bs] x -> x |> string) |> dict )
+      [ "childrenByOrder", r.childrenByOrder |> dict string
       ; "entry", r.entry |> bool
       ; "files", r.files |> list string
       ; "filteredModules", r.filteredModules |> int

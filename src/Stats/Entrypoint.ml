@@ -18,8 +18,8 @@ let encode r =
   Json.Encode.(
     object_
       [ "assets", r.assets |> list string
-      ; "childAssets", r.childAssets |> Js.Dict.map (fun [@bs] x -> x |> string) |> dict
-      ; "children", r.children |> Js.Dict.map (fun [@bs] x -> x |> string) |> dict
+      ; "childAssets", r.childAssets |> dict string
+      ; "children", r.children |> dict string
       ; "chunks", r.chunks |> list int
       ])
 ;;
