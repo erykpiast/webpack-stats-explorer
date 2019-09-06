@@ -33,14 +33,14 @@ module Styles = {
       display(`flex),
       flexDirection(`column),
       flexGrow(1.0),
-      boxShadow(
+      boxShadow(Shadow.box(
         ~x=`px(0),
         ~y=`px(0),
         ~spread=`px(0),
         ~inset=true,
         ~blur=`px(4),
         Theme.Color.Shadow.default,
-      ),
+      )),
       overflowX(`hidden),
     ]);
 };
