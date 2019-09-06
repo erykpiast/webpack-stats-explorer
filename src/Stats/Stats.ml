@@ -43,21 +43,16 @@ let encode r =
   Json.Encode.(
     object_
       [ "assets", r.assets |> list Asset.encode
-      ; ( "assetsByChunkName"
-        , r.assetsByChunkName |> Js.Dict.map (fun [@bs] x -> x |> AssetsGroup.encode) |> dict )
+      ; "assetsByChunkName", r.assetsByChunkName |> dict AssetsGroup.encode
       ; "builtAt", r.builtAt |> int
       ; "children", r.children |> list Child.encode
       ; "chunks", r.chunks |> list Chunk.encode
-      ; ( "entrypoints"
-        , r.entrypoints |> Js.Dict.map (fun [@bs] x -> x |> Entrypoint.encode) |> dict )
+      ; "entrypoints", r.entrypoints |> dict Entrypoint.encode
       ; "errors", r.errors |> list string
       ; "filteredAssets", r.filteredAssets |> int
       ; "hash", r.hash |> string
       ; "modules", r.modules |> list Module.encode
-      ; ( "namedChunkGroups"
-        , r.namedChunkGroups
-          |> Js.Dict.map (fun [@bs] x -> x |> Entrypoint.encode)
-          |> dict )
+      ; "namedChunkGroups", r.namedChunkGroups |> dict Entrypoint.encode
       ; "outputPath", r.outputPath |> string
       ; "time", r.time |> int
       ; "version", r.version |> string
