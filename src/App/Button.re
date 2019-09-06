@@ -8,21 +8,21 @@ module Styles = {
       borderWidth(px(0)),
       borderRadius(Theme.Space.half),
       boxShadows([
-        boxShadow(
+        Shadow.box(
           ~y=px(0),
           ~x=px(1),
           ~blur=px(5),
           ~spread=px(0),
           Theme.Color.Shadow.Button.primary,
         ),
-        boxShadow(
+        Shadow.box(
           ~y=px(0),
           ~x=px(2),
           ~blur=px(2),
           ~spread=px(0),
           Theme.Color.Shadow.Button.secondary,
         ),
-        boxShadow(
+        Shadow.box(
           ~y=px(0),
           ~x=px(3),
           ~blur=px(1),
@@ -33,10 +33,7 @@ module Styles = {
       cursor(`pointer),
       lineHeight(`em(1.75)),
       margin(Theme.Space.default),
-      padding2(
-        ~v=Theme.Space.default,
-        ~h=Theme.Space.double
-      ),
+      padding2(~v=Theme.Space.default, ~h=Theme.Space.double),
       textTransform(`uppercase),
     ]);
 

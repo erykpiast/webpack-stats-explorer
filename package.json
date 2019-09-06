@@ -33,7 +33,7 @@
     "@glennsl/bs-json": "4.0.0",
     "@glennsl/rebase": "0.2.1",
     "@zpnester/bs-filereader": "0.4.0",
-    "bs-css": "9.0.1",
+    "bs-css": "10.0.0",
     "bs-jsverify": "0.10.0",
     "bs-react-dropzone": "0.4.2",
     "diff": "4.0.1",
