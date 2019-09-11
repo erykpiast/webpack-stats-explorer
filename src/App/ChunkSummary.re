@@ -4,6 +4,20 @@ module ChunkSummary =
 
     type a = chunk;
 
+    module Style = {
+      open Css;
+
+      let pointingContainer =
+        style([
+          height(`percent(100.0)),
+          flexGrow(1.0),
+          position(`relative),
+        ]);
+
+      let pointingArrow =
+        style([position(`absolute), right(px(0)), top(px(0))]);
+    };
+
     let componentName = "ChunkSummary";
 
     let getName = chunk =>
@@ -29,7 +43,15 @@ module ChunkSummary =
         }
       )
       |> (module_ => Some(module_));
-    let getSource = _ => ReasonReact.null;
+    let getSource = _ =>
+      <div className=Style.pointingContainer>
+        <PointingArrow
+          direction=PointingArrow.ToRight className=Style.pointingArrow>
+          {"Choose the" |> ReasonReact.string}
+          <br />
+          {"module here!" |> ReasonReact.string}
+        </PointingArrow>
+      </div>;
   });
 
 let make = ChunkSummary.make;
