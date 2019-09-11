@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.9.0...v1.10.0) (2019-09-11)
+
+
+### Bug Fixes
+
+* **package:** update @glennsl/bs-json to version 5.0.0 ([460fceb](https://github.com/erykpiast/webpack-stats-explorer/commit/460fceb))
+* **package:** update @glennsl/bs-json to version 5.0.1 ([8d6aa7f](https://github.com/erykpiast/webpack-stats-explorer/commit/8d6aa7f))
+* **package:** update @zpnester/bs-filereader to version 0.4.0 ([892251e](https://github.com/erykpiast/webpack-stats-explorer/commit/892251e))
+* **package:** update bs-css to version 10.0.0 ([945ab56](https://github.com/erykpiast/webpack-stats-explorer/commit/945ab56))
+* **package:** update bs-react-dropzone to version 0.4.2 ([2c13dec](https://github.com/erykpiast/webpack-stats-explorer/commit/2c13dec))
+* **package:** update rationale to version 0.2.0 ([1978e30](https://github.com/erykpiast/webpack-stats-explorer/commit/1978e30))
+* **ui:** prevent stretching UI beyond the viewport ([e562db2](https://github.com/erykpiast/webpack-stats-explorer/commit/e562db2))
+
+
+### Features
+
+* **ui:** show what to do after loading stats ([4ab9d77](https://github.com/erykpiast/webpack-stats-explorer/commit/4ab9d77))
+
 ## [1.9.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.8.0...v1.9.0) (2019-08-31)
 
 
