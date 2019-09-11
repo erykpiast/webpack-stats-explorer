@@ -30,7 +30,7 @@
   "author": "Eryk Napierała <eryk.piast@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@glennsl/bs-json": "5.0.0",
+    "@glennsl/bs-json": "5.0.1",
     "@glennsl/rebase": "0.2.1",
     "@zpnester/bs-filereader": "0.4.0",
     "bs-css": "10.0.0",
