@@ -1,6 +1,8 @@
 module Styles = {
   open Css;
 
+  let headerHeight = Theme.Space.tenfold;
+
   let wrapper =
     style([
       display(`flex),
@@ -12,13 +14,17 @@ module Styles = {
   let top =
     style([
       display(`flex),
-      height(Theme.Space.tenfold),
+      height(headerHeight),
       backgroundColor(Theme.Color.Background.default),
       flexShrink(0.0),
     ]);
 
   let contentWrapper =
-    style([display(`flex), flexGrow(1.0), maxHeight(`percent(100.0))]);
+    style([
+      display(`flex),
+      flexGrow(1.0),
+      maxHeight(Calc.(`percent(100.0) - headerHeight)),
+    ]);
 
   let side =
     style([
@@ -33,14 +39,16 @@ module Styles = {
       display(`flex),
       flexDirection(`column),
       flexGrow(1.0),
-      boxShadow(Shadow.box(
-        ~x=`px(0),
-        ~y=`px(0),
-        ~spread=`px(0),
-        ~inset=true,
-        ~blur=`px(4),
-        Theme.Color.Shadow.default,
-      )),
+      boxShadow(
+        Shadow.box(
+          ~x=`px(0),
+          ~y=`px(0),
+          ~spread=`px(0),
+          ~inset=true,
+          ~blur=`px(4),
+          Theme.Color.Shadow.default,
+        ),
+      ),
       overflowX(`hidden),
     ]);
 };
