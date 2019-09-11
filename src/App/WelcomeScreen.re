@@ -32,21 +32,6 @@ let logComp = (title, comp) => {
   comp |> Compare.encode |> Js.log;
 };
 
-let loadExampleData = () => {
-  // logStats("a", Data.a);
-  // logStats("b", Data.b);
-  // logStats("c", Data.c);
-  // logStats("d", Data.d);
-  // logStats("e", Data.e);
-  
-  [
-    Compare.make(Data.a, Data.b),
-    Compare.make(Data.b, Data.c),
-    Compare.make(Data.c, Data.d),
-    Compare.make(Data.d, Data.e)
-  ];
-};
-
 let compareStats = stats =>
   stats
   |> Array.to_list
@@ -55,13 +40,16 @@ let compareStats = stats =>
        (acc: (option(Stats.t), list(Compare.t)), a) =>
          switch (acc) {
          | (None, []) => (Some(a), [])
-         | (Some(b), acc) => (Some(b), [Compare.make(b, a), ...acc])
+         | (Some(b), acc) => (Some(a), [Compare.make(b, a), ...acc])
          | _ => acc
          },
        (None, []),
      )
   |> snd
   |> List.rev;
+
+let loadExampleData = () =>
+  compareStats([|Data.a, Data.b, Data.c, Data.d, Data.e|]);
 
 let make = (~onStats, children) => {
   ...component,

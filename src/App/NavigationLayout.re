@@ -32,6 +32,7 @@ module Styles = {
       width(Theme.Space.triplehexfold),
       backgroundColor(Theme.Color.Background.default),
       maxHeight(`percent(100.0)),
+      flexShrink(0.0),
     ]);
 
   let main =
