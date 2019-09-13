@@ -128,6 +128,32 @@ describe("Compare", () => {
         );
       });
     });
+
+    describe("removeHash", () => {
+      test("should remove hash from JS filename", () => {
+        let noHash = removeHash("foo.1abcde.js");
+
+        expect(noHash) |> toEqual("foo.js");
+      });
+
+      test("should remove hash from CSS filename", () => {
+        let noHash = removeHash("foo.1abcde.css");
+
+        expect(noHash) |> toEqual("foo.css");
+      });
+
+      test("should remove hash from filename in filepath", () => {
+        let noHash = removeHash("foo/bar/baz.1abcde.js");
+
+        expect(noHash) |> toEqual("foo/bar/baz.js");
+      });
+
+      test("should not remove hash from dirname in filepath", () => {
+        let noHash = removeHash("foo.1abcde.bar/baz.js");
+
+        expect(noHash) |> toEqual("foo.1abcde.bar/baz.js");
+      });
+    });
   });
 
   describe("Modules", () => {
