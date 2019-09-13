@@ -1,5 +1,5 @@
 type t =
-  { emitted : bool
+  { emitted : bool option
   ; chunkNames : string list
   ; chunks : int list
   ; name : string
@@ -8,7 +8,7 @@ type t =
 
 let decode json =
   Json.Decode.
-    { emitted = json |> field "emitted" bool
+    { emitted = json |> optional (field "emitted" bool)
     ; chunkNames = json |> field "chunkNames" (list string)
     ; chunks = json |> field "chunks" (list int)
     ; name = json |> field "name" string
@@ -19,7 +19,7 @@ let decode json =
 let encode r =
   Json.Encode.(
     object_
-      [ "emitted", r.emitted |> bool
+      [ "emitted", r.emitted |> nullable bool
       ; "chunkNames", r.chunkNames |> list string
       ; "chunks", r.chunks |> list int
       ; "name", r.name |> string

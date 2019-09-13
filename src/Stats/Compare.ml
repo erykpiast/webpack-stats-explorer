@@ -143,13 +143,17 @@ module Modules = struct
 end
 
 module Chunks = struct
-  let getName (ch : Chunk.t) =
-    match ch.names with
-    | [] -> List.nth ch.files 0
-    | name :: _ -> name
+
+  let getFilename (ch : Chunk.t) =
+    Utils.List.findOpt (Js.String.endsWith ".js") ch.files
+    |> Utils.defaultTo (List.nth ch.files 0)
   ;;
 
-  let getFilename (ch : Chunk.t) = List.nth ch.files 0
+  let getName (ch : Chunk.t) =
+    match ch.names with
+    | [] -> getFilename ch
+    | name :: _ -> name
+  ;;
 
   module Summary = struct
     type t =
@@ -216,8 +220,30 @@ module Chunks = struct
     | Summary of Summary.t
     | ModifiedSummary of ModifiedSummary.t
 
+  let hashPattern = [%re "/\\/?(.*)(?:\\.[0-9a-f]+)(?:\\.chunk)?(\\.js|\\.css)/"]
+
+  let removeHash filename =
+    let separator = "/" in
+    let split = Js.String.split separator filename
+      |> Array.to_list
+      |> List.rev
+    in match split with
+    | hd :: tl -> (
+        Js.String.unsafeReplaceBy2
+        hashPattern
+        (fun _ p1 p2 _ _ -> p1 ^ p2)
+        hd
+      )::tl
+      |> List.rev
+      |> Array.of_list
+      |> Js.Array.joinWith separator
+    | [] -> filename
+
   let similar (a : Chunk.t) (b : Chunk.t) =
-    Utils.List.isEqual a.files b.files ()
+    Utils.List.isEqual
+      (List.map removeHash a.files)
+      (List.map removeHash b.files)
+      ()
     || (List.length a.names != 0 && Utils.List.isEqual a.names b.names ())
   ;;
 

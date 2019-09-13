@@ -8,6 +8,7 @@ module Styles = {
       margin(px(0)),
       maxHeight(`percent(100.0)),
       overflowY(`auto),
+      flexShrink(0.0)
     ]);
 
   let item =
