@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.10.2](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.10.1...v1.10.2) (2019-09-13)
+
+
+### Bug Fixes
+
+* **format:** support chunks with hash in filename ([255fea9](https://github.com/erykpiast/webpack-stats-explorer/commit/255fea9))
+* **format:** support stats without emitted fields on asset ([c156e03](https://github.com/erykpiast/webpack-stats-explorer/commit/c156e03))
+* **ui:** do not shrink right sidebar when code is wide ([4bdb020](https://github.com/erykpiast/webpack-stats-explorer/commit/4bdb020))
+
 ### [1.10.1](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.10.0...v1.10.1) (2019-09-11)
 
 
