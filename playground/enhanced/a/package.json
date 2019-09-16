@@ -5,14 +5,14 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack.config.js --verbose && cp dist/stats.json ../$(basename $(pwd)).json"
+    "build": "webpack --config webpack.config.js --verbose && mv dist/stats.json ../$(basename $(pwd)).json"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "7.5.5",
-    "@babel/preset-env": "7.5.5",
-    "@babel/plugin-transform-runtime": "^7.5.5",
+    "@babel/core": "7.6.0",
+    "@babel/preset-env": "7.6.0",
+    "@babel/plugin-transform-runtime": "7.6.0",
     "babel-loader": "8.0.6",
     "terser-webpack-plugin": "2.1.0",
     "webpack": "4.40.2",
