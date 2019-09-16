@@ -22,7 +22,8 @@
     "webpack": "webpack-dev-server",
     "format": "find src -name '*.ml' -exec xargs ocamlformat -i -p janestreet {} \\;",
     "release": "standard-version",
-    "play": "./playground/play.sh"
+    "playground:play": "./playground/play.sh",
+    "playground:upgrade-deps": "./playground/upgrade-deps.sh"
   },
   "keywords": [
     "BuckleScript"
