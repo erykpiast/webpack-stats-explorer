@@ -25,6 +25,10 @@ type t =
   ; size : int
   ; ownSize : int
   ; source : string option
+  ; originalSize : int option
+  ; originalSource : string option
+  ; parsedSize : int option
+  ; parsedSource : string option
   ; usedExports : bool option
   ; warnings : int
   }
@@ -75,6 +79,10 @@ let rec decode json =
     ; size = json |> field "size" int
     ; ownSize = json |> field "size" int
     ; source = json |> optional (field "source" string)
+    ; originalSize = json |> optional (field "originalSize" int)
+    ; originalSource = json |> optional (field "originalSource" string)
+    ; parsedSize = json |> optional (field "parsedSize" int)
+    ; parsedSource = json |> optional (field "parsedSource" string)
     ; usedExports = json |> optional (field "usedExports" bool)
     ; warnings = json |> field "warnings" int
     }
@@ -109,6 +117,10 @@ let rec encode r =
       ; "size", r.size |> int
       ; "ownSize", r.ownSize |> int
       ; "source", r.source |> nullable string
+      ; "originalSize", r.originalSize |> nullable int
+      ; "originalSource", r.originalSource |> nullable string
+      ; "parsedSize", r.parsedSize |> nullable int
+      ; "parsedSource", r.parsedSource |> nullable string
       ; "usedExports", r.usedExports |> nullable bool
       ; "warnings", r.warnings |> int
       ])
@@ -141,6 +153,10 @@ let make
     size
     ownSize
     source
+    originalSize
+    originalSource
+    parsedSize
+    parsedSource
     usedExports
     warnings
   =
@@ -170,6 +186,10 @@ let make
   ; size
   ; ownSize
   ; source
+  ; originalSize
+  ; originalSource
+  ; parsedSize
+  ; parsedSource
   ; usedExports
   ; warnings
   }
@@ -178,6 +198,7 @@ let make
 let rec eql a b =
   a.name = b.name
   && a.size = b.size
+  && a.parsedSize = b.parsedSize
   && a.source = b.source
   && (
     match a.modules, b.modules with

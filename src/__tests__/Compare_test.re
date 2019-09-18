@@ -188,6 +188,10 @@ describe("Compare", () => {
         size,
         source,
         None,
+        None,
+        None,
+        None,
+        None,
         0,
       );
 
