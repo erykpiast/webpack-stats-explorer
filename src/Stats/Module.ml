@@ -195,6 +195,14 @@ let make
   }
 ;;
 
+(* TODO:
+  this logic has to take MEANINGFUL size into account
+  like in many other places; maybe it's a good time to create
+  intermediate format with used properties only and computed
+  meaningfulSize and meaningfulSource values one along stat,
+  parsed and original; the same goes with chunks so maybe it's
+  a good time for unification; seems like a huge refactor, though
+ *)
 let rec eql a b =
   a.name = b.name
   && a.size = b.size
