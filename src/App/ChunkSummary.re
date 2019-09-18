@@ -19,7 +19,6 @@ module ChunkSummary =
     };
 
     let componentName = "ChunkSummary";
-
     let getName = chunk =>
       switch (chunk) {
       | Summary(chunk) => chunk.name
@@ -32,8 +31,9 @@ module ChunkSummary =
       | ModifiedSummary(chunk) => fst(chunk.size)
       };
 
-    let getOwnSize = getSize;
-
+    let getStatSize = getSize;
+    let getOriginalSize = _ => None;
+    let getParsedSize = _ => None;
     let getModules = chunk =>
       (
         switch (chunk) {
@@ -52,6 +52,8 @@ module ChunkSummary =
           {"module here!" |> ReasonReact.string}
         </PointingArrow>
       </div>;
+    let getOriginalSource = _ => None;
+    let getParsedSource = _ => None;
   });
 
 let make = ChunkSummary.make;

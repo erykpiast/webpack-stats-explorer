@@ -12,29 +12,36 @@ module Styles = {
 module ModuleSummary =
   GenericSummary.Make({
     open Compare.Modules;
+    open Rationale.Option.Infix;
 
     type a = module_;
 
     let componentName = "ModuleSummary";
-
     let getName = module_ =>
       switch (module_) {
       | Summary(module_) => module_.name
       | ModifiedSummary(module_) => module_.name
       };
-
     let getSize = module_ =>
       switch (module_) {
       | Summary(module_) => module_.size
-      | ModifiedSummary(module_) => fst(module_.size)
+      | ModifiedSummary(module_) => module_.size |> snd
       };
-
-    let getOwnSize = module_ =>
+    let getStatSize = module_ =>
       switch (module_) {
       | Summary(module_) => module_.ownSize
-      | ModifiedSummary(module_) => fst(module_.ownSize)
+      | ModifiedSummary(module_) => module_.ownSize |> snd
       };
-
+    let getOriginalSize = module_ =>
+      switch (module_) {
+      | Summary(module_) => module_.originalSize
+      | ModifiedSummary(module_) => module_.originalSize <$> snd
+      };
+    let getParsedSize = module_ =>
+      switch (module_) {
+      | Summary(module_) => module_.parsedSize
+      | ModifiedSummary(module_) => module_.parsedSize <$> snd
+      };
     let getSource = module_ =>
       switch (module_) {
       | Summary(module_) =>
@@ -59,7 +66,8 @@ module ModuleSummary =
           after={snd(module_.source)}
         />
       };
-
+    let getOriginalSource = _ => None;
+    let getParsedSource = _ => None;
     let getModules = module_ =>
       switch (module_) {
       | Summary(module_) =>

@@ -24,6 +24,7 @@ describe("Compare", () => {
           false,
           [],
           0,
+          None,
         );
 
       test("equal files and different names", () => {
@@ -89,6 +90,7 @@ describe("Compare", () => {
           false,
           [],
           size,
+          None,
         );
       let foo1 = fakeChunk(["foo123"], ["foo"], 100);
       let foo2 = fakeChunk(["foo456"], ["foo"], 200);

@@ -1,10 +1,19 @@
+let both a b = match (a, b) with
+  | (Some(aSize), Some(bSize)) -> Some(aSize, bSize)
+  | _ -> None
+;;
+
 module Modules = struct
   module Summary = struct
     type t =
       { name : string
       ; size : int
       ; ownSize : int
+      ; originalSize : int option
+      ; parsedSize : int option
       ; source : string
+      ; originalSource : string option
+      ; parsedSource : string option
       ; modules : t list
       }
 
@@ -12,7 +21,11 @@ module Modules = struct
       { name = m.name
       ; size = m.size
       ; ownSize = m.ownSize
+      ; originalSize = m.originalSize
+      ; parsedSize = m.parsedSize
       ; source = m.source |> Utils.defaultTo ""
+      ; originalSource = m.originalSource
+      ; parsedSource = m.parsedSource
       ; modules = m.modules |> Utils.defaultTo [] |> List.map make
       }
     ;;
@@ -23,7 +36,11 @@ module Modules = struct
           [ "name", r.name |> string
           ; "size", r.size |> int
           ; "ownSize", r.ownSize |> int
+          ; "originalSize", r.originalSize |> nullable int
+          ; "parsedSize", r.parsedSize |> nullable int
           ; "source", r.source |> string
+          ; "originalSource", r.originalSource |> nullable string
+          ; "parsedSource", r.parsedSource |> nullable string
           ; "modules", r.modules |> list encode
           ])
     ;;
@@ -34,7 +51,11 @@ module Modules = struct
       { name : string
       ; size : int * int
       ; ownSize : int * int
+      ; originalSize : (int * int) option
+      ; parsedSize : (int * int) option
       ; source : string * string
+      ; originalSource : (string * string) option
+      ; parsedSource : (string * string) option
       ; modules : 'diff option
       }
 
@@ -42,7 +63,11 @@ module Modules = struct
       { name = b.name
       ; size = a.size, b.size
       ; ownSize = a.ownSize, b.ownSize
+      ; originalSize = both a.originalSize b.originalSize
+      ; parsedSize = both a.parsedSize b.parsedSize
       ; source = a.source |> Utils.defaultTo "", b.source |> Utils.defaultTo ""
+      ; originalSource = both a.originalSource b.originalSource
+      ; parsedSource = both a.parsedSource b.parsedSource
       ; modules =
           (match a.modules, b.modules with
           | None, None -> None
@@ -57,7 +82,11 @@ module Modules = struct
           [ "name", r.name |> string
           ; "size", r.size |> tuple2 int int
           ; "ownSize", r.ownSize |> tuple2 int int
+          ; "originalSize", r.originalSize |> nullable (tuple2 int int)
+          ; "parsedSize", r.parsedSize |> nullable (tuple2 int int)
           ; "source", r.source |> tuple2 string string
+          ; "originalSource", r.originalSource |> nullable (tuple2 string string)
+          ; "parsedSource", r.parsedSource |> nullable (tuple2 string string)
           ; "modules", r.modules |> nullable diff
           ])
     ;;
@@ -107,7 +136,7 @@ module Modules = struct
   );;
 
   let rec make xs ys =
-    let d = diffModules (normalize xs) (normalize ys) in
+    let d = diffModules xs ys in
     { added = d.added |> List.map Summary.make
     ; removed = d.removed |> List.map Summary.make
     ; intact = d.intact |> List.map Summary.make
@@ -160,6 +189,7 @@ module Chunks = struct
       { name : string
       ; filename : string
       ; size : int
+      ; parsedSize : int option
       ; modules : Modules.Summary.t list
       }
 
@@ -167,6 +197,7 @@ module Chunks = struct
       { name = getName ch
       ; filename = getFilename ch
       ; size = ch.size
+      ; parsedSize = ch.parsedSize
       ; modules = ch.modules |> List.map Modules.Summary.make
       }
     ;;
@@ -177,6 +208,7 @@ module Chunks = struct
           [ "name", r.name |> string
           ; "filename", r.filename |> string
           ; "size", r.size |> int
+          ; "parsedSize", r.parsedSize |> nullable int
           ; "modules", r.modules |> list Modules.Summary.encode
           ])
     ;;
@@ -187,6 +219,7 @@ module Chunks = struct
       { name : string
       ; filename : string * string
       ; size : int * int
+      ; parsedSize : (int * int) option
       ; modules : Modules.t
       }
 
@@ -194,6 +227,7 @@ module Chunks = struct
       { name = getName a
       ; filename = getName a, getName b
       ; size = a.size, b.size
+      ; parsedSize = both a.parsedSize b.parsedSize
       ; modules = Modules.make a.modules b.modules
       }
     ;;
@@ -204,6 +238,7 @@ module Chunks = struct
           [ "name", r.name |> string
           ; "filename", r.filename |> tuple2 string string
           ; "size", r.size |> tuple2 int int
+          ; "parsedSize", r.parsedSize |> nullable (tuple2 int int)
           ; "modules", r.modules |> Modules.encode
           ])
     ;;
@@ -249,6 +284,18 @@ module Chunks = struct
 
   let diffChunks = Diff.create similar Chunk.eql
 
+  let nameEqual (a : Module.t) (b : Module.t) = a.name = b.name
+
+  let normalize =
+    List.map (fun (chunk: Chunk.t) ->
+      let normalizedModules = Modules.normalize chunk.modules in
+      let parsedSize = normalizedModules
+        |> List.map (fun (module_: Module.t) -> module_.parsedSize |> (Utils.defaultTo 0))
+        |> List.fold_left (+) 0
+      in { chunk with parsedSize = Some(parsedSize)
+         ; modules = normalizedModules
+      });;
+
   let make xs ys =
     let d = diffChunks xs ys in
     { added = d.added |> List.map Summary.make
@@ -280,13 +327,23 @@ end
 type t =
   { chunks : Chunks.t
   ; size : int * int
-  ;count : int
+  ; count : int
   }
 
-let calcSize = List.fold_left (fun acc (a : Chunk.t) -> a.size + acc) 0
+let calcSize = List.fold_left (fun acc (a : Chunk.t) ->
+  let size =
+    match (a.parsedSize) with
+    | Some(size) -> size
+    | None -> a.size
+  in size + acc) 0
 
 let make (a : Stats.t) (b : Stats.t) =
-  { chunks = Chunks.make a.chunks b.chunks; size = calcSize a.chunks, calcSize b.chunks; count = List.length b.chunks }
+  let aChunks = Chunks.normalize a.chunks
+  and bChunks = Chunks.normalize b.chunks
+  in { chunks = Chunks.make aChunks bChunks
+     ; size = calcSize aChunks, calcSize bChunks
+     ; count = List.length bChunks
+  }
 ;;
 
 let encode r =

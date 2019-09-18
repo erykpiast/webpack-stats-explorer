@@ -4,8 +4,12 @@ module type Interface = {
   let componentName: string;
   let getName: a => string;
   let getSize: a => int;
-  let getOwnSize: a => int;
+  let getStatSize: a => int;
+  let getOriginalSize: a => option(int);
+  let getParsedSize: a => option(int);
   let getSource: a => ReasonReact.reactElement;
+  let getOriginalSource: a => option(ReasonReact.reactElement);
+  let getParsedSource: a => option(ReasonReact.reactElement);
   let getModules: a => option(Compare.Modules.modules);
 };
 
@@ -28,7 +32,6 @@ module Styles = {
 
   let header =
     style([
-      padding(Theme.Space.double),
       flexGrow(0.0),
       borderBottom(px(1), `solid, Theme.Color.Border.default),
     ]);
@@ -41,10 +44,23 @@ module Styles = {
       height(`percent(100.0)),
     ]);
 
-  let status = style([textTransform(`uppercase)]);
+  let status =
+    style([
+      textTransform(`uppercase),
+      marginLeft(Theme.Space.double),
+      marginTop(Theme.Space.double),
+    ]);
 
-  let name = style([fontSize(rem(2.0)), wordBreak(`breakAll)]);
-  let size = style([fontSize(rem(1.2))]);
+  let name =
+    style([
+      fontSize(rem(2.0)),
+      wordBreak(`breakAll),
+      marginLeft(Theme.Space.double),
+    ]);
+
+  let size = style([fontSize(rem(1.2)), marginTop(Theme.Space.default)]);
+
+  let sizeTerm = style([display(`block), marginRight(Theme.Space.default)]);
 
   let content =
     style([
@@ -92,8 +108,11 @@ module Make = (ToSummarize: Interface) => {
   let make = (~data, ~kind, ~onModule, ~selected, _children) => {
     ...component,
     render: _self => {
-      let ownSize = data |> ToSummarize.getOwnSize;
-      let totalSize = data |> ToSummarize.getSize;
+      let ownSize = data |> ToSummarize.getStatSize;
+      let statSize = data |> ToSummarize.getSize;
+      let originalSize = data |> ToSummarize.getOriginalSize;
+      let parsedSize = data |> ToSummarize.getParsedSize;
+
       let (modules, modulesCount) =
         switch (data |> ToSummarize.getModules) {
         | Some(modules) =>
@@ -123,12 +142,20 @@ module Make = (ToSummarize: Interface) => {
         | None => (ReasonReact.null, 0)
         };
 
+      let renderSize = (label, size) =>
+        <>
+          <dt className={Cn.make([Styles.term, Styles.sizeTerm])}>
+            {label |> ReasonReact.string}
+          </dt>
+          <dd className=Styles.definition> <Size value=size /> </dd>
+        </>;
+
       <div className=Styles.wrapper>
         <header className=Styles.header>
           <dl className=Styles.list>
             <div className=Styles.status>
               <dt className=Styles.term>
-                {L10N.Chunk.status |> ReasonReact.string}
+                {L10N.Summary.status |> ReasonReact.string}
               </dt>
               <dd
                 className={Cn.make([
@@ -142,33 +169,23 @@ module Make = (ToSummarize: Interface) => {
             </div>
             <div className=Styles.name>
               <dt className=Styles.term>
-                {L10N.Chunk.name |> ReasonReact.string}
+                {L10N.Summary.name |> ReasonReact.string}
               </dt>
               <dd className=Styles.definition>
                 {data |> ToSummarize.getName |> ReasonReact.string}
               </dd>
             </div>
-            <div className=Styles.size>
-              <dt className=Styles.term>
-                {L10N.Chunk.size |> ReasonReact.string}
-              </dt>
-              <dd className=Styles.definition>
-                <Size value=totalSize />
-                {if (totalSize != ownSize) {
-                   <>
-                     {" (" |> ReasonReact.string}
-                     <Size value=ownSize />
-                     {" + " |> ReasonReact.string}
-                     {modulesCount |> string_of_int |> ReasonReact.string}
-                     {" " |> ReasonReact.string}
-                     {L10N.modules |> ReasonReact.string}
-                     {")" |> ReasonReact.string}
-                   </>;
-                 } else {
-                   ReasonReact.null;
-                 }}
-              </dd>
-            </div>
+            Rationale.Option.Infix.(
+              <Tabs className=Styles.size selectedIndex=1>
+                {originalSize
+                 <$> renderSize(L10N.Summary.original)
+                 |> Utils.defaultTo(ReasonReact.null)}
+                {renderSize(L10N.Summary.stat, statSize)}
+                {parsedSize
+                 <$> renderSize(L10N.Summary.parsed)
+                 |> Utils.defaultTo(ReasonReact.null)}
+              </Tabs>
+            )
           </dl>
         </header>
         <div className=Styles.content>

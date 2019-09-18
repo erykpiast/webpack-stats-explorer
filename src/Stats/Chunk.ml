@@ -13,6 +13,7 @@ type t =
   ; rendered : bool
   ; siblings : int list
   ; size : int
+  ; parsedSize : int option
   }
 
 let decode json =
@@ -31,6 +32,7 @@ let decode json =
     ; rendered = json |> field "rendered" bool
     ; siblings = json |> field "siblings" (list int)
     ; size = json |> field "size" int
+    ; parsedSize = json |> optional (field "size" int)
     }
 ;;
 
@@ -51,6 +53,7 @@ let encode r =
       ; "rendered", r.rendered |> bool
       ; "siblings", r.siblings |> list int
       ; "size", r.size |> int
+      ; "parsedSize", r.parsedSize |> nullable int
       ])
 ;;
 
@@ -69,6 +72,7 @@ let make
     rendered
     siblings
     size
+    parsedSize
   =
   { childrenByOrder
   ; entry
@@ -84,6 +88,7 @@ let make
   ; rendered
   ; siblings
   ; size
+  ; parsedSize
   }
 ;;
 

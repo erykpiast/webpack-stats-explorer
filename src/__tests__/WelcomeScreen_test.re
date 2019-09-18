@@ -26,6 +26,7 @@ describe("WelcomeScreen", () =>
               true,
               [],
               builtAt,
+              None,
             ),
           ],
           Js.Dict.fromList([]),

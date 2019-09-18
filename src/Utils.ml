@@ -68,6 +68,8 @@ module Array = struct
   let last array = nth (Array.length array - 1) array;;
 
   let trimLeft amount array = Js.Array.slice ~start:amount ~end_:(Js.Array.length array) array;;
+
+  let filter = Js.Array.filter
 end
 
 let pluralize singular plural n = (string_of_int n) ^ " " ^ (if n == 1 then singular else plural);;

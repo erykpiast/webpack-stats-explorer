@@ -198,7 +198,6 @@ let make
 let rec eql a b =
   a.name = b.name
   && a.size = b.size
-  && a.parsedSize = b.parsedSize
   && a.source = b.source
   && (
     match a.modules, b.modules with

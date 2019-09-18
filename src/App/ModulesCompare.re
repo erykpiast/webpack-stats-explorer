@@ -6,13 +6,25 @@ open State.NavigationPath;
 
 let component = ReasonReact.statelessComponent("ModulesCompare");
 
+let getSummarySize = (m: Summary.t) =>
+  switch (m.parsedSize) {
+  | Some(size) => size
+  | None => m.size
+  };
+
+let getModifiedSummarySize = (m: ModifiedSummary.t(Compare.Modules.t)) =>
+  switch (m.parsedSize) {
+  | Some(size) => size
+  | None => m.size
+  };
+
 let mapModulesToProps = (modules, onModule) => {
   let added =
     modules.added
     |> List.map((module_: Summary.t) =>
          (
            {
-             after: module_.size,
+             after: module_ |> getSummarySize,
              before: 0,
              name: module_.name,
              value: Summary(module_),
@@ -29,7 +41,7 @@ let mapModulesToProps = (modules, onModule) => {
          (
            {
              after: 0,
-             before: module_.size,
+             before: module_ |> getSummarySize,
              name: module_.name,
              value: Summary(module_),
              onChange: module_ => {
@@ -41,11 +53,12 @@ let mapModulesToProps = (modules, onModule) => {
        );
   let intact =
     modules.intact
-    |> List.map((module_: Summary.t) =>
+    |> List.map((module_: Summary.t) => {
+         let size = module_ |> getSummarySize;
          (
            {
-             after: module_.size,
-             before: module_.size,
+             after: size,
+             before: size,
              name: module_.name,
              value: Summary(module_),
              onChange: module_ => {
@@ -53,15 +66,16 @@ let mapModulesToProps = (modules, onModule) => {
                ();
              },
            }: ModulesDiff.props
-         )
-       );
+         );
+       });
   let modified =
     modules.modified
-    |> List.map((module_: ModifiedSummary.t(Compare.Modules.t)) =>
+    |> List.map((module_: ModifiedSummary.t(Compare.Modules.t)) => {
+         let size = module_ |> getModifiedSummarySize;
          (
            {
-             after: snd(module_.size),
-             before: fst(module_.size),
+             after: size |> snd,
+             before: size |> fst,
              name: module_.name,
              value: ModifiedSummary(module_),
              onChange: module_ => {
@@ -69,8 +83,8 @@ let mapModulesToProps = (modules, onModule) => {
                ();
              },
            }: ModulesDiff.props
-         )
-       );
+         );
+       });
 
   // TODO: test
   Belt.List.concatMany([|added, modified, removed, intact|]);

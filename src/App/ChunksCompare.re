@@ -6,13 +6,25 @@ open State.NavigationPath;
 
 let component = ReasonReact.statelessComponent("ChunksCompare");
 
+let getSummarySize = (m: Summary.t) =>
+  switch (m.parsedSize) {
+  | Some(size) => size
+  | None => m.size
+  };
+
+let getModifiedSummarySize = (m: ModifiedSummary.t) =>
+  switch (m.parsedSize) {
+  | Some(size) => size
+  | None => m.size
+  };
+
 let mapChunksToProps = (chunks, onChunk) => {
   let added =
     chunks.added
     |> List.map((chunk: Summary.t) =>
          (
            {
-             after: chunk.size,
+             after: chunk |> getSummarySize,
              before: 0,
              name: chunk.name,
              value: Summary(chunk),
@@ -26,7 +38,7 @@ let mapChunksToProps = (chunks, onChunk) => {
          (
            {
              after: 0,
-             before: chunk.size,
+             before: chunk |> getSummarySize,
              name: chunk.name,
              value: Summary(chunk),
              onChange: chunk => onChunk(Segment.of_chunk(Removed, chunk)),
@@ -35,30 +47,32 @@ let mapChunksToProps = (chunks, onChunk) => {
        );
   let intact =
     chunks.intact
-    |> List.map((chunk: Summary.t) =>
+    |> List.map((chunk: Summary.t) => {
+         let size = chunk |> getSummarySize;
          (
            {
-             after: chunk.size,
-             before: chunk.size,
+             after: size,
+             before: size,
              name: chunk.name,
              value: Summary(chunk),
              onChange: chunk => onChunk(Segment.of_chunk(Intact, chunk)),
            }: ChunksDiff.props
-         )
-       );
+         );
+       });
   let modified =
     chunks.modified
-    |> List.map((chunk: ModifiedSummary.t) =>
+    |> List.map((chunk: ModifiedSummary.t) => {
+         let size = chunk |> getModifiedSummarySize;
          (
            {
-             after: snd(chunk.size),
-             before: fst(chunk.size),
+             after: size |> snd,
+             before: size |> fst,
              name: chunk.name,
              value: ModifiedSummary(chunk),
              onChange: chunk => onChunk(Segment.of_chunk(Modified, chunk)),
            }: ChunksDiff.props
-         )
-       );
+         );
+       });
 
   // TODO: test
   Belt.List.concatMany([|added, modified, removed, intact|])
@@ -81,8 +95,6 @@ let mapChunksToProps = (chunks, onChunk) => {
 
 let make = (~chunks, ~onChunk, ~selected, _children) => {
   ...component,
-  render: _self => <ChunksDiff
-    data={mapChunksToProps(chunks, onChunk)}
-    selected
-  />,
+  render: _self =>
+    <ChunksDiff data={mapChunksToProps(chunks, onChunk)} selected />,
 };
