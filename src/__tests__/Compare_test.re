@@ -9,7 +9,7 @@ describe("Compare", () => {
 
     describe("chunksSimilar", () => {
       let fakeChunk = (files, names) =>
-        Chunk.make(
+        WebpackChunk.make(
           Js.Dict.empty(),
           false,
           files,
@@ -75,7 +75,7 @@ describe("Compare", () => {
 
     describe("compare", () => {
       let fakeChunk = (files, names, size) =>
-        Chunk.make(
+        WebpackChunk.make(
           Js.Dict.empty(),
           false,
           files,
@@ -162,7 +162,7 @@ describe("Compare", () => {
     open Modules;
 
     let fakeModule = (name, size, source, modules) =>
-      Module.make(
+      WebpackModule.make(
         [],
         true,
         false,

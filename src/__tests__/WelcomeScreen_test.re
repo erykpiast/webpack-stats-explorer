@@ -5,13 +5,13 @@ describe("WelcomeScreen", () =>
   WelcomeScreen.(
     describe("compareStats", () => {
       let mockStats = builtAt =>
-        Stats.make(
+        WebpackStats.make(
           [],
           Js.Dict.fromList([]),
           builtAt,
           [],
           [
-            Chunk.make(
+            WebpackChunk.make(
               Js.Dict.fromList([]),
               false,
               [],

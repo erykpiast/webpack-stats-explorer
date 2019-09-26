@@ -17,7 +17,7 @@ module Modules = struct
       ; modules : t list
       }
 
-    let rec make (m : Module.t) =
+    let rec make (m : WebpackModule.t) =
       { name = m.name
       ; size = m.size
       ; ownSize = m.ownSize
@@ -59,7 +59,7 @@ module Modules = struct
       ; modules : 'diff option
       }
 
-    let make diff (a : Module.t) (b : Module.t) =
+    let make diff (a : WebpackModule.t) (b : WebpackModule.t) =
       { name = b.name
       ; size = a.size, b.size
       ; ownSize = a.ownSize, b.ownSize
@@ -107,16 +107,16 @@ module Modules = struct
     | ModifiedModules of t
     | NotModifiedModules of Summary.t list
 
-  let nameEqual (a : Module.t) (b : Module.t) = a.name = b.name
-  let builtEqual (a : Module.t) (b : Module.t) = a.built = b.built
+  let nameEqual (a : WebpackModule.t) (b : WebpackModule.t) = a.name = b.name
+  let builtEqual (a : WebpackModule.t) (b : WebpackModule.t) = a.built = b.built
   let similar = Utils.Function.(allPass [
     uncurry2 nameEqual;
     uncurry2 builtEqual
   ] |> curry2)
-  let diffModules = Diff.create similar Module.eql
+  let diffModules = Diff.create similar WebpackModule.eql
 
   let normalize = Rationale.Function.Infix.(
-    List.map (fun (module_: Module.t) -> match module_.modules with
+    List.map (fun (module_: WebpackModule.t) -> match module_.modules with
     | None -> module_
     | Some modules -> match Utils.List.findOpt (nameEqual module_) modules with
       | None -> module_
@@ -125,12 +125,12 @@ module Modules = struct
       ; ownSize = mainSubmodule.size
       }
     )
-    ||> List.filter (fun (module_: Module.t) ->
+    ||> List.filter (fun (module_: WebpackModule.t) ->
       module_.built &&
       (
-        module_ |> Module.hasCode
-        || module_ |> Module.hasSubmodules
-        || module_ |> Module.isEntryPoint |> not
+        module_ |> WebpackModule.hasCode
+        || module_ |> WebpackModule.hasSubmodules
+        || module_ |> WebpackModule.isEntryPoint |> not
       )
     )
   );;
@@ -173,12 +173,12 @@ end
 
 module Chunks = struct
 
-  let getFilename (ch : Chunk.t) =
+  let getFilename (ch : WebpackChunk.t) =
     Utils.List.findOpt (Js.String.endsWith ".js") ch.files
     |> Utils.defaultTo (List.nth ch.files 0)
   ;;
 
-  let getName (ch : Chunk.t) =
+  let getName (ch : WebpackChunk.t) =
     match ch.names with
     | [] -> getFilename ch
     | name :: _ -> name
@@ -193,7 +193,7 @@ module Chunks = struct
       ; modules : Modules.Summary.t list
       }
 
-    let make (ch : Chunk.t) =
+    let make (ch : WebpackChunk.t) =
       { name = getName ch
       ; filename = getFilename ch
       ; size = ch.size
@@ -223,7 +223,7 @@ module Chunks = struct
       ; modules : Modules.t
       }
 
-    let make (a : Chunk.t) (b : Chunk.t) =
+    let make (a : WebpackChunk.t) (b : WebpackChunk.t) =
       { name = getName a
       ; filename = getName a, getName b
       ; size = a.size, b.size
@@ -274,7 +274,7 @@ module Chunks = struct
       |> Js.Array.joinWith separator
     | [] -> filename
 
-  let similar (a : Chunk.t) (b : Chunk.t) =
+  let similar (a : WebpackChunk.t) (b : WebpackChunk.t) =
     Utils.List.isEqual
       (List.map removeHash a.files)
       (List.map removeHash b.files)
@@ -282,15 +282,15 @@ module Chunks = struct
     || (List.length a.names != 0 && Utils.List.isEqual a.names b.names ())
   ;;
 
-  let diffChunks = Diff.create similar Chunk.eql
+  let diffChunks = Diff.create similar WebpackChunk.eql
 
-  let nameEqual (a : Module.t) (b : Module.t) = a.name = b.name
+  let nameEqual (a : WebpackModule.t) (b : WebpackModule.t) = a.name = b.name
 
   let normalize =
-    List.map (fun (chunk: Chunk.t) ->
+    List.map (fun (chunk: WebpackChunk.t) ->
       let normalizedModules = Modules.normalize chunk.modules in
       let parsedSize = normalizedModules
-        |> List.map (fun (module_: Module.t) -> module_.parsedSize |> (Utils.defaultTo 0))
+        |> List.map (fun (module_: WebpackModule.t) -> module_.parsedSize |> (Utils.defaultTo 0))
         |> List.fold_left (+) 0
       in { chunk with parsedSize = Some(parsedSize)
          ; modules = normalizedModules
@@ -330,14 +330,14 @@ type t =
   ; count : int
   }
 
-let calcSize = List.fold_left (fun acc (a : Chunk.t) ->
+let calcSize = List.fold_left (fun acc (a : WebpackChunk.t) ->
   let size =
     match (a.parsedSize) with
     | Some(size) -> size
     | None -> a.size
   in size + acc) 0
 
-let make (a : Stats.t) (b : Stats.t) =
+let make (a : WebpackStats.t) (b : WebpackStats.t) =
   let aChunks = Chunks.normalize a.chunks
   and bChunks = Chunks.normalize b.chunks
   in { chunks = Chunks.make aChunks bChunks

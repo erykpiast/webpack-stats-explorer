@@ -24,7 +24,7 @@ module Styles = {
 
 let logStats = (title, stats) => {
   Js.log(title);
-  stats |> Stats.encode |> Js.log;
+  stats |> WebpackStats.encode |> Js.log;
 };
 
 let logComp = (title, comp) => {
@@ -35,9 +35,9 @@ let logComp = (title, comp) => {
 let compareStats = stats =>
   stats
   |> Array.to_list
-  |> List.sort((a: Stats.t, b: Stats.t) => a.builtAt - b.builtAt)
+  |> List.sort((a: WebpackStats.t, b: WebpackStats.t) => a.builtAt - b.builtAt)
   |> List.fold_left(
-       (acc: (option(Stats.t), list(Compare.t)), a) =>
+       (acc: (option(WebpackStats.t), list(Compare.t)), a) =>
          switch (acc) {
          | (None, []) => (Some(a), [])
          | (Some(b), acc) => (Some(a), [Compare.make(b, a), ...acc])

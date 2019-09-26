@@ -3,7 +3,7 @@ type t =
   ; module_ : string
   ; moduleIdentifier : string
   ; moduleName : string
-  ; reasons : Reason.t list
+  ; reasons : WebpackReason.t list
   ; request : string option
   }
 
@@ -13,7 +13,7 @@ let decode json =
     ; module_ = json |> field "module" string
     ; moduleIdentifier = json |> field "moduleIdentifier" string
     ; moduleName = json |> field "moduleName" string
-    ; reasons = json |> field "reasons" (list Reason.decode)
+    ; reasons = json |> field "reasons" (list WebpackReason.decode)
     ; request = json |> field "request" (optional string)
     }
 ;;
@@ -25,7 +25,7 @@ let encode r =
       ; "module", r.module_ |> string
       ; "moduleIdentifier", r.moduleIdentifier |> string
       ; "moduleName", r.moduleName |> string
-      ; "reasons", r.reasons |> list Reason.encode
+      ; "reasons", r.reasons |> list WebpackReason.encode
       ; "request", r.request |> nullable string
       ])
 ;;

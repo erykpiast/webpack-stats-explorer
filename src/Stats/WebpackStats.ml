@@ -2,17 +2,17 @@ type compilation_error = string
 type compilation_warning = string
 
 type t =
-  { assets : Asset.t list
-  ; assetsByChunkName : AssetsGroup.t Js.Dict.t
+  { assets : WebpackAsset.t list
+  ; assetsByChunkName : WebpackAssetsGroup.t Js.Dict.t
   ; builtAt : int
-  ; children : Child.t list
-  ; chunks : Chunk.t list
-  ; entrypoints : Entrypoint.t Js.Dict.t
+  ; children : WebpackChild.t list
+  ; chunks : WebpackChunk.t list
+  ; entrypoints : WebpackEntrypoint.t Js.Dict.t
   ; errors : string list
   ; filteredAssets : int
   ; hash : string
-  ; modules : Module.t list
-  ; namedChunkGroups : Entrypoint.t Js.Dict.t
+  ; modules : WebpackModule.t list
+  ; namedChunkGroups : WebpackEntrypoint.t Js.Dict.t
   ; outputPath : string
   ; time : int
   ; version : string
@@ -21,17 +21,17 @@ type t =
 
 let decode json =
   Json.Decode.
-    { assets = json |> field "assets" (list Asset.decode)
-    ; assetsByChunkName = json |> field "assetsByChunkName" (dict AssetsGroup.decode)
+    { assets = json |> field "assets" (list WebpackAsset.decode)
+    ; assetsByChunkName = json |> field "assetsByChunkName" (dict WebpackAssetsGroup.decode)
     ; builtAt = json |> field "builtAt" int
-    ; children = json |> field "children" (list Child.decode)
-    ; chunks = json |> field "chunks" (list Chunk.decode)
-    ; entrypoints = json |> field "entrypoints" (dict Entrypoint.decode)
+    ; children = json |> field "children" (list WebpackChild.decode)
+    ; chunks = json |> field "chunks" (list WebpackChunk.decode)
+    ; entrypoints = json |> field "entrypoints" (dict WebpackEntrypoint.decode)
     ; errors = json |> field "errors" (list string)
     ; filteredAssets = json |> field "filteredAssets" int
     ; hash = json |> field "hash" string
-    ; modules = json |> field "modules" (list Module.decode)
-    ; namedChunkGroups = json |> field "namedChunkGroups" (dict Entrypoint.decode)
+    ; modules = json |> field "modules" (list WebpackModule.decode)
+    ; namedChunkGroups = json |> field "namedChunkGroups" (dict WebpackEntrypoint.decode)
     ; outputPath = json |> field "outputPath" string
     ; time = json |> field "time" int
     ; version = json |> field "version" string
@@ -42,17 +42,17 @@ let decode json =
 let encode r =
   Json.Encode.(
     object_
-      [ "assets", r.assets |> list Asset.encode
-      ; "assetsByChunkName", r.assetsByChunkName |> dict AssetsGroup.encode
+      [ "assets", r.assets |> list WebpackAsset.encode
+      ; "assetsByChunkName", r.assetsByChunkName |> dict WebpackAssetsGroup.encode
       ; "builtAt", r.builtAt |> int
-      ; "children", r.children |> list Child.encode
-      ; "chunks", r.chunks |> list Chunk.encode
-      ; "entrypoints", r.entrypoints |> dict Entrypoint.encode
+      ; "children", r.children |> list WebpackChild.encode
+      ; "chunks", r.chunks |> list WebpackChunk.encode
+      ; "entrypoints", r.entrypoints |> dict WebpackEntrypoint.encode
       ; "errors", r.errors |> list string
       ; "filteredAssets", r.filteredAssets |> int
       ; "hash", r.hash |> string
-      ; "modules", r.modules |> list Module.encode
-      ; "namedChunkGroups", r.namedChunkGroups |> dict Entrypoint.encode
+      ; "modules", r.modules |> list WebpackModule.encode
+      ; "namedChunkGroups", r.namedChunkGroups |> dict WebpackEntrypoint.encode
       ; "outputPath", r.outputPath |> string
       ; "time", r.time |> int
       ; "version", r.version |> string

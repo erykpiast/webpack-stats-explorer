@@ -19,9 +19,9 @@ type t =
   ; optimizationBailout : string list
   ; optional : bool
   ; prefetched : bool
-  ; profile : Profile.t option
+  ; profile : WebpackProfile.t option
   ; providedExports : string list option
-  ; reasons : Reason.t list
+  ; reasons : WebpackReason.t list
   ; size : int
   ; ownSize : int
   ; source : string option
@@ -73,9 +73,9 @@ let rec decode json =
     ; optimizationBailout = json |> field "optimizationBailout" (list string)
     ; optional = json |> field "optional" bool
     ; prefetched = json |> field "prefetched" bool
-    ; profile = json |> optional (field "profile" Profile.decode)
+    ; profile = json |> optional (field "profile" WebpackProfile.decode)
     ; providedExports = json |> field "providedExports" (optional (list string))
-    ; reasons = json |> field "reasons" (list Reason.decode)
+    ; reasons = json |> field "reasons" (list WebpackReason.decode)
     ; size = json |> field "size" int
     ; ownSize = json |> field "size" int
     ; source = json |> optional (field "source" string)
@@ -111,9 +111,9 @@ let rec encode r =
       ; "optimizationBailout", r.optimizationBailout |> list string
       ; "optional", r.optional |> bool
       ; "prefetched", r.prefetched |> bool
-      ; "profile", r.profile |> nullable Profile.encode
+      ; "profile", r.profile |> nullable WebpackProfile.encode
       ; "providedExports", r.providedExports |> nullable (list string)
-      ; "reasons", r.reasons |> list Reason.encode
+      ; "reasons", r.reasons |> list WebpackReason.encode
       ; "size", r.size |> int
       ; "ownSize", r.ownSize |> int
       ; "source", r.source |> nullable string

@@ -6,9 +6,9 @@ type t =
   ; hash : string
   ; id : int
   ; initial : bool
-  ; modules : Module.t list
+  ; modules : WebpackModule.t list
   ; names : string list
-  ; origins : Origin.t list
+  ; origins : WebpackOrigin.t list
   ; parents : int list
   ; rendered : bool
   ; siblings : int list
@@ -25,9 +25,9 @@ let decode json =
     ; hash = json |> field "hash" string
     ; id = json |> field "id" int
     ; initial = json |> field "initial" bool
-    ; modules = json |> field "modules" (list Module.decode)
+    ; modules = json |> field "modules" (list WebpackModule.decode)
     ; names = json |> field "names" (list string)
-    ; origins = json |> field "origins" (list Origin.decode)
+    ; origins = json |> field "origins" (list WebpackOrigin.decode)
     ; parents = json |> field "parents" (list int)
     ; rendered = json |> field "rendered" bool
     ; siblings = json |> field "siblings" (list int)
@@ -46,9 +46,9 @@ let encode r =
       ; "hash", r.hash |> string
       ; "id", r.id |> int
       ; "initial", r.initial |> bool
-      ; "modules", r.modules |> list Module.encode
+      ; "modules", r.modules |> list WebpackModule.encode
       ; "names", r.names |> list string
-      ; "origins", r.origins |> list Origin.encode
+      ; "origins", r.origins |> list WebpackOrigin.encode
       ; "parents", r.parents |> list int
       ; "rendered", r.rendered |> bool
       ; "siblings", r.siblings |> list int
@@ -96,5 +96,5 @@ let eql a b =
   a.size = b.size
   && Utils.List.isEqual a.names b.names ()
   && Utils.List.isEqual a.files b.files ()
-  && Utils.List.isEqual a.modules b.modules ~eql:Module.eql ()
+  && Utils.List.isEqual a.modules b.modules ~eql:WebpackModule.eql ()
 ;;

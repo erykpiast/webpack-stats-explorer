@@ -2,7 +2,7 @@ open Jest;
 open ExpectJs;
 
 describe("Module", () => {
-  open Module;
+  open WebpackModule;
 
   describe("normalize name", () => {
     test("same name for already normalized", () =>
@@ -72,21 +72,21 @@ describe("Module", () => {
       let a = fakeModule("foo", 0, None, None);
       let b = fakeModule("bar", 0, None, None);
 
-      expect(Module.eql(a, b)) |> toEqual(false);
+      expect(WebpackModule.eql(a, b)) |> toEqual(false);
     });
 
     test("module with different size", () => {
       let a = fakeModule("foo", 0, None, None);
       let b = fakeModule("foo", 1, None, None);
 
-      expect(Module.eql(a, b)) |> toEqual(false);
+      expect(WebpackModule.eql(a, b)) |> toEqual(false);
     });
 
     test("module with different source", () => {
       let a = fakeModule("foo", 0, Some("foo"), None);
       let b = fakeModule("foo", 0, Some("bar"), None);
 
-      expect(Module.eql(a, b)) |> toEqual(false);
+      expect(WebpackModule.eql(a, b)) |> toEqual(false);
     });
 
     test("module with different modules", () => {
@@ -99,7 +99,7 @@ describe("Module", () => {
           Some([fakeModule("bar", 0, None, None)]),
         );
 
-      expect(Module.eql(a, b)) |> toEqual(false);
+      expect(WebpackModule.eql(a, b)) |> toEqual(false);
     });
 
     test("module with equal name, size, source and modules", () => {
@@ -107,7 +107,7 @@ describe("Module", () => {
       let a = fakeModule("foo", 0, Some("bar"), Some([c]));
       let b = fakeModule("foo", 0, Some("bar"), Some([c]));
 
-      expect(Module.eql(a, b)) |> toEqual(true);
+      expect(WebpackModule.eql(a, b)) |> toEqual(true);
     });
   });
 });
