@@ -3,6 +3,15 @@ module Data = struct
     { size : int
     ; source : string
     }
+  ;;
+
+  let encode r =
+    Json.Encode.(object_
+      [ "size", r.size |> int
+      ; "source", r.source |> string
+      ]
+    )
+  ;;
 
   let make source size =
     match (size, source) with
@@ -10,11 +19,10 @@ module Data = struct
     | _ -> None
   ;;
 
-  let encode r = Json.Encode.(
-    object_
-      [ "size", r.size |> int
-      ; "source", r.source |> string
-      ])
+  let eql a b =
+    a.size = b.size
+    && a.source = b.source
+  ;;
 end
 
 type t =
@@ -27,14 +35,26 @@ type t =
 ;;
 
 let rec encode r =
-  Json.Encode.(
-    object_
-      [ "id", r.id |> string
-      ; "original", r.original |> nullable Data.encode
-      ; "stat", r.stat |> nullable Data.encode
-      ; "parsed", r.parsed |> nullable Data.encode
-      ; "children", r.children |> list encode
-      ])
+  Json.Encode.(object_
+    [ "id", r.id |> string
+    ; "original", r.original |> nullable Data.encode
+    ; "stat", r.stat |> nullable Data.encode
+    ; "parsed", r.parsed |> nullable Data.encode
+    ; "children", r.children |> list encode
+    ]
+  )
+;;
+
+let rec eql a b =
+  a.id = b.id
+  && a.stat = b.stat
+  && a.original = b.original
+  && a.parsed = b.parsed
+  && Utils.List.isEqual ~eql a.children b.children ()
+;;
+
+let similar a b =
+  a.id = b.id
 ;;
 
 module FromModule = struct
