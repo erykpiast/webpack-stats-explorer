@@ -1,30 +1,13 @@
 // TODO: unify with ModulesCompare
 
 open CompareEntry;
-open Kind;
 open State.NavigationPath;
 
 let component = ReasonReact.statelessComponent("EntryCompare");
 
-let getSize = (entry: Entry.t) =>
-  switch (entry.parsed) {
-  | Some({size}) => size
-  | None =>
-    switch (entry.stat) {
-    | Some({size}) => size
-    | None => 0
-    }
-  };
+let getSize = Entry.getSize
 
-let getModifiedSize = (entry: ModifiedEntry.t(CompareEntry.t)) =>
-  switch (entry.parsed) {
-  | Some({size}) => size
-  | None =>
-    switch (entry.stat) {
-    | Some({size}) => size
-    | None => (0, 0)
-    }
-  };
+let getModifiedSize = ModifiedEntry.getSize;
 
 let putAddedFirst =
   List.sort((a: EntryDiff.props, b: EntryDiff.props) => {
@@ -106,8 +89,12 @@ let mapChunksToProps =
     }
   );
 
-let make = (~entries, ~onEntry, ~selected, _children) => {
+let make = (~entries, ~onEntry, ~selected, ~className="", _children) => {
   ...component,
   render: _self =>
-    <EntryDiff data={mapChunksToProps(entries, onEntry)} selected />,
+    <EntryDiff
+      data={mapChunksToProps(entries, onEntry)}
+      selected
+      className
+    />,
 };

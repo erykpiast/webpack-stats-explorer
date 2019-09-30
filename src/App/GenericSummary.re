@@ -81,7 +81,7 @@ module Styles = {
 let nbsp = {js|  |js};
 
 let getKindMessage =
-  Compare.Kind.(
+  CompareKind.(
     kind =>
       switch (kind) {
       | Added => L10N.Kind.added
@@ -92,7 +92,7 @@ let getKindMessage =
   );
 
 let getKindClassName =
-  Compare.Kind.(
+  CompareKind.(
     kind =>
       switch (kind) {
       | Added => Styles.Kind.added
@@ -108,38 +108,33 @@ module Make = (ToSummarize: Interface) => {
   let make = (~data, ~kind, ~onModule, ~selected, _children) => {
     ...component,
     render: _self => {
-      let ownSize = data |> ToSummarize.getStatSize;
       let statSize = data |> ToSummarize.getSize;
       let originalSize = data |> ToSummarize.getOriginalSize;
       let parsedSize = data |> ToSummarize.getParsedSize;
 
-      let (modules, modulesCount) =
+      let modules =
         switch (data |> ToSummarize.getModules) {
         | Some(modules) =>
           Rationale.Option.Infix.(
             switch (modules) {
-            | NotModifiedModules(modules) => (
+            | NotModifiedModules(modules) =>
                 <ModulesList
                   className=Styles.modules
                   modules
                   kind
                   onModule
                   selected={selected <$> ToSummarize.getName}
-                />,
-                modules |> List.length,
-              )
-            | ModifiedModules(modules) => (
+                />
+            | ModifiedModules(modules) =>
                 <ModulesCompare
                   className=Styles.modules
                   modules
                   onModule
                   selected={selected <$> ToSummarize.getName}
-                />,
-                modules |> Compare.Modules.count |> snd,
-              )
+                />
             }
           )
-        | None => (ReasonReact.null, 0)
+        | None => ReasonReact.null
         };
 
       let renderSize = (label, size) =>

@@ -57,6 +57,15 @@ let similar a b =
   a.id = b.id
 ;;
 
+let getSize entry =
+  match entry.parsed with
+  | Some { size } -> size
+  | None ->
+    match entry.stat with
+    | Some { size } -> size
+    | None -> 0
+;;
+
 module FromModule = struct
   open Rationale.Option.Infix;;
   open Rationale.Function.Infix;;
@@ -167,7 +176,7 @@ module FromChunk = struct
         Some(size)
   ;;
 
-  let make (chunk : WebpackChunk.t) (assets : WebpackAsset.t list) =
+  let make (assets : WebpackAsset.t list) (chunk : WebpackChunk.t) =
     let modules = List.map FromModule.make chunk.modules
     and makeData = Data.make (Some "")
     in { id = getId chunk

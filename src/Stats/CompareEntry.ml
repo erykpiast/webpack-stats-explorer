@@ -27,6 +27,39 @@ let rec make xs ys =
   }
 ;;
 
+let count comp =
+  (
+    [
+      comp.intact |> List.length;
+      comp.removed |> List.length;
+      comp.modified |> List.length
+    ] |> Utils.List.sumInt,
+    [
+      comp.intact |> List.length;
+      comp.added |> List.length;
+      comp.modified |> List.length
+    ] |> Utils.List.sumInt
+  )
+;;
+
+let size comp = Rationale.Function.Infix.
+  (
+    let sum = List.flatten ||> Utils.List.sumInt
+    in (
+      [
+        comp.intact |> List.map Entry.getSize;
+        comp.removed |> List.map Entry.getSize;
+        comp.modified |> List.map (ModifiedEntry.getSize ||> fst)
+      ] |> sum,
+      [
+        comp.intact |> List.map Entry.getSize;
+        comp.added |> List.map Entry.getSize;
+        comp.modified |> List.map (ModifiedEntry.getSize ||> snd)
+      ] |> sum
+    )
+  )
+;;
+
 type entry =
   | Entry of Entry.t
   | ModifiedEntry of t ModifiedEntry.t
@@ -36,14 +69,6 @@ type children =
   | ModifiedChildren of t
   | NotModifiedChildren of Entry.t list
 ;;
-
-module Kind = struct
-  type t =
-    | Added
-    | Intact
-    | Modified
-    | Removed
-end
 
 module OveralSize = struct
   let getSize (entry: Entry.t) = match (entry.parsed, entry.stat) with

@@ -295,7 +295,7 @@ describe("Entry", () => {
     test("create entry for chunk and corresponding asset", () => {
       let chunk = mockChunk(~file="foo.js", ~name="foo", ~size=666, ());
       let assets = [mockAsset(~file="foo.js", ~name="foo", ~size=444)];
-      let entry = Entry.FromChunk.make(chunk, assets);
+      let entry = Entry.FromChunk.make(assets, chunk);
 
       expect(entry)
       |> toEqual(
@@ -312,7 +312,7 @@ describe("Entry", () => {
     test("should create entry for chunk with no corresponding asset", () => {
       let chunk = mockChunk(~file="foo.js", ~name="foo", ~size=666, ());
       let assets = [];
-      let entry = Entry.FromChunk.make(chunk, assets);
+      let entry = Entry.FromChunk.make(assets, chunk);
 
       expect(entry)
       |> toEqual(
@@ -352,7 +352,7 @@ describe("Entry", () => {
           (),
         );
       let assets = [];
-      let entry = Entry.FromChunk.make(chunk, assets);
+      let entry = Entry.FromChunk.make(assets, chunk);
 
       expect(entry)
       |> toEqual(

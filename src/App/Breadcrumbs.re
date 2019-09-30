@@ -38,6 +38,10 @@ let renderName = item =>
         | ModifiedSummary(summary) => summary.name
         }
       )
+    | Entry(entry) => switch (entry) {
+      | CompareEntry.Entry({id}) => id
+      | CompareEntry.ModifiedEntry({id}) => id
+      }
     }
   );
 

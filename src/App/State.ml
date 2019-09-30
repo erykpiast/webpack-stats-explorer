@@ -7,18 +7,24 @@ module NavigationPath = struct
         | Entry of CompareEntry.entry
     end
 
-    type t = Item.t * Compare.Kind.t
+    type t = Item.t * CompareKind.t
 
-    let of_chunk (kind : Compare.Kind.t) item = Item.Chunk item, kind
-    let of_module (kind : Compare.Kind.t) item = Item.Module item, kind
-    let of_entry (kind : CompareEntry.Kind.t) item = Item.Entry item, kind
+    let of_chunk (kind : CompareKind.t) item = Item.Chunk item, kind
+    let of_module (kind : CompareKind.t) item = Item.Module item, kind
+    let of_entry (kind : CompareKind.t) item = Item.Entry item, kind
   end
 
   type t = Segment.t list
 end
 
+type compare =
+  | Legacy of Compare.t
+  | Entry of CompareEntry.t
+;;
+
 type t =
   { index : int
-  ; comparisons : Compare.t list
+  ; comparisons : compare list
   ; navigationPath : NavigationPath.t
   }
+;;

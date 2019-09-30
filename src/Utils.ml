@@ -62,6 +62,8 @@ module List = struct
   let nth index list = List.nth list index;;
 
   let findOpt isEqual list = Belt.List.getBy list isEqual;;
+
+  let sumInt = List.fold_left (+) 0;;
 end
 
 module Array = struct

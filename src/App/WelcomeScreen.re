@@ -1,3 +1,5 @@
+open Rationale.Function.Infix;
+
 let component = ReasonReact.statelessComponent("WelcomeScreen");
 
 module Styles = {
@@ -32,21 +34,7 @@ let logComp = (title, comp) => {
   comp |> Compare.encode |> Js.log;
 };
 
-let compareStats = stats =>
-  stats
-  |> Array.to_list
-  |> List.sort((a: WebpackStats.t, b: WebpackStats.t) => a.builtAt - b.builtAt)
-  |> List.fold_left(
-       (acc: (option(WebpackStats.t), list(Compare.t)), a) =>
-         switch (acc) {
-         | (None, []) => (Some(a), [])
-         | (Some(b), acc) => (Some(a), [Compare.make(b, a), ...acc])
-         | _ => acc
-         },
-       (None, []),
-     )
-  |> snd
-  |> List.rev;
+let compareStats = Array.to_list ||> CompareStats.make;
 
 let loadExampleData = () =>
   compareStats([|Data.a, Data.b, Data.c, Data.d, Data.e|]);
@@ -54,9 +42,7 @@ let loadExampleData = () =>
 let make = (~onStats, children) => {
   ...component,
   render: _self => {
-    <Dropzone
-      className=Styles.dropzone
-      onStats={stats => onStats(compareStats(stats))}>
+    <Dropzone className=Styles.dropzone onStats={compareStats ||> onStats}>
       ...{onClick =>
         [|
           children(

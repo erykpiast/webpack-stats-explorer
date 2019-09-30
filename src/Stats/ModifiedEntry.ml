@@ -51,3 +51,12 @@ let encode encodeChildren r =
     ]
   )
 ;;
+
+let getSize entry =
+  match entry.parsed with
+  | Some { size } -> size
+  | None ->
+    match entry.stat with
+    | Some { size } -> size
+    | None -> (0, 0)
+;;

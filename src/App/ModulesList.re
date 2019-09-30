@@ -1,4 +1,4 @@
-open Compare.Kind;
+open CompareKind;
 open Compare.Modules.Summary;
 open State.NavigationPath;
 

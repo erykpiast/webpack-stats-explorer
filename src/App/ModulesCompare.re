@@ -1,7 +1,7 @@
 // TODO: unify with ChunksCompare
 
 open Compare.Modules;
-open Compare.Kind;
+open CompareKind;
 open State.NavigationPath;
 
 let component = ReasonReact.statelessComponent("ModulesCompare");
