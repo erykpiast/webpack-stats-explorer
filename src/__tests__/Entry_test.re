@@ -377,6 +377,68 @@ describe("Entry", () => {
          );
     });
 
+    test("filtering meaningless submodules", () => {
+      let notBuilt =
+        mockModule(
+          ~name="baz",
+          ~size=444,
+          ~source=Some("I am Baz"),
+          ~built=false,
+          (),
+        );
+      let entryPoint =
+        mockModule(
+          ~name="moo",
+          ~size=222,
+          ~source=None,
+          ~reasons=[
+            WebpackReason.{
+              module_: None,
+              moduleId: None,
+              moduleIdentifier: None,
+              moduleName: None,
+              type_: "some",
+              userRequest: "gimme",
+              loc: "0",
+            },
+          ],
+          (),
+        );
+      let withSubmodules =
+        mockModule(
+          ~name="taz",
+          ~size=333,
+          ~source=None,
+          ~modules=
+            Some([
+              mockModule(
+                ~name="bar",
+                ~size=555,
+                ~source=Some("I am Bar"),
+                (),
+              ),
+            ]),
+          (),
+        );
+      let withSource =
+        mockModule(~name="foo", ~size=666, ~source=Some("I am Foo"), ());
+      let chunk =
+        mockChunk(
+          ~file="foo.js",
+          ~name="foo",
+          ~size=666,
+          ~modules=[notBuilt, withSource, entryPoint, withSubmodules],
+          (),
+        );
+      let entry = Entry.FromChunk.make([], chunk);
+
+      expect(entry.children)
+      |> toEqual([
+           Entry.FromModule.make(withSource),
+           Entry.FromModule.make(withSubmodules),
+         ]);
+    });
+
     describe("getId", () => {
       let mockChunkForId = (~names=[], ~files=[], ()) =>
         WebpackChunk.{

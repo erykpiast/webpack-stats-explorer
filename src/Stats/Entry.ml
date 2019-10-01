@@ -182,7 +182,9 @@ module FromChunk = struct
   ;;
 
   let make (assets : WebpackAsset.t list) (chunk : WebpackChunk.t) =
-    let modules = List.map FromModule.make chunk.modules
+    let modules = chunk.modules
+      |> List.filter FromModule.isMeaningfulModule
+      |> List.map FromModule.make
     and makeData = Data.make (Some "")
     and asset = findChunkAsset chunk assets
     in let parsed =
