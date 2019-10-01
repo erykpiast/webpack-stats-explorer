@@ -21,7 +21,7 @@ let mapModulesToProps = (entries, kind, onEntry) => {
            name: entry.id,
            value: Entry(entry),
            onChange: entry => {
-             onEntry(Segment.of_entry(kind, entry));
+             onEntry(Segment.make(kind, entry));
              ();
            },
          }: EntryDiff.props

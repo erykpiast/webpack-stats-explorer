@@ -1,5 +1,3 @@
-// TODO: unify with ModulesCompare
-
 open CompareEntry;
 open State.NavigationPath;
 
@@ -34,7 +32,7 @@ let mapChunksToProps =
                  before: 0,
                  name: entry.id,
                  value: Entry(entry),
-                 onChange: Segment.of_entry(Added) ||> onEntry,
+                 onChange: Segment.make(Added) ||> onEntry,
                }: EntryDiff.props
              )
            );
@@ -47,7 +45,7 @@ let mapChunksToProps =
                  before: entry.size,
                  name: entry.id,
                  value: Entry(entry),
-                 onChange: Segment.of_entry(Removed) ||> onEntry,
+                 onChange: Segment.make(Removed) ||> onEntry,
                }: EntryDiff.props
              )
            );
@@ -60,7 +58,7 @@ let mapChunksToProps =
                  before: entry.size,
                  name: entry.id,
                  value: Entry(entry),
-                 onChange: Segment.of_entry(Intact) ||> onEntry,
+                 onChange: Segment.make(Intact) ||> onEntry,
                }: EntryDiff.props
              )
            );
@@ -73,7 +71,7 @@ let mapChunksToProps =
                  before: entry.size |> fst,
                  name: entry.id,
                  value: ModifiedEntry(entry),
-                 onChange: Segment.of_entry(Modified) ||> onEntry,
+                 onChange: Segment.make(Modified) ||> onEntry,
                }: EntryDiff.props
              )
            );

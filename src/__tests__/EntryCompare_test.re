@@ -4,7 +4,7 @@ open ExpectJs;
 describe("EntryCompare", () =>
   describe("putAddedFirst", () => {
     let mockEntry = (before, after) =>
-      EntryDiff.EntryDiff.{
+      EntryDiff.{
         after,
         before,
         name: "",

@@ -1,16 +1,118 @@
 open CompareEntry;
 
-module EntryDiff =
-  GenericDiff.Make({
-    type a = entry;
+module Styles = {
+  open Css;
 
-    let componentName = "EntryDiff";
-    let getName = entry =>
-      switch (entry) {
-      | Entry(entry) => entry.id
-      | ModifiedEntry(entry) => entry.id
-      };
-  });
+  let list =
+    style([
+      listStyleType(`none),
+      padding(px(0)),
+      margin(px(0)),
+      maxHeight(`percent(100.0)),
+      overflowY(`auto),
+      flexShrink(0.0)
+    ]);
 
-let make = EntryDiff.make;
-type props = EntryDiff.props;
+  let item =
+    style([
+      display(`flex),
+      cursor(`pointer),
+      justifyContent(`spaceBetween),
+      padding(Theme.Space.default),
+    ]);
+
+  let selectedItem =
+    style([backgroundColor(Theme.Color.Background.selected)]);
+
+  let name =
+    style([
+      overflow(`hidden),
+      flexShrink(1.0),
+      marginRight(Theme.Space.default),
+      textOverflow(`ellipsis),
+      whiteSpace(`nowrap),
+    ]);
+
+  let size =
+    style([
+      marginLeft(`auto),
+      marginRight(Theme.Space.default),
+      color(Theme.Color.Text.secondary),
+      flexShrink(0.0),
+    ]);
+
+  let diff = style([flexShrink(0.0)]);
+};
+
+let renderFilenames = filenames =>
+  <>
+    {ReasonReact.string(L10N.assets ++ ": ")}
+    {switch (filenames) {
+     | [a] => ReasonReact.string(a)
+     | [_, b] => ReasonReact.string(b ++ {j|❗|j})
+     | _ => ReasonReact.null
+     }}
+  </>;
+
+type props = {
+  after: int,
+  before: int,
+  name: string,
+  value: entry,
+  onChange: entry => unit,
+};
+
+let component = ReasonReact.statelessComponent("EntryDiff");
+
+let make = (~data, ~className="", ~selected: option(string), _children) => {
+  ...component,
+  render: _self =>
+    switch (data) {
+    | [] => ReasonReact.null
+    | _ =>
+      <ul className={Cn.make([Styles.list, className])}>
+        ...{
+              data
+              |> List.sort((a: props, b: props) => {
+                  let aDiff = a.after - a.before;
+                  let bDiff = b.after - b.before;
+                  let diffOfDiffs = bDiff - aDiff;
+
+                  if (diffOfDiffs === 0) {
+                    0;
+                  } else if (aDiff === 0) {
+                    1;
+                  } else if (bDiff === 0) {
+                    (-1);
+                  } else {
+                    diffOfDiffs;
+                  };
+                })
+              |> List.map(({after, before, value, name, onChange}) =>
+                  <li
+                    onClick={_ => onChange(value)}
+                    className={Cn.make([
+                      Styles.item,
+                      Cn.ifTrue(
+                        Styles.selectedItem,
+                        switch (selected) {
+                        | Some(selected) => selected === name
+                        | None => false
+                        },
+                      ),
+                    ])}
+                    title=name>
+                    <ReversedText className=Styles.name>
+                      ...{name |> ReasonReact.string}
+                    </ReversedText>
+                    {before !== 0 && after !== 0
+                        ? <Size className=Styles.size value=after />
+                        : ReasonReact.null}
+                    <NumericDiff className=Styles.diff after before />
+                  </li>
+                )
+              |> Array.of_list
+            }
+      </ul>
+    },
+}

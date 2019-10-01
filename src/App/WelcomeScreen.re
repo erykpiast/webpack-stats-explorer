@@ -31,7 +31,7 @@ let logStats = (title, stats) => {
 
 let logComp = (title, comp) => {
   Js.log(title);
-  comp |> Compare.encode |> Js.log;
+  comp |> CompareEntry.encode |> Js.log;
 };
 
 let compareStats = Array.to_list ||> CompareStats.make;
