@@ -5,7 +5,7 @@ open State.NavigationPath;
 let mapModulesToProps = (entries, kind, onEntry) => {
   entries
   |> List.map((entry: Entry.t) => {
-       let size = entry |> Entry.getSize;
+       let size = entry.size;
        let (after, before) =
          switch (kind) {
          | Added => (size, 0)

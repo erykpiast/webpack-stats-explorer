@@ -27,6 +27,7 @@ end
 
 type t =
   { id : string
+  ; size : int
   ; original : Data.t option
   ; stat : Data.t option
   ; parsed : Data.t option
@@ -37,6 +38,7 @@ type t =
 let rec encode r =
   Json.Encode.(object_
     [ "id", r.id |> string
+    ; "size", r.size |> int
     ; "original", r.original |> nullable Data.encode
     ; "stat", r.stat |> nullable Data.encode
     ; "parsed", r.parsed |> nullable Data.encode
@@ -47,6 +49,7 @@ let rec encode r =
 
 let rec eql a b =
   a.id = b.id
+  && a.size = b.size
   && a.stat = b.stat
   && a.original = b.original
   && a.parsed = b.parsed
@@ -55,15 +58,6 @@ let rec eql a b =
 
 let similar a b =
   a.id = b.id
-;;
-
-let getSize entry =
-  match entry.parsed with
-  | Some { size } -> size
-  | None ->
-    match entry.stat with
-    | Some { size } -> size
-    | None -> 0
 ;;
 
 module FromModule = struct
@@ -101,7 +95,24 @@ module FromModule = struct
 
   let rec make (module_ : WebpackModule.t) =
     let mainSubmodule = findMainSubmodule module_
-    in { id = getId mainSubmodule.name
+    and getSubmodulesParsedSize =
+      List.map
+        (fun (module_: WebpackModule.t) -> module_.parsedSize |> Utils.defaultTo 0)
+      ||> Utils.List.sumInt
+    in let modules =
+      module_.modules
+      |> Utils.defaultTo []
+      |> List.filter (Utils.Function.allPass [
+          (!=) mainSubmodule;
+          isMeaningfulModule
+        ])
+    in
+      { id = getId mainSubmodule.name
+      ; size = (
+        match mainSubmodule.parsedSize with
+        | Some size -> size + (modules |> getSubmodulesParsedSize)
+        | None -> module_.size
+      )
       ; stat = Data.make
           (Some (mainSubmodule.source |> Utils.defaultTo ""))
           (Some mainSubmodule.size)
@@ -111,13 +122,7 @@ module FromModule = struct
       ; parsed = Data.make
           mainSubmodule.parsedSource
           mainSubmodule.parsedSize
-      ; children = module_.modules
-        |> Utils.defaultTo []
-        |> List.filter (Utils.Function.allPass [
-            (!=) mainSubmodule;
-            isMeaningfulModule
-          ])
-        |> List.map make
+      ; children = modules |> List.map make
       }
 end
 
@@ -179,15 +184,21 @@ module FromChunk = struct
   let make (assets : WebpackAsset.t list) (chunk : WebpackChunk.t) =
     let modules = List.map FromModule.make chunk.modules
     and makeData = Data.make (Some "")
-    in { id = getId chunk
+    and asset = findChunkAsset chunk assets
+    in let parsed =
+      match asset with
+      | Some asset -> makeData (Some asset.size)
+      | _ -> None
+    in
+      { id = getId chunk
+      ; size = (
+        match parsed with
+        | Some { size } -> size
+        | None -> chunk.size
+      )
       ; original = calculateOriginalSize modules |> makeData
       ; stat = makeData (Some chunk.size)
-      ; parsed = (
-          let asset = findChunkAsset chunk assets
-          in match asset with
-          | Some asset -> makeData (Some asset.size)
-          | _ -> None
-        )
+      ; parsed = parsed
       ; children = modules
       }
   ;;

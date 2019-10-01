@@ -103,8 +103,8 @@ module Mapper = {
 
   let getSize = entry =>
     switch (entry) {
-    | Entry(entry) => entry |> Entry.getSize
-    | ModifiedEntry(entry) => entry |> ModifiedEntry.getSize |> snd
+    | Entry(entry) => entry.size
+    | ModifiedEntry(entry) => entry.size |> snd
     };
 
   let getStatSize = entry =>

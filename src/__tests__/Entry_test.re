@@ -60,8 +60,9 @@ describe("Entry", () => {
       |> toEqual(
            Entry.{
              id: "foo",
+             size: 666,
              original: None,
-             stat: Some(Entry.Data.{size: 666, source: ""}),
+             stat: Entry.Data.make(Some(""), Some(666)),
              parsed: None,
              children: [],
            },
@@ -77,8 +78,9 @@ describe("Entry", () => {
       |> toEqual(
            Entry.{
              id: "foo",
+             size: 666,
              original: None,
-             stat: Some(Entry.Data.{size: 666, source: "I am Foo"}),
+             stat: Entry.Data.make(Some("I am Foo"), Some(666)),
              parsed: None,
              children: [],
            },
@@ -103,10 +105,11 @@ describe("Entry", () => {
       |> toEqual(
            Entry.{
              id: "foo",
+             size: 444,
              original:
-               Some(Entry.Data.{size: 999, source: "I am original Foo"}),
-             stat: Some(Entry.Data.{size: 666, source: "I am Foo"}),
-             parsed: Some(Entry.Data.{size: 444, source: "I'm Foo"}),
+               Entry.Data.make(Some("I am original Foo"), Some(999)),
+             stat: Entry.Data.make(Some("I am Foo"), Some(666)),
+             parsed: Entry.Data.make(Some("I'm Foo"), Some(444)),
              children: [],
            },
          );
@@ -131,8 +134,9 @@ describe("Entry", () => {
       |> toEqual(
            Entry.{
              id: "baz",
+             size: 444,
              original: None,
-             stat: Some(Entry.Data.{size: 444, source: "I am Baz"}),
+             stat: Entry.Data.make(Some("I am Baz"), Some(444)),
              parsed: None,
              children: [
                Entry.FromModule.make(submodule1),
@@ -161,8 +165,9 @@ describe("Entry", () => {
       |> toEqual(
            Entry.{
              id: "bar",
+             size: 444,
              original: None,
-             stat: Some(Entry.Data.{size: 555, source: "I am Bar"}),
+             stat: Entry.Data.make(Some("I am Bar"), Some(555)),
              parsed: None,
              children: [Entry.FromModule.make(submodule)],
            },
@@ -301,9 +306,10 @@ describe("Entry", () => {
       |> toEqual(
            Entry.{
              id: "foo",
+             size: 444,
              original: None,
-             stat: Some(Entry.Data.{size: 666, source: ""}),
-             parsed: Some(Entry.Data.{size: 444, source: ""}),
+             stat: Entry.Data.make(Some(""), Some(666)),
+             parsed: Entry.Data.make(Some(""), Some(444)),
              children: [],
            },
          );
@@ -318,8 +324,9 @@ describe("Entry", () => {
       |> toEqual(
            Entry.{
              id: "foo",
+             size: 666,
              original: None,
-             stat: Some(Entry.Data.{size: 666, source: ""}),
+             stat: Entry.Data.make(Some(""), Some(666)),
              parsed: None,
              children: [],
            },
@@ -358,8 +365,9 @@ describe("Entry", () => {
       |> toEqual(
            Entry.{
              id: "foo",
-             original: Some(Entry.Data.{size: 333, source: ""}),
-             stat: Some(Entry.Data.{size: 666, source: ""}),
+             size: 666,
+             original: Entry.Data.make(Some(""), Some(333)),
+             stat: Entry.Data.make(Some(""), Some(666)),
              parsed: None,
              children: [
                Entry.FromModule.make(submodule1),

@@ -8,18 +8,20 @@ describe("ModifiedEntry", () => {
     let e1 =
       Entry.{
         id: "foo",
+        size: 666,
         original: None,
         parsed: None,
         children: [],
-        stat: Some(Entry.Data.{source: "I am Foo", size: 666}),
+        stat: Entry.Data.make(Some("I am Foo"), Some(666)),
       };
     let e2 =
       Entry.{
         id: "foo",
+        size: 555,
         original: None,
         parsed: None,
         children: [],
-        stat: Some(Entry.Data.{source: "I am new Foo", size: 555}),
+        stat: Entry.Data.make(Some("I am new Foo"), Some(555)),
       };
     let modified = makeModified(e1, e2);
 
@@ -27,15 +29,14 @@ describe("ModifiedEntry", () => {
     |> toEqual(
          ModifiedEntry.{
            id: "foo",
+           size: (666, 555),
            original: None,
            parsed: None,
            children: [],
            stat:
-             Some(
-               ModifiedEntry.Data.{
-                 size: (666, 555),
-                 source: ("I am Foo", "I am new Foo"),
-               },
+             ModifiedEntry.Data.make(
+               Entry.Data.make(Some("I am Foo"), Some(666)),
+               Entry.Data.make(Some("I am new Foo"), Some(555)),
              ),
          },
        );
@@ -45,18 +46,20 @@ describe("ModifiedEntry", () => {
     let e1 =
       Entry.{
         id: "foo",
+        size: 666,
         children: [],
         original: None,
         parsed: None,
-        stat: Some(Entry.Data.{source: "I am Foo", size: 666}),
+        stat: Entry.Data.make(Some("I am Foo"), Some(666)),
       };
     let e2 =
       Entry.{
         id: "foo",
+        size: 222,
         children: [],
         original: None,
-        parsed: Some(Entry.Data.{source: "I'm nu foo", size: 222}),
-        stat: Some(Entry.Data.{source: "I am new Foo", size: 555}),
+        parsed: Entry.Data.make(Some("I'm nu foo"), Some(222)),
+        stat: Entry.Data.make(Some("I am new Foo"), Some(555)),
       };
     let modified = makeModified(e1, e2);
 
@@ -64,15 +67,14 @@ describe("ModifiedEntry", () => {
     |> toEqual(
          ModifiedEntry.{
            id: "foo",
+           size: (666, 222),
            original: None,
            parsed: None,
            children: [],
            stat:
-             Some(
-               ModifiedEntry.Data.{
-                 size: (666, 555),
-                 source: ("I am Foo", "I am new Foo"),
-               },
+             ModifiedEntry.Data.make(
+               Entry.Data.make(Some("I am Foo"), Some(666)),
+               Entry.Data.make(Some("I am new Foo"), Some(555)),
              ),
          },
        );
@@ -82,18 +84,20 @@ describe("ModifiedEntry", () => {
     let e1 =
       Entry.{
         id: "foo",
+        size: 222,
         children: [],
         original: None,
-        parsed: Some(Entry.Data.{source: "I'm nu foo", size: 222}),
-        stat: Some(Entry.Data.{source: "I am Foo", size: 666}),
+        parsed: Entry.Data.make(Some("I'm nu foo"), Some(222)),
+        stat: Entry.Data.make(Some("I am Foo"), Some(666)),
       };
     let e2 =
       Entry.{
         id: "foo",
+        size: 555,
         children: [],
         original: None,
         parsed: None,
-        stat: Some(Entry.Data.{source: "I am new Foo", size: 555}),
+        stat: Entry.Data.make(Some("I am new Foo"), Some(555)),
       };
     let modified = makeModified(e1, e2);
 
@@ -101,15 +105,14 @@ describe("ModifiedEntry", () => {
     |> toEqual(
          ModifiedEntry.{
            id: "foo",
+           size: (222, 555),
            original: None,
            parsed: None,
            children: [],
            stat:
-             Some(
-               ModifiedEntry.Data.{
-                 size: (666, 555),
-                 source: ("I am Foo", "I am new Foo"),
-               },
+             ModifiedEntry.Data.make(
+               Entry.Data.make(Some("I am Foo"), Some(666)),
+               Entry.Data.make(Some("I am new Foo"), Some(555)),
              ),
          },
        );

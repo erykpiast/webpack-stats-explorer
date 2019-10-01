@@ -12,6 +12,7 @@ describe("EntryCompare", () =>
           Entry(
             Entry.{
               id: "foo",
+              size: 0,
               children: [],
               stat: None,
               original: None,
@@ -31,7 +32,9 @@ describe("EntryCompare", () =>
       expect(sorted) |> toEqual([added, removed, intact]);
     });
 
-    test("it should put modified modules with more code added above added ones", () => {
+    test(
+      "it should put modified modules with more code added above added ones",
+      () => {
       let added = mockEntry(0, 100);
       let modified1 = mockEntry(200, 250);
       let modified2 = mockEntry(200, 400);

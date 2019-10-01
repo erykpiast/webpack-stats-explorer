@@ -45,16 +45,18 @@ let count comp =
 let size comp = Rationale.Function.Infix.
   (
     let sum = List.flatten ||> Utils.List.sumInt
+    and getEntrySize = fun (entry : Entry.t) -> entry.size
+    and getModifiedEntrySize = fun (entry : t ModifiedEntry.t) -> entry.size
     in (
       [
-        comp.intact |> List.map Entry.getSize;
-        comp.removed |> List.map Entry.getSize;
-        comp.modified |> List.map (ModifiedEntry.getSize ||> fst)
+        comp.intact |> List.map getEntrySize;
+        comp.removed |> List.map getEntrySize;
+        comp.modified |> List.map (getModifiedEntrySize ||> fst)
       ] |> sum,
       [
-        comp.intact |> List.map Entry.getSize;
-        comp.added |> List.map Entry.getSize;
-        comp.modified |> List.map (ModifiedEntry.getSize ||> snd)
+        comp.intact |> List.map getEntrySize;
+        comp.added |> List.map getEntrySize;
+        comp.modified |> List.map (getModifiedEntrySize ||> snd)
       ] |> sum
     )
   )

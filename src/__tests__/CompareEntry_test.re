@@ -7,25 +7,28 @@ describe("CompareEntry", () => {
   let foo1 =
     Entry.{
       id: "foo",
+      size: 666,
       original: None,
       parsed: None,
-      stat: Some(Entry.Data.{size: 666, source: "I am foo"}),
+      stat: Entry.Data.make(Some("I am foo"), Some(666)),
       children: [],
     };
   let foo2 =
     Entry.{
       id: "foo",
+      size: 555,
       original: None,
       parsed: None,
-      stat: Some(Entry.Data.{size: 555, source: "I am different foo"}),
+      stat: Entry.Data.make(Some("I am different foo"), Some(555)),
       children: [],
     };
   let bar1 =
     Entry.{
       id: "bar",
+      size: 555,
       original: None,
       parsed: None,
-      stat: Some(Entry.Data.{size: 555, source: "I am Boo"}),
+      stat: Entry.Data.make(Some("I am Boo"), Some(555)),
       children: [],
     };
 

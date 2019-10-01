@@ -5,10 +5,6 @@ open State.NavigationPath;
 
 let component = ReasonReact.statelessComponent("EntryCompare");
 
-let getSize = Entry.getSize
-
-let getModifiedSize = ModifiedEntry.getSize;
-
 let putAddedFirst =
   List.sort((a: EntryDiff.props, b: EntryDiff.props) => {
     let aDiff = a.after - a.before;
@@ -34,7 +30,7 @@ let mapChunksToProps =
         |> List.map((entry: Entry.t) =>
              (
                {
-                 after: entry |> getSize,
+                 after: entry.size,
                  before: 0,
                  name: entry.id,
                  value: Entry(entry),
@@ -48,7 +44,7 @@ let mapChunksToProps =
              (
                {
                  after: 0,
-                 before: entry |> getSize,
+                 before: entry.size,
                  name: entry.id,
                  value: Entry(entry),
                  onChange: Segment.of_entry(Removed) ||> onEntry,
@@ -57,32 +53,30 @@ let mapChunksToProps =
            );
       let intact =
         entries.intact
-        |> List.map((entry: Entry.t) => {
-             let size = entry |> getSize;
+        |> List.map((entry: Entry.t) =>
              (
                {
-                 after: size,
-                 before: size,
+                 after: entry.size,
+                 before: entry.size,
                  name: entry.id,
                  value: Entry(entry),
                  onChange: Segment.of_entry(Intact) ||> onEntry,
                }: EntryDiff.props
-             );
-           });
+             )
+           );
       let modified =
         entries.modified
-        |> List.map((entry: ModifiedEntry.t(CompareEntry.t)) => {
-             let size = entry |> getModifiedSize;
+        |> List.map((entry: ModifiedEntry.t(CompareEntry.t)) =>
              (
                {
-                 after: size |> snd,
-                 before: size |> fst,
+                 after: entry.size |> snd,
+                 before: entry.size |> fst,
                  name: entry.id,
                  value: ModifiedEntry(entry),
                  onChange: Segment.of_entry(Modified) ||> onEntry,
                }: EntryDiff.props
-             );
-           });
+             )
+           );
 
       Belt.List.concatMany([|added, modified, removed, intact|])
       |> putAddedFirst;
