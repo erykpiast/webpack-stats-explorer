@@ -138,7 +138,7 @@ let make = (~comparisons, _children) => {
           |> (
             ((entry, kind)) =>
               <EntrySummary
-                data=entry
+                entry
                 kind
                 onEntry={entry => self.send(Navigate(entry, 2))}
                 selected={Some(entry)}

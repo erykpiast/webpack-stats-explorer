@@ -1,5 +1,6 @@
 open CompareEntry;
 open CompareKind;
+open Rationale.Option.Infix;
 
 module Styles = {
   open Css;
@@ -75,153 +76,121 @@ module Styles = {
 
 let nbsp = {js|  |js};
 
-let getKindMessage = kind =>
+let getKindProps = kind =>
   switch (kind) {
-  | Added => L10N.Kind.added
-  | Removed => L10N.Kind.removed
-  | Intact => L10N.Kind.intact
-  | Modified => L10N.Kind.modified
+  | Added => (Styles.Kind.added, L10N.Kind.added)
+  | Removed => (Styles.Kind.removed, L10N.Kind.removed)
+  | Intact => (Styles.Kind.intact, L10N.Kind.intact)
+  | Modified => (Styles.Kind.modified, L10N.Kind.modified)
   };
 
-let getKindClassName = kind =>
-  switch (kind) {
-  | Added => Styles.Kind.added
-  | Removed => Styles.Kind.removed
-  | Intact => Styles.Kind.intact
-  | Modified => Styles.Kind.modified
+let makeEntryData = data => EntryData(data);
+let makeModifiedEntryData = data => ModifiedEntryData(data);
+
+let getId = entry =>
+  switch (entry) {
+  | Entry(entry) => entry.id
+  | ModifiedEntry(entry) => entry.id
+  };
+let getModules = entry =>
+  switch (entry) {
+  | Entry(entry) => NotModifiedChildren(entry.children)
+  | ModifiedEntry(entry) => ModifiedChildren(entry.children)
+  };
+let getStat = entry =>
+  switch (entry) {
+  | Entry(entry) => entry.stat <$> makeEntryData
+  | ModifiedEntry(entry) => entry.stat <$> makeModifiedEntryData
+  };
+let getOriginal = entry =>
+  switch (entry) {
+  | Entry(entry) => entry.original <$> makeEntryData
+  | ModifiedEntry(entry) => entry.original <$> makeModifiedEntryData
+  };
+let getParsed = entry =>
+  switch (entry) {
+  | Entry(entry) => entry.parsed <$> makeEntryData
+  | ModifiedEntry(entry) => entry.parsed <$> makeModifiedEntryData
   };
 
-module Mapper = {
-  type a = entry;
-
-  let componentName = "EntrySummary";
-  let getName = entry =>
-    switch (entry) {
-    | Entry(entry) => entry.id
-    | ModifiedEntry(entry) => entry.id
-    };
-
-  let getSize = entry =>
-    switch (entry) {
-    | Entry(entry) => entry.size
-    | ModifiedEntry(entry) => entry.size |> snd
-    };
-
-  let getStatSize = entry =>
-    switch (entry) {
-    | Entry(entry) =>
-      switch (entry.stat) {
-      | Some({size}) => size
-      | None => 0
-      }
-    | ModifiedEntry(entry) =>
-      switch (entry.stat) {
-      | Some({size}) => size |> snd
-      | None => 0
-      }
-    };
-
-  let getOriginalSize = entry =>
-    switch (entry) {
-    | Entry(entry) =>
-      switch (entry.original) {
-      | Some({size}) => Some(size)
-      | None => None
-      }
-    | ModifiedEntry(entry) =>
-      switch (entry.original) {
-      | Some({size}) => Some(size |> snd)
-      | None => None
-      }
-    };
-  let getParsedSize = entry =>
-    switch (entry) {
-    | Entry(entry) =>
-      switch (entry.parsed) {
-      | Some({size}) => Some(size)
-      | None => None
-      }
-    | ModifiedEntry(entry) =>
-      switch (entry.parsed) {
-      | Some({size}) => Some(size |> snd)
-      | None => None
-      }
-    };
-  let getStatSource = entry =>
-    switch (entry) {
-    | Entry(entry) =>
-      (
-        switch (entry.stat) {
-        | Some({source}) => source
-        | None => ""
-        }
-      )
-      |> (
-        code => <pre className=Styles.code> {code |> ReasonReact.string} </pre>
-      )
-    | ModifiedEntry(entry) =>
-      switch (entry.stat) {
-      | Some({source}) =>
-        <CodeDiff
-          className=Styles.code
-          before={source |> fst}
-          after={source |> snd}
-        />
-      | None => ReasonReact.null
-      }
-    };
-  let getOriginalSource = _ => None;
-  let getParsedSource = _ => None;
-  let getSource = getStatSource;
-
-  let getModules = entry =>
-    switch (entry) {
-    | Entry(entry) => Some(NotModifiedChildren(entry.children))
-    | ModifiedEntry(entry) => Some(ModifiedChildren(entry.children))
-    };
-};
-
-let component = ReasonReact.statelessComponent(Mapper.componentName);
-
-let make = (~data, ~kind, ~onEntry, ~selected, _children) => {
-  ...component,
-  render: _self => {
-    let statSize = data |> Mapper.getStatSize;
-    let originalSize = data |> Mapper.getOriginalSize;
-    let parsedSize = data |> Mapper.getParsedSize;
-
-    let modules =
-      switch (data |> Mapper.getModules) {
-      | Some(modules) =>
-        Rationale.Option.Infix.(
-          switch (modules) {
-          | NotModifiedChildren(entries) =>
-            <EntryList
-              className=Styles.modules
-              entries
-              kind
-              onEntry
-              selected={selected <$> Mapper.getName}
-            />
-          | ModifiedChildren(entries) =>
-            <EntryCompare
-              className=Styles.modules
-              entries
-              onEntry
-              selected={selected <$> Mapper.getName}
-            />
-          }
-        )
-      | None => ReasonReact.null
+let renderModules = (onEntry, kind, selected, modules) =>
+  switch (modules) {
+  | NotModifiedChildren(entries) =>
+    <EntryList
+      className=Styles.modules
+      entries
+      kind
+      onEntry
+      selected={selected <$> getId}
+    />
+  | ModifiedChildren(entries) =>
+    <EntryCompare
+      className=Styles.modules
+      entries
+      onEntry
+      selected={selected <$> getId}
+    />
+  };
+let renderSize = (label, data) =>
+  switch (data) {
+  | None => ReasonReact.null
+  | Some(data) =>
+    let size =
+      switch (data) {
+      | EntryData({size}) => size
+      | ModifiedEntryData({size}) => size |> snd
       };
 
-    let renderSize = (label, size) =>
-      <>
-        <dt className={Cn.make([Styles.term, Styles.sizeTerm])}>
-          {label |> ReasonReact.string}
-        </dt>
-        <dd className=Styles.definition> <Size value=size /> </dd>
-      </>;
+    <>
+      <dt className={Cn.make([Styles.term, Styles.sizeTerm])}>
+        {label |> ReasonReact.string}
+      </dt>
+      <dd className=Styles.definition> <Size value=size /> </dd>
+    </>;
+  };
+let renderSource = data =>
+  switch (data) {
+  | None => ReasonReact.null
+  | Some(data) =>
+    switch (data) {
+    | EntryData({source}) =>
+      <pre className=Styles.code> {source |> ReasonReact.string} </pre>
+    | ModifiedEntryData({source}) =>
+      <CodeDiff
+        className=Styles.code
+        before={source |> fst}
+        after={source |> snd}
+      />
+    }
+  };
+
+type action =
+  | SwitchTab(int);
+
+type state = {currentTabIndex: int};
+
+let reducer = (action, _state) =>
+  switch (action) {
+  | SwitchTab(index) => ReasonReact.Update({currentTabIndex: index})
+  };
+
+let component = ReasonReact.reducerComponent("EntrySummary");
+
+let make = (~entry, ~kind, ~onEntry, ~selected, _children) => {
+  ...component,
+  reducer,
+  initialState: () => {currentTabIndex: 1},
+  render: self => {
+    let original = entry |> getOriginal;
+    let stat = entry |> getStat;
+    let parsed = entry |> getParsed;
+    let currentData =
+      switch (self.state.currentTabIndex) {
+      | 0 => original
+      | 2 => parsed
+      | _ => stat
+      };
+    let (kindClassName, kindLabel) = getKindProps(kind);
 
     <div className=Styles.wrapper>
       <header className=Styles.header>
@@ -230,12 +199,8 @@ let make = (~data, ~kind, ~onEntry, ~selected, _children) => {
             <dt className=Styles.term>
               {L10N.Summary.status |> ReasonReact.string}
             </dt>
-            <dd
-              className={Cn.make([
-                Styles.definition,
-                getKindClassName(kind),
-              ])}>
-              {kind |> getKindMessage |> ReasonReact.string}
+            <dd className={Cn.make([Styles.definition, kindClassName])}>
+              {kindLabel |> ReasonReact.string}
               {nbsp |> ReasonReact.string}
               {L10N.module_ |> ReasonReact.string}
             </dd>
@@ -245,23 +210,23 @@ let make = (~data, ~kind, ~onEntry, ~selected, _children) => {
               {L10N.Summary.name |> ReasonReact.string}
             </dt>
             <dd className=Styles.definition>
-              {data |> Mapper.getName |> ReasonReact.string}
+              {entry |> getId |> ReasonReact.string}
             </dd>
           </div>
-          Rationale.Option.Infix.(
-            <Tabs className=Styles.size selectedIndex=1>
-              {originalSize
-               <$> renderSize(L10N.Summary.original)
-               |> Utils.defaultTo(ReasonReact.null)}
-              {renderSize(L10N.Summary.stat, statSize)}
-              {parsedSize
-               <$> renderSize(L10N.Summary.parsed)
-               |> Utils.defaultTo(ReasonReact.null)}
-            </Tabs>
-          )
+          <Tabs
+            className=Styles.size
+            selectedIndex={self.state.currentTabIndex}
+            onChange={index => self.send(SwitchTab(index))}>
+            {original |> renderSize(L10N.Summary.original)}
+            {stat |> renderSize(L10N.Summary.stat)}
+            {parsed |> renderSize(L10N.Summary.parsed)}
+          </Tabs>
         </dl>
       </header>
-      <div className=Styles.content> {data |> Mapper.getSource} modules </div>
+      <div className=Styles.content>
+        {currentData |> renderSource}
+        {entry |> getModules |> renderModules(onEntry, kind, selected)}
+      </div>
     </div>;
   },
 };

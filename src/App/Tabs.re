@@ -43,7 +43,7 @@ let component = ReasonReact.statelessComponent("Tabs");
 
 let notNullElement = (!==)(ReasonReact.null);
 
-let make = (~className="", ~selectedIndex=0, children) => {
+let make = (~className="", ~selectedIndex=0, ~onChange=_index => (), children) => {
   ...component,
   render: _self => {
     <div className={Cn.make([className, Styles.root])}>
@@ -57,7 +57,8 @@ let make = (~className="", ~selectedIndex=0, children) => {
                     className={Cn.make([
                       Styles.tab,
                       Cn.ifTrue(Styles.selectedTab, index === selectedIndex),
-                    ])}>
+                    ])}
+                    onClick={_event => onChange(index)}>
                     child
                   </button>;
                 }

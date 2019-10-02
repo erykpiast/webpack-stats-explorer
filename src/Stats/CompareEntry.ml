@@ -67,6 +67,11 @@ type entry =
   | ModifiedEntry of t ModifiedEntry.t
 ;;
 
+type data =
+  | EntryData of Entry.Data.t
+  | ModifiedEntryData of ModifiedEntry.Data.t
+;;
+
 type children =
   | ModifiedChildren of t
   | NotModifiedChildren of Entry.t list
