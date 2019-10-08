@@ -47,7 +47,7 @@
   "devDependencies": {
     "@babel/cli": "7.6.3",
     "@babel/core": "7.6.3",
-    "@babel/preset-env": "7.6.2",
+    "@babel/preset-env": "7.6.3",
     "@glennsl/bs-jest": "0.4.9",
     "babel-jest": "24.9.0",
     "bs-enzyme": "0.6.1",
