@@ -47,7 +47,7 @@ module Styles = {
       marginLeft(Theme.Space.double),
     ]);
 
-  let size = style([fontSize(rem(1.2)), marginTop(Theme.Space.default)]);
+  let size = style([marginTop(Theme.Space.default)]);
 
   let sizeTerm = style([display(`block), marginRight(Theme.Space.default)]);
 
@@ -140,12 +140,21 @@ let renderSize = (label, data) =>
       | EntryData({size}) => size
       | ModifiedEntryData({size}) => size |> snd
       };
+    let diff =
+      switch (data) {
+      | EntryData({size}) => ReasonReact.null
+      | ModifiedEntryData({size}) =>
+        <>
+          {nbsp |> ReasonReact.string}
+          <NumericDiff before={size |> fst} after={size |> snd} />
+        </>
+      };
 
     <>
       <dt className={Cn.make([Styles.term, Styles.sizeTerm])}>
         {label |> ReasonReact.string}
       </dt>
-      <dd className=Styles.definition> <Size value=size /> </dd>
+      <dd className=Styles.definition> <Size value=size /> diff </dd>
     </>;
   };
 let renderSource = data =>
