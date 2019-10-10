@@ -72,6 +72,29 @@ module Styles = {
     let intact = style([color(Theme.Color.Intact.default)]);
     let modified = style([color(Theme.Color.Modified.default)]);
   };
+
+  module PluginBait = {
+    let root =
+      style([
+        display(`flex),
+        flexDirection(`column),
+        flexGrow(1.0),
+        justifyContent(`center),
+        alignItems(`center),
+      ]);
+
+    let heading = style([fontSize(Theme.Space.triple)]);
+
+    let caption = style([]);
+
+    let snippet =
+      style([
+        backgroundColor(Theme.Color.Background.default),
+        padding(Theme.Space.default),
+      ]);
+
+    let prompt = style([userSelect(`none)]);
+  };
 };
 
 let nbsp = {js|  |js};
@@ -133,7 +156,7 @@ let renderModules = (onEntry, kind, selected, modules) =>
   };
 let renderSize = (label, data) =>
   switch (data) {
-  | None => ReasonReact.null
+  | None => <> {label |> ReasonReact.string} </>
   | Some(data) =>
     let size =
       switch (data) {
@@ -142,7 +165,7 @@ let renderSize = (label, data) =>
       };
     let diff =
       switch (data) {
-      | EntryData({size}) => ReasonReact.null
+      | EntryData(_) => ReasonReact.null
       | ModifiedEntryData({size}) =>
         <>
           {nbsp |> ReasonReact.string}
@@ -159,7 +182,57 @@ let renderSize = (label, data) =>
   };
 let renderSource = data =>
   switch (data) {
-  | None => ReasonReact.null
+  | None =>
+    // NOTE: there are some cases when plugin is configured but some
+    // enhanced source is not available
+    // TODO: detect plugin based on whole stats object
+    <div className=Styles.PluginBait.root>
+      <h3 className=Styles.PluginBait.heading>
+        {"No code here?" |> ReasonReact.string}
+      </h3>
+      <p className=Styles.PluginBait.caption>
+        {"Add " |> ReasonReact.string}
+        <a
+          href="https://www.npmjs.com/package/webpack-enhanced-stats-plugin"
+          target="_blank">
+          {"webpack-enhanced-stats-plugin" |> ReasonReact.string}
+        </a>
+        {" to your Webpack config!" |> ReasonReact.string}
+      </p>
+      <pre className=Styles.PluginBait.snippet>
+        <span className=Styles.PluginBait.prompt>
+          {"$ " |> ReasonReact.string}
+        </span>
+        <code>
+          {"npm i -D webpack-enhanced-stats-plugin" |> ReasonReact.string}
+        </code>
+      </pre>
+      <pre className=Styles.PluginBait.snippet>
+        <code>
+          {"const StatsPlugin = require(\"webpack-enhanced-stats-plugin\");
+
+module.exports = {
+  // set any source-map devtool (not none/false nor eval)
+  devtool: 'source-map',
+  module: {
+    rules: [
+      // other loaders here, this has to be the last one
+      {
+        loader: StatsPlugin.loader
+      }
+    ]
+  },
+  plugins: [
+    // write out stats file to the output directory
+    new StatsPlugin({
+      filename: 'stats.json'
+    })
+  ]
+}"
+           |> ReasonReact.string}
+        </code>
+      </pre>
+    </div>
   | Some(data) =>
     switch (data) {
     | EntryData({source}) =>
