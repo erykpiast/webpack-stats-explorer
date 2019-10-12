@@ -1,4 +1,4 @@
-let component = ReasonReact.statelessComponent("ChunksOverview");
+let component = ReasonReact.statelessComponent("EntryOverview");
 
 module Styles = {
   open Css;

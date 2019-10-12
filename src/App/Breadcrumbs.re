@@ -21,25 +21,10 @@ module Styles = {
     ]);
 };
 
-let renderName = item =>
-  State.NavigationPath.Segment.Item.(
-    switch (item) {
-    | Chunk(chunk) =>
-      Compare.Chunks.(
-        switch (chunk) {
-        | Summary(summary) => summary.name
-        | ModifiedSummary(summary) => summary.name
-        }
-      )
-    | Module(module_) =>
-      Compare.Modules.(
-        switch (module_) {
-        | Summary(summary) => summary.name
-        | ModifiedSummary(summary) => summary.name
-        }
-      )
-    }
-  );
+let renderName = item => switch (item) {
+  | CompareEntry.Entry({id}) => id
+  | CompareEntry.ModifiedEntry({id}) => id
+  };
 
 let component = ReasonReact.statelessComponent("Breadcrumbs");
 

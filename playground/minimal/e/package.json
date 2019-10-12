@@ -10,6 +10,6 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "webpack": "4.39.3"
+    "webpack": "4.41.0"
   }
 }

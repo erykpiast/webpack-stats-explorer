@@ -34,6 +34,14 @@ module Module = {
   let size = "Size";
   let status = "Status";
 };
+module Summary = {
+  let code = "Code";
+  let name = "Name";
+  let stat = "Stat";
+  let original = "Original";
+  let parsed = "Parsed";
+  let status = "Status";
+};
 module Validation = {
   let json = "We need JSON here";
   let notEnough = "There is no point in comparing less than two files";

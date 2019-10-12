@@ -56,14 +56,14 @@ let parseStats = (~onSuccess, ~onFailure, files) =>
                 let version =
                   text
                   |> Json.parseOrRaise
-                  |> Stats.Version.decode
-                  |> Stats.Version.isSupported;
+                  |> WebpackStats.Version.decode
+                  |> WebpackStats.Version.isSupported;
 
                 if (version) {
                   try (
                     text
                     |> Json.parseOrRaise
-                    |> Stats.decode
+                    |> WebpackStats.decode
                     |> Js.Promise.resolve
                   ) {
                   | err =>

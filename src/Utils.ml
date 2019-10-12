@@ -17,6 +17,8 @@ module Function = struct
   let converge agg fns args = agg (List.map (fun fn -> fn args) fns)
   let all =  (List.fold_left (&&) true)
   let allPass (fns: (('a -> bool) list)) (args: 'a) = converge all fns args
+  let curry fn arg1 = fn (arg1);;
+  let uncurry fn (arg1) = fn arg1;;
   let curry2 fn arg1 arg2 = fn (arg1, arg2);;
   let uncurry2 fn (arg1, arg2) = fn arg1 arg2;;
 end
@@ -60,6 +62,8 @@ module List = struct
   let nth index list = List.nth list index;;
 
   let findOpt isEqual list = Belt.List.getBy list isEqual;;
+
+  let sumInt = List.fold_left (+) 0;;
 end
 
 module Array = struct
@@ -68,6 +72,16 @@ module Array = struct
   let last array = nth (Array.length array - 1) array;;
 
   let trimLeft amount array = Js.Array.slice ~start:amount ~end_:(Js.Array.length array) array;;
+
+  let filter = Js.Array.filter;;
+
+  let join = Js.Array.joinWith;;
+end
+
+module String = struct
+  let endsWith = Js.String.endsWith;;
+
+  let split = Js.String.split;;
 end
 
 let pluralize singular plural n = (string_of_int n) ^ " " ^ (if n == 1 then singular else plural);;

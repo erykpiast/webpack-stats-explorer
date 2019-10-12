@@ -17,6 +17,8 @@ module Color = {
 
   module Border = {
     let default = rgb(158, 158, 158);
+
+    let accent = rgb(25, 118, 210);
   };
 
   module Text = {

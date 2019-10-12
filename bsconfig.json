@@ -18,6 +18,9 @@
         "dir": "Stats"
       },
       {
+        "dir": "Webpack"
+      },
+      {
         "dir": "App"
       }
     ]
