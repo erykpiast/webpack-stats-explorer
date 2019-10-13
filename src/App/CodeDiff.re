@@ -1,6 +1,8 @@
 module Styles = {
   open Css;
 
+  let root = style([whiteSpace(`preWrap), wordBreak(`breakAll)]);
+
   let removed = style([backgroundColor(Theme.Color.Removed.background)]);
 
   let added = style([backgroundColor(Theme.Color.Added.background)]);
@@ -11,7 +13,7 @@ let component = ReasonReact.statelessComponent("CodeDiff");
 let make = (~after, ~before, ~className, _children) => {
   ...component,
   render: _self =>
-    <pre className>
+    <pre className={Cn.make([className, Styles.root])}>
       ...JsDiff.(
            make(after, before)
            |> List.map(diff =>

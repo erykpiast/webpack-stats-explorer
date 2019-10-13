@@ -62,8 +62,6 @@ module Styles = {
   let code =
     style([
       padding(Theme.Space.default),
-      whiteSpace(`preWrap),
-      wordBreak(`breakAll),
     ]);
 
   module Kind = {
@@ -235,14 +233,16 @@ module.exports = {
     </div>
   | Some(data) =>
     switch (data) {
-    | EntryData({source}) =>
-      <pre className=Styles.code> {source |> ReasonReact.string} </pre>
+    | EntryData({source}) => <Code className=Styles.code> ...source </Code>
     | ModifiedEntryData({source}) =>
-      <CodeDiff
-        className=Styles.code
-        before={source |> fst}
-        after={source |> snd}
-      />
+      let before = source |> fst;
+      let after = source |> snd;
+
+      if (after == before) {
+        <Code className=Styles.code> ...after </Code>;
+      } else {
+        <CodeDiff className=Styles.code before after />;
+      };
     }
   };
 
