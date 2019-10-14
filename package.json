@@ -26,7 +26,12 @@
     "playground:upgrade-deps": "./playground/upgrade-deps.sh"
   },
   "keywords": [
-    "BuckleScript"
+    "webpack",
+    "analyzer",
+    "bundle",
+    "diff",
+    "compare",
+    "stats"
   ],
   "author": "Eryk Napierała <eryk.piast@gmail.com>",
   "license": "MIT",
