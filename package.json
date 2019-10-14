@@ -28,7 +28,8 @@
     "format": "find src -name '*.ml' -exec xargs ocamlformat -i -p janestreet {} \\;",
     "release": "standard-version",
     "playground:play": "./playground/play.sh",
-    "playground:upgrade-deps": "./playground/upgrade-deps.sh"
+    "playground:upgrade-deps": "./playground/upgrade-deps.sh",
+    "prepublish": "npm run build"
   },
   "keywords": [
     "webpack",
