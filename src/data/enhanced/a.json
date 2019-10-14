@@ -1,0 +1,214 @@
+{
+  "errors": [],
+  "warnings": [
+    "configuration\nThe 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.\nYou can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/"
+  ],
+  "version": "4.41.0",
+  "hash": "f49c02c184308b634870",
+  "time": 1005,
+  "builtAt": 1571003681038,
+  "publicPath": "",
+  "outputPath": "/./playground/enhanced/a/dist",
+  "assetsByChunkName": {
+    "main": [
+      "main.js",
+      "main.js.map"
+    ]
+  },
+  "assets": [
+    {
+      "name": "main.js",
+      "size": 1025,
+      "chunks": [
+        0
+      ],
+      "chunkNames": [
+        "main"
+      ],
+      "info": {},
+      "emitted": true
+    },
+    {
+      "name": "main.js.map",
+      "size": 4789,
+      "chunks": [
+        0
+      ],
+      "chunkNames": [
+        "main"
+      ],
+      "info": {
+        "development": true
+      },
+      "emitted": true
+    }
+  ],
+  "filteredAssets": 0,
+  "entrypoints": {
+    "main": {
+      "chunks": [
+        0
+      ],
+      "assets": [
+        "main.js",
+        "main.js.map"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "namedChunkGroups": {
+    "main": {
+      "chunks": [
+        0
+      ],
+      "assets": [
+        "main.js",
+        "main.js.map"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "chunks": [
+    {
+      "id": 0,
+      "rendered": true,
+      "initial": true,
+      "entry": true,
+      "size": 57,
+      "names": [
+        "main"
+      ],
+      "files": [
+        "main.js",
+        "main.js.map"
+      ],
+      "hash": "4517fbc41c32a746ac42",
+      "siblings": [],
+      "parents": [],
+      "children": [],
+      "childrenByOrder": {},
+      "filteredModules": 0,
+      "origins": [
+        {
+          "module": "",
+          "moduleIdentifier": "",
+          "moduleName": "",
+          "loc": "main",
+          "request": "./src/index.js",
+          "reasons": []
+        }
+      ],
+      "modules": [
+        {
+          "id": 0,
+          "identifier": "/./playground/enhanced/a/node_modules/babel-loader/lib/index.js??ref--4!/./playground/enhanced/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/./playground/enhanced/a/src/index.js",
+          "name": "./src/index.js",
+          "index": 0,
+          "index2": 0,
+          "size": 57,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "issuer": null,
+          "issuerId": null,
+          "issuerName": null,
+          "issuerPath": null,
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": null,
+              "module": null,
+              "moduleName": null,
+              "type": "single entry",
+              "userRequest": "./src/index.js",
+              "loc": "main"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [
+            "ModuleConcatenation bailout: Module is an entry point"
+          ],
+          "depth": 0,
+          "source": "export default function (a, b, c) {\n  return [a, b, c];\n}",
+          "parsedSize": 51,
+          "parsedSource": "r.r(t),t.default=function(e,t,r){return[e,t,r]}}]);",
+          "originalSize": 59,
+          "originalSource": "export default function (a, b, c) {\n    return [a, b, c];\n}",
+          "modules": []
+        }
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "id": 0,
+      "identifier": "/./playground/enhanced/a/node_modules/babel-loader/lib/index.js??ref--4!/./playground/enhanced/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/./playground/enhanced/a/src/index.js",
+      "name": "./src/index.js",
+      "index": 0,
+      "index2": 0,
+      "size": 57,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "issuer": null,
+      "issuerId": null,
+      "issuerName": null,
+      "issuerPath": null,
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "assets": [],
+      "reasons": [
+        {
+          "moduleId": null,
+          "moduleIdentifier": null,
+          "module": null,
+          "moduleName": null,
+          "type": "single entry",
+          "userRequest": "./src/index.js",
+          "loc": "main"
+        }
+      ],
+      "usedExports": true,
+      "providedExports": [
+        "default"
+      ],
+      "optimizationBailout": [
+        "ModuleConcatenation bailout: Module is an entry point"
+      ],
+      "depth": 0,
+      "source": "export default function (a, b, c) {\n  return [a, b, c];\n}",
+      "parsedSize": 51,
+      "parsedSource": "r.r(t),t.default=function(e,t,r){return[e,t,r]}}]);",
+      "originalSize": 59,
+      "originalSource": "export default function (a, b, c) {\n    return [a, b, c];\n}",
+      "modules": []
+    }
+  ],
+  "filteredModules": 0,
+  "logging": {
+    "webpack.buildChunkGraph.visitModules": {
+      "entries": [],
+      "filteredEntries": 2,
+      "debug": false
+    }
+  },
+  "children": []
+}
