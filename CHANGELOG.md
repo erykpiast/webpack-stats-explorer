@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.10.2...v1.11.0) (2019-10-14)
+
+
+### Features
+
+* **format:** support optional parsed* and orignal* fields on module ([47334df](https://github.com/erykpiast/webpack-stats-explorer/commit/47334df5552f4b4d640524880a9f57139c0ce06c))
+* **testing:** allow to upgrade deps of all playgrounds ([3a8f687](https://github.com/erykpiast/webpack-stats-explorer/commit/3a8f687d051df0b594f11da8a8e19715b81e4139))
+* **ui:** allow to switch between different data kinds ([4ab9930](https://github.com/erykpiast/webpack-stats-explorer/commit/4ab9930999ed75a13516767e03ca38dbac6d61fb))
+* **ui:** encourage to install plugin when there is no original or parsed size ([eb0db19](https://github.com/erykpiast/webpack-stats-explorer/commit/eb0db198cf90694300b32703197af4e7124c4378))
+* **ui:** show size diff on tabs ([e6e9438](https://github.com/erykpiast/webpack-stats-explorer/commit/e6e9438f52d828caf569331596cdf88736136063))
+* **ui:** use parsed size in most places, show tabs with different sizes ([83b38d2](https://github.com/erykpiast/webpack-stats-explorer/commit/83b38d244c233340432837ea9f795f48534da0ff))
+
+
+### Bug Fixes
+
+* **build:** generate webpack-stats-analyzer report and stats for the tool ([eebe91f](https://github.com/erykpiast/webpack-stats-explorer/commit/eebe91f7d17580d3b09a300ef4b9f7d220b0c1c8))
+* **package:** update bs-css to version 10.0.1 ([3eabfe4](https://github.com/erykpiast/webpack-stats-explorer/commit/3eabfe4ee9e3aa608fb7fe6e62108af7814a0bb3))
+* **package:** update react to version 16.10.0 ([608f6ca](https://github.com/erykpiast/webpack-stats-explorer/commit/608f6caee09353e22f12a04f15b7863f1f9cfce9))
+* **package:** update react to version 16.10.2 ([147a508](https://github.com/erykpiast/webpack-stats-explorer/commit/147a5080e359085dab4e13d611949a7b015ac737))
+* **package:** update react-dom to version 16.10.0 ([7c491f3](https://github.com/erykpiast/webpack-stats-explorer/commit/7c491f3297ed976bcbf412acd948f919b4d8357e))
+* **package:** update react-dom to version 16.10.2 ([40dd5c8](https://github.com/erykpiast/webpack-stats-explorer/commit/40dd5c877590425082bb98898e67b72cb2c77019))
+* **package:** update react-dropzone to version 10.1.10 ([acc0302](https://github.com/erykpiast/webpack-stats-explorer/commit/acc0302ecf1f418255d13c46b4cc6c0a8de9535b))
+* **package:** update react-dropzone to version 10.1.9 ([d8f7a75](https://github.com/erykpiast/webpack-stats-explorer/commit/d8f7a75995b17fd612518f1818674a28c91d7f21))
+
 ### [1.10.2](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.10.1...v1.10.2) (2019-09-13)
 
 
