@@ -10,7 +10,7 @@ module Styles = {
       margin(px(0)),
       maxHeight(`percent(100.0)),
       overflowY(`auto),
-      flexShrink(0.0)
+      flexShrink(0.0),
     ]);
 
   let item =
@@ -62,6 +62,23 @@ type props = {
   onChange: entry => unit,
 };
 
+let putAddedFirst =
+  List.sort((a: props, b: props) => {
+    let aDiff = a.after - a.before;
+    let bDiff = b.after - b.before;
+    let diffOfDiffs = bDiff - aDiff;
+
+    if (diffOfDiffs === 0) {
+      0;
+    } else if (aDiff === 0) {
+      1;
+    } else if (bDiff === 0) {
+      (-1);
+    } else {
+      diffOfDiffs;
+    };
+  });
+
 let component = ReasonReact.statelessComponent("EntryDiff");
 
 let make = (~data, ~className="", ~selected: option(string), _children) => {
@@ -72,23 +89,9 @@ let make = (~data, ~className="", ~selected: option(string), _children) => {
     | _ =>
       <ul className={Cn.make([Styles.list, className])}>
         ...{
-              data
-              |> List.sort((a: props, b: props) => {
-                  let aDiff = a.after - a.before;
-                  let bDiff = b.after - b.before;
-                  let diffOfDiffs = bDiff - aDiff;
-
-                  if (diffOfDiffs === 0) {
-                    0;
-                  } else if (aDiff === 0) {
-                    1;
-                  } else if (bDiff === 0) {
-                    (-1);
-                  } else {
-                    diffOfDiffs;
-                  };
-                })
-              |> List.map(({after, before, value, name, onChange}) =>
+             data
+             |> putAddedFirst
+             |> List.map(({after, before, value, name, onChange}) =>
                   <li
                     onClick={_ => onChange(value)}
                     className={Cn.make([
@@ -106,13 +109,13 @@ let make = (~data, ~className="", ~selected: option(string), _children) => {
                       ...{name |> ReasonReact.string}
                     </ReversedText>
                     {before !== 0 && after !== 0
-                        ? <Size className=Styles.size value=after />
-                        : ReasonReact.null}
+                       ? <Size className=Styles.size value=after />
+                       : ReasonReact.null}
                     <NumericDiff className=Styles.diff after before />
                   </li>
                 )
-              |> Array.of_list
-            }
+             |> Array.of_list
+           }
       </ul>
     },
-}
+};

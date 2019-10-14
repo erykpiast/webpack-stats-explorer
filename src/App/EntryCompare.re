@@ -3,23 +3,6 @@ open State.NavigationPath;
 
 let component = ReasonReact.statelessComponent("EntryCompare");
 
-let putAddedFirst =
-  List.sort((a: EntryDiff.props, b: EntryDiff.props) => {
-    let aDiff = a.after - a.before;
-    let bDiff = b.after - b.before;
-    let diffOfDiffs = bDiff - aDiff;
-
-    if (diffOfDiffs === 0) {
-      0;
-    } else if (aDiff === 0) {
-      1;
-    } else if (bDiff === 0) {
-      (-1);
-    } else {
-      diffOfDiffs;
-    };
-  });
-
 let mapChunksToProps =
   Rationale.Function.Infix.(
     (entries, onEntry) => {
@@ -76,8 +59,7 @@ let mapChunksToProps =
              )
            );
 
-      Belt.List.concatMany([|added, modified, removed, intact|])
-      |> putAddedFirst;
+      Belt.List.concatMany([|added, modified, removed, intact|]);
     }
   );
 

@@ -1,7 +1,7 @@
 open Jest;
 open ExpectJs;
 
-describe("EntryCompare", () =>
+describe("EntryDiff", () =>
   describe("putAddedFirst", () => {
     let mockEntry = (before, after) =>
       EntryDiff.{
@@ -27,7 +27,7 @@ describe("EntryCompare", () =>
       let intact = mockEntry(200, 200);
       let removed = mockEntry(50, 0);
 
-      let sorted = EntryCompare.putAddedFirst([intact, removed, added]);
+      let sorted = EntryDiff.putAddedFirst([intact, removed, added]);
 
       expect(sorted) |> toEqual([added, removed, intact]);
     });
@@ -39,7 +39,7 @@ describe("EntryCompare", () =>
       let modified1 = mockEntry(200, 250);
       let modified2 = mockEntry(200, 400);
 
-      let sorted = EntryCompare.putAddedFirst([added, modified1, modified2]);
+      let sorted = EntryDiff.putAddedFirst([added, modified1, modified2]);
 
       expect(sorted) |> toEqual([modified2, added, modified1]);
     });
