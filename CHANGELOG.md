@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.11.0...v1.12.0) (2019-10-14)
+
+
+### Features
+
+* **ui:** show diff only for changed sources ([b94899f](https://github.com/erykpiast/webpack-stats-explorer/commit/b94899fb53f5484f84003eebaed8957f6832bac6))
+* **ui:** use enhanced stats as an example ([b7a2b0d](https://github.com/erykpiast/webpack-stats-explorer/commit/b7a2b0dbfe7be70b8c96e1212b8e60e80f149fe8))
+
+
+### Bug Fixes
+
+* **package:** build before publish ([c75e388](https://github.com/erykpiast/webpack-stats-explorer/commit/c75e3889b9afde99f151ef5fb4af0e44edaeaf2a))
+* **package:** specify files published to NPM ([b69b235](https://github.com/erykpiast/webpack-stats-explorer/commit/b69b23584badb464d20343c4207c1e3b7b10fd1b))
+* **testing:** add new examples to playground with enhanced stats ([350fd00](https://github.com/erykpiast/webpack-stats-explorer/commit/350fd00b90336001a43be8f1fdbe96a900ba5cb3))
+
 ## [1.11.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.10.2...v1.11.0) (2019-10-14)
 
 
