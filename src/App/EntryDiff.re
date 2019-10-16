@@ -44,16 +44,6 @@ module Styles = {
   let diff = style([flexShrink(0.0)]);
 };
 
-let renderFilenames = filenames =>
-  <>
-    {ReasonReact.string(L10N.assets ++ ": ")}
-    {switch (filenames) {
-     | [a] => ReasonReact.string(a)
-     | [_, b] => ReasonReact.string(b ++ {j|❗|j})
-     | _ => ReasonReact.null
-     }}
-  </>;
-
 type props = {
   after: int,
   before: int,

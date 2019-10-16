@@ -63,11 +63,14 @@ module Space = {
     let double = default * 2;
     let triple = default * 3;
     let quadruple = default * 4;
+    let fivefold = default * 5;
+    let hexfold = default * 6;
+    let sevenfold = default * 7;
     let tenfold = default * 10;
-    let hexfold = default * 16;
-    let doublehexfold = hexfold * 2;
-    let triplehexfold = hexfold * 3;
-    let quadruplehexfold = hexfold * 4;
+    let hexteenfold = default * 16;
+    let doublehexteenfold = hexteenfold * 2;
+    let triplehexteenfold = hexteenfold * 3;
+    let quadruplehexteenfold = hexteenfold * 4;
   };
 
   let default = `px(Raw.default);
@@ -80,15 +83,21 @@ module Space = {
 
   let quadruple = `px(Raw.quadruple);
 
-  let tenfold = `px(Raw.tenfold);
+  let fivefold = `px(Raw.fivefold);
 
   let hexfold = `px(Raw.hexfold);
 
-  let doublehexfold = `px(Raw.doublehexfold);
+  let sevenfold = `px(Raw.sevenfold);
 
-  let triplehexfold = `px(Raw.triplehexfold);
+  let tenfold = `px(Raw.tenfold);
 
-  let quadruplehexfold = `px(Raw.quadruplehexfold);
+  let hexteenfold = `px(Raw.hexteenfold);
+
+  let doublehexteenfold = `px(Raw.doublehexteenfold);
+
+  let triplehexteenfold = `px(Raw.triplehexteenfold);
+
+  let quadruplehexteenfold = `px(Raw.quadruplehexteenfold);
 };
 
 module Size = {

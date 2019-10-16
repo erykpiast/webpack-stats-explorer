@@ -24,6 +24,8 @@ module Function = struct
 end
 
 module List = struct
+  open Rationale.Function.Infix
+
   let rec isEqual a b ?eql:(eql=(=)) () =
     match a, b with
     | [], [] -> true
@@ -64,6 +66,8 @@ module List = struct
   let findOpt isEqual list = Belt.List.getBy list isEqual;;
 
   let sumInt = List.fold_left (+) 0;;
+
+  let flatMap mapper = List.map mapper ||> List.concat;;
 end
 
 module Array = struct

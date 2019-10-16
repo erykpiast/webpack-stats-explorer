@@ -84,47 +84,6 @@ let make = (~comparisons, _children) => {
           />
         </>;
 
-      let sideContent =
-        switch (revPath) {
-        | [] =>
-          <EntryCompare
-            entries=comp
-            onEntry={entry => self.send(Navigate(entry, pathDepth - 1))}
-            selected=None
-          />
-        | [(leaf, _kind)] =>
-          let leafName =
-            switch (leaf) {
-            | Entry({id}) => id
-            | ModifiedEntry({id}) => id
-            };
-          <EntryCompare
-            entries=comp
-            onEntry={entry => self.send(Navigate(entry, 0))}
-            selected={Some(leafName)}
-          />;
-        | [(leaf, kind), (parent, _kind), ..._] =>
-          let leafId =
-            switch (leaf) {
-            | Entry({id}) => id
-            | ModifiedEntry({id}) => id
-            };
-          switch (parent) {
-          | ModifiedEntry(entry) =>
-            <EntryCompare
-              entries={entry.children}
-              onEntry={entry => self.send(Navigate(entry, pathDepth - 1))}
-              selected={Some(leafId)}
-            />
-          | Entry(entry) =>
-            <EntryList
-              entries={entry.children}
-              kind
-              onEntry={entry => self.send(Navigate(entry, pathDepth - 1))}
-              selected={Some(leafId)}
-            />
-          };
-        };
       let mainContent =
         switch (revPath) {
         | [] =>
@@ -146,6 +105,13 @@ let make = (~comparisons, _children) => {
           )
         };
 
-      <NavigationLayout side=sideContent main=mainContent top=topContent />;
+      let tree =
+        <EntryTree
+          comp
+          navigationPath={self.state.navigationPath}
+          onEntry={(level, entry) => self.send(Navigate(entry, level))}
+        />;
+
+      <NavigationLayout side=tree main=mainContent top=topContent />;
     },
 };

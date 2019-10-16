@@ -28,7 +28,7 @@ module Styles = {
   let modules =
     style([
       backgroundColor(Theme.Color.Background.default),
-      width(Theme.Space.triplehexfold),
+      width(Theme.Space.triplehexteenfold),
       marginLeft(`auto),
       height(`percent(100.0)),
     ]);
@@ -59,10 +59,7 @@ module Styles = {
       maxHeight(`percent(100.0)),
     ]);
 
-  let code =
-    style([
-      padding(Theme.Space.default),
-    ]);
+  let code = style([padding(Theme.Space.default)]);
 
   module Kind = {
     let added = style([color(Theme.Color.Added.default)]);
