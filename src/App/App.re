@@ -68,7 +68,6 @@ let make = (~comparisons, _children) => {
     } else {
       let comp = List.nth(self.state.comparisons, self.state.index);
       let revPath = List.rev(self.state.navigationPath);
-      let pathDepth = List.length(self.state.navigationPath);
       let topContent =
         <>
           <Logo onClick={_ => self.send(NavigateThroughBreadcrumbs(0))} />
@@ -91,27 +90,16 @@ let make = (~comparisons, _children) => {
             size={comp |> CompareEntry.size}
             count={comp |> CompareEntry.count |> snd}
           />
-        | segments =>
-          segments
-          |> List.hd
-          |> (
-            ((entry, kind)) =>
-              <EntrySummary
-                entry
-                kind
-                onEntry={entry => self.send(Navigate(entry, 2))}
-                selected={Some(entry)}
-              />
-          )
+        | [(entry, kind), ..._] => <EntrySummary entry kind />
         };
 
-      let tree =
+      let sideContent =
         <EntryTree
           comp
           navigationPath={self.state.navigationPath}
           onEntry={(level, entry) => self.send(Navigate(entry, level))}
         />;
 
-      <NavigationLayout side=tree main=mainContent top=topContent />;
+      <NavigationLayout side=sideContent main=mainContent top=topContent />;
     },
 };

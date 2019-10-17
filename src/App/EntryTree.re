@@ -271,9 +271,6 @@ let make =
   render: _self => {
     let props = mapToProps(onEntry, navigationPath, comp);
 
-    // Js.log(props |> List.map(encode) |> Array.of_list);
-    Js.log(navigationPath |> State.NavigationPath.encode);
-
     switch (props) {
     | [] => ReasonReact.null
     | data =>
