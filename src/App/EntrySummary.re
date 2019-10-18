@@ -28,7 +28,7 @@ module Styles = {
   let modules =
     style([
       backgroundColor(Theme.Color.Background.default),
-      width(Theme.Space.triplehexfold),
+      width(Theme.Space.triplehexteenfold),
       marginLeft(`auto),
       height(`percent(100.0)),
     ]);
@@ -59,10 +59,7 @@ module Styles = {
       maxHeight(`percent(100.0)),
     ]);
 
-  let code =
-    style([
-      padding(Theme.Space.default),
-    ]);
+  let code = style([padding(Theme.Space.default)]);
 
   module Kind = {
     let added = style([color(Theme.Color.Added.default)]);
@@ -113,11 +110,6 @@ let getId = entry =>
   | Entry(entry) => entry.id
   | ModifiedEntry(entry) => entry.id
   };
-let getModules = entry =>
-  switch (entry) {
-  | Entry(entry) => NotModifiedChildren(entry.children)
-  | ModifiedEntry(entry) => ModifiedChildren(entry.children)
-  };
 let getStat = entry =>
   switch (entry) {
   | Entry(entry) => entry.stat <$> makeEntryData
@@ -134,24 +126,6 @@ let getParsed = entry =>
   | ModifiedEntry(entry) => entry.parsed <$> makeModifiedEntryData
   };
 
-let renderModules = (onEntry, kind, selected, modules) =>
-  switch (modules) {
-  | NotModifiedChildren(entries) =>
-    <EntryList
-      className=Styles.modules
-      entries
-      kind
-      onEntry
-      selected={selected <$> getId}
-    />
-  | ModifiedChildren(entries) =>
-    <EntryCompare
-      className=Styles.modules
-      entries
-      onEntry
-      selected={selected <$> getId}
-    />
-  };
 let renderSize = (label, data) =>
   switch (data) {
   | None => <> {label |> ReasonReact.string} </>
@@ -258,7 +232,7 @@ let reducer = (action, _state) =>
 
 let component = ReasonReact.reducerComponent("EntrySummary");
 
-let make = (~entry, ~kind, ~onEntry, ~selected, _children) => {
+let make = (~entry, ~kind, _children) => {
   ...component,
   reducer,
   initialState: () => {currentTabIndex: 1},
@@ -305,10 +279,7 @@ let make = (~entry, ~kind, ~onEntry, ~selected, _children) => {
           </Tabs>
         </dl>
       </header>
-      <div className=Styles.content>
-        {currentData |> renderSource}
-        {entry |> getModules |> renderModules(onEntry, kind, selected)}
-      </div>
+      <div className=Styles.content> {currentData |> renderSource} </div>
     </div>;
   },
 };

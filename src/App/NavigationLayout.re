@@ -29,7 +29,7 @@ module Styles = {
   let side =
     style([
       display(`block),
-      width(Theme.Space.triplehexfold),
+      width(Theme.Space.triplehexteenfold),
       backgroundColor(Theme.Color.Background.default),
       maxHeight(`percent(100.0)),
       flexShrink(0.0),
