@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.12.0...v1.13.0) (2019-10-18)
+
+
+### Features
+
+* **ui:** use single tree to navigate through entries ([e70b7a7](https://github.com/erykpiast/webpack-stats-explorer/commit/e70b7a7e46e0e1e783a6c05d7259aac93b2c9c6a))
+
 ## [1.12.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.11.0...v1.12.0) (2019-10-14)
 
 
