@@ -13,7 +13,7 @@ module Styles = {
 
 let component = ReasonReact.statelessComponent("NumericDiff");
 
-let make = (~className="", ~after, ~before, _children) => {
+let make = (~className="", ~after, ~before) => {
   ...component,
   render: _self => {
     let diff = after - before;
@@ -28,8 +28,8 @@ let make = (~className="", ~after, ~before, _children) => {
       React.null;
     } else {
       <Size
-        className=(Cn.make([className, kindClassName]))
-        value=(Js.Math.abs_int(diff))
+        className={Cn.make([className, kindClassName])}
+        value={Js.Math.abs_int(diff)}
       />;
     };
   },
@@ -47,30 +47,21 @@ let make =
         "before": 'before,
         "after": 'after,
         "className": option('className),
-        "children": 'children,
       },
     ) =>
     make(
       ~before=reactProps##before,
       ~after=reactProps##after,
       ~className=?reactProps##className,
-      reactProps##children,
     )
   );
 [@bs.obj]
 external makeProps:
-  (
-    ~children: 'children,
-    ~className: 'className=?,
-    ~after: 'after,
-    ~before: 'before,
-    unit
-  ) =>
+  (~className: 'className=?, ~after: 'after, ~before: 'before, unit) =>
   {
     .
     "before": 'before,
     "after": 'after,
     "className": option('className),
-    "children": 'children,
   } =
   "";

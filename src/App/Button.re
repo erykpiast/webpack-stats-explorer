@@ -62,7 +62,7 @@ let make = (~onClick=_ => (), ~className="", ~type_=Default, children) => {
       );
     let className = Cn.make([Styles.button, typeClassName, className]);
 
-    <button className onClick> ...children </button>;
+    <button className onClick> children </button>;
   },
 };
 /**

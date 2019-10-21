@@ -23,7 +23,7 @@ let component = ReasonReact.statelessComponent("Snackbar");
 let make = (~className="", children) => {
   ...component,
   render: _self =>
-    <div className=(Cn.make([className, Styles.root]))> ...children </div>,
+    <div className={Cn.make([className, Styles.root])}> children </div>,
 };
 /**
  * This is a wrapper created to let this component be used from the new React api.

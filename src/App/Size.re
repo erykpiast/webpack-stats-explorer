@@ -1,4 +1,4 @@
-type unit =
+type sizeUnit =
   | B
   | KB
   | MB;
@@ -42,15 +42,15 @@ let displayUnit = unit =>
 
 let component = ReasonReact.statelessComponent("Size");
 
-let make = (~value, ~className="", _children) => {
+let make = (~className="", ~value) => {
   ...component,
   render: _self => {
     let unit = guessUnit(value);
 
     <span className>
-      (displayValue(value, unit))
-      (React.string(" "))
-      (displayUnit(unit))
+      {displayValue(value, unit)}
+      {React.string(" ")}
+      {displayUnit(unit)}
     </span>;
   },
 };
@@ -66,22 +66,16 @@ let make =
         .
         "className": option('className),
         "value": 'value,
-        "children": 'children,
       },
     ) =>
-    make(
-      ~className=?reactProps##className,
-      ~value=reactProps##value,
-      reactProps##children,
-    )
+    make(~className=?reactProps##className, ~value=reactProps##value)
   );
 [@bs.obj]
 external makeProps:
-  (~children: 'children, ~value: 'value, ~className: 'className=?, unit) =>
+  (~value: 'value, ~className: 'className=?, unit) =>
   {
     .
     "className": option('className),
     "value": 'value,
-    "children": 'children,
   } =
   "";

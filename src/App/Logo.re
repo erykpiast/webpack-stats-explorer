@@ -13,14 +13,14 @@ module Styles = {
     ]);
 };
 
-let make = (~onClick=() => (), _children) => {
+let make = (~onClick) => {
   ...component,
   render: _self =>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 774 875.7"
       className=Styles.root
-      onClick=(_ => onClick())>
+      onClick={_ => onClick()}>
       <path fill="#FFF" d="M387 0l387 218.9v437.9L387 875.7 0 656.8V218.9z" />
       <path
         fill="#8ed6fb"
@@ -38,22 +38,10 @@ let make = (~onClick=() => (), _children) => {
  */
 let make =
   ReasonReactCompat.wrapReasonReactForReact(
-    ~component,
-    (
-      reactProps: {
-        .
-        "onClick": option('onClick),
-        "children": 'children,
-      },
-    ) =>
-    make(~onClick=?reactProps##onClick, reactProps##children)
+    ~component, (reactProps: {. "onClick": 'onClick}) =>
+    make(~onClick=reactProps##onClick)
   );
 [@bs.obj]
 external makeProps:
-  (~children: 'children, ~onClick: 'onClick=?, unit) =>
-  {
-    .
-    "onClick": option('onClick),
-    "children": 'children,
-  } =
+  (~onClick: 'onClick, unit) => {. "onClick": 'onClick} =
   "";

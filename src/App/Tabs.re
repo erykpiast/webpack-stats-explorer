@@ -49,29 +49,23 @@ let notNullElement = (!==)(React.null);
 let make = (~className="", ~selectedIndex=0, ~onChange=_index => (), children) => {
   ...component,
   render: _self =>
-    <div className=(Cn.make([className, Styles.root]))>
-      ...(
-           children
-           |> Array.mapi((index, child) =>
-                if (child === React.null) {
-                  React.null;
-                } else {
-                  <button
-                    className=(
-                      Cn.make([
-                        Styles.tab,
-                        Cn.ifTrue(
-                          Styles.selectedTab,
-                          index === selectedIndex,
-                        ),
-                      ])
-                    )
-                    onClick=(_event => onChange(index))>
-                    child
-                  </button>;
-                }
-              )
-         )
+    <div className={Cn.make([className, Styles.root])}>
+      {children
+       |> Array.mapi((index, child) =>
+            if (child === React.null) {
+              React.null;
+            } else {
+              <button
+                className={Cn.make([
+                  Styles.tab,
+                  Cn.ifTrue(Styles.selectedTab, index === selectedIndex),
+                ])}
+                onClick={_event => onChange(index)}>
+                child
+              </button>;
+            }
+          )
+       |> React.array}
     </div>,
 };
 /**

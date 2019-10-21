@@ -24,7 +24,7 @@ module Styles = {
   let diff = style([display(`block)]);
 };
 
-let make = (~size, ~count, _children) => {
+let make = (~size, ~count) => {
   ...component,
   render: _self =>
     <section className=Styles.root>
@@ -56,22 +56,19 @@ let make =
         .
         "count": 'count,
         "size": 'size,
-        "children": 'children,
       },
     ) =>
     make(
       ~count=reactProps##count,
       ~size=reactProps##size,
-      reactProps##children,
     )
   );
 [@bs.obj]
 external makeProps:
-  (~children: 'children, ~size: 'size, ~count: 'count, unit) =>
+  (~size: 'size, ~count: 'count, unit) =>
   {
     .
     "count": 'count,
     "size": 'size,
-    "children": 'children,
   } =
   "";

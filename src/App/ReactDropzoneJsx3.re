@@ -1,0 +1,101 @@
+let make =
+  ReasonReactCompat.wrapReasonReactForReact(
+    ~component=ReasonReact.statelessComponent("TemporaryRefactorComponent"),
+    (
+      reactProps: {
+        .
+        "preventDropOnDocument": option('preventDropOnDocument),
+        "onKeyDown": option('onKeyDown),
+        "onFocus": option('onFocus),
+        "onFileDialogCancel": option('onFileDialogCancel),
+        "onDropRejected": option('onDropRejected),
+        "onDropAccepted": option('onDropAccepted),
+        "onDrop": option('onDrop),
+        "onDragStart": option('onDragStart),
+        "onDragOver": option('onDragOver),
+        "onDragLeave": option('onDragLeave),
+        "onDragEnter": option('onDragEnter),
+        "onClick": option('onClick),
+        "onBlur": option('onBlur),
+        "name": option('name),
+        "multiple": option('multiple),
+        "minSize": option('minSize),
+        "maxSize": option('maxSize),
+        "disabled": option('disabled),
+        "accept": option('accept),
+        "children": ReactDropzone.Children.t,
+      },
+    ) =>
+    ReactDropzone.make(
+      ~preventDropOnDocument=?reactProps##preventDropOnDocument,
+      ~onKeyDown=?reactProps##onKeyDown,
+      ~onFocus=?reactProps##onFocus,
+      ~onFileDialogCancel=?reactProps##onFileDialogCancel,
+      ~onDropRejected=?reactProps##onDropRejected,
+      ~onDropAccepted=?reactProps##onDropAccepted,
+      ~onDrop=?reactProps##onDrop,
+      ~onDragStart=?reactProps##onDragStart,
+      ~onDragOver=?reactProps##onDragOver,
+      ~onDragLeave=?reactProps##onDragLeave,
+      ~onDragEnter=?reactProps##onDragEnter,
+      ~onClick=?reactProps##onClick,
+      ~onBlur=?reactProps##onBlur,
+      ~name=?reactProps##name,
+      ~multiple=?reactProps##multiple,
+      ~minSize=?reactProps##minSize,
+      ~maxSize=?reactProps##maxSize,
+      ~disabled=?reactProps##disabled,
+      ~accept=?reactProps##accept,
+      reactProps##children,
+    )
+  );
+
+[@bs.obj]
+external makeProps:
+  (
+    ~children: ReactDropzone.Children.t,
+    ~accept: 'accept=?,
+    ~disabled: 'disabled=?,
+    ~maxSize: 'maxSize=?,
+    ~minSize: 'minSize=?,
+    ~multiple: 'multiple=?,
+    ~name: 'name=?,
+    ~onBlur: 'onBlur=?,
+    ~onClick: 'onClick=?,
+    ~onDragEnter: 'onDragEnter=?,
+    ~onDragLeave: 'onDragLeave=?,
+    ~onDragOver: 'onDragOver=?,
+    ~onDragStart: 'onDragStart=?,
+    ~onDrop: 'onDrop=?,
+    ~onDropAccepted: 'onDropAccepted=?,
+    ~onDropRejected: 'onDropRejected=?,
+    ~onFileDialogCancel: 'onFileDialogCancel=?,
+    ~onFocus: 'onFocus=?,
+    ~onKeyDown: 'onKeyDown=?,
+    ~preventDropOnDocument: 'preventDropOnDocument=?,
+    unit
+  ) =>
+  {
+    .
+    "preventDropOnDocument": option('preventDropOnDocument),
+    "onKeyDown": option('onKeyDown),
+    "onFocus": option('onFocus),
+    "onFileDialogCancel": option('onFileDialogCancel),
+    "onDropRejected": option('onDropRejected),
+    "onDropAccepted": option('onDropAccepted),
+    "onDrop": option('onDrop),
+    "onDragStart": option('onDragStart),
+    "onDragOver": option('onDragOver),
+    "onDragLeave": option('onDragLeave),
+    "onDragEnter": option('onDragEnter),
+    "onClick": option('onClick),
+    "onBlur": option('onBlur),
+    "name": option('name),
+    "multiple": option('multiple),
+    "minSize": option('minSize),
+    "maxSize": option('maxSize),
+    "disabled": option('disabled),
+    "accept": option('accept),
+    "children": ReactDropzone.Children.t,
+  } =
+  "";

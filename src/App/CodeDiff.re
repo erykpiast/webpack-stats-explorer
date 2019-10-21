@@ -10,25 +10,24 @@ module Styles = {
 
 let component = ReasonReact.statelessComponent("CodeDiff");
 
-let make = (~after, ~before, ~className, _children) => {
+let make = (~after, ~before, ~className) => {
   ...component,
   render: _self =>
-    <pre className=(Cn.make([className, Styles.root]))>
-      ...JsDiff.(
-           make(after, before)
-           |> List.map(diff =>
-                switch (diff) {
-                | Intact(value) => React.string(value)
-                | Added(value) =>
-                  <span className=Styles.added> (React.string(value)) </span>
-                | Removed(value) =>
-                  <span className=Styles.removed>
-                    (React.string(value))
-                  </span>
-                }
-              )
-           |> Array.of_list
-         )
+    <pre className={Cn.make([className, Styles.root])}>
+      JsDiff.(
+        make(after, before)
+        |> List.map(diff =>
+             switch (diff) {
+             | Intact(value) => React.string(value)
+             | Added(value) =>
+               <span className=Styles.added> {React.string(value)} </span>
+             | Removed(value) =>
+               <span className=Styles.removed> {React.string(value)} </span>
+             }
+           )
+        |> Array.of_list
+        |> React.array
+      )
     </pre>,
 };
 /**
@@ -44,20 +43,17 @@ let make =
         "className": 'className,
         "before": 'before,
         "after": 'after,
-        "children": 'children,
       },
     ) =>
     make(
       ~className=reactProps##className,
       ~before=reactProps##before,
       ~after=reactProps##after,
-      reactProps##children,
     )
   );
 [@bs.obj]
 external makeProps:
   (
-    ~children: 'children,
     ~after: 'after,
     ~before: 'before,
     ~className: 'className,
@@ -68,6 +64,5 @@ external makeProps:
     "className": 'className,
     "before": 'before,
     "after": 'after,
-    "children": 'children,
   } =
   "";

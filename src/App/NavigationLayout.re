@@ -56,7 +56,7 @@ module Styles = {
 
 let component = ReasonReact.statelessComponent("NavigationLayout");
 
-let make = (~side, ~main, ~top, _children) => {
+let make = (~side, ~main, ~top) => {
   ...component,
   render: _self =>
     <div className=Styles.wrapper>
@@ -80,24 +80,17 @@ let make =
         "top": 'top,
         "main": 'main,
         "side": 'side,
-        "children": 'children,
       },
     ) =>
-    make(
-      ~top=reactProps##top,
-      ~main=reactProps##main,
-      ~side=reactProps##side,
-      reactProps##children,
-    )
+    make(~top=reactProps##top, ~main=reactProps##main, ~side=reactProps##side)
   );
 [@bs.obj]
 external makeProps:
-  (~children: 'children, ~side: 'side, ~main: 'main, ~top: 'top, unit) =>
+  (~side: 'side, ~main: 'main, ~top: 'top, unit) =>
   {
     .
     "top": 'top,
     "main": 'main,
     "side": 'side,
-    "children": 'children,
   } =
   "";

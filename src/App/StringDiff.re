@@ -18,12 +18,12 @@ module Styles = {
 
 let component = ReasonReact.statelessComponent("StringDiff");
 
-let make = (_children, ~after, ~before) => {
+let make = (~after, ~before) => {
   ...component,
   render: _self =>
     <>
-      <span className=Styles.before> (React.string(before)) </span>
-      <span className=Styles.after> (React.string(after)) </span>
+      <span className=Styles.before> {React.string(before)} </span>
+      <span className=Styles.after> {React.string(after)} </span>
     </>,
 };
 /**
@@ -38,22 +38,16 @@ let make =
         .
         "before": 'before,
         "after": 'after,
-        "children": 'children,
       },
     ) =>
-    make(
-      ~before=reactProps##before,
-      ~after=reactProps##after,
-      reactProps##children,
-    )
+    make(~before=reactProps##before, ~after=reactProps##after)
   );
 [@bs.obj]
 external makeProps:
-  (~children: 'children, ~after: 'after, ~before: 'before, unit) =>
+  (~after: 'after, ~before: 'before, unit) =>
   {
     .
     "before": 'before,
     "after": 'after,
-    "children": 'children,
   } =
   "";

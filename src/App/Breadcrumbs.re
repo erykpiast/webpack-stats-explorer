@@ -29,24 +29,26 @@ let renderName = item =>
 
 let component = ReasonReact.statelessComponent("Breadcrumbs");
 
-let make = (~items, ~onClick, _children) => {
+let make = (~items, ~onClick) => {
   ...component,
   render: _self => {
     let separator =
-      <li className=Styles.separator> ({js|▷|js} |> React.string) </li>;
+      <li className=Styles.separator> {{js|▷|js} |> React.string} </li>;
 
     let breadcrumbs =
       items
       |> List.map2(
-           (index, (item, _)) =>
-             <li className=Styles.item onClick=(_ => onClick(index))>
-               (item |> renderName |> React.string)
+           (index, (item, _: CompareKind.t)) =>
+             <li className=Styles.item onClick={_ => onClick(index)}>
+               {item |> renderName |> React.string}
              </li>,
            Rebase.List.range(1, List.length(items)),
          )
       |> Utils.List.join(separator);
 
-    <ul className=Styles.list> ...(breadcrumbs |> Array.of_list) </ul>;
+    <ul className=Styles.list>
+      {breadcrumbs |> Array.of_list |> React.array}
+    </ul>;
   },
 };
 /**
@@ -61,22 +63,16 @@ let make =
         .
         "onClick": 'onClick,
         "items": 'items,
-        "children": 'children,
       },
     ) =>
-    make(
-      ~onClick=reactProps##onClick,
-      ~items=reactProps##items,
-      reactProps##children,
-    )
+    make(~onClick=reactProps##onClick, ~items=reactProps##items)
   );
 [@bs.obj]
 external makeProps:
-  (~children: 'children, ~items: 'items, ~onClick: 'onClick, unit) =>
+  (~items: 'items, ~onClick: 'onClick, unit) =>
   {
     .
     "onClick": 'onClick,
     "items": 'items,
-    "children": 'children,
   } =
   "";

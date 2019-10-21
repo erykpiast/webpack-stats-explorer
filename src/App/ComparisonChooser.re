@@ -18,19 +18,19 @@ module Styles = {
 
 let triangle = {js|◁|js};
 
-let make = (~comparisons, ~onNext, ~onPrev, ~currentIndex, _children) => {
+let make = (~comparisons: list(CompareEntry.t), ~onNext, ~onPrev, ~currentIndex) => {
   ...component,
   render: _self =>
     <div className=Styles.wrapper>
-      <Button onClick=onPrev> (triangle |> React.string) </Button>
+      <Button onClick=onPrev> {triangle |> React.string} </Button>
       <span className=Styles.value>
-        (currentIndex + 1 |> string_of_int |> React.string)
-        ("/" |> React.string)
-        (comparisons |> List.length |> string_of_int |> React.string)
+        {currentIndex + 1 |> string_of_int |> React.string}
+        {"/" |> React.string}
+        {comparisons |> List.length |> string_of_int |> React.string}
       </span>
       <Button onClick=onNext>
         <span className=Styles.nextButtonLabel>
-          (triangle |> React.string)
+          {triangle |> React.string}
         </span>
       </Button>
     </div>,
@@ -49,7 +49,6 @@ let make =
         "onPrev": 'onPrev,
         "onNext": 'onNext,
         "comparisons": 'comparisons,
-        "children": 'children,
       },
     ) =>
     make(
@@ -57,13 +56,11 @@ let make =
       ~onPrev=reactProps##onPrev,
       ~onNext=reactProps##onNext,
       ~comparisons=reactProps##comparisons,
-      reactProps##children,
     )
   );
 [@bs.obj]
 external makeProps:
   (
-    ~children: 'children,
     ~comparisons: 'comparisons,
     ~onNext: 'onNext,
     ~onPrev: 'onPrev,
@@ -76,6 +73,5 @@ external makeProps:
     "onPrev": 'onPrev,
     "onNext": 'onNext,
     "comparisons": 'comparisons,
-    "children": 'children,
   } =
   "";
