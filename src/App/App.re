@@ -60,26 +60,27 @@ let make = (~comparisons, _children) => {
   reducer,
   render: self =>
     if (List.length(self.state.comparisons) === 0) {
-      <WelcomeScreen onStats={stats => self.send(UpdateComparisons(stats))}>
-        ...{loader =>
-          <NavigationLayout side=ReasonReact.null main=loader top={<Logo />} />
-        }
+      <WelcomeScreen onStats=(stats => self.send(UpdateComparisons(stats)))>
+        ...(
+             loader =>
+               <NavigationLayout side=React.null main=loader top={<Logo />} />
+           )
       </WelcomeScreen>;
     } else {
       let comp = List.nth(self.state.comparisons, self.state.index);
       let revPath = List.rev(self.state.navigationPath);
       let topContent =
         <>
-          <Logo onClick={_ => self.send(NavigateThroughBreadcrumbs(0))} />
+          <Logo onClick=(_ => self.send(NavigateThroughBreadcrumbs(0))) />
           <Breadcrumbs
-            items={self.state.navigationPath}
-            onClick={index => self.send(NavigateThroughBreadcrumbs(index))}
+            items=self.state.navigationPath
+            onClick=(index => self.send(NavigateThroughBreadcrumbs(index)))
           />
           <ComparisonChooser
-            comparisons={self.state.comparisons}
-            currentIndex={self.state.index}
-            onPrev={_ => self.send(Prev)}
-            onNext={_ => self.send(Next)}
+            comparisons=self.state.comparisons
+            currentIndex=self.state.index
+            onPrev=(_ => self.send(Prev))
+            onNext=(_ => self.send(Next))
           />
         </>;
 
@@ -87,8 +88,8 @@ let make = (~comparisons, _children) => {
         switch (revPath) {
         | [] =>
           <EntryOverview
-            size={comp |> CompareEntry.size}
-            count={comp |> CompareEntry.count |> snd}
+            size=(comp |> CompareEntry.size)
+            count=(comp |> CompareEntry.count |> snd)
           />
         | [(entry, kind), ..._] => <EntrySummary entry kind />
         };
@@ -96,10 +97,35 @@ let make = (~comparisons, _children) => {
       let sideContent =
         <EntryTree
           comp
-          navigationPath={self.state.navigationPath}
-          onEntry={(level, entry) => self.send(Navigate(entry, level))}
+          navigationPath=self.state.navigationPath
+          onEntry=((level, entry) => self.send(Navigate(entry, level)))
         />;
 
       <NavigationLayout side=sideContent main=mainContent top=topContent />;
     },
 };
+/**
+ * This is a wrapper created to let this component be used from the new React api.
+ * Please convert this component to a [@react.component] function and then remove this wrapping code.
+ */
+let make =
+  ReasonReactCompat.wrapReasonReactForReact(
+    ~component,
+    (
+      reactProps: {
+        .
+        "comparisons": 'comparisons,
+        "children": 'children,
+      },
+    ) =>
+    make(~comparisons=reactProps##comparisons, reactProps##children)
+  );
+[@bs.obj]
+external makeProps:
+  (~children: 'children, ~comparisons: 'comparisons, unit) =>
+  {
+    .
+    "comparisons": 'comparisons,
+    "children": 'children,
+  } =
+  "";

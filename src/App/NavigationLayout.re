@@ -67,3 +67,37 @@ let make = (~side, ~main, ~top, _children) => {
       </div>
     </div>,
 };
+/**
+ * This is a wrapper created to let this component be used from the new React api.
+ * Please convert this component to a [@react.component] function and then remove this wrapping code.
+ */
+let make =
+  ReasonReactCompat.wrapReasonReactForReact(
+    ~component,
+    (
+      reactProps: {
+        .
+        "top": 'top,
+        "main": 'main,
+        "side": 'side,
+        "children": 'children,
+      },
+    ) =>
+    make(
+      ~top=reactProps##top,
+      ~main=reactProps##main,
+      ~side=reactProps##side,
+      reactProps##children,
+    )
+  );
+[@bs.obj]
+external makeProps:
+  (~children: 'children, ~side: 'side, ~main: 'main, ~top: 'top, unit) =>
+  {
+    .
+    "top": 'top,
+    "main": 'main,
+    "side": 'side,
+    "children": 'children,
+  } =
+  "";

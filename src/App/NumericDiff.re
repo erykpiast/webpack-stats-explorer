@@ -25,12 +25,52 @@ let make = (~className="", ~after, ~before, _children) => {
       };
 
     if (diff == 0) {
-      ReasonReact.null;
+      React.null;
     } else {
       <Size
-        className={Cn.make([className, kindClassName])}
-        value={Js.Math.abs_int(diff)}
+        className=(Cn.make([className, kindClassName]))
+        value=(Js.Math.abs_int(diff))
       />;
     };
   },
 };
+/**
+ * This is a wrapper created to let this component be used from the new React api.
+ * Please convert this component to a [@react.component] function and then remove this wrapping code.
+ */
+let make =
+  ReasonReactCompat.wrapReasonReactForReact(
+    ~component,
+    (
+      reactProps: {
+        .
+        "before": 'before,
+        "after": 'after,
+        "className": option('className),
+        "children": 'children,
+      },
+    ) =>
+    make(
+      ~before=reactProps##before,
+      ~after=reactProps##after,
+      ~className=?reactProps##className,
+      reactProps##children,
+    )
+  );
+[@bs.obj]
+external makeProps:
+  (
+    ~children: 'children,
+    ~className: 'className=?,
+    ~after: 'after,
+    ~before: 'before,
+    unit
+  ) =>
+  {
+    .
+    "before": 'before,
+    "after": 'after,
+    "className": option('className),
+    "children": 'children,
+  } =
+  "";

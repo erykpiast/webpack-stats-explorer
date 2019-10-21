@@ -228,8 +228,10 @@ module Mapper = (Context: MapperContext) => {
 
   let rec flatten = nested =>
     Utils.List.flatMap(
-      ({selected, value, children}) =>
-        [(selected, value), ...flatten(children)],
+      ({selected, value, children}) => [
+        (selected, value),
+        ...flatten(children),
+      ],
       nested,
     );
 };
@@ -272,35 +274,78 @@ let make =
     let props = mapToProps(onEntry, navigationPath, comp);
 
     switch (props) {
-    | [] => ReasonReact.null
+    | [] => React.null
     | data =>
       <ul className=Styles.list>
-        ...{
+        ...(
              data
              |> List.map(
                   (
                     (selected, {after, before, value, name, level, onChange}),
                   ) =>
                   <li
-                    onClick={_ => onChange(value)}
-                    className={Cn.make([
-                      Styles.item,
-                      Cn.ifTrue(Styles.selectedItem, selected),
-                      getLevelClass(level),
-                    ])}
+                    onClick=(_ => onChange(value))
+                    className=(
+                      Cn.make([
+                        Styles.item,
+                        Cn.ifTrue(Styles.selectedItem, selected),
+                        getLevelClass(level),
+                      ])
+                    )
                     title=name>
                     <ReversedText className=Styles.name>
-                      ...{name |> ReasonReact.string}
+                      ...(name |> React.string)
                     </ReversedText>
-                    {before !== 0 && after !== 0
-                       ? <Size className=Styles.size value=after />
-                       : ReasonReact.null}
+                    (
+                      before !== 0 && after !== 0 ?
+                        <Size className=Styles.size value=after /> : React.null
+                    )
                     <NumericDiff className=Styles.diff after before />
                   </li>
                 )
              |> Array.of_list
-           }
+           )
       </ul>
     };
   },
 };
+/**
+ * This is a wrapper created to let this component be used from the new React api.
+ * Please convert this component to a [@react.component] function and then remove this wrapping code.
+ */
+let make =
+  ReasonReactCompat.wrapReasonReactForReact(
+    ~component,
+    (
+      reactProps: {
+        .
+        "navigationPath": 'navigationPath,
+        "comp": 'comp,
+        "onEntry": 'onEntry,
+        "children": 'children,
+      },
+    ) =>
+    make(
+      ~navigationPath=reactProps##navigationPath,
+      ~comp=reactProps##comp,
+      ~onEntry=reactProps##onEntry,
+      reactProps##children,
+    )
+  );
+[@bs.obj]
+external makeProps:
+  (
+    ~children: 'children,
+    ~onEntry: 'onEntry,
+    ~comp: 'comp,
+    ~navigationPath: 'navigationPath,
+    unit
+  ) =>
+  {
+    .
+    "navigationPath": 'navigationPath,
+    "comp": 'comp,
+    "onEntry": 'onEntry,
+    "children": 'children,
+  } =
+  "";

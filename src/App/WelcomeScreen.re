@@ -41,30 +41,55 @@ let loadExampleData = () =>
 
 let make = (~onStats, children) => {
   ...component,
-  render: _self => {
-    <Dropzone className=Styles.dropzone onStats={compareStats ||> onStats}>
-      ...{onClick =>
-        [|
-          children(
-            <div className=Styles.wrapper>
-              <p> {L10N.drag |> ReasonReact.string} </p>
-              <div>
-                <Button onClick type_=Button.Primary className=Styles.action>
-                  {L10N.upload |> ReasonReact.string}
-                </Button>
-              </div>
-              <p> {L10N.or_ |> ReasonReact.string} </p>
-              <div>
-                <Button
-                  onClick={_ => onStats(loadExampleData())}
-                  className=Styles.action>
-                  {L10N.loadExample |> ReasonReact.string}
-                </Button>
-              </div>
-            </div>,
-          ),
-        |]
-      }
-    </Dropzone>;
-  },
+  render: _self =>
+    <Dropzone className=Styles.dropzone onStats=(compareStats ||> onStats)>
+      ...(
+           onClick => [|
+             children(
+               <div className=Styles.wrapper>
+                 <p> (L10N.drag |> React.string) </p>
+                 <div>
+                   <Button
+                     onClick type_=Button.Primary className=Styles.action>
+                     (L10N.upload |> React.string)
+                   </Button>
+                 </div>
+                 <p> (L10N.or_ |> React.string) </p>
+                 <div>
+                   <Button
+                     onClick=(_ => onStats(loadExampleData()))
+                     className=Styles.action>
+                     (L10N.loadExample |> React.string)
+                   </Button>
+                 </div>
+               </div>,
+             ),
+           |]
+         )
+    </Dropzone>,
 };
+/**
+ * This is a wrapper created to let this component be used from the new React api.
+ * Please convert this component to a [@react.component] function and then remove this wrapping code.
+ */
+let make =
+  ReasonReactCompat.wrapReasonReactForReact(
+    ~component,
+    (
+      reactProps: {
+        .
+        "onStats": 'onStats,
+        "children": 'children,
+      },
+    ) =>
+    make(~onStats=reactProps##onStats, reactProps##children)
+  );
+[@bs.obj]
+external makeProps:
+  (~children: 'children, ~onStats: 'onStats, unit) =>
+  {
+    .
+    "onStats": 'onStats,
+    "children": 'children,
+  } =
+  "";

@@ -15,12 +15,12 @@ module Styles = {
 
 let make = (~onClick=() => (), _children) => {
   ...component,
-  render: _self => {
+  render: _self =>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 774 875.7"
       className=Styles.root
-      onClick={_ => onClick()}>
+      onClick=(_ => onClick())>
       <path fill="#FFF" d="M387 0l387 218.9v437.9L387 875.7 0 656.8V218.9z" />
       <path
         fill="#8ed6fb"
@@ -30,6 +30,30 @@ let make = (~onClick=() => (), _children) => {
         fill="#1c78c0"
         d="M373 649.3L185.4 546.1V341.8L373 450.1v199.2zm26.8 0l187.6-103.1V341.8L399.8 450.1v199.2zm-13.4-207zM198.1 318.2l188.3-103.5 188.3 103.5-188.3 108.7-188.3-108.7z"
       />
-    </svg>;
-  },
+    </svg>,
 };
+/**
+ * This is a wrapper created to let this component be used from the new React api.
+ * Please convert this component to a [@react.component] function and then remove this wrapping code.
+ */
+let make =
+  ReasonReactCompat.wrapReasonReactForReact(
+    ~component,
+    (
+      reactProps: {
+        .
+        "onClick": option('onClick),
+        "children": 'children,
+      },
+    ) =>
+    make(~onClick=?reactProps##onClick, reactProps##children)
+  );
+[@bs.obj]
+external makeProps:
+  (~children: 'children, ~onClick: 'onClick=?, unit) =>
+  {
+    .
+    "onClick": option('onClick),
+    "children": 'children,
+  } =
+  "";

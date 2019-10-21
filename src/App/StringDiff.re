@@ -22,7 +22,38 @@ let make = (_children, ~after, ~before) => {
   ...component,
   render: _self =>
     <>
-      <span className=Styles.before> {ReasonReact.string(before)} </span>
-      <span className=Styles.after> {ReasonReact.string(after)} </span>
+      <span className=Styles.before> (React.string(before)) </span>
+      <span className=Styles.after> (React.string(after)) </span>
     </>,
 };
+/**
+ * This is a wrapper created to let this component be used from the new React api.
+ * Please convert this component to a [@react.component] function and then remove this wrapping code.
+ */
+let make =
+  ReasonReactCompat.wrapReasonReactForReact(
+    ~component,
+    (
+      reactProps: {
+        .
+        "before": 'before,
+        "after": 'after,
+        "children": 'children,
+      },
+    ) =>
+    make(
+      ~before=reactProps##before,
+      ~after=reactProps##after,
+      reactProps##children,
+    )
+  );
+[@bs.obj]
+external makeProps:
+  (~children: 'children, ~after: 'after, ~before: 'before, unit) =>
+  {
+    .
+    "before": 'before,
+    "after": 'after,
+    "children": 'children,
+  } =
+  "";

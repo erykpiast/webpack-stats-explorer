@@ -65,3 +65,43 @@ let make = (~onClick=_ => (), ~className="", ~type_=Default, children) => {
     <button className onClick> ...children </button>;
   },
 };
+/**
+ * This is a wrapper created to let this component be used from the new React api.
+ * Please convert this component to a [@react.component] function and then remove this wrapping code.
+ */
+let make =
+  ReasonReactCompat.wrapReasonReactForReact(
+    ~component,
+    (
+      reactProps: {
+        .
+        "type_": option('type_),
+        "className": option('className),
+        "onClick": option('onClick),
+        "children": 'children,
+      },
+    ) =>
+    make(
+      ~type_=?reactProps##type_,
+      ~className=?reactProps##className,
+      ~onClick=?reactProps##onClick,
+      reactProps##children,
+    )
+  );
+[@bs.obj]
+external makeProps:
+  (
+    ~children: 'children,
+    ~onClick: 'onClick=?,
+    ~className: 'className=?,
+    ~type_: 'type_=?,
+    unit
+  ) =>
+  {
+    .
+    "type_": option('type_),
+    "className": option('className),
+    "onClick": option('onClick),
+    "children": 'children,
+  } =
+  "";
