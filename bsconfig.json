@@ -5,12 +5,11 @@
 {
   "name": "webpack-stats-explorer",
   "reason": {
-    "react-jsx": 2
+    "react-jsx": 3
   },
   "sources": {
-    "dir" : "src",
-    "subdirs": [
-      {
+    "dir": "src",
+    "subdirs": [{
         "dir": "__tests__",
         "type": "dev"
       },
