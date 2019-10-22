@@ -149,7 +149,7 @@ let make = (~onStats, ~className="", children) => {
       );
 
     <>
-      <ReactDropzoneJsx3
+      <ReactDropzone
         accept={ReactDropzone.Single("application/json")}
         multiple=true
         onDrop={(acceptedFiles, _) =>
@@ -226,7 +226,7 @@ let make = (~onStats, ~className="", children) => {
              |> React.array}
           </div>;
         }}
-      </ReactDropzoneJsx3>
+      </ReactDropzone>
     </>;
   },
 };
