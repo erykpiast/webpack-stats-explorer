@@ -40,42 +40,13 @@ let displayUnit = unit =>
   )
   |> React.string;
 
-let component = ReasonReact.statelessComponent("Size");
-
+[@react.component]
 let make = (~className="", ~value) => {
-  ...component,
-  render: _self => {
-    let unit = guessUnit(value);
+  let unit = guessUnit(value);
 
-    <span className>
-      {displayValue(value, unit)}
-      {React.string(" ")}
-      {displayUnit(unit)}
-    </span>;
-  },
+  <span className>
+    {displayValue(value, unit)}
+    {React.string(" ")}
+    {displayUnit(unit)}
+  </span>;
 };
-/**
- * This is a wrapper created to let this component be used from the new React api.
- * Please convert this component to a [@react.component] function and then remove this wrapping code.
- */
-let make =
-  ReasonReactCompat.wrapReasonReactForReact(
-    ~component,
-    (
-      reactProps: {
-        .
-        "className": option('className),
-        "value": 'value,
-      },
-    ) =>
-    make(~className=?reactProps##className, ~value=reactProps##value)
-  );
-[@bs.obj]
-external makeProps:
-  (~value: 'value, ~className: 'className=?, unit) =>
-  {
-    .
-    "className": option('className),
-    "value": 'value,
-  } =
-  "";

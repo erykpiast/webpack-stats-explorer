@@ -1,5 +1,3 @@
-let component = ReasonReact.statelessComponent("Button");
-
 module Styles = {
   open Css;
 
@@ -50,58 +48,16 @@ type type_ =
   | Default
   | Primary;
 
-let make = (~onClick=_ => (), ~className="", ~type_=Default, children) => {
-  ...component,
-  render: _self => {
-    let typeClassName =
-      Cn.mapSome(Some(type_), t =>
-        switch (t) {
-        | Default => Styles.default
-        | Primary => Styles.primary
-        }
-      );
-    let className = Cn.make([Styles.button, typeClassName, className]);
+[@react.component]
+let make = (~onClick=_ => (), ~className="", ~type_=Default, ~children) => {
+  let typeClassName =
+    Cn.mapSome(Some(type_), t =>
+      switch (t) {
+      | Default => Styles.default
+      | Primary => Styles.primary
+      }
+    );
+  let className = Cn.make([Styles.button, typeClassName, className]);
 
-    <button className onClick> children </button>;
-  },
+  <button className onClick> children </button>;
 };
-/**
- * This is a wrapper created to let this component be used from the new React api.
- * Please convert this component to a [@react.component] function and then remove this wrapping code.
- */
-let make =
-  ReasonReactCompat.wrapReasonReactForReact(
-    ~component,
-    (
-      reactProps: {
-        .
-        "type_": option('type_),
-        "className": option('className),
-        "onClick": option('onClick),
-        "children": 'children,
-      },
-    ) =>
-    make(
-      ~type_=?reactProps##type_,
-      ~className=?reactProps##className,
-      ~onClick=?reactProps##onClick,
-      reactProps##children,
-    )
-  );
-[@bs.obj]
-external makeProps:
-  (
-    ~children: 'children,
-    ~onClick: 'onClick=?,
-    ~className: 'className=?,
-    ~type_: 'type_=?,
-    unit
-  ) =>
-  {
-    .
-    "type_": option('type_),
-    "className": option('className),
-    "onClick": option('onClick),
-    "children": 'children,
-  } =
-  "";

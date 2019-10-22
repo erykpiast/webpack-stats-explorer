@@ -16,38 +16,10 @@ module Styles = {
     ]);
 };
 
-let component = ReasonReact.statelessComponent("StringDiff");
-
+[@react.component]
 let make = (~after, ~before) => {
-  ...component,
-  render: _self =>
-    <>
-      <span className=Styles.before> {React.string(before)} </span>
-      <span className=Styles.after> {React.string(after)} </span>
-    </>,
+  <>
+    <span className=Styles.before> {React.string(before)} </span>
+    <span className=Styles.after> {React.string(after)} </span>
+  </>;
 };
-/**
- * This is a wrapper created to let this component be used from the new React api.
- * Please convert this component to a [@react.component] function and then remove this wrapping code.
- */
-let make =
-  ReasonReactCompat.wrapReasonReactForReact(
-    ~component,
-    (
-      reactProps: {
-        .
-        "before": 'before,
-        "after": 'after,
-      },
-    ) =>
-    make(~before=reactProps##before, ~after=reactProps##after)
-  );
-[@bs.obj]
-external makeProps:
-  (~after: 'after, ~before: 'before, unit) =>
-  {
-    .
-    "before": 'before,
-    "after": 'after,
-  } =
-  "";

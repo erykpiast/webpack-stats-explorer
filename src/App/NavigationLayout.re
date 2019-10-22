@@ -54,43 +54,13 @@ module Styles = {
     ]);
 };
 
-let component = ReasonReact.statelessComponent("NavigationLayout");
-
+[@react.component]
 let make = (~side, ~main, ~top) => {
-  ...component,
-  render: _self =>
-    <div className=Styles.wrapper>
-      <div className=Styles.top> top </div>
-      <div className=Styles.contentWrapper>
-        <div className=Styles.side> side </div>
-        <div className=Styles.main> main </div>
-      </div>
-    </div>,
+  <div className=Styles.wrapper>
+    <div className=Styles.top> top </div>
+    <div className=Styles.contentWrapper>
+      <div className=Styles.side> side </div>
+      <div className=Styles.main> main </div>
+    </div>
+  </div>;
 };
-/**
- * This is a wrapper created to let this component be used from the new React api.
- * Please convert this component to a [@react.component] function and then remove this wrapping code.
- */
-let make =
-  ReasonReactCompat.wrapReasonReactForReact(
-    ~component,
-    (
-      reactProps: {
-        .
-        "top": 'top,
-        "main": 'main,
-        "side": 'side,
-      },
-    ) =>
-    make(~top=reactProps##top, ~main=reactProps##main, ~side=reactProps##side)
-  );
-[@bs.obj]
-external makeProps:
-  (~side: 'side, ~main: 'main, ~top: 'top, unit) =>
-  {
-    .
-    "top": 'top,
-    "main": 'main,
-    "side": 'side,
-  } =
-  "";

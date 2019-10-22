@@ -258,80 +258,36 @@ let getLevelClass = level =>
   | _ => Styles.Level.l3
   };
 
-let component = ReasonReact.statelessComponent("EntryTree");
-
+[@react.component]
 let make =
-    (
-      ~onEntry,
-      ~comp: CompareEntry.t,
-      ~navigationPath: State.NavigationPath.t,
-    ) => {
-  ...component,
-  render: _self => {
-    let props = mapToProps(onEntry, navigationPath, comp);
+    (~onEntry, ~comp: CompareEntry.t, ~navigationPath: State.NavigationPath.t) => {
+  let props = mapToProps(onEntry, navigationPath, comp);
 
-    switch (props) {
-    | [] => React.null
-    | data =>
-      <ul className=Styles.list>
-        {data
-         |> List.map(
-              ((selected, {after, before, value, name, level, onChange})) =>
-              <li
-                onClick={_ => onChange(value)}
-                className={Cn.make([
-                  Styles.item,
-                  Cn.ifTrue(Styles.selectedItem, selected),
-                  getLevelClass(level),
-                ])}
-                title=name>
-                <ReversedText className=Styles.name>
-                  ...{name |> React.string}
-                </ReversedText>
-                {before !== 0 && after !== 0
-                   ? <Size className=Styles.size value=after /> : React.null}
-                <NumericDiff className=Styles.diff after before />
-              </li>
-            )
-         |> Array.of_list
-         |> React.array}
-      </ul>
-    };
-  },
+  switch (props) {
+  | [] => React.null
+  | data =>
+    <ul className=Styles.list>
+      {data
+       |> List.map(
+            ((selected, {after, before, value, name, level, onChange})) =>
+            <li
+              onClick={_ => onChange(value)}
+              className={Cn.make([
+                Styles.item,
+                Cn.ifTrue(Styles.selectedItem, selected),
+                getLevelClass(level),
+              ])}
+              title=name>
+              <ReversedText className=Styles.name>
+                ...{name |> React.string}
+              </ReversedText>
+              {before !== 0 && after !== 0
+                 ? <Size className=Styles.size value=after /> : React.null}
+              <NumericDiff className=Styles.diff after before />
+            </li>
+          )
+       |> Array.of_list
+       |> React.array}
+    </ul>
+  };
 };
-/**
- * This is a wrapper created to let this component be used from the new React api.
- * Please convert this component to a [@react.component] function and then remove this wrapping code.
- */
-let make =
-  ReasonReactCompat.wrapReasonReactForReact(
-    ~component,
-    (
-      reactProps: {
-        .
-        "navigationPath": 'navigationPath,
-        "comp": 'comp,
-        "onEntry": 'onEntry,
-      },
-    ) =>
-    make(
-      ~navigationPath=reactProps##navigationPath,
-      ~comp=reactProps##comp,
-      ~onEntry=reactProps##onEntry,
-    )
-  );
-[@bs.obj]
-external makeProps:
-  (
-    ~onEntry: 'onEntry,
-    ~comp: 'comp,
-    ~navigationPath: 'navigationPath,
-    unit
-  ) =>
-  {
-    .
-    "navigationPath": 'navigationPath,
-    "comp": 'comp,
-    "onEntry": 'onEntry,
-  } =
-  "";

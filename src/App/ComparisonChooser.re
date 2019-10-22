@@ -1,5 +1,3 @@
-let component = ReasonReact.statelessComponent("ComparisonChooser");
-
 module Styles = {
   open Css;
 
@@ -18,60 +16,20 @@ module Styles = {
 
 let triangle = {js|◁|js};
 
-let make = (~comparisons: list(CompareEntry.t), ~onNext, ~onPrev, ~currentIndex) => {
-  ...component,
-  render: _self =>
-    <div className=Styles.wrapper>
-      <Button onClick=onPrev> {triangle |> React.string} </Button>
-      <span className=Styles.value>
-        {currentIndex + 1 |> string_of_int |> React.string}
-        {"/" |> React.string}
-        {comparisons |> List.length |> string_of_int |> React.string}
-      </span>
-      <Button onClick=onNext>
-        <span className=Styles.nextButtonLabel>
-          {triangle |> React.string}
-        </span>
-      </Button>
-    </div>,
-};
-/**
- * This is a wrapper created to let this component be used from the new React api.
- * Please convert this component to a [@react.component] function and then remove this wrapping code.
- */
+[@react.component]
 let make =
-  ReasonReactCompat.wrapReasonReactForReact(
-    ~component,
-    (
-      reactProps: {
-        .
-        "currentIndex": 'currentIndex,
-        "onPrev": 'onPrev,
-        "onNext": 'onNext,
-        "comparisons": 'comparisons,
-      },
-    ) =>
-    make(
-      ~currentIndex=reactProps##currentIndex,
-      ~onPrev=reactProps##onPrev,
-      ~onNext=reactProps##onNext,
-      ~comparisons=reactProps##comparisons,
-    )
-  );
-[@bs.obj]
-external makeProps:
-  (
-    ~comparisons: 'comparisons,
-    ~onNext: 'onNext,
-    ~onPrev: 'onPrev,
-    ~currentIndex: 'currentIndex,
-    unit
-  ) =>
-  {
-    .
-    "currentIndex": 'currentIndex,
-    "onPrev": 'onPrev,
-    "onNext": 'onNext,
-    "comparisons": 'comparisons,
-  } =
-  "";
+    (~comparisons: list(CompareEntry.t), ~onNext, ~onPrev, ~currentIndex) => {
+  <div className=Styles.wrapper>
+    <Button onClick=onPrev> {triangle |> React.string} </Button>
+    <span className=Styles.value>
+      {currentIndex + 1 |> string_of_int |> React.string}
+      {"/" |> React.string}
+      {comparisons |> List.length |> string_of_int |> React.string}
+    </span>
+    <Button onClick=onNext>
+      <span className=Styles.nextButtonLabel>
+        {triangle |> React.string}
+      </span>
+    </Button>
+  </div>;
+};
