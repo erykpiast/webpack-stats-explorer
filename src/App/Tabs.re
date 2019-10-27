@@ -42,13 +42,8 @@ module Styles = {
     ]);
 };
 
-let component = ReasonReact.statelessComponent("Tabs");
-
-let notNullElement = (!==)(React.null);
-
 [@react.component]
-let make =
-    (~className="", ~selectedIndex=0, ~onChange=_index => (), ~children) => {
+let make = (~className="", ~selectedIndex=0, ~onChange=_ => (), ~children) => {
   <div className={Cn.make([className, Styles.root])}>
     {children
      |> Array.mapi((index, child) =>

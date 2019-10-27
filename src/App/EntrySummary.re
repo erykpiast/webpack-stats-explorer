@@ -220,97 +220,52 @@ module.exports = {
     }
   };
 
-type action =
-  | SwitchTab(int);
-
-type state = {currentTabIndex: int};
-
-let reducer = (action, _state) =>
-  switch (action) {
-  | SwitchTab(index) => ReasonReact.Update({currentTabIndex: index})
-  };
-
-let component = ReasonReact.reducerComponent("EntrySummary");
-
+[@react.component]
 let make = (~entry, ~kind) => {
-  ...component,
-  reducer,
-  initialState: () => {currentTabIndex: 1},
-  render: self => {
-    let original = entry |> getOriginal;
-    let stat = entry |> getStat;
-    let parsed = entry |> getParsed;
-    let currentData =
-      switch (self.state.currentTabIndex) {
-      | 0 => original
-      | 2 => parsed
-      | _ => stat
-      };
-    let (kindClassName, kindLabel) = getKindProps(kind);
+  let (index, setIndex) = React.useState(() => 1);
 
-    <div className=Styles.wrapper>
-      <header className=Styles.header>
-        <dl className=Styles.list>
-          <div className=Styles.status>
-            <dt className=Styles.term>
-              {L10N.Summary.status |> React.string}
-            </dt>
-            <dd className={Cn.make([Styles.definition, kindClassName])}>
-              {kindLabel |> React.string}
-              {nbsp |> React.string}
-              {L10N.module_ |> React.string}
-            </dd>
-          </div>
-          <div className=Styles.name>
-            <dt className=Styles.term>
-              {L10N.Summary.name |> React.string}
-            </dt>
-            <dd className=Styles.definition>
-              {entry |> getId |> React.string}
-            </dd>
-          </div>
-          <Tabs
-            className=Styles.size
-            selectedIndex={self.state.currentTabIndex}
-            onChange={index => self.send(SwitchTab(index))}>
-            [|
-              original |> renderSize(L10N.Summary.original),
-              stat |> renderSize(L10N.Summary.stat),
-              parsed |> renderSize(L10N.Summary.parsed)
-            |]
-          </Tabs>
-        </dl>
-      </header>
-      <div className=Styles.content> {currentData |> renderSource} </div>
-    </div>;
-  },
+  let original = entry |> getOriginal;
+  let stat = entry |> getStat;
+  let parsed = entry |> getParsed;
+  let currentData =
+    switch (index) {
+    | 0 => original
+    | 2 => parsed
+    | _ => stat
+    };
+  let (kindClassName, kindLabel) = getKindProps(kind);
+
+  <div className=Styles.wrapper>
+    <header className=Styles.header>
+      <dl className=Styles.list>
+        <div className=Styles.status>
+          <dt className=Styles.term>
+            {L10N.Summary.status |> React.string}
+          </dt>
+          <dd className={Cn.make([Styles.definition, kindClassName])}>
+            {kindLabel |> React.string}
+            {nbsp |> React.string}
+            {L10N.module_ |> React.string}
+          </dd>
+        </div>
+        <div className=Styles.name>
+          <dt className=Styles.term> {L10N.Summary.name |> React.string} </dt>
+          <dd className=Styles.definition>
+            {entry |> getId |> React.string}
+          </dd>
+        </div>
+        <Tabs
+          className=Styles.size
+          selectedIndex=index
+          onChange={index => setIndex(_ => index)}>
+          [|
+            original |> renderSize(L10N.Summary.original),
+            stat |> renderSize(L10N.Summary.stat),
+            parsed |> renderSize(L10N.Summary.parsed),
+          |]
+        </Tabs>
+      </dl>
+    </header>
+    <div className=Styles.content> {currentData |> renderSource} </div>
+  </div>;
 };
-
-/**
- * This is a wrapper created to let this component be used from the new React api.
- * Please convert this component to a [@react.component] function and then remove this wrapping code.
- */
-let make =
-  ReasonReactCompat.wrapReasonReactForReact(
-    ~component,
-    (
-      reactProps: {
-        .
-        "entry": 'entry,
-        "kind": 'kind,
-      },
-    ) =>
-    make(
-      ~entry=reactProps##entry,
-      ~kind=reactProps##kind,
-    )
-  );
-[@bs.obj]
-external makeProps:
-  (~kind: 'kind, ~entry: 'entry, unit) =>
-  {
-    .
-    "entry": 'entry,
-    "kind": 'kind,
-  } =
-  "";

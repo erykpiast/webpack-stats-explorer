@@ -98,166 +98,118 @@ module Styles = {
   let label = style([backgroundColor(Theme.Color.Background.danger)]);
 };
 
-let reducer = (action, _state) =>
+let reducer = (_state, action) =>
   switch (action) {
-  | UploadSuccess(timeoutId) =>
-    ReasonReact.Update({
+  | UploadSuccess(timeoutId) => {
       status: Success,
       resetParsingStatusTimeout: Some(timeoutId),
-    })
-  | UploadFail(reason, timeoutId) =>
-    ReasonReact.Update({
+    }
+  | UploadFail(reason, timeoutId) => {
       status: Fail(reason),
       resetParsingStatusTimeout: Some(timeoutId),
-    })
-  | StatusReset =>
-    ReasonReact.Update({status: Unknown, resetParsingStatusTimeout: None})
+    }
+  | StatusReset => {status: Unknown, resetParsingStatusTimeout: None}
   };
 
 let fail = (reason, timeoutId) => UploadFail(reason, timeoutId);
 
 let success = timeoutId => UploadSuccess(timeoutId);
 
-let component = ReasonReact.reducerComponent("Dropzone");
+[@react.component]
+let make = (~onStats, ~className="", ~children) => {
+  let (state, send) =
+    React.useReducer(
+      reducer,
+      {status: Unknown, resetParsingStatusTimeout: None},
+    );
 
-let make = (~onStats, ~className="", children) => {
-  ...component,
-  initialState: () => {status: Unknown, resetParsingStatusTimeout: None},
-  reducer,
-  render: self => {
-    let updateStatus = actionCreator => {
-      switch (self.state.resetParsingStatusTimeout) {
-      | Some(timeoutId) => Js.Global.clearTimeout(timeoutId)
-      | _ => ()
-      };
-      let timeoutId =
-        Js.Global.setTimeout(() => self.send(StatusReset), 5000);
-
-      self.send(actionCreator(timeoutId));
+  let updateStatus = actionCreator => {
+    switch (state.resetParsingStatusTimeout) {
+    | Some(timeoutId) => Js.Global.clearTimeout(timeoutId)
+    | _ => ()
     };
+    let timeoutId = Js.Global.setTimeout(() => send(StatusReset), 5000);
 
-    let failureHandler =
-      Rationale.Function.Infix.(
-        [@bs.open]
-        (
-          fun
-          | UnsupportedVersionExn => UnsupportedVersion
-          | ParsingFailedExn => ParsingFailed
-        )
-        ||> Utils.defaultTo(ParsingFailed)
-        ||> (err => updateStatus(fail(err)))
-      );
+    send(actionCreator(timeoutId));
+  };
 
-    <>
-      <ReactDropzone
-        accept={ReactDropzone.Single("application/json")}
-        multiple=true
-        onDrop={(acceptedFiles, _) =>
-          switch (acceptedFiles) {
-          | [||] => updateStatus(fail(NotEnoughFiles))
-          | [|_|] => updateStatus(fail(NotEnoughFiles))
-          | files =>
-            files
-            |> parseStats(
-                 ~onSuccess=
-                   stats => {
-                     updateStatus(success);
-                     onStats(stats);
-                   },
-                 ~onFailure=failureHandler,
-               )
-            |> ignore
-          }
-        }>
-        ...{(
-          {
-            getInputProps,
-            getRootProps,
-            isDragAccept,
-            isDragActive,
-            isDragReject,
-          },
-        ) => {
-          let inputProps = getInputProps();
-          let rootProps = getRootProps();
-          let label =
-            getLabel(
-              ~isDragAccept,
-              ~isDragActive,
-              ~isDragReject,
-              ~status=self.state.status,
-            );
-          <div
-            className
-            onBlur={rootProps.onBlur}
-            onDragEnter={rootProps.onDragEnter}
-            onDragLeave={rootProps.onDragLeave}
-            onDragOver={rootProps.onDragOver}
-            onDragStart={rootProps.onDragStart}
-            onDrop={rootProps.onDrop}
-            onFocus={rootProps.onFocus}
-            onKeyDown={rootProps.onKeyDown}
-            ref={ReactDOMRe.Ref.callbackDomRef(rootProps.ref)}
-            tabIndex={rootProps.tabIndex}>
-            {Array.append(
-               [|
-                 <div className=Styles.input>
-                   <input
-                     autoComplete={inputProps.autoComplete}
-                     onChange={inputProps.onChange}
-                     onClick={inputProps.onClick}
-                     ref={ReactDOMRe.Ref.callbackDomRef(inputProps.ref)}
-                     style={inputProps.style}
-                     tabIndex={inputProps.tabIndex}
-                     type_={inputProps.type_}
-                     multiple={inputProps.multiple}
-                   />
-                 </div>,
-                 switch (label) {
-                 | Some(label) =>
-                   <Snackbar className=Styles.label>
-                     {label |> React.string}
-                   </Snackbar>
-                 | None => React.null
-                 },
-               |],
-               children(rootProps.onClick),
-             )
-             |> React.array}
-          </div>;
-        }}
-      </ReactDropzone>
-    </>;
-  },
+  let failureHandler =
+    Rationale.Function.Infix.(
+      [@bs.open]
+      (
+        fun
+        | UnsupportedVersionExn => UnsupportedVersion
+        | ParsingFailedExn => ParsingFailed
+      )
+      ||> Utils.defaultTo(ParsingFailed)
+      ||> (err => updateStatus(fail(err)))
+    );
+
+  <ReactDropzone
+    accept={ReactDropzone.Single("application/json")}
+    multiple=true
+    onDrop={(acceptedFiles, _) =>
+      switch (acceptedFiles) {
+      | [||] => updateStatus(fail(NotEnoughFiles))
+      | [|_|] => updateStatus(fail(NotEnoughFiles))
+      | files =>
+        files
+        |> parseStats(
+             ~onSuccess=
+               stats => {
+                 updateStatus(success);
+                 onStats(stats);
+               },
+             ~onFailure=failureHandler,
+           )
+        |> ignore
+      }
+    }>
+    {(
+       {getInputProps, getRootProps, isDragAccept, isDragActive, isDragReject},
+     ) => {
+       let inputProps = getInputProps();
+       let rootProps = getRootProps();
+       let label =
+         getLabel(
+           ~isDragAccept,
+           ~isDragActive,
+           ~isDragReject,
+           ~status=state.status,
+         );
+       <div
+         className
+         onBlur={rootProps.onBlur}
+         onDragEnter={rootProps.onDragEnter}
+         onDragLeave={rootProps.onDragLeave}
+         onDragOver={rootProps.onDragOver}
+         onDragStart={rootProps.onDragStart}
+         onDrop={rootProps.onDrop}
+         onFocus={rootProps.onFocus}
+         onKeyDown={rootProps.onKeyDown}
+         ref={ReactDOMRe.Ref.callbackDomRef(rootProps.ref)}
+         tabIndex={rootProps.tabIndex}>
+         <div className=Styles.input>
+           <input
+             autoComplete={inputProps.autoComplete}
+             onChange={inputProps.onChange}
+             onClick={inputProps.onClick}
+             ref={ReactDOMRe.Ref.callbackDomRef(inputProps.ref)}
+             style={inputProps.style}
+             tabIndex={inputProps.tabIndex}
+             type_={inputProps.type_}
+             multiple={inputProps.multiple}
+           />
+         </div>
+         {switch (label) {
+          | Some(label) =>
+            <Snackbar className=Styles.label>
+              {label |> React.string}
+            </Snackbar>
+          | None => React.null
+          }}
+         {children(rootProps.onClick)}
+       </div>;
+     }}
+  </ReactDropzone>;
 };
-/**
- * This is a wrapper created to let this component be used from the new React api.
- * Please convert this component to a [@react.component] function and then remove this wrapping code.
- */
-let make =
-  ReasonReactCompat.wrapReasonReactForReact(
-    ~component,
-    (
-      reactProps: {
-        .
-        "className": option('className),
-        "onStats": 'onStats,
-        "children": 'children,
-      },
-    ) =>
-    make(
-      ~className=?reactProps##className,
-      ~onStats=reactProps##onStats,
-      reactProps##children,
-    )
-  );
-[@bs.obj]
-external makeProps:
-  (~children: 'children, ~onStats: 'onStats, ~className: 'className=?, unit) =>
-  {
-    .
-    "className": option('className),
-    "onStats": 'onStats,
-    "children": 'children,
-  } =
-  "";

@@ -42,7 +42,7 @@ let loadExampleData = () =>
 [@react.component]
 let make = (~onStats, ~children) => {
   <Dropzone className=Styles.dropzone onStats={compareStats ||> onStats}>
-    {onClick => [|
+    {onClick =>
        children(
          <div className=Styles.wrapper>
            <p> {L10N.drag |> React.string} </p>
@@ -60,7 +60,6 @@ let make = (~onStats, ~children) => {
              </Button>
            </div>
          </div>,
-       ),
-     |]}
+       )}
   </Dropzone>;
 };
