@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.13.1](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.13.0...v1.13.1) (2019-10-28)
+
+
+### Bug Fixes
+
+* **package:** update react to version 16.11.0 ([363795b](https://github.com/erykpiast/webpack-stats-explorer/commit/363795bd7dd9df355d4ea1392b879ad4c85f38a0))
+* **package:** update react-dom to version 16.11.0 ([5d56653](https://github.com/erykpiast/webpack-stats-explorer/commit/5d56653fe51b979eca995256acccf06a5e225ea6))
+
 ## [1.13.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.12.0...v1.13.0) (2019-10-18)
 
 
