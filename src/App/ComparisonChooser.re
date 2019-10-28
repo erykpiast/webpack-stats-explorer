@@ -1,5 +1,3 @@
-let component = ReasonReact.statelessComponent("ComparisonChooser");
-
 module Styles = {
   open Css;
 
@@ -18,21 +16,20 @@ module Styles = {
 
 let triangle = {js|◁|js};
 
-let make = (~comparisons, ~onNext, ~onPrev, ~currentIndex, _children) => {
-  ...component,
-  render: _self => {
-    <div className=Styles.wrapper>
-      <Button onClick=onPrev> {triangle |> ReasonReact.string} </Button>
-      <span className=Styles.value>
-        {currentIndex + 1 |> string_of_int |> ReasonReact.string}
-        {"/" |> ReasonReact.string}
-        {comparisons |> List.length |> string_of_int |> ReasonReact.string}
+[@react.component]
+let make =
+    (~comparisons: list(CompareEntry.t), ~onNext, ~onPrev, ~currentIndex) => {
+  <div className=Styles.wrapper>
+    <Button onClick=onPrev> {triangle |> React.string} </Button>
+    <span className=Styles.value>
+      {currentIndex + 1 |> string_of_int |> React.string}
+      {"/" |> React.string}
+      {comparisons |> List.length |> string_of_int |> React.string}
+    </span>
+    <Button onClick=onNext>
+      <span className=Styles.nextButtonLabel>
+        {triangle |> React.string}
       </span>
-      <Button onClick=onNext>
-        <span className=Styles.nextButtonLabel>
-          {triangle |> ReasonReact.string}
-        </span>
-      </Button>
-    </div>;
-  },
+    </Button>
+  </div>;
 };

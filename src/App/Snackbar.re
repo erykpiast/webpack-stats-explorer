@@ -18,11 +18,7 @@ module Styles = {
     ]);
 };
 
-let component = ReasonReact.statelessComponent("Snackbar");
-
-let make = (~className="", children) => {
-  ...component,
-  render: _self => {
-    <div className={Cn.make([className, Styles.root])}> ...children </div>;
-  },
+[@react.component]
+let make = (~className="", ~children) => {
+  <div className={Cn.make([className, Styles.root])}> children </div>;
 };

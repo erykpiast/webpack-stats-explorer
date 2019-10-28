@@ -49,18 +49,21 @@ describe("Utils", () =>
       test(
         "false for two lists with different length and eql function always returning true",
         () => {
-        let result = isEqual([1, 2], [3, 4, 5], ~eql=(_, _) => true, ());
+          let result = isEqual([1, 2], [3, 4, 5], ~eql=(_, _) => true, ());
 
-        expect(result) |> toEqual(false);
-      });
+          expect(result) |> toEqual(false);
+        },
+      );
 
       test(
         "true for two different lists with the same length and eql function always returning true",
         () => {
-        let result = isEqual([1, 2, 3], [4, 5, 6], ~eql=(_, _) => true, ());
+          let result =
+            isEqual([1, 2, 3], [4, 5, 6], ~eql=(_, _) => true, ());
 
-        expect(result) |> toEqual(true);
-      });
+          expect(result) |> toEqual(true);
+        },
+      );
 
       describe("property", () => {
         open Verify.Arbitrary;

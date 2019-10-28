@@ -1,4 +1,4 @@
-type unit =
+type sizeUnit =
   | B
   | KB
   | MB;
@@ -19,7 +19,7 @@ let displayValue = (value, unit) =>
       )
     }
   )
-  |> ReasonReact.string;
+  |> React.string;
 
 let guessUnit = value =>
   if (value < 10) {
@@ -38,19 +38,15 @@ let displayUnit = unit =>
     | MB => "MB"
     }
   )
-  |> ReasonReact.string;
+  |> React.string;
 
-let component = ReasonReact.statelessComponent("Size");
+[@react.component]
+let make = (~className="", ~value) => {
+  let unit = guessUnit(value);
 
-let make = (~value, ~className="", _children) => {
-  ...component,
-  render: _self => {
-    let unit = guessUnit(value);
-
-    <span className>
-      {displayValue(value, unit)}
-      {ReasonReact.string(" ")}
-      {displayUnit(unit)}
-    </span>;
-  },
+  <span className>
+    {displayValue(value, unit)}
+    {React.string(" ")}
+    {displayUnit(unit)}
+  </span>;
 };

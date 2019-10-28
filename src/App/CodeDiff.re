@@ -8,28 +8,22 @@ module Styles = {
   let added = style([backgroundColor(Theme.Color.Added.background)]);
 };
 
-let component = ReasonReact.statelessComponent("CodeDiff");
-
-let make = (~after, ~before, ~className, _children) => {
-  ...component,
-  render: _self =>
-    <pre className={Cn.make([className, Styles.root])}>
-      ...JsDiff.(
-           make(after, before)
-           |> List.map(diff =>
-                switch (diff) {
-                | Intact(value) => ReasonReact.string(value)
-                | Added(value) =>
-                  <span className=Styles.added>
-                    {ReasonReact.string(value)}
-                  </span>
-                | Removed(value) =>
-                  <span className=Styles.removed>
-                    {ReasonReact.string(value)}
-                  </span>
-                }
-              )
-           |> Array.of_list
+[@react.component]
+let make = (~after, ~before, ~className) => {
+  <pre className={Cn.make([className, Styles.root])}>
+    JsDiff.(
+      make(after, before)
+      |> List.map(diff =>
+           switch (diff) {
+           | Intact(value) => React.string(value)
+           | Added(value) =>
+             <span className=Styles.added> {React.string(value)} </span>
+           | Removed(value) =>
+             <span className=Styles.removed> {React.string(value)} </span>
+           }
          )
-    </pre>,
+      |> Array.of_list
+      |> React.array
+    )
+  </pre>;
 };

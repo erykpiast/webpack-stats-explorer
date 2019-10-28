@@ -21,32 +21,29 @@ module Styles = {
     ]);
 };
 
-let renderName = item => switch (item) {
+let renderName = item =>
+  switch (item) {
   | CompareEntry.Entry({id}) => id
   | CompareEntry.ModifiedEntry({id}) => id
   };
 
-let component = ReasonReact.statelessComponent("Breadcrumbs");
+[@react.component]
+let make = (~items, ~onClick) => {
+  let separator =
+    <li className=Styles.separator> {{js|▷|js} |> React.string} </li>;
 
-let make = (~items, ~onClick, _children) => {
-  ...component,
-  render: _self => {
-    let separator =
-      <li className=Styles.separator>
-        {{js|▷|js} |> ReasonReact.string}
-      </li>;
+  let breadcrumbs =
+    items
+    |> List.map2(
+         (index, (item, _: CompareKind.t)) =>
+           <li className=Styles.item onClick={_ => onClick(index)}>
+             {item |> renderName |> React.string}
+           </li>,
+         Rebase.List.range(1, List.length(items)),
+       )
+    |> Utils.List.join(separator);
 
-    let breadcrumbs =
-      items
-      |> List.map2(
-           (index, (item, _)) =>
-             <li className=Styles.item onClick={_ => onClick(index)}>
-               {item |> renderName |> ReasonReact.string}
-             </li>,
-           Rebase.List.range(1, List.length(items)),
-         )
-      |> Utils.List.join(separator);
-
-    <ul className=Styles.list> ...{breadcrumbs |> Array.of_list} </ul>;
-  },
+  <ul className=Styles.list>
+    {breadcrumbs |> Array.of_list |> React.array}
+  </ul>;
 };

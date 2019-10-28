@@ -42,31 +42,24 @@ module Styles = {
     ]);
 };
 
-let component = ReasonReact.statelessComponent("Tabs");
-
-let notNullElement = (!==)(ReasonReact.null);
-
-let make = (~className="", ~selectedIndex=0, ~onChange=_index => (), children) => {
-  ...component,
-  render: _self => {
-    <div className={Cn.make([className, Styles.root])}>
-      ...{
-           children
-           |> Array.mapi((index, child) =>
-                if (child === ReasonReact.null) {
-                  ReasonReact.null;
-                } else {
-                  <button
-                    className={Cn.make([
-                      Styles.tab,
-                      Cn.ifTrue(Styles.selectedTab, index === selectedIndex),
-                    ])}
-                    onClick={_event => onChange(index)}>
-                    child
-                  </button>;
-                }
-              )
-         }
-    </div>;
-  },
+[@react.component]
+let make = (~className="", ~selectedIndex=0, ~onChange=_ => (), ~children) => {
+  <div className={Cn.make([className, Styles.root])}>
+    {children
+     |> Array.mapi((index, child) =>
+          if (child === React.null) {
+            React.null;
+          } else {
+            <button
+              className={Cn.make([
+                Styles.tab,
+                Cn.ifTrue(Styles.selectedTab, index === selectedIndex),
+              ])}
+              onClick={_event => onChange(index)}>
+              child
+            </button>;
+          }
+        )
+     |> React.array}
+  </div>;
 };

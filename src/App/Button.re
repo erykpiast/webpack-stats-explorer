@@ -1,5 +1,3 @@
-let component = ReasonReact.statelessComponent("Button");
-
 module Styles = {
   open Css;
 
@@ -50,18 +48,16 @@ type type_ =
   | Default
   | Primary;
 
-let make = (~onClick=_ => (), ~className="", ~type_=Default, children) => {
-  ...component,
-  render: _self => {
-    let typeClassName =
-      Cn.mapSome(Some(type_), t =>
-        switch (t) {
-        | Default => Styles.default
-        | Primary => Styles.primary
-        }
-      );
-    let className = Cn.make([Styles.button, typeClassName, className]);
+[@react.component]
+let make = (~onClick=_ => (), ~className="", ~type_=Default, ~children) => {
+  let typeClassName =
+    Cn.mapSome(Some(type_), t =>
+      switch (t) {
+      | Default => Styles.default
+      | Primary => Styles.primary
+      }
+    );
+  let className = Cn.make([Styles.button, typeClassName, className]);
 
-    <button className onClick> ...children </button>;
-  },
+  <button className onClick> children </button>;
 };

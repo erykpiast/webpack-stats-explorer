@@ -39,32 +39,27 @@ let compareStats = Array.to_list ||> CompareStats.make;
 let loadExampleData = () =>
   compareStats([|Data.a, Data.b, Data.c, Data.d, Data.e|]);
 
-let make = (~onStats, children) => {
-  ...component,
-  render: _self => {
-    <Dropzone className=Styles.dropzone onStats={compareStats ||> onStats}>
-      ...{onClick =>
-        [|
-          children(
-            <div className=Styles.wrapper>
-              <p> {L10N.drag |> ReasonReact.string} </p>
-              <div>
-                <Button onClick type_=Button.Primary className=Styles.action>
-                  {L10N.upload |> ReasonReact.string}
-                </Button>
-              </div>
-              <p> {L10N.or_ |> ReasonReact.string} </p>
-              <div>
-                <Button
-                  onClick={_ => onStats(loadExampleData())}
-                  className=Styles.action>
-                  {L10N.loadExample |> ReasonReact.string}
-                </Button>
-              </div>
-            </div>,
-          ),
-        |]
-      }
-    </Dropzone>;
-  },
+[@react.component]
+let make = (~onStats, ~children) => {
+  <Dropzone className=Styles.dropzone onStats={compareStats ||> onStats}>
+    {onClick =>
+       children(
+         <div className=Styles.wrapper>
+           <p> {L10N.drag |> React.string} </p>
+           <div>
+             <Button onClick type_=Button.Primary className=Styles.action>
+               {L10N.upload |> React.string}
+             </Button>
+           </div>
+           <p> {L10N.or_ |> React.string} </p>
+           <div>
+             <Button
+               onClick={_ => onStats(loadExampleData())}
+               className=Styles.action>
+               {L10N.loadExample |> React.string}
+             </Button>
+           </div>
+         </div>,
+       )}
+  </Dropzone>;
 };

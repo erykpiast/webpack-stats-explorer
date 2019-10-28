@@ -54,16 +54,13 @@ module Styles = {
     ]);
 };
 
-let component = ReasonReact.statelessComponent("NavigationLayout");
-
-let make = (~side, ~main, ~top, _children) => {
-  ...component,
-  render: _self =>
-    <div className=Styles.wrapper>
-      <div className=Styles.top> top </div>
-      <div className=Styles.contentWrapper>
-        <div className=Styles.side> side </div>
-        <div className=Styles.main> main </div>
-      </div>
-    </div>,
+[@react.component]
+let make = (~side, ~main, ~top) => {
+  <div className=Styles.wrapper>
+    <div className=Styles.top> top </div>
+    <div className=Styles.contentWrapper>
+      <div className=Styles.side> side </div>
+      <div className=Styles.main> main </div>
+    </div>
+  </div>;
 };

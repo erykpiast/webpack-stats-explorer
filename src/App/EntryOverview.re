@@ -1,5 +1,3 @@
-let component = ReasonReact.statelessComponent("EntryOverview");
-
 module Styles = {
   open Css;
 
@@ -24,26 +22,22 @@ module Styles = {
   let diff = style([display(`block)]);
 };
 
-let make = (~size, ~count, _children) => {
-  ...component,
-  render: _self => {
-    <section className=Styles.root>
-      <PointingArrow className=Styles.arrow>
-        {"Choose the" |> ReasonReact.string}
-        <br />
-        {"chunk here!" |> ReasonReact.string}
-      </PointingArrow>
-      <p className=Styles.count>
-        {count
-         |> Utils.pluralize(L10N.chunk, L10N.chunks)
-         |> ReasonReact.string}
-      </p>
-      <Size className=Styles.size value={snd(size)} />
-      <NumericDiff
-        className=Styles.diff
-        after={snd(size)}
-        before={fst(size)}
-      />
-    </section>;
-  },
+[@react.component]
+let make = (~size, ~count) => {
+  <section className=Styles.root>
+    <PointingArrow className=Styles.arrow>
+      {"Choose the" |> React.string}
+      <br />
+      {"chunk here!" |> React.string}
+    </PointingArrow>
+    <p className=Styles.count>
+      {count |> Utils.pluralize(L10N.chunk, L10N.chunks) |> React.string}
+    </p>
+    <Size className=Styles.size value={snd(size)} />
+    <NumericDiff
+      className=Styles.diff
+      after={snd(size)}
+      before={fst(size)}
+    />
+  </section>;
 };

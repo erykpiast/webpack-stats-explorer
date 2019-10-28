@@ -128,7 +128,7 @@ let getParsed = entry =>
 
 let renderSize = (label, data) =>
   switch (data) {
-  | None => <> {label |> ReasonReact.string} </>
+  | None => <> {label |> React.string} </>
   | Some(data) =>
     let size =
       switch (data) {
@@ -140,14 +140,14 @@ let renderSize = (label, data) =>
       | EntryData(_) => ReasonReact.null
       | ModifiedEntryData({size}) =>
         <>
-          {nbsp |> ReasonReact.string}
+          {nbsp |> React.string}
           <NumericDiff before={size |> fst} after={size |> snd} />
         </>
       };
 
     <>
       <dt className={Cn.make([Styles.term, Styles.sizeTerm])}>
-        {label |> ReasonReact.string}
+        {label |> React.string}
       </dt>
       <dd className=Styles.definition> <Size value=size /> diff </dd>
     </>;
@@ -160,23 +160,23 @@ let renderSource = data =>
     // TODO: detect plugin based on whole stats object
     <div className=Styles.PluginBait.root>
       <h3 className=Styles.PluginBait.heading>
-        {"No code here?" |> ReasonReact.string}
+        {"No code here?" |> React.string}
       </h3>
       <p className=Styles.PluginBait.caption>
-        {"Add " |> ReasonReact.string}
+        {"Add " |> React.string}
         <a
           href="https://www.npmjs.com/package/webpack-enhanced-stats-plugin"
           target="_blank">
-          {"webpack-enhanced-stats-plugin" |> ReasonReact.string}
+          {"webpack-enhanced-stats-plugin" |> React.string}
         </a>
-        {" to your Webpack config!" |> ReasonReact.string}
+        {" to your Webpack config!" |> React.string}
       </p>
       <pre className=Styles.PluginBait.snippet>
         <span className=Styles.PluginBait.prompt>
-          {"$ " |> ReasonReact.string}
+          {"$ " |> React.string}
         </span>
         <code>
-          {"npm i -D webpack-enhanced-stats-plugin" |> ReasonReact.string}
+          {"npm i -D webpack-enhanced-stats-plugin" |> React.string}
         </code>
       </pre>
       <pre className=Styles.PluginBait.snippet>
@@ -201,7 +201,7 @@ module.exports = {
     })
   ]
 }"
-           |> ReasonReact.string}
+           |> React.string}
         </code>
       </pre>
     </div>
@@ -220,66 +220,52 @@ module.exports = {
     }
   };
 
-type action =
-  | SwitchTab(int);
+[@react.component]
+let make = (~entry, ~kind) => {
+  let (index, setIndex) = React.useState(() => 1);
 
-type state = {currentTabIndex: int};
+  let original = entry |> getOriginal;
+  let stat = entry |> getStat;
+  let parsed = entry |> getParsed;
+  let currentData =
+    switch (index) {
+    | 0 => original
+    | 2 => parsed
+    | _ => stat
+    };
+  let (kindClassName, kindLabel) = getKindProps(kind);
 
-let reducer = (action, _state) =>
-  switch (action) {
-  | SwitchTab(index) => ReasonReact.Update({currentTabIndex: index})
-  };
-
-let component = ReasonReact.reducerComponent("EntrySummary");
-
-let make = (~entry, ~kind, _children) => {
-  ...component,
-  reducer,
-  initialState: () => {currentTabIndex: 1},
-  render: self => {
-    let original = entry |> getOriginal;
-    let stat = entry |> getStat;
-    let parsed = entry |> getParsed;
-    let currentData =
-      switch (self.state.currentTabIndex) {
-      | 0 => original
-      | 2 => parsed
-      | _ => stat
-      };
-    let (kindClassName, kindLabel) = getKindProps(kind);
-
-    <div className=Styles.wrapper>
-      <header className=Styles.header>
-        <dl className=Styles.list>
-          <div className=Styles.status>
-            <dt className=Styles.term>
-              {L10N.Summary.status |> ReasonReact.string}
-            </dt>
-            <dd className={Cn.make([Styles.definition, kindClassName])}>
-              {kindLabel |> ReasonReact.string}
-              {nbsp |> ReasonReact.string}
-              {L10N.module_ |> ReasonReact.string}
-            </dd>
-          </div>
-          <div className=Styles.name>
-            <dt className=Styles.term>
-              {L10N.Summary.name |> ReasonReact.string}
-            </dt>
-            <dd className=Styles.definition>
-              {entry |> getId |> ReasonReact.string}
-            </dd>
-          </div>
-          <Tabs
-            className=Styles.size
-            selectedIndex={self.state.currentTabIndex}
-            onChange={index => self.send(SwitchTab(index))}>
-            {original |> renderSize(L10N.Summary.original)}
-            {stat |> renderSize(L10N.Summary.stat)}
-            {parsed |> renderSize(L10N.Summary.parsed)}
-          </Tabs>
-        </dl>
-      </header>
-      <div className=Styles.content> {currentData |> renderSource} </div>
-    </div>;
-  },
+  <div className=Styles.wrapper>
+    <header className=Styles.header>
+      <dl className=Styles.list>
+        <div className=Styles.status>
+          <dt className=Styles.term>
+            {L10N.Summary.status |> React.string}
+          </dt>
+          <dd className={Cn.make([Styles.definition, kindClassName])}>
+            {kindLabel |> React.string}
+            {nbsp |> React.string}
+            {L10N.module_ |> React.string}
+          </dd>
+        </div>
+        <div className=Styles.name>
+          <dt className=Styles.term> {L10N.Summary.name |> React.string} </dt>
+          <dd className=Styles.definition>
+            {entry |> getId |> React.string}
+          </dd>
+        </div>
+        <Tabs
+          className=Styles.size
+          selectedIndex=index
+          onChange={index => setIndex(_ => index)}>
+          [|
+            original |> renderSize(L10N.Summary.original),
+            stat |> renderSize(L10N.Summary.stat),
+            parsed |> renderSize(L10N.Summary.parsed),
+          |]
+        </Tabs>
+      </dl>
+    </header>
+    <div className=Styles.content> {currentData |> renderSource} </div>
+  </div>;
 };

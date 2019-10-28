@@ -258,49 +258,36 @@ let getLevelClass = level =>
   | _ => Styles.Level.l3
   };
 
-let component = ReasonReact.statelessComponent("EntryTree");
-
+[@react.component]
 let make =
-    (
-      ~onEntry,
-      ~comp: CompareEntry.t,
-      ~navigationPath: State.NavigationPath.t,
-      _children,
-    ) => {
-  ...component,
-  render: _self => {
-    let props = mapToProps(onEntry, navigationPath, comp);
+    (~onEntry, ~comp: CompareEntry.t, ~navigationPath: State.NavigationPath.t) => {
+  let props = mapToProps(onEntry, navigationPath, comp);
 
-    switch (props) {
-    | [] => ReasonReact.null
-    | data =>
-      <ul className=Styles.list>
-        ...{
-             data
-             |> List.map(
-                  (
-                    (selected, {after, before, value, name, level, onChange}),
-                  ) =>
-                  <li
-                    onClick={_ => onChange(value)}
-                    className={Cn.make([
-                      Styles.item,
-                      Cn.ifTrue(Styles.selectedItem, selected),
-                      getLevelClass(level),
-                    ])}
-                    title=name>
-                    <ReversedText className=Styles.name>
-                      ...{name |> ReasonReact.string}
-                    </ReversedText>
-                    {before !== 0 && after !== 0
-                       ? <Size className=Styles.size value=after />
-                       : ReasonReact.null}
-                    <NumericDiff className=Styles.diff after before />
-                  </li>
-                )
-             |> Array.of_list
-           }
-      </ul>
-    };
-  },
+  switch (props) {
+  | [] => React.null
+  | data =>
+    <ul className=Styles.list>
+      {data
+       |> List.map(
+            ((selected, {after, before, value, name, level, onChange})) =>
+            <li
+              onClick={_ => onChange(value)}
+              className={Cn.make([
+                Styles.item,
+                Cn.ifTrue(Styles.selectedItem, selected),
+                getLevelClass(level),
+              ])}
+              title=name>
+              <ReversedText className=Styles.name>
+                ...{name |> React.string}
+              </ReversedText>
+              {before !== 0 && after !== 0
+                 ? <Size className=Styles.size value=after /> : React.null}
+              <NumericDiff className=Styles.diff after before />
+            </li>
+          )
+       |> Array.of_list
+       |> React.array}
+    </ul>
+  };
 };
