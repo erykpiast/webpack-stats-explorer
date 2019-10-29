@@ -34,14 +34,11 @@ let logComp = (title, comp) => {
   comp |> CompareEntry.encode |> Js.log;
 };
 
-let compareStats = Array.to_list ||> CompareStats.make;
-
-let loadExampleData = () =>
-  compareStats([|Data.a, Data.b, Data.c, Data.d, Data.e|]);
+let loadExampleData = () => [Data.a, Data.b, Data.c, Data.d, Data.e];
 
 [@react.component]
 let make = (~onStats, ~children) => {
-  <Dropzone className=Styles.dropzone onStats={compareStats ||> onStats}>
+  <Dropzone className=Styles.dropzone onStats={Array.to_list ||> onStats}>
     {onClick =>
        children(
          <div className=Styles.wrapper>
@@ -54,7 +51,7 @@ let make = (~onStats, ~children) => {
            <p> {L10N.or_ |> React.string} </p>
            <div>
              <Button
-               onClick={_ => onStats(loadExampleData())}
+               onClick={_ => loadExampleData() |> onStats}
                className=Styles.action>
                {L10N.loadExample |> React.string}
              </Button>

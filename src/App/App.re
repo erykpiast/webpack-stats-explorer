@@ -5,7 +5,7 @@ type action =
   | Prev
   | Navigate(NavigationPath.Segment.t, int)
   | NavigateThroughBreadcrumbs(int)
-  | UpdateComparisons(list(compare));
+  | UpdateStats(list(WebpackStats.t));
 
 let updateNavigationPath = (path: list('a), segment, depth): list('a) => {
   let tail =
@@ -21,43 +21,40 @@ let updateNavigationPath = (path: list('a), segment, depth): list('a) => {
 let reducer = (state, action) =>
   switch (action) {
   | Next => {
-      index: (state.index + 1) mod List.length(state.comparisons),
-      comparisons: state.comparisons,
+      index: (state.index + 1) mod (List.length(state.stats) - 1),
+      stats: state.stats,
       navigationPath: [],
     }
   | Prev => {
       index:
-        (state.index - 1 + List.length(state.comparisons))
-        mod List.length(state.comparisons),
-      comparisons: state.comparisons,
+        (state.index - 1 + (List.length(state.stats) - 1))
+        mod List.length(state.stats),
+      stats: state.stats,
       navigationPath: [],
     }
   | Navigate(segment, depth) => {
       index: state.index,
-      comparisons: state.comparisons,
+      stats: state.stats,
       navigationPath:
         updateNavigationPath(state.navigationPath, segment, depth),
     }
   | NavigateThroughBreadcrumbs(index) => {
       index: state.index,
-      comparisons: state.comparisons,
+      stats: state.stats,
       navigationPath:
         Belt.List.take(state.navigationPath, index) |> Utils.defaultTo([]),
     }
-  | UpdateComparisons(comparisons) => {
-      index: 0,
-      comparisons,
-      navigationPath: [],
-    }
+  | UpdateStats(stats) => {index: 0, stats, navigationPath: []}
   };
 
 [@react.component]
-let make = (~comparisons) => {
+let make = (~stats) => {
   let (state, dispatch) =
-    React.useReducer(reducer, {index: 0, comparisons, navigationPath: []});
+    React.useReducer(reducer, {index: 0, stats, navigationPath: []});
+  let comparisons = state.stats |> CompareStats.make;
 
-  if (List.length(state.comparisons) === 0) {
-    <WelcomeScreen onStats={stats => dispatch(UpdateComparisons(stats))}>
+  if (List.length(comparisons) === 0) {
+    <WelcomeScreen onStats={stats => dispatch(UpdateStats(stats))}>
       {loader =>
          <NavigationLayout
            side=React.null
@@ -66,7 +63,7 @@ let make = (~comparisons) => {
          />}
     </WelcomeScreen>;
   } else {
-    let comp = List.nth(state.comparisons, state.index);
+    let comp = List.nth(comparisons, state.index);
     let revPath = List.rev(state.navigationPath);
     let topContent =
       <>
@@ -76,7 +73,7 @@ let make = (~comparisons) => {
           onClick={index => dispatch(NavigateThroughBreadcrumbs(index))}
         />
         <ComparisonChooser
-          comparisons={state.comparisons}
+          comparisons
           currentIndex={state.index}
           onPrev={_ => dispatch(Prev)}
           onNext={_ => dispatch(Next)}
@@ -100,6 +97,9 @@ let make = (~comparisons) => {
         onEntry={(level, entry) => dispatch(Navigate(entry, level))}
       />;
 
-    <NavigationLayout side=sideContent main=mainContent top=topContent />;
+    <>
+      <Timeline stats={state.stats} selectedIndex={state.index} />
+      <NavigationLayout side=sideContent main=mainContent top=topContent />
+    </>;
   };
 };

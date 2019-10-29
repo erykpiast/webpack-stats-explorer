@@ -19,12 +19,11 @@ module NavigationPath = struct
   let encode = Json.Encode.list Segment.encode;;
 end
 
-type compare = CompareEntry.t
-;;
+type compare = CompareEntry.t;;
 
 type t =
   { index : int
-  ; comparisons : compare list
+  ; stats : WebpackStats.t list
   ; navigationPath : NavigationPath.t
   }
 ;;

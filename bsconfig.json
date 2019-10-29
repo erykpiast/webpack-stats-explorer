@@ -31,6 +31,7 @@
   "suffix": ".bs.js",
   "namespace": true,
   "bs-dependencies": [
+    "@ahrefs/bs-recharts",
     "@glennsl/rebase",
     "@glennsl/bs-json",
     "@zpnester/bs-filereader",
@@ -38,6 +39,7 @@
     "reason-react",
     "bs-css",
     "bs-react-dropzone",
+    "bs-webapi",
     "re-classnames"
   ],
   "bs-dev-dependencies": [
