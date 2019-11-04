@@ -36,6 +36,7 @@
     "@glennsl/bs-json",
     "@zpnester/bs-filereader",
     "rationale",
+    "reason-date-fns",
     "reason-react",
     "bs-css",
     "bs-react-dropzone",
