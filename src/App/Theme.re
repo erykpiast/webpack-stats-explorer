@@ -56,6 +56,66 @@ module Color = {
       let tertiary = rgba(0, 0, 0, 0.12);
     };
   };
+
+  module Chart = {
+    module Fill = {
+      module Red = {
+        let light = rgb(255, 235, 238);
+
+        let normal = rgb(255, 205, 210);
+
+        let dark = rgb(255, 138, 128);
+      };
+
+      module Green = {
+        let light = rgb(200, 230, 201);
+        let normal = rgb(165, 214, 167);
+        let dark = rgb(129, 199, 132);
+      };
+
+      module Blue = {
+        let light = rgb(187, 222, 251);
+
+        let normal = rgb(144, 202, 249);
+
+        let dark = rgb(100, 181, 246);
+      };
+
+      module Yellow = {
+        let light = rgb(255, 249, 196);
+        let normal = rgb(255, 245, 157);
+        let dark = rgb(255, 241, 118);
+      };
+    };
+
+    module Stroke = {
+      module Red = {
+        let light = rgb(211, 47, 47);
+
+        let normal = rgb(198, 40, 40);
+
+        let dark = rgb(183, 28, 28);
+      };
+
+      module Green = {
+        let light = rgb(56, 142, 60);
+        let normal = rgb(46, 125, 50);
+        let dark = rgb(27, 94, 32);
+      };
+
+      module Blue = {
+        let light = rgb(25, 118, 210);
+        let normal = rgb(21, 101, 192);
+        let dark = rgb(13, 71, 161);
+      };
+
+      module Yellow = {
+        let light = rgb(251, 192, 45);
+        let normal = rgb(249, 168, 37);
+        let dark = rgb(245, 127, 23);
+      };
+    };
+  };
 };
 
 module Space = {

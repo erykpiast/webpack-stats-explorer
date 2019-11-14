@@ -5,6 +5,8 @@ module Styles = {
   open Css;
 
   let root = style([]);
+
+  let clickableArea = style([cursor(`pointer)]);
 };
 
 type name = string;
@@ -25,6 +27,9 @@ type payload = {
 
 [@bs.deriving {abstract: light}]
 type contentProps = {payload: array(payload)};
+
+[@bs.deriving {abstract: light}]
+type onClickProps = {index: int};
 
 module TimestampNameMap =
   Map.Make({
@@ -49,8 +54,48 @@ let formatDate =
   ||> Js.Date.fromFloat
   ||> ReasonDateFns.DateFns.lightFormat("yyyy-MM-dd hh:mm");
 
+let getStrokeColor =
+  Theme.Color.Chart.Stroke.(
+    [
+      Green.light,
+      Green.normal,
+      Green.dark,
+      Yellow.light,
+      Yellow.normal,
+      Yellow.dark,
+      Red.light,
+      Red.normal,
+      Red.dark,
+      Blue.light,
+      Blue.normal,
+      Blue.dark,
+    ]
+    |> List.map(Css.Types.Color.toString)
+    |> List.nth
+  );
+
+let getFillColor =
+  Theme.Color.Chart.Fill.(
+    [
+      Green.light,
+      Green.normal,
+      Green.dark,
+      Yellow.light,
+      Yellow.normal,
+      Yellow.dark,
+      Red.light,
+      Red.normal,
+      Red.dark,
+      Blue.light,
+      Blue.normal,
+      Blue.dark,
+    ]
+    |> List.map(Css.Types.Color.toString)
+    |> List.nth
+  );
+
 [@react.component]
-let make = (~className="", ~stats=[], ~selectedIndex) => {
+let make = (~className="", ~stats=[], ~onChange, ~selectedIndex) => {
   let (rootWidth, setRootWidth) = React.useState(() => 0);
   let (rootElement, setRootElement) = React.useState(() => Js.Nullable.null);
   let getRootWidth =
@@ -157,6 +202,10 @@ let make = (~className="", ~stats=[], ~selectedIndex) => {
          |> Js.Dict.fromList
        )
     |> Array.of_list;
+  let selectedStatDate1 =
+    List.nth(stats, selectedIndex).builtAt |> string_of_int;
+  let selectedStatDate2 =
+    List.nth(stats, selectedIndex + 1).builtAt |> string_of_int;
 
   BsRecharts.(
     <div
@@ -167,6 +216,49 @@ let make = (~className="", ~stats=[], ~selectedIndex) => {
         ();
       })}>
       <AreaChart data width=rootWidth height=300>
+        {uniqNames
+         |> List.mapi((index, name) =>
+              <Area
+                dataKey=name
+                stroke={getStrokeColor(index)}
+                fill={getFillColor(index)}
+                key=name
+                stackId="1"
+              />
+            )
+         |> Array.of_list
+         |> React.array}
+        {stats
+         |> List.mapi((index, {builtAt}: WebpackStats.t) => {
+              let x1 = builtAt |> string_of_int;
+              let x2 =
+                if (List.length(stats) > index + 1) {
+                  List.nth(stats, index + 1).builtAt |> string_of_int;
+                } else {
+                  x1;
+                };
+
+              let (stroke, fill) =
+                if (index === selectedIndex) {
+                  (
+                    Theme.Color.Border.default |> Css.Types.Color.toString,
+                    "transparent",
+                  );
+                } else {
+                  ("transparent", "#fff");
+                };
+
+              <ReferenceArea
+                className=Styles.clickableArea
+                x1
+                x2
+                fill
+                stroke
+                onClick={(_, _) => onChange(index)}
+              />;
+            })
+         |> Array.of_list
+         |> React.array}
         <XAxis dataKey="timestamp" tickFormatter=formatDate />
         <YAxis
           allowDecimals=false
@@ -174,12 +266,6 @@ let make = (~className="", ~stats=[], ~selectedIndex) => {
           mirror=true
           unit={sizeUnit |> Size.displayUnit}
         />
-        {uniqNames
-         |> List.map(name =>
-              <Area dataKey=name stroke="#8884d8" fill="#8884d8" key=name />
-            )
-         |> Array.of_list
-         |> React.array}
         <Tooltip
           formatter={value =>
             switch (value) {

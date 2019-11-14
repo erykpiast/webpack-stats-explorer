@@ -3,6 +3,7 @@ open State;
 type action =
   | Next
   | Prev
+  | Choose(int)
   | Navigate(NavigationPath.Segment.t, int)
   | NavigateThroughBreadcrumbs(int)
   | UpdateStats(list(WebpackStats.t));
@@ -32,6 +33,7 @@ let reducer = (state, action) => {
       stats: state.stats,
       navigationPath: [],
     }
+  | Choose(index) => {index, stats: state.stats, navigationPath: []}
   | Navigate(segment, depth) => {
       index: state.index,
       stats: state.stats,
@@ -99,7 +101,11 @@ let make = (~stats) => {
       />;
 
     <>
-      <Timeline stats={state.stats} selectedIndex={state.index} />
+      <Timeline
+        stats={state.stats}
+        selectedIndex={state.index}
+        onChange={index => dispatch(Choose(index))}
+      />
       <NavigationLayout side=sideContent main=mainContent top=topContent />
     </>;
   };
