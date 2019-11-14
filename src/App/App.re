@@ -18,17 +18,17 @@ let updateNavigationPath = (path: list('a), segment, depth): list('a) => {
   [segment, ...tail |> List.rev] |> List.rev;
 };
 
-let reducer = (state, action) =>
+let reducer = (state, action) => {
+  let maxIndex = List.length(state.stats) - 1;
+
   switch (action) {
   | Next => {
-      index: (state.index + 1) mod (List.length(state.stats) - 1),
+      index: (state.index + 1) mod maxIndex,
       stats: state.stats,
       navigationPath: [],
     }
   | Prev => {
-      index:
-        (state.index - 1 + (List.length(state.stats) - 1))
-        mod List.length(state.stats),
+      index: (state.index - 1 + maxIndex) mod maxIndex,
       stats: state.stats,
       navigationPath: [],
     }
@@ -46,6 +46,7 @@ let reducer = (state, action) =>
     }
   | UpdateStats(stats) => {index: 0, stats, navigationPath: []}
   };
+};
 
 [@react.component]
 let make = (~stats) => {
