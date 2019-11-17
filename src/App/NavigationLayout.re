@@ -3,7 +3,7 @@ module Styles = {
 
   let headerHeight = Theme.Space.tenfold;
 
-  let wrapper =
+  let root =
     style([
       display(`flex),
       flexDirection(`column),
@@ -17,13 +17,17 @@ module Styles = {
       height(headerHeight),
       backgroundColor(Theme.Color.Background.default),
       flexShrink(0.0),
+      alignItems(`center),
     ]);
+
+  let aboveTop =
+    style([]);
 
   let contentWrapper =
     style([
       display(`flex),
       flexGrow(1.0),
-      maxHeight(Calc.(`percent(100.0) - headerHeight)),
+      // maxHeight(Calc.(`percent(100.0) - headerHeight)),
     ]);
 
   let side =
@@ -55,8 +59,9 @@ module Styles = {
 };
 
 [@react.component]
-let make = (~side, ~main, ~top) => {
-  <div className=Styles.wrapper>
+let make = (~side, ~main, ~top, ~aboveTop) => {
+  <div className=Styles.root>
+    <div className=Styles.aboveTop> aboveTop </div>
     <div className=Styles.top> top </div>
     <div className=Styles.contentWrapper>
       <div className=Styles.side> side </div>

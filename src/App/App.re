@@ -6,6 +6,7 @@ type action =
   | Choose(int)
   | Navigate(NavigationPath.Segment.t, int)
   | NavigateThroughBreadcrumbs(int)
+  | ToggleTimeline
   | UpdateStats(list(WebpackStats.t));
 
 let updateNavigationPath = (path: list('a), segment, depth): list('a) => {
@@ -27,33 +28,56 @@ let reducer = (state, action) => {
       index: (state.index + 1) mod maxIndex,
       stats: state.stats,
       navigationPath: [],
+      isTimelineVisible: state.isTimelineVisible,
     }
   | Prev => {
       index: (state.index - 1 + maxIndex) mod maxIndex,
       stats: state.stats,
       navigationPath: [],
+      isTimelineVisible: state.isTimelineVisible,
     }
-  | Choose(index) => {index, stats: state.stats, navigationPath: []}
+  | Choose(index) => {
+      index,
+      stats: state.stats,
+      navigationPath: [],
+      isTimelineVisible: state.isTimelineVisible,
+    }
   | Navigate(segment, depth) => {
       index: state.index,
       stats: state.stats,
       navigationPath:
         updateNavigationPath(state.navigationPath, segment, depth),
+      isTimelineVisible: state.isTimelineVisible,
     }
   | NavigateThroughBreadcrumbs(index) => {
       index: state.index,
       stats: state.stats,
       navigationPath:
         Belt.List.take(state.navigationPath, index) |> Utils.defaultTo([]),
+      isTimelineVisible: state.isTimelineVisible,
     }
-  | UpdateStats(stats) => {index: 0, stats, navigationPath: []}
+  | ToggleTimeline => {
+      index: state.index,
+      stats: state.stats,
+      navigationPath: state.navigationPath,
+      isTimelineVisible: !state.isTimelineVisible,
+    }
+  | UpdateStats(stats) => {
+      index: 0,
+      stats,
+      navigationPath: [],
+      isTimelineVisible: false,
+    }
   };
 };
 
 [@react.component]
 let make = (~stats) => {
   let (state, dispatch) =
-    React.useReducer(reducer, {index: 0, stats, navigationPath: []});
+    React.useReducer(
+      reducer,
+      {index: 0, stats, navigationPath: [], isTimelineVisible: false},
+    );
   let comparisons = state.stats |> CompareStats.make;
 
   if (List.length(comparisons) === 0) {
@@ -63,6 +87,7 @@ let make = (~stats) => {
            side=React.null
            main=loader
            top={<Logo onClick={() => ()} />}
+           aboveTop=React.null
          />}
     </WelcomeScreen>;
   } else {
@@ -81,7 +106,20 @@ let make = (~stats) => {
           onPrev={_ => dispatch(Prev)}
           onNext={_ => dispatch(Next)}
         />
+        <ToggleTimeline
+          isVisible={state.isTimelineVisible}
+          onToggle={() => dispatch(ToggleTimeline)}
+        />
       </>;
+
+    let aboveTopContent =
+      state.isTimelineVisible
+        ? <Timeline
+            stats={state.stats}
+            selectedIndex={state.index}
+            onChange={index => dispatch(Choose(index))}
+          />
+        : React.null;
 
     let mainContent =
       switch (revPath) {
@@ -100,13 +138,11 @@ let make = (~stats) => {
         onEntry={(level, entry) => dispatch(Navigate(entry, level))}
       />;
 
-    <>
-      <Timeline
-        stats={state.stats}
-        selectedIndex={state.index}
-        onChange={index => dispatch(Choose(index))}
-      />
-      <NavigationLayout side=sideContent main=mainContent top=topContent />
-    </>;
+    <NavigationLayout
+      side=sideContent
+      main=mainContent
+      top=topContent
+      aboveTop=aboveTopContent
+    />;
   };
 };

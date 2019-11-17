@@ -25,5 +25,6 @@ type t =
   { index : int
   ; stats : WebpackStats.t list
   ; navigationPath : NavigationPath.t
+  ; isTimelineVisible : bool
   }
 ;;
