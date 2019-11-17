@@ -54,45 +54,43 @@ let formatDate =
   ||> Js.Date.fromFloat
   ||> ReasonDateFns.DateFns.lightFormat("yyyy-MM-dd hh:mm");
 
+let getChunkColor = colors =>
+  flip((mod), List.length(colors))
+  ||> (colors |> List.map(Css.Types.Color.toString) |> List.nth);
+
 let getStrokeColor =
-  Theme.Color.Chart.Stroke.(
-    [
-      Green.light,
-      Green.normal,
-      Green.dark,
-      Yellow.light,
-      Yellow.normal,
-      Yellow.dark,
-      Red.light,
-      Red.normal,
-      Red.dark,
-      Blue.light,
-      Blue.normal,
-      Blue.dark,
-    ]
-    |> List.map(Css.Types.Color.toString)
-    |> List.nth
-  );
+  Theme.Color.Chart.Stroke.[
+    Green.light,
+    Green.normal,
+    Green.dark,
+    Yellow.light,
+    Yellow.normal,
+    Yellow.dark,
+    Red.light,
+    Red.normal,
+    Red.dark,
+    Blue.light,
+    Blue.normal,
+    Blue.dark,
+  ]
+  |> getChunkColor;
 
 let getFillColor =
-  Theme.Color.Chart.Fill.(
-    [
-      Green.light,
-      Green.normal,
-      Green.dark,
-      Yellow.light,
-      Yellow.normal,
-      Yellow.dark,
-      Red.light,
-      Red.normal,
-      Red.dark,
-      Blue.light,
-      Blue.normal,
-      Blue.dark,
-    ]
-    |> List.map(Css.Types.Color.toString)
-    |> List.nth
-  );
+  Theme.Color.Chart.Fill.[
+    Green.light,
+    Green.normal,
+    Green.dark,
+    Yellow.light,
+    Yellow.normal,
+    Yellow.dark,
+    Red.light,
+    Red.normal,
+    Red.dark,
+    Blue.light,
+    Blue.normal,
+    Blue.dark,
+  ]
+  |> getChunkColor;
 
 [@react.component]
 let make = (~className="", ~stats=[], ~onChange, ~selectedIndex) => {
