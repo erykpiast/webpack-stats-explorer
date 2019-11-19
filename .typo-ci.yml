@@ -1,0 +1,4 @@
+excluded_words
+  - bsconfig
+  - reason-date-fns
+  - date-fns
