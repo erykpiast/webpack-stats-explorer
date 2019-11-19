@@ -42,7 +42,7 @@
   "author": "Eryk Napierała <eryk.piast@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@ahrefs/bs-recharts": "github:erykpiast/bs-recharts#feature/referencearea",
+    "@ahrefs/bs-recharts": "github:ahrefs/bs-recharts#392aaf5bd3502a337f5de019f30a29181afb325c",
     "@glennsl/bs-json": "5.0.1",
     "@glennsl/rebase": "0.2.1",
     "@zpnester/bs-filereader": "0.4.0",
