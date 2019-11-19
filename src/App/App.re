@@ -3,9 +3,11 @@ open State;
 type action =
   | Next
   | Prev
+  | Choose(int)
   | Navigate(NavigationPath.Segment.t, int)
   | NavigateThroughBreadcrumbs(int)
-  | UpdateComparisons(list(compare));
+  | ToggleTimeline
+  | UpdateStats(list(WebpackStats.t));
 
 let updateNavigationPath = (path: list('a), segment, depth): list('a) => {
   let tail =
@@ -18,55 +20,78 @@ let updateNavigationPath = (path: list('a), segment, depth): list('a) => {
   [segment, ...tail |> List.rev] |> List.rev;
 };
 
-let reducer = (state, action) =>
+let reducer = (state, action) => {
+  let maxIndex = List.length(state.stats) - 1;
+
   switch (action) {
   | Next => {
-      index: (state.index + 1) mod List.length(state.comparisons),
-      comparisons: state.comparisons,
+      index: (state.index + 1) mod maxIndex,
+      stats: state.stats,
       navigationPath: [],
+      isTimelineVisible: state.isTimelineVisible,
     }
   | Prev => {
-      index:
-        (state.index - 1 + List.length(state.comparisons))
-        mod List.length(state.comparisons),
-      comparisons: state.comparisons,
+      index: (state.index - 1 + maxIndex) mod maxIndex,
+      stats: state.stats,
       navigationPath: [],
+      isTimelineVisible: state.isTimelineVisible,
+    }
+  | Choose(index) => {
+      index,
+      stats: state.stats,
+      navigationPath: [],
+      isTimelineVisible: state.isTimelineVisible,
     }
   | Navigate(segment, depth) => {
       index: state.index,
-      comparisons: state.comparisons,
+      stats: state.stats,
       navigationPath:
         updateNavigationPath(state.navigationPath, segment, depth),
+      isTimelineVisible: state.isTimelineVisible,
     }
   | NavigateThroughBreadcrumbs(index) => {
       index: state.index,
-      comparisons: state.comparisons,
+      stats: state.stats,
       navigationPath:
         Belt.List.take(state.navigationPath, index) |> Utils.defaultTo([]),
+      isTimelineVisible: state.isTimelineVisible,
     }
-  | UpdateComparisons(comparisons) => {
+  | ToggleTimeline => {
+      index: state.index,
+      stats: state.stats,
+      navigationPath: state.navigationPath,
+      isTimelineVisible: !state.isTimelineVisible,
+    }
+  | UpdateStats(stats) => {
       index: 0,
-      comparisons,
+      stats,
       navigationPath: [],
+      isTimelineVisible: false,
     }
   };
+};
 
 [@react.component]
-let make = (~comparisons) => {
+let make = (~stats) => {
   let (state, dispatch) =
-    React.useReducer(reducer, {index: 0, comparisons, navigationPath: []});
+    React.useReducer(
+      reducer,
+      {index: 0, stats, navigationPath: [], isTimelineVisible: false},
+    );
+  let comparisons = state.stats |> CompareStats.make;
 
-  if (List.length(state.comparisons) === 0) {
-    <WelcomeScreen onStats={stats => dispatch(UpdateComparisons(stats))}>
+  if (List.length(comparisons) === 0) {
+    <WelcomeScreen onStats={stats => dispatch(UpdateStats(stats))}>
       {loader =>
          <NavigationLayout
            side=React.null
            main=loader
            top={<Logo onClick={() => ()} />}
+           aboveTop=React.null
          />}
     </WelcomeScreen>;
   } else {
-    let comp = List.nth(state.comparisons, state.index);
+    let comp = List.nth(comparisons, state.index);
     let revPath = List.rev(state.navigationPath);
     let topContent =
       <>
@@ -76,12 +101,25 @@ let make = (~comparisons) => {
           onClick={index => dispatch(NavigateThroughBreadcrumbs(index))}
         />
         <ComparisonChooser
-          comparisons={state.comparisons}
+          comparisons
           currentIndex={state.index}
           onPrev={_ => dispatch(Prev)}
           onNext={_ => dispatch(Next)}
         />
+        <ToggleTimeline
+          isVisible={state.isTimelineVisible}
+          onToggle={() => dispatch(ToggleTimeline)}
+        />
       </>;
+
+    let aboveTopContent =
+      state.isTimelineVisible
+        ? <Timeline
+            stats={state.stats}
+            selectedIndex={state.index}
+            onChange={index => dispatch(Choose(index))}
+          />
+        : React.null;
 
     let mainContent =
       switch (revPath) {
@@ -100,6 +138,11 @@ let make = (~comparisons) => {
         onEntry={(level, entry) => dispatch(Navigate(entry, level))}
       />;
 
-    <NavigationLayout side=sideContent main=mainContent top=topContent />;
+    <NavigationLayout
+      side=sideContent
+      main=mainContent
+      top=topContent
+      aboveTop=aboveTopContent
+    />;
   };
 };

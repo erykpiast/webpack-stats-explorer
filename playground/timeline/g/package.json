@@ -1,0 +1,15 @@
+{
+  "name": "webpack-stats-explorer-playground-timeline",
+  "version": "7.0.0",
+  "description": "Timeline configuration playground for Webpack Stats Explorer",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js --verbose --json 1> ../$(basename $(pwd)).json"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "4.41.2"
+  }
+}

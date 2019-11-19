@@ -88,4 +88,10 @@ module String = struct
   let split = Js.String.split;;
 end
 
+module Js = struct
+  type 'a any = < .. > as 'a;;
+
+  let fromDict (dict: 'a Js.Dict.t) : < > any Js.t = [%raw "dict"];;
+end
+
 let pluralize singular plural n = (string_of_int n) ^ " " ^ (if n == 1 then singular else plural);;

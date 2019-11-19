@@ -3,7 +3,7 @@ type sizeUnit =
   | KB
   | MB;
 
-let displayValue = (value, unit) =>
+let displayValue = (unit, value) =>
   (
     switch (unit) {
     | B => value |> string_of_int
@@ -24,7 +24,7 @@ let displayValue = (value, unit) =>
 let guessUnit = value =>
   if (value < 10) {
     B;
-  } else if (value < 10 * 1024) {
+  } else if (value < 100 * 1024) {
     KB;
   } else {
     MB;
@@ -37,16 +37,15 @@ let displayUnit = unit =>
     | KB => "kB"
     | MB => "MB"
     }
-  )
-  |> React.string;
+  );
 
 [@react.component]
 let make = (~className="", ~value) => {
   let unit = guessUnit(value);
 
   <span className>
-    {displayValue(value, unit)}
+    {displayValue(unit, value)}
     {React.string(" ")}
-    {displayUnit(unit)}
+    {displayUnit(unit) |> React.string}
   </span>;
 };

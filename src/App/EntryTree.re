@@ -277,7 +277,8 @@ let make =
                 Cn.ifTrue(Styles.selectedItem, selected),
                 getLevelClass(level),
               ])}
-              title=name>
+              title=name
+              key=name>
               <ReversedText className=Styles.name>
                 ...{name |> React.string}
               </ReversedText>

@@ -42,19 +42,24 @@
   "author": "Eryk Napierała <eryk.piast@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@ahrefs/bs-recharts": "github:ahrefs/bs-recharts#392aaf5bd3502a337f5de019f30a29181afb325c",
     "@glennsl/bs-json": "5.0.1",
     "@glennsl/rebase": "0.2.1",
     "@zpnester/bs-filereader": "0.4.0",
     "bs-css": "11.0.0",
     "bs-jsverify": "0.10.0",
     "bs-react-dropzone": "0.5.0",
+    "bs-webapi": "0.15.5",
+    "date-fns": "2.6.0",
     "diff": "4.0.1",
     "rationale": "0.2.0",
     "re-classnames": "4.0.0",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-dropzone": "10.2.0",
-    "reason-react": "0.7.0"
+    "reason-date-fns": "0.10.4",
+    "reason-react": "0.7.0",
+    "recharts": "1.8.5"
   },
   "devDependencies": {
     "@babel/cli": "7.7.0",

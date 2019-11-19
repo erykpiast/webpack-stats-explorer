@@ -1,1 +1,1 @@
-ReactDOMRe.renderToElementWithId(<App comparisons=[] />, "app");
+ReactDOMRe.renderToElementWithId(<App stats=[] />, "app");

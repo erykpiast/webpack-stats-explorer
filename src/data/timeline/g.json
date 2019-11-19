@@ -1,0 +1,730 @@
+{
+  "errors": [],
+  "warnings": [
+    "configuration\nThe 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.\nYou can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/"
+  ],
+  "version": "4.41.2",
+  "hash": "627c017d59bd8cde28dd",
+  "time": 96,
+  "builtAt": 1574028230136,
+  "publicPath": "",
+  "outputPath": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/dist",
+  "assetsByChunkName": {
+    "main": "main.js"
+  },
+  "assets": [
+    {
+      "name": "1.js",
+      "size": 262,
+      "chunks": [
+        1
+      ],
+      "chunkNames": [],
+      "info": {},
+      "emitted": true
+    },
+    {
+      "name": "2.js",
+      "size": 262,
+      "chunks": [
+        2
+      ],
+      "chunkNames": [],
+      "info": {},
+      "emitted": true
+    },
+    {
+      "name": "main.js",
+      "size": 2158,
+      "chunks": [
+        0
+      ],
+      "chunkNames": [
+        "main"
+      ],
+      "info": {},
+      "emitted": true
+    }
+  ],
+  "filteredAssets": 0,
+  "entrypoints": {
+    "main": {
+      "chunks": [
+        0
+      ],
+      "assets": [
+        "main.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "namedChunkGroups": {
+    "main": {
+      "chunks": [
+        0
+      ],
+      "assets": [
+        "main.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "chunks": [
+    {
+      "id": 0,
+      "rendered": true,
+      "initial": true,
+      "entry": true,
+      "size": 107,
+      "names": [
+        "main"
+      ],
+      "files": [
+        "main.js"
+      ],
+      "hash": "18433c0f73b234b761e4",
+      "siblings": [],
+      "parents": [],
+      "children": [
+        1,
+        2
+      ],
+      "childrenByOrder": {},
+      "modules": [
+        {
+          "id": 0,
+          "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/index.js",
+          "name": "./src/index.js",
+          "index": 0,
+          "index2": 0,
+          "size": 107,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "issuer": null,
+          "issuerId": null,
+          "issuerName": null,
+          "issuerPath": null,
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": null,
+              "module": null,
+              "moduleName": null,
+              "type": "single entry",
+              "userRequest": "./src/index.js",
+              "loc": "main"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": null,
+          "optimizationBailout": [
+            "ModuleConcatenation bailout: Module is not an ECMAScript module"
+          ],
+          "depth": 0,
+          "source": "(function main(params) {\n  import('./foo').then(foo => foo());\n  import('./bar').then(bar => bar());;\n})();"
+        }
+      ],
+      "filteredModules": 0,
+      "origins": [
+        {
+          "module": "",
+          "moduleIdentifier": "",
+          "moduleName": "",
+          "loc": "main",
+          "request": "./src/index.js",
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "size": 171,
+      "names": [],
+      "files": [
+        "1.js"
+      ],
+      "hash": "3581b61ee8a998a7baec",
+      "siblings": [],
+      "parents": [
+        0
+      ],
+      "children": [],
+      "childrenByOrder": {},
+      "modules": [
+        {
+          "id": 2,
+          "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/bar.js",
+          "name": "./src/bar.js",
+          "index": 3,
+          "index2": 3,
+          "size": 89,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            1
+          ],
+          "issuer": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/index.js",
+          "issuerId": 0,
+          "issuerName": "./src/index.js",
+          "issuerPath": [
+            {
+              "id": 0,
+              "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/index.js",
+              "name": "./src/index.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": 0,
+              "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/index.js",
+              "module": "./src/index.js",
+              "moduleName": "./src/index.js",
+              "type": "import()",
+              "userRequest": "./bar",
+              "loc": "3:2-17"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [
+            "ModuleConcatenation bailout: Module is referenced from these modules with unsupported syntax: ./src/index.js (referenced with import())"
+          ],
+          "depth": 1,
+          "source": "import create from './common';\n\nexport default function foo() {\n  return create('bar');\n}"
+        },
+        {
+          "id": 3,
+          "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/common.js",
+          "name": "./src/common.js",
+          "index": 2,
+          "index2": 1,
+          "size": 82,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            1,
+            2
+          ],
+          "issuer": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/foo.js",
+          "issuerId": 1,
+          "issuerName": "./src/foo.js",
+          "issuerPath": [
+            {
+              "id": 0,
+              "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/index.js",
+              "name": "./src/index.js"
+            },
+            {
+              "id": 1,
+              "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/foo.js",
+              "name": "./src/foo.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": 1,
+              "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/foo.js",
+              "module": "./src/foo.js",
+              "moduleName": "./src/foo.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./common",
+              "loc": "1:0-30"
+            },
+            {
+              "moduleId": 1,
+              "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/foo.js",
+              "module": "./src/foo.js",
+              "moduleName": "./src/foo.js",
+              "type": "harmony import specifier",
+              "userRequest": "./common",
+              "loc": "4:9-15"
+            },
+            {
+              "moduleId": 2,
+              "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/bar.js",
+              "module": "./src/bar.js",
+              "moduleName": "./src/bar.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./common",
+              "loc": "1:0-30"
+            },
+            {
+              "moduleId": 2,
+              "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/bar.js",
+              "module": "./src/bar.js",
+              "moduleName": "./src/bar.js",
+              "type": "harmony import specifier",
+              "userRequest": "./common",
+              "loc": "4:9-15"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [],
+          "depth": 2,
+          "source": "export default (name) => Array.from({\n  length: 21\n}, (_, index) => name + index);"
+        }
+      ],
+      "filteredModules": 0,
+      "origins": [
+        {
+          "moduleId": 0,
+          "module": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/index.js",
+          "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/index.js",
+          "moduleName": "./src/index.js",
+          "loc": "3:2-17",
+          "request": "./bar",
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "rendered": true,
+      "initial": false,
+      "entry": false,
+      "size": 171,
+      "names": [],
+      "files": [
+        "2.js"
+      ],
+      "hash": "07af6a4ce70668aa5149",
+      "siblings": [],
+      "parents": [
+        0
+      ],
+      "children": [],
+      "childrenByOrder": {},
+      "modules": [
+        {
+          "id": 1,
+          "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/foo.js",
+          "name": "./src/foo.js",
+          "index": 1,
+          "index2": 2,
+          "size": 89,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            2
+          ],
+          "issuer": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/index.js",
+          "issuerId": 0,
+          "issuerName": "./src/index.js",
+          "issuerPath": [
+            {
+              "id": 0,
+              "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/index.js",
+              "name": "./src/index.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": 0,
+              "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/index.js",
+              "module": "./src/index.js",
+              "moduleName": "./src/index.js",
+              "type": "import()",
+              "userRequest": "./foo",
+              "loc": "2:2-17"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [
+            "ModuleConcatenation bailout: Module is referenced from these modules with unsupported syntax: ./src/index.js (referenced with import())"
+          ],
+          "depth": 1,
+          "source": "import create from './common';\n\nexport default function foo() {\n  return create('foo');\n}"
+        },
+        {
+          "id": 3,
+          "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/common.js",
+          "name": "./src/common.js",
+          "index": 2,
+          "index2": 1,
+          "size": 82,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            1,
+            2
+          ],
+          "issuer": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/foo.js",
+          "issuerId": 1,
+          "issuerName": "./src/foo.js",
+          "issuerPath": [
+            {
+              "id": 0,
+              "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/index.js",
+              "name": "./src/index.js"
+            },
+            {
+              "id": 1,
+              "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/foo.js",
+              "name": "./src/foo.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": 1,
+              "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/foo.js",
+              "module": "./src/foo.js",
+              "moduleName": "./src/foo.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./common",
+              "loc": "1:0-30"
+            },
+            {
+              "moduleId": 1,
+              "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/foo.js",
+              "module": "./src/foo.js",
+              "moduleName": "./src/foo.js",
+              "type": "harmony import specifier",
+              "userRequest": "./common",
+              "loc": "4:9-15"
+            },
+            {
+              "moduleId": 2,
+              "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/bar.js",
+              "module": "./src/bar.js",
+              "moduleName": "./src/bar.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./common",
+              "loc": "1:0-30"
+            },
+            {
+              "moduleId": 2,
+              "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/bar.js",
+              "module": "./src/bar.js",
+              "moduleName": "./src/bar.js",
+              "type": "harmony import specifier",
+              "userRequest": "./common",
+              "loc": "4:9-15"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [],
+          "depth": 2,
+          "source": "export default (name) => Array.from({\n  length: 21\n}, (_, index) => name + index);"
+        }
+      ],
+      "filteredModules": 0,
+      "origins": [
+        {
+          "moduleId": 0,
+          "module": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/index.js",
+          "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/index.js",
+          "moduleName": "./src/index.js",
+          "loc": "2:2-17",
+          "request": "./foo",
+          "reasons": []
+        }
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "id": 0,
+      "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/index.js",
+      "name": "./src/index.js",
+      "index": 0,
+      "index2": 0,
+      "size": 107,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "issuer": null,
+      "issuerId": null,
+      "issuerName": null,
+      "issuerPath": null,
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "assets": [],
+      "reasons": [
+        {
+          "moduleId": null,
+          "moduleIdentifier": null,
+          "module": null,
+          "moduleName": null,
+          "type": "single entry",
+          "userRequest": "./src/index.js",
+          "loc": "main"
+        }
+      ],
+      "usedExports": true,
+      "providedExports": null,
+      "optimizationBailout": [
+        "ModuleConcatenation bailout: Module is not an ECMAScript module"
+      ],
+      "depth": 0,
+      "source": "(function main(params) {\n  import('./foo').then(foo => foo());\n  import('./bar').then(bar => bar());;\n})();"
+    },
+    {
+      "id": 1,
+      "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/foo.js",
+      "name": "./src/foo.js",
+      "index": 1,
+      "index2": 2,
+      "size": 89,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        2
+      ],
+      "issuer": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/index.js",
+      "issuerId": 0,
+      "issuerName": "./src/index.js",
+      "issuerPath": [
+        {
+          "id": 0,
+          "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/index.js",
+          "name": "./src/index.js"
+        }
+      ],
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "assets": [],
+      "reasons": [
+        {
+          "moduleId": 0,
+          "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/index.js",
+          "module": "./src/index.js",
+          "moduleName": "./src/index.js",
+          "type": "import()",
+          "userRequest": "./foo",
+          "loc": "2:2-17"
+        }
+      ],
+      "usedExports": true,
+      "providedExports": [
+        "default"
+      ],
+      "optimizationBailout": [
+        "ModuleConcatenation bailout: Module is referenced from these modules with unsupported syntax: ./src/index.js (referenced with import())"
+      ],
+      "depth": 1,
+      "source": "import create from './common';\n\nexport default function foo() {\n  return create('foo');\n}"
+    },
+    {
+      "id": 2,
+      "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/bar.js",
+      "name": "./src/bar.js",
+      "index": 3,
+      "index2": 3,
+      "size": 89,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        1
+      ],
+      "issuer": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/index.js",
+      "issuerId": 0,
+      "issuerName": "./src/index.js",
+      "issuerPath": [
+        {
+          "id": 0,
+          "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/index.js",
+          "name": "./src/index.js"
+        }
+      ],
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "assets": [],
+      "reasons": [
+        {
+          "moduleId": 0,
+          "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/index.js",
+          "module": "./src/index.js",
+          "moduleName": "./src/index.js",
+          "type": "import()",
+          "userRequest": "./bar",
+          "loc": "3:2-17"
+        }
+      ],
+      "usedExports": true,
+      "providedExports": [
+        "default"
+      ],
+      "optimizationBailout": [
+        "ModuleConcatenation bailout: Module is referenced from these modules with unsupported syntax: ./src/index.js (referenced with import())"
+      ],
+      "depth": 1,
+      "source": "import create from './common';\n\nexport default function foo() {\n  return create('bar');\n}"
+    },
+    {
+      "id": 3,
+      "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/common.js",
+      "name": "./src/common.js",
+      "index": 2,
+      "index2": 1,
+      "size": 82,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        1,
+        2
+      ],
+      "issuer": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/foo.js",
+      "issuerId": 1,
+      "issuerName": "./src/foo.js",
+      "issuerPath": [
+        {
+          "id": 0,
+          "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/index.js",
+          "name": "./src/index.js"
+        },
+        {
+          "id": 1,
+          "identifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/foo.js",
+          "name": "./src/foo.js"
+        }
+      ],
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "assets": [],
+      "reasons": [
+        {
+          "moduleId": 1,
+          "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/foo.js",
+          "module": "./src/foo.js",
+          "moduleName": "./src/foo.js",
+          "type": "harmony side effect evaluation",
+          "userRequest": "./common",
+          "loc": "1:0-30"
+        },
+        {
+          "moduleId": 1,
+          "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/foo.js",
+          "module": "./src/foo.js",
+          "moduleName": "./src/foo.js",
+          "type": "harmony import specifier",
+          "userRequest": "./common",
+          "loc": "4:9-15"
+        },
+        {
+          "moduleId": 2,
+          "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/bar.js",
+          "module": "./src/bar.js",
+          "moduleName": "./src/bar.js",
+          "type": "harmony side effect evaluation",
+          "userRequest": "./common",
+          "loc": "1:0-30"
+        },
+        {
+          "moduleId": 2,
+          "moduleIdentifier": "/Users/eryk.napierala/Projects/webpack-stats-explorer/playground/timeline/g/src/bar.js",
+          "module": "./src/bar.js",
+          "moduleName": "./src/bar.js",
+          "type": "harmony import specifier",
+          "userRequest": "./common",
+          "loc": "4:9-15"
+        }
+      ],
+      "usedExports": [
+        "default"
+      ],
+      "providedExports": [
+        "default"
+      ],
+      "optimizationBailout": [],
+      "depth": 2,
+      "source": "export default (name) => Array.from({\n  length: 21\n}, (_, index) => name + index);"
+    }
+  ],
+  "filteredModules": 0,
+  "logging": {
+    "webpack.buildChunkGraph.visitModules": {
+      "entries": [
+        {
+          "type": "time",
+          "message": "prepare: 0.393345ms"
+        },
+        {
+          "type": "time",
+          "message": "visiting: 0.371407ms"
+        },
+        {
+          "type": "time",
+          "message": "calculating available modules: 0.051101ms"
+        },
+        {
+          "type": "time",
+          "message": "merging available modules: 0.021029ms"
+        },
+        {
+          "type": "time",
+          "message": "visiting: 0.088706ms"
+        }
+      ],
+      "filteredEntries": 0,
+      "debug": false
+    }
+  },
+  "children": []
+}
