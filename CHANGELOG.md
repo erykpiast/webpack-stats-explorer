@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.14.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.13.1...v1.14.0) (2019-11-19)
+
+
+### Features
+
+* **ui:** allow to have more that 12 chunks by rolling available colors ([19d9f5f](https://github.com/erykpiast/webpack-stats-explorer/commit/19d9f5fc87c4721e8dd51978b270f987dd0e5808))
+* **ui:** display currently chosen comparision on timeline ([f4ab470](https://github.com/erykpiast/webpack-stats-explorer/commit/f4ab470fe2ad9a2b039b9baa1d6916dfc69ac37f))
+* **ui:** display timeline with chunks size ([205f8aa](https://github.com/erykpiast/webpack-stats-explorer/commit/205f8aaaf7fbe02e4b1d054392d8b82ebcd49f1d))
+* **ui:** toggle timeline ([b343031](https://github.com/erykpiast/webpack-stats-explorer/commit/b34303122d342363a75ce96e0dfb48b2aaa4246c))
+
+
+### Bug Fixes
+
+* **ci:** add some words to Typo CI dictionary ([669d35d](https://github.com/erykpiast/webpack-stats-explorer/commit/669d35d1b2c8d1870b2dd3fc0fa49e22a2afd08e))
+* **package:** update bs-css to version 11.0.0 ([7c18a31](https://github.com/erykpiast/webpack-stats-explorer/commit/7c18a31dfc7e40b836cb5b65106803dba7efd30b))
+* **package:** update react to version 16.12.0 ([172575b](https://github.com/erykpiast/webpack-stats-explorer/commit/172575bd118393ef703be46a13c3da3997a1136f))
+* **package:** update react-dom to version 16.12.0 ([e47dead](https://github.com/erykpiast/webpack-stats-explorer/commit/e47deadb7e040286504d17fcd617c0ff77c0add2))
+* **package:** update react-dropzone to version 10.2.0 ([d76fb8f](https://github.com/erykpiast/webpack-stats-explorer/commit/d76fb8f28e0c1d1d8fb1eeac2e647e33db8666f9))
+* **package:** use correct Git url to bs-recharts ([e3c7f85](https://github.com/erykpiast/webpack-stats-explorer/commit/e3c7f85a24fe53926cd98d28d64fb94830cfb3bf))
+* **ui:** don't allow to select negative index with prev button ([84d99dd](https://github.com/erykpiast/webpack-stats-explorer/commit/84d99dd5c23bff9c847b4468bc8d4518613ad268))
+
 ### [1.13.1](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.13.0...v1.13.1) (2019-10-28)
 
 
