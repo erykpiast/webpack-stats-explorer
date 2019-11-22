@@ -50,7 +50,7 @@
     "bs-jsverify": "0.10.0",
     "bs-react-dropzone": "0.5.0",
     "bs-webapi": "0.15.6",
-    "date-fns": "2.8.0",
+    "date-fns": "2.8.1",
     "diff": "4.0.1",
     "rationale": "0.2.0",
     "re-classnames": "4.0.0",
