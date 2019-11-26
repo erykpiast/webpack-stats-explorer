@@ -33,19 +33,14 @@ let fetch = urls =>
     |> Utils.String.split("\n")
     |> Array.map(Utils.String.trim)
     |> Utils.Array.filter(String.length ||> (!==)(0))
-    |> Utils.Array.map(
-         Fetch.fetch
-         ||> then_(Fetch.Response.text)
-         ||> then_(WebpackStats.FromText.make),
-       )
+    |> Utils.Array.map(Fetch.fetch ||> then_(Fetch.Response.text))
     |> all
-    |> then_(Array.to_list ||> resolve)
   );
 
 [@react.component]
-let make = (~className="", ~onStats) => {
+let make = (~className="", ~onFiles) => {
   let (value, setValue) = React.useState(() => "");
-  let onSubmit = fetch ||> Js.Promise.(then_(onStats ||> resolve)) ||> ignore;
+  let onSubmit = fetch ||> onFiles;
 
   <div className={Cn.make([className, Styles.root])}>
     <textarea
