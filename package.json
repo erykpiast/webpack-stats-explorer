@@ -16,10 +16,10 @@
     "dist/main.js"
   ],
   "scripts": {
-    "clean": "rm -rf dist",
-    "precompile": "bsb -clean-world",
+    "clean": "rm -rf dist && bsb -clean-world",
+    "precompile": "npm run clean",
     "compile": "bsb -make-world",
-    "prebuild": "run-s compile clean",
+    "prebuild": "npm run compile",
     "build": "NODE_ENV=production webpack",
     "start": "bsb -make-world -w",
     "pretest": "npm run compile",
