@@ -11,11 +11,15 @@ let removed = "Removed";
 let modules = "Modules";
 let module_ = "Module";
 let submodules = "Submodules";
-let drag = "Click button bellow or drag some files here to";
 
-let upload = "load your own stats";
-let loadExample = "load example data";
-let or_ = "or";
+module Welcome = {
+  let paste = "Paste URLs to webpack stats uploaded somewhere";
+  let download = "Download stats";
+  let drag = "click button bellow or drag some files here to";
+  let upload = "load your own stats";
+  let or_ = "or";
+  let loadExample = "load example data";
+};
 
 module Chunk = {
   let name = "Name";

@@ -1,11 +1,10 @@
+open Rationale.Function.Infix;
+
 type failReason =
   | NotEnoughFiles
   | WrongFormat
   | ParsingFailed
   | UnsupportedVersion;
-
-exception UnsupportedVersionExn;
-exception ParsingFailedExn;
 
 type status =
   | Success
@@ -21,6 +20,8 @@ type action =
   | UploadSuccess(Js.Global.timeoutId)
   | UploadFail(failReason, Js.Global.timeoutId)
   | StatusReset;
+
+exception NotEnoughFilesExn;
 
 let getLabel = (~isDragAccept, ~isDragActive, ~isDragReject, ~status) =>
   switch (status) {
@@ -44,51 +45,25 @@ let getLabel = (~isDragAccept, ~isDragActive, ~isDragReject, ~status) =>
     }
   };
 
-let parseStats = (~onSuccess, ~onFailure, files) =>
-  files
-  |> Array.map(file =>
-       file
-       |> FileReader.File.asBlob
-       |> (
-         blob =>
-           FileReader.toText2(blob, ~encoding="UTF-8")
-           |> Js.Promise.then_(text => {
-                let version =
-                  text
-                  |> Json.parseOrRaise
-                  |> WebpackStats.Version.decode
-                  |> WebpackStats.Version.isSupported;
-
-                if (version) {
-                  try (
-                    text
-                    |> Json.parseOrRaise
-                    |> WebpackStats.decode
-                    |> Js.Promise.resolve
-                  ) {
-                  | err =>
-                    Js.log(err);
-                    Js.Promise.reject(ParsingFailedExn);
-                  };
-                } else {
-                  Js.Promise.reject(UnsupportedVersionExn);
-                };
-              })
-       )
-     )
-  |> Js.Promise.all
-  |> Js.Promise.then_(files => {
-       if (Array.length(files) > 0) {
-         onSuccess(files);
-       };
-
-       Js.Promise.resolve();
-     })
-  |> Js.Promise.catch(err => {
-       Js.log(err);
-       onFailure(err);
-       Js.Promise.resolve();
-     });
+let parseStats =
+  Js.Promise.(
+    Array.map(
+      FileReader.File.asBlob
+      ||> (
+        blob =>
+          FileReader.toText2(blob, ~encoding="UTF-8")
+          |> then_(WebpackStats.FromText.make)
+      ),
+    )
+    ||> all
+    ||> then_(files =>
+          if (Array.length(files) > 0) {
+            resolve(files);
+          } else {
+            reject(NotEnoughFilesExn);
+          }
+        )
+  );
 
 module Styles = {
   open Css;
@@ -134,16 +109,15 @@ let make = (~onStats, ~className="", ~children) => {
   };
 
   let failureHandler =
-    Rationale.Function.Infix.(
-      [@bs.open]
-      (
-        fun
-        | UnsupportedVersionExn => UnsupportedVersion
-        | ParsingFailedExn => ParsingFailed
-      )
-      ||> Utils.defaultTo(ParsingFailed)
-      ||> (err => updateStatus(fail(err)))
-    );
+    [@bs.open]
+    (
+      fun
+      | WebpackStats.FromText.UnsupportedVersionExn => UnsupportedVersion
+      | WebpackStats.FromText.ParsingFailedExn => ParsingFailed
+      | NotEnoughFilesExn => NotEnoughFiles
+    )
+    ||> Utils.defaultTo(ParsingFailed)
+    ||> (err => updateStatus(fail(err)));
 
   <ReactDropzone
     accept={ReactDropzone.Single("application/json")}
@@ -153,16 +127,16 @@ let make = (~onStats, ~className="", ~children) => {
       | [||] => updateStatus(fail(NotEnoughFiles))
       | [|_|] => updateStatus(fail(NotEnoughFiles))
       | files =>
-        files
-        |> parseStats(
-             ~onSuccess=
-               stats => {
-                 updateStatus(success);
-                 onStats(stats);
-               },
-             ~onFailure=failureHandler,
-           )
-        |> ignore
+        Js.Promise.(
+          files
+          |> parseStats
+          |> then_(stats => {
+               updateStatus(success);
+               onStats(stats) |> ignore |> resolve;
+             })
+          |> catch(failureHandler ||> resolve)
+          |> ignore
+        )
       }
     }>
     {(

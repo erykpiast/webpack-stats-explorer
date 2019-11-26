@@ -15,7 +15,7 @@ module Styles = {
       display(`inlineFlex),
       flexShrink(0.0),
       fontSize(rem(1.0)),
-      fontFamily("inherit"),
+      fontFamily(`inherit_),
       flexGrow(1.0),
       justifyContent(`center),
       letterSpacing(em(0.02857)),

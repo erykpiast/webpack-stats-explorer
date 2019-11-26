@@ -80,12 +80,16 @@ module Array = struct
   let filter = Js.Array.filter;;
 
   let join = Js.Array.joinWith;;
+
+  let map = Js.Array.map;;
 end
 
 module String = struct
   let endsWith = Js.String.endsWith;;
 
   let split = Js.String.split;;
+
+  let trim = Js.String.trim;;
 end
 
 module Js = struct

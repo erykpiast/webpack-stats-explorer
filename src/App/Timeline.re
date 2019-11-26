@@ -109,10 +109,7 @@ let make = (~className="", ~stats=[], ~onChange, ~selectedIndex) => {
           )
           ||> setRootWidth,
         );
-  let resizeHandler = _ => {
-    getRootWidth(rootElement);
-    ();
-  };
+  let resizeHandler = _ => getRootWidth(rootElement) |> ignore;
   Webapi.Dom.(
     React.useEffect(() => {
       Window.addEventListener("resize", resizeHandler, window);
@@ -200,18 +197,13 @@ let make = (~className="", ~stats=[], ~onChange, ~selectedIndex) => {
          |> Js.Dict.fromList
        )
     |> Array.of_list;
-  let selectedStatDate1 =
-    List.nth(stats, selectedIndex).builtAt |> string_of_int;
-  let selectedStatDate2 =
-    List.nth(stats, selectedIndex + 1).builtAt |> string_of_int;
 
   BsRecharts.(
     <div
       className={Cn.make([className, Styles.root])}
       ref={ReactDOMRe.Ref.callbackDomRef(element => {
         setRootElement(_ => element);
-        getRootWidth(element);
-        ();
+        getRootWidth(element) |> ignore;
       })}>
       <AreaChart data width=rootWidth height=300>
         {uniqNames

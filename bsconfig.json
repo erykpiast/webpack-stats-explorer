@@ -39,6 +39,7 @@
     "reason-date-fns",
     "reason-react",
     "bs-css",
+    "bs-fetch",
     "bs-react-dropzone",
     "bs-webapi",
     "re-classnames"

@@ -106,3 +106,23 @@ module Version = struct
     ||> (=) "4"
   );;
 end;;
+
+module FromText = struct
+  exception UnsupportedVersionExn;;
+  exception ParsingFailedExn;;
+
+  let make text = Js.Promise.(
+    let version =
+      text
+        |> Json.parseOrRaise
+        |> Version.decode
+        |> Version.isSupported
+    in if version then
+        try (
+          text |> Json.parseOrRaise |> decode |> resolve
+        ) with err ->
+          let () = Js.log err
+          in reject(ParsingFailedExn);
+        else reject UnsupportedVersionExn
+  );;
+end;;

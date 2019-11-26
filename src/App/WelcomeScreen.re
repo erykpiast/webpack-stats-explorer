@@ -22,6 +22,16 @@ module Styles = {
       fontSize(em(1.5)),
       padding2(~v=Theme.Space.double, ~h=Theme.Space.quadruple),
     ]);
+
+  let paste =
+    style([
+      fontSize(Theme.Size.Text.default),
+      fontFamily(`monospace),
+      minHeight(em(5.0)),
+      width(`percent(80.0)),
+      margin2(~v=px(0), ~h=`auto),
+      maxWidth(Theme.Space.quadruplehexteenfold),
+    ]);
 };
 
 let logStats = (title, stats) => {
@@ -34,7 +44,7 @@ let logComp = (title, comp) => {
   comp |> CompareEntry.encode |> Js.log;
 };
 
-let loadExampleData = () => [Data.a, Data.b, Data.c, Data.d, Data.e];
+let loadExampleData = _ => [Data.a, Data.b, Data.c, Data.d, Data.e];
 
 [@react.component]
 let make = (~onStats, ~children) => {
@@ -42,18 +52,21 @@ let make = (~onStats, ~children) => {
     {onClick =>
        children(
          <div className=Styles.wrapper>
-           <p> {L10N.drag |> React.string} </p>
+           <p> {L10N.Welcome.paste |> React.string} </p>
+           <div> <FetchArea className=Styles.paste onStats /> </div>
+           <p>
+             {L10N.Welcome.or_ ++ " " ++ L10N.Welcome.drag |> React.string}
+           </p>
            <div>
              <Button onClick type_=Button.Primary className=Styles.action>
-               {L10N.upload |> React.string}
+               {L10N.Welcome.upload |> React.string}
              </Button>
            </div>
-           <p> {L10N.or_ |> React.string} </p>
+           <p> {L10N.Welcome.or_ |> React.string} </p>
            <div>
              <Button
-               onClick={_ => loadExampleData() |> onStats}
-               className=Styles.action>
-               {L10N.loadExample |> React.string}
+               onClick={loadExampleData ||> onStats} className=Styles.action>
+               {L10N.Welcome.loadExample |> React.string}
              </Button>
            </div>
          </div>,
