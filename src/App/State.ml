@@ -26,5 +26,6 @@ type t =
   ; stats : WebpackStats.t list
   ; navigationPath : NavigationPath.t
   ; isTimelineVisible : bool
+  ; urls : string list
   }
 ;;

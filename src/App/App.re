@@ -7,7 +7,8 @@ type action =
   | Navigate(NavigationPath.Segment.t, int)
   | NavigateThroughBreadcrumbs(int)
   | ToggleTimeline
-  | UpdateStats(list(WebpackStats.t));
+  | UpdateStats(list(WebpackStats.t))
+  | UpdateUrls(list(string));
 
 let updateNavigationPath = (path: list('a), segment, depth): list('a) => {
   let tail =
@@ -29,18 +30,21 @@ let reducer = (state, action) => {
       stats: state.stats,
       navigationPath: [],
       isTimelineVisible: state.isTimelineVisible,
+      urls: state.urls,
     }
   | Prev => {
       index: (state.index - 1 + maxIndex) mod maxIndex,
       stats: state.stats,
       navigationPath: [],
       isTimelineVisible: state.isTimelineVisible,
+      urls: state.urls,
     }
   | Choose(index) => {
       index,
       stats: state.stats,
       navigationPath: [],
       isTimelineVisible: state.isTimelineVisible,
+      urls: state.urls,
     }
   | Navigate(segment, depth) => {
       index: state.index,
@@ -48,6 +52,7 @@ let reducer = (state, action) => {
       navigationPath:
         updateNavigationPath(state.navigationPath, segment, depth),
       isTimelineVisible: state.isTimelineVisible,
+      urls: state.urls,
     }
   | NavigateThroughBreadcrumbs(index) => {
       index: state.index,
@@ -55,18 +60,28 @@ let reducer = (state, action) => {
       navigationPath:
         Belt.List.take(state.navigationPath, index) |> Utils.defaultTo([]),
       isTimelineVisible: state.isTimelineVisible,
+      urls: state.urls,
     }
   | ToggleTimeline => {
       index: state.index,
       stats: state.stats,
       navigationPath: state.navigationPath,
       isTimelineVisible: !state.isTimelineVisible,
+      urls: state.urls,
     }
   | UpdateStats(stats) => {
       index: 0,
       stats,
       navigationPath: [],
       isTimelineVisible: false,
+      urls: state.urls,
+    }
+  | UpdateUrls(urls) => {
+      index: state.index,
+      stats: state.stats,
+      navigationPath: state.navigationPath,
+      isTimelineVisible: state.isTimelineVisible,
+      urls,
     }
   };
 };
@@ -76,12 +91,24 @@ let make = (~stats) => {
   let (state, dispatch) =
     React.useReducer(
       reducer,
-      {index: 0, stats, navigationPath: [], isTimelineVisible: false},
+      {
+        index: 0,
+        stats,
+        navigationPath: [],
+        isTimelineVisible: false,
+        urls: UrlState.read().urls,
+      },
     );
   let comparisons = state.stats |> CompareStats.make;
 
   if (List.length(comparisons) === 0) {
-    <WelcomeScreen onStats={stats => dispatch(UpdateStats(stats))}>
+    <WelcomeScreen
+      onStats={stats => dispatch(UpdateStats(stats))}
+      onUrls={urls => {
+        Js.log(("oh my, URLS!", urls));
+        dispatch(UpdateUrls(urls));
+      }}
+      urls={state.urls}>
       {loader =>
          <NavigationLayout
            side=React.null

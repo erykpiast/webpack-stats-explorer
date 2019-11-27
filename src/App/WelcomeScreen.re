@@ -66,11 +66,6 @@ type state = {
   resetParsingStatusTimeout: option(Js.Global.timeoutId),
 };
 
-type action =
-  | UploadSuccess(Js.Global.timeoutId)
-  | UploadFail(failReason, Js.Global.timeoutId)
-  | StatusReset;
-
 exception NotEnoughFilesExn;
 
 let getLabel = status =>
@@ -91,41 +86,17 @@ let getLabel = status =>
   | Unknown => None
   };
 
-let reducer = (_state, action) =>
-  switch (action) {
-  | UploadSuccess(timeoutId) => {
-      status: Success,
-      resetParsingStatusTimeout: Some(timeoutId),
-    }
-  | UploadFail(reason, timeoutId) => {
-      status: Fail(reason),
-      resetParsingStatusTimeout: Some(timeoutId),
-    }
-  | StatusReset => {status: Unknown, resetParsingStatusTimeout: None}
-  };
-
-let fail = (reason, timeoutId) => UploadFail(reason, timeoutId);
-
-let success = timeoutId => UploadSuccess(timeoutId);
-
 [@react.component]
-let make = (~onStats, ~children) => {
-  let (state, send) =
-    React.useReducer(
-      reducer,
-      {status: Unknown, resetParsingStatusTimeout: None},
-    );
-
-  let updateStatus = actionCreator => {
-    switch (state.resetParsingStatusTimeout) {
-    | Some(timeoutId) => Js.Global.clearTimeout(timeoutId)
-    | _ => ()
-    };
-    let timeoutId = Js.Global.setTimeout(() => send(StatusReset), 5000);
-
-    send(actionCreator(timeoutId));
-  };
-
+let make = (~urls, ~onStats, ~onUrls, ~children) => {
+  let (status, setStatus) = React.useState(() => Unknown);
+  React.useEffect1(
+    () => {
+      let timeout = Js.Global.setTimeout(() => setStatus(_ => Unknown), 5000);
+      Some(() => Js.Global.clearTimeout(timeout));
+    },
+    [|status|],
+  );
+  let (filesPromise, setFilesPromise) = React.useState(() => None);
   let failureHandler =
     [@bs.open]
     (
@@ -138,32 +109,51 @@ let make = (~onStats, ~children) => {
       | FetchArea.OtherExn(code) => OtherFetchingError(code)
       | NotEnoughFilesExn => NotEnoughFiles
     )
-    ||> Utils.defaultTo(ParsingFailed)
-    ||> (err => updateStatus(fail(err)));
+    ||> Utils.defaultTo(ParsingFailed);
+  React.useEffect1(
+    () =>
+      switch (filesPromise) {
+      | Some(promise) =>
+        let unmounted = ref(false);
+        Js.Promise.(
+          promise
+          |> then_(Array.map(WebpackStats.FromText.make) ||> all)
+          |> then_(stats =>
+               if (Array.length(stats) <= 1) {
+                 reject(NotEnoughFilesExn);
+               } else {
+                 resolve(stats);
+               }
+             )
+          |> then_(Array.to_list ||> onStats ||> (_ => Success |> resolve))
+          |> catch(failureHandler ||> (err => Fail(err) |> resolve))
+          |> then_(status => {
+               if (! unmounted^) {
+                 setStatus(_ => status);
+               };
 
-  let onFiles =
-    Js.Promise.(
-      then_(Array.map(WebpackStats.FromText.make) ||> all)
-      ||> then_(files =>
-            if (Array.length(files) > 1) {
-              updateStatus(success);
-              onStats(files |> Array.to_list) |> resolve;
-            } else {
-              reject(NotEnoughFilesExn);
-            }
-          )
-      ||> catch(failureHandler ||> resolve)
-      ||> ignore
-    );
+               resolve();
+             })
+          |> ignore
+        );
 
-  let label = getLabel(state.status);
+        Some(() => unmounted := true);
+      | None => None
+      },
+    [|filesPromise|],
+  );
+
+  let label = status |> getLabel;
+  let onFiles = filesPromise => setFilesPromise(_ => Some(filesPromise));
 
   <Dropzone className=Styles.dropzone onFiles label>
     {onClick =>
        children(
          <div className=Styles.wrapper>
            <p> {L10N.Welcome.paste |> React.string} </p>
-           <div> <FetchArea className=Styles.paste onFiles /> </div>
+           <div>
+             <FetchArea className=Styles.paste urls onFiles onUrls />
+           </div>
            <p>
              {L10N.Welcome.or_ ++ " " ++ L10N.Welcome.drag |> React.string}
            </p>

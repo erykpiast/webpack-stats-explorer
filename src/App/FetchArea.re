@@ -33,12 +33,17 @@ module Styles = {
     ]);
 };
 
+let parseUrls =
+  Utils.String.split("\n")
+  ||> Array.map(Utils.String.trim)
+  ||> Utils.Array.filter(String.length ||> (!==)(0));
+
+let stringifyUrls: list(string) => string =
+  Array.of_list ||> Utils.Array.join("\n");
+
 let fetch = urls =>
   Js.Promise.(
     urls
-    |> Utils.String.split("\n")
-    |> Array.map(Utils.String.trim)
-    |> Utils.Array.filter(String.length ||> (!==)(0))
     |> Utils.Array.map(
          Fetch.(
            fetch
@@ -57,9 +62,27 @@ let fetch = urls =>
   );
 
 [@react.component]
-let make = (~className="", ~onFiles) => {
-  let (value, setValue) = React.useState(() => "");
-  let onSubmit = fetch ||> onFiles;
+let make = (~className="", ~urls, ~onFiles, ~onUrls) => {
+  let (value, setValue) = React.useState(() => urls |> stringifyUrls);
+  let onSubmit =
+    (
+      text => {
+        let urls = parseUrls(text);
+        onUrls(urls |> Array.to_list);
+        urls;
+      }
+    )
+    ||> fetch
+    ||> onFiles;
+  React.useEffect1(
+    () => {
+      if (List.length(urls) > 0) {
+        urls |> Array.of_list |> fetch |> onFiles |> ignore;
+      };
+      None;
+    },
+    [|urls|],
+  );
 
   <div className={Cn.make([className, Styles.root])}>
     <textarea
