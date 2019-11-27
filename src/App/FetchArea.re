@@ -1,4 +1,10 @@
+open Rationale.Function;
 open Rationale.Function.Infix;
+
+exception CorsExn;
+exception NotFoundExn;
+exception EmptyResponseExn;
+exception OtherExn(int);
 
 module Styles = {
   open Css;
@@ -33,7 +39,20 @@ let fetch = urls =>
     |> Utils.String.split("\n")
     |> Array.map(Utils.String.trim)
     |> Utils.Array.filter(String.length ||> (!==)(0))
-    |> Utils.Array.map(Fetch.fetch ||> then_(Fetch.Response.text))
+    |> Utils.Array.map(
+         Fetch.(
+           fetch
+           ||> then_(response =>
+                 switch (response |> Response.status) {
+                 | 200 => response |> Response.text
+                 | 204 => reject(EmptyResponseExn)
+                 | 404 => reject(NotFoundExn)
+                 | code => reject(OtherExn(code))
+                 }
+               )
+           ||> catch(_ => reject(CorsExn))
+         ),
+       )
     |> all
   );
 

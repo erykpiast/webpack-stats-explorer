@@ -50,7 +50,11 @@ type failReason =
   | NotEnoughFiles
   | WrongFormat
   | ParsingFailed
-  | UnsupportedVersion;
+  | UnsupportedVersion
+  | EmptyResponse
+  | CorsIssue
+  | FileNotFound
+  | OtherFetchingError(int);
 
 type status =
   | Success
@@ -78,6 +82,11 @@ let getLabel = status =>
     | WrongFormat => Some(L10N.Validation.json)
     | ParsingFailed => Some(L10N.Validation.stats)
     | UnsupportedVersion => Some(L10N.Validation.version)
+    | EmptyResponse => Some(L10N.Fetch.empty)
+    | CorsIssue => Some(L10N.Fetch.cors)
+    | FileNotFound => Some(L10N.Fetch.notFound)
+    | OtherFetchingError(code) =>
+      Some(L10N.Fetch.unknown ++ " " ++ string_of_int(code))
     }
   | Unknown => None
   };
@@ -123,6 +132,10 @@ let make = (~onStats, ~children) => {
       fun
       | WebpackStats.FromText.UnsupportedVersionExn => UnsupportedVersion
       | WebpackStats.FromText.ParsingFailedExn => ParsingFailed
+      | FetchArea.CorsExn => CorsIssue
+      | FetchArea.NotFoundExn => FileNotFound
+      | FetchArea.EmptyResponseExn => EmptyResponse
+      | FetchArea.OtherExn(code) => OtherFetchingError(code)
       | NotEnoughFilesExn => NotEnoughFiles
     )
     ||> Utils.defaultTo(ParsingFailed)

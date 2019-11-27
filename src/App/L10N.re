@@ -53,3 +53,10 @@ module Validation = {
   let success = "Webpack stats uploaded successfully";
   let version = "Only Webpack 4 stats are supported";
 };
+
+module Fetch = {
+  let empty = "Empty response. Check the URL";
+  let cors = "File not available because of CORS. You can easily fix it with browser extension like ModHeader";
+  let notFound = "File not found";
+  let unknown = "Unknown fetching error";
+};
