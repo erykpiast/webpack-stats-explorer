@@ -99,6 +99,13 @@ let make = (~stats) => {
         urls: UrlState.read().urls,
       },
     );
+  React.useEffect1(
+    () => {
+      UrlState.({urls: state.urls} |> write);
+      None;
+    },
+    [|state.urls|],
+  );
   let comparisons = state.stats |> CompareStats.make;
 
   if (List.length(comparisons) === 0) {
