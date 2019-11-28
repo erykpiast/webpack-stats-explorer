@@ -87,7 +87,8 @@ let make = (~className="", ~urls, ~onFiles, ~onUrls) => {
   <div className={Cn.make([className, Styles.root])}>
     <textarea
       className=Styles.textArea
-      onInput={e => e->ReactEvent.Form.target##value |> setValue}
+      value
+      onChange={e => e->ReactEvent.Form.target##value |> setValue}
     />
     {String.length(value) > 0
        ? <Button
