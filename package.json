@@ -62,7 +62,7 @@
     "recharts": "1.8.5"
   },
   "devDependencies": {
-    "@babel/cli": "7.7.4",
+    "@babel/cli": "7.7.5",
     "@babel/core": "7.7.4",
     "@babel/preset-env": "7.7.4",
     "@glennsl/bs-jest": "0.4.9",
