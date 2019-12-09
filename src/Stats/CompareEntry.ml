@@ -62,9 +62,23 @@ let size comp = Rationale.Function.Infix.
   )
 ;;
 
+let empty =
+  { added = []
+  ; removed = []
+  ; intact = []
+  ; modified = []
+  }
+;;
+
 type entry =
   | Entry of Entry.t
   | ModifiedEntry of t ModifiedEntry.t
+;;
+
+let encodeEntry entry =
+  match entry with
+  | Entry(e) -> Entry.encode e
+  | ModifiedEntry(e) -> ModifiedEntry.encode encode e
 ;;
 
 type data =

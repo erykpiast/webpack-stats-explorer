@@ -1,10 +1,8 @@
-open State;
-
 type action =
   | Next
   | Prev
   | Choose(int)
-  | Navigate(NavigationPath.Segment.t, int)
+  | Navigate(State.NavigationPath.Segment.t, int)
   | NavigateThroughBreadcrumbs(int)
   | ToggleTimeline
   | UpdateStats(list(WebpackStats.t))
@@ -21,90 +19,106 @@ let updateNavigationPath = (path: list('a), segment, depth): list('a) => {
   [segment, ...tail |> List.rev] |> List.rev;
 };
 
-let reducer = (state, action) => {
-  let maxIndex = List.length(state.stats) - 1;
+let reducer = (state, action) =>
+  State.(
+    {
+      let maxIndex = List.length(state.stats) - 1;
 
-  switch (action) {
-  | Next => {
-      index: (state.index + 1) mod maxIndex,
-      stats: state.stats,
-      navigationPath: [],
-      isTimelineVisible: state.isTimelineVisible,
-      urls: state.urls,
+      switch (action) {
+      | Next => {
+          index: (state.index + 1) mod maxIndex,
+          stats: state.stats,
+          navigationPath: [],
+          isTimelineVisible: state.isTimelineVisible,
+          urls: state.urls,
+        }
+      | Prev => {
+          index: (state.index - 1 + maxIndex) mod maxIndex,
+          stats: state.stats,
+          navigationPath: [],
+          isTimelineVisible: state.isTimelineVisible,
+          urls: state.urls,
+        }
+      | Choose(index) => {
+          index,
+          stats: state.stats,
+          navigationPath: [],
+          isTimelineVisible: state.isTimelineVisible,
+          urls: state.urls,
+        }
+      | Navigate(segment, depth) => {
+          index: state.index,
+          stats: state.stats,
+          navigationPath:
+            updateNavigationPath(state.navigationPath, segment, depth),
+          isTimelineVisible: state.isTimelineVisible,
+          urls: state.urls,
+        }
+      | NavigateThroughBreadcrumbs(index) => {
+          index: state.index,
+          stats: state.stats,
+          navigationPath:
+            Belt.List.take(state.navigationPath, index)
+            |> Utils.defaultTo([]),
+          isTimelineVisible: state.isTimelineVisible,
+          urls: state.urls,
+        }
+      | ToggleTimeline => {
+          index: state.index,
+          stats: state.stats,
+          navigationPath: state.navigationPath,
+          isTimelineVisible: !state.isTimelineVisible,
+          urls: state.urls,
+        }
+      | UpdateStats(stats) => {
+          index: Js.Math.min_int(state.index, List.length(stats)),
+          stats,
+          navigationPath: state.navigationPath,
+          isTimelineVisible: false,
+          urls: state.urls,
+        }
+      | UpdateUrls(urls) => {
+          index: state.index,
+          stats: state.stats,
+          navigationPath: state.navigationPath,
+          isTimelineVisible: state.isTimelineVisible,
+          urls,
+        }
+      };
     }
-  | Prev => {
-      index: (state.index - 1 + maxIndex) mod maxIndex,
-      stats: state.stats,
-      navigationPath: [],
-      isTimelineVisible: state.isTimelineVisible,
-      urls: state.urls,
-    }
-  | Choose(index) => {
-      index,
-      stats: state.stats,
-      navigationPath: [],
-      isTimelineVisible: state.isTimelineVisible,
-      urls: state.urls,
-    }
-  | Navigate(segment, depth) => {
-      index: state.index,
-      stats: state.stats,
-      navigationPath:
-        updateNavigationPath(state.navigationPath, segment, depth),
-      isTimelineVisible: state.isTimelineVisible,
-      urls: state.urls,
-    }
-  | NavigateThroughBreadcrumbs(index) => {
-      index: state.index,
-      stats: state.stats,
-      navigationPath:
-        Belt.List.take(state.navigationPath, index) |> Utils.defaultTo([]),
-      isTimelineVisible: state.isTimelineVisible,
-      urls: state.urls,
-    }
-  | ToggleTimeline => {
-      index: state.index,
-      stats: state.stats,
-      navigationPath: state.navigationPath,
-      isTimelineVisible: !state.isTimelineVisible,
-      urls: state.urls,
-    }
-  | UpdateStats(stats) => {
-      index: 0,
-      stats,
-      navigationPath: [],
-      isTimelineVisible: false,
-      urls: state.urls,
-    }
-  | UpdateUrls(urls) => {
-      index: state.index,
-      stats: state.stats,
-      navigationPath: state.navigationPath,
-      isTimelineVisible: state.isTimelineVisible,
-      urls,
-    }
-  };
-};
+  );
 
 [@react.component]
 let make = (~stats) => {
+  let urlState = UrlState.read();
   let (state, dispatch) =
     React.useReducer(
       reducer,
       {
-        index: 0,
+        index: urlState.index,
         stats,
-        navigationPath: [],
+        navigationPath:
+          urlState.navigationPath
+          |> List.map(State.NavigationPath.Segment.fromString)
+          |> List.filter((!=)(None))
+          |> List.map(Belt.Option.getExn),
         isTimelineVisible: false,
-        urls: UrlState.read().urls,
+        urls: urlState.urls,
       },
     );
-  React.useEffect1(
+  React.useEffect3(
     () => {
-      UrlState.({urls: state.urls} |> write);
+      UrlState.{
+        urls: state.urls,
+        navigationPath:
+          state.navigationPath
+          |> List.map(State.NavigationPath.Segment.toString),
+        index: state.index,
+      }
+      |> UrlState.write;
       None;
     },
-    [|state.urls|],
+    (state.urls, state.navigationPath, state.index),
   );
   let comparisons = state.stats |> CompareStats.make;
 
@@ -126,12 +140,14 @@ let make = (~stats) => {
     </WelcomeScreen>;
   } else {
     let comp = List.nth(comparisons, state.index);
-    let revPath = List.rev(state.navigationPath);
+    let navigationPath =
+      state.navigationPath |> NavigationPath.fromState(CompareEntry.ModifiedChildren(comp));
+    let revPath = navigationPath |> List.rev;
     let topContent =
       <>
         <Logo onClick={_ => dispatch(NavigateThroughBreadcrumbs(0))} />
         <Breadcrumbs
-          items={state.navigationPath}
+          items=navigationPath
           onClick={index => dispatch(NavigateThroughBreadcrumbs(index))}
         />
         <ComparisonChooser
@@ -168,8 +184,11 @@ let make = (~stats) => {
     let sideContent =
       <EntryTree
         comp
-        navigationPath={state.navigationPath}
-        onEntry={(level, entry) => dispatch(Navigate(entry, level))}
+        navigationPath
+        onEntry={(level, segment) =>
+          Navigate(NavigationPath.Segment.toState(segment), level)
+          |> dispatch
+        }
       />;
 
     <NavigationLayout

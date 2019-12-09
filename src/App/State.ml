@@ -1,16 +1,36 @@
 module NavigationPath = struct
   module Segment = struct
-    type t = CompareEntry.entry * CompareKind.t;;
-    let make (kind : CompareKind.t) item = (item, kind);;
+    type t = string * CompareKind.t;;
 
-    let encode r =
-      let encodedEntry = CompareEntry.(
-        match (r |> fst) with
-        | Entry(entry) -> Entry.encode entry
-        | ModifiedEntry(modifiedEntry) -> ModifiedEntry.encode CompareEntry.encode modifiedEntry
-      )
-      and encodedKind = r |> snd |> CompareKind.encode
-      in Json.Encode.jsonArray [|encodedEntry; encodedKind|]
+    let make (kind : CompareKind.t) item = CompareEntry.(
+      match (item) with
+        | Entry(entry) -> (entry.id, kind)
+        | ModifiedEntry(modifiedEntry) -> (modifiedEntry.id, kind)
+    );;
+
+    let encode (id, kind) =
+      [|
+        id;
+        kind |> CompareKind.encode
+      |] |> Json.Encode.jsonArray
+    ;;
+
+    let entryAndKindSeparator = "|";;
+
+    let toString (id, kind) = id ^ entryAndKindSeparator ^ (kind |> CompareKind.toString);;
+
+    let fromString entry =
+      let parts = entry |> Utils.String.split entryAndKindSeparator |> Array.to_list
+      in
+        match (parts) with
+        | id::kindString::[] ->
+          let maybeKind = CompareKind.fromString kindString
+          in (
+            match (maybeKind) with
+            | Some kind -> Some (id ^ "", kind)
+            | None -> None
+          )
+        | _ -> None
     ;;
   end
 

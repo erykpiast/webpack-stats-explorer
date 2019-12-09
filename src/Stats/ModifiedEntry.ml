@@ -57,3 +57,7 @@ let encode encodeChildren r =
     ]
   )
 ;;
+
+let hasId id entry =
+  entry.id = id
+;;
