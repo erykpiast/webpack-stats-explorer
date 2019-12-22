@@ -75,8 +75,8 @@ let encode = r =>
   );
 
 module type MapperContext = {
-  let onEntry: (int, State.NavigationPath.Segment.t) => unit;
-  let navigationPath: list(State.NavigationPath.Segment.t);
+  let onEntry: (int, NavigationPath.Segment.t) => unit;
+  let navigationPath: list(NavigationPath.Segment.t);
 };
 
 module Mapper = (Context: MapperContext) => {
@@ -119,7 +119,7 @@ module Mapper = (Context: MapperContext) => {
       | [(segment, kind), ...tail] =>
         if (kind === expectedKind) {
           switch (segment) {
-          | Entry(segmentEntry) =>
+          | CompareEntry.Entry(segmentEntry) =>
             if (segmentEntry == entry) {
               let children =
                 entry.children
@@ -150,8 +150,7 @@ module Mapper = (Context: MapperContext) => {
     level,
     value: Entry(entry),
     parent,
-    onChange:
-      State.NavigationPath.Segment.make(Added) ||> Context.onEntry(level),
+    onChange: NavigationPath.Segment.make(Added) ||> Context.onEntry(level),
   };
   let mapRemoved = (level, parent, entry: Entry.t) => {
     after: 0,
@@ -161,7 +160,7 @@ module Mapper = (Context: MapperContext) => {
     value: Entry(entry),
     parent,
     onChange:
-      State.NavigationPath.Segment.make(Removed) ||> Context.onEntry(level),
+      NavigationPath.Segment.make(Removed) ||> Context.onEntry(level),
   };
   let mapIntact = (level, parent, entry: Entry.t) => {
     after: entry.size,
@@ -170,8 +169,7 @@ module Mapper = (Context: MapperContext) => {
     level,
     value: Entry(entry),
     parent,
-    onChange:
-      State.NavigationPath.Segment.make(Intact) ||> Context.onEntry(level),
+    onChange: NavigationPath.Segment.make(Intact) ||> Context.onEntry(level),
   };
   let mapModified = (level, parent, entry: ModifiedEntry.t(CompareEntry.t)) => {
     after: entry.size |> snd,
@@ -181,7 +179,7 @@ module Mapper = (Context: MapperContext) => {
     value: ModifiedEntry(entry),
     parent,
     onChange:
-      State.NavigationPath.Segment.make(Modified) ||> Context.onEntry(level),
+      NavigationPath.Segment.make(Modified) ||> Context.onEntry(level),
   };
 
   let added = expandNotModifiedEntryChildren(Added, mapAdded);
@@ -260,7 +258,7 @@ let getLevelClass = level =>
 
 [@react.component]
 let make =
-    (~onEntry, ~comp: CompareEntry.t, ~navigationPath: State.NavigationPath.t) => {
+    (~onEntry, ~comp: CompareEntry.t, ~navigationPath: NavigationPath.t) => {
   let props = mapToProps(onEntry, navigationPath, comp);
 
   switch (props) {

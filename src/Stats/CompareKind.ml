@@ -1,3 +1,5 @@
+open Rationale.Function.Infix;;
+
 type t =
   | Added
   | Intact
@@ -5,11 +7,21 @@ type t =
   | Removed
 ;;
 
-let encode r = (
+let toString r = (
   match r with
   | Added -> "Added"
   | Intact -> "Intact"
   | Modified -> "Modified"
   | Removed -> "Removed"
-) |> Json.Encode.string
-;;
+);;
+
+let fromString s = (
+  match s with
+ | "Added" -> Some Added
+ | "Intact" -> Some Intact
+ | "Modified" -> Some Modified
+ | "Removed" -> Some Removed
+ | _ -> None
+)
+
+let encode = toString ||> Json.Encode.string;;

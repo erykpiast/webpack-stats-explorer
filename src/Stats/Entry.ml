@@ -60,6 +60,10 @@ let similar a b =
   a.id = b.id
 ;;
 
+let hasId id entry =
+  entry.id = id
+;;
+
 module FromModule = struct
   open Rationale.Option.Infix;;
   open Rationale.Function.Infix;;

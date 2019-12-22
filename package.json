@@ -16,10 +16,10 @@
     "dist/main.js"
   ],
   "scripts": {
-    "clean": "rm -rf dist",
-    "precompile": "bsb -clean-world",
+    "clean": "rm -rf dist && bsb -clean-world",
+    "precompile": "npm run clean",
     "compile": "bsb -make-world",
-    "prebuild": "run-s compile clean",
+    "prebuild": "npm run compile",
     "build": "NODE_ENV=production webpack",
     "start": "bsb -make-world -w",
     "pretest": "npm run compile",
@@ -46,7 +46,8 @@
     "@glennsl/bs-json": "5.0.1",
     "@glennsl/rebase": "0.2.1",
     "@zpnester/bs-filereader": "0.4.0",
-    "bs-css": "11.0.0",
+    "bs-css": "github:erykpiast/bs-css#feature/font-family",
+    "bs-fetch": "0.5.0",
     "bs-jsverify": "0.10.0",
     "bs-react-dropzone": "0.5.0",
     "bs-webapi": "0.15.6",

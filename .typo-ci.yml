@@ -1,4 +1,6 @@
 excluded_words
   - bsconfig
-  - reason-date-fns
-  - date-fns
+  - fns
+  - fns
+  - bsb
+  - exn

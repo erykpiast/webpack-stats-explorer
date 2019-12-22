@@ -11,11 +11,15 @@ let removed = "Removed";
 let modules = "Modules";
 let module_ = "Module";
 let submodules = "Submodules";
-let drag = "Click button bellow or drag some files here to";
 
-let upload = "load your own stats";
-let loadExample = "load example data";
-let or_ = "or";
+module Welcome = {
+  let paste = "Paste URLs to webpack stats uploaded somewhere";
+  let download = "Download stats";
+  let drag = "click button bellow or drag some files here to";
+  let upload = "load your own stats";
+  let or_ = "or";
+  let loadExample = "load example data";
+};
 
 module Chunk = {
   let name = "Name";
@@ -48,4 +52,11 @@ module Validation = {
   let stats = "It doesn't seem to be valid Webpack stats";
   let success = "Webpack stats uploaded successfully";
   let version = "Only Webpack 4 stats are supported";
+};
+
+module Fetch = {
+  let empty = "Empty response. Check the URL";
+  let cors = "File not available because of CORS. You can easily fix it with browser extension like ModHeader";
+  let notFound = "File not found";
+  let unknown = "Unknown fetching error";
 };
