@@ -43,6 +43,7 @@ type compare = CompareEntry.t;;
 
 type t =
   { index : int
+  ; tab : int
   ; stats : WebpackStats.t list
   ; navigationPath : NavigationPath.t
   ; isTimelineVisible : bool

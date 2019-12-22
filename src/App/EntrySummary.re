@@ -221,14 +221,12 @@ module.exports = {
   };
 
 [@react.component]
-let make = (~entry, ~kind) => {
-  let (index, setIndex) = React.useState(() => 1);
-
+let make = (~entry, ~onTab, ~tab, ~kind) => {
   let original = entry |> getOriginal;
   let stat = entry |> getStat;
   let parsed = entry |> getParsed;
   let currentData =
-    switch (index) {
+    switch (tab) {
     | 0 => original
     | 2 => parsed
     | _ => stat
@@ -256,8 +254,8 @@ let make = (~entry, ~kind) => {
         </div>
         <Tabs
           className=Styles.size
-          selectedIndex=index
-          onChange={index => setIndex(_ => index)}>
+          selectedIndex=tab
+          onChange={onTab}>
           [|
             original |> renderSize(L10N.Summary.original),
             stat |> renderSize(L10N.Summary.stat),

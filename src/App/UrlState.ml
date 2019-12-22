@@ -7,37 +7,50 @@ type t =
   { urls : string list
   ; navigationPath : string list
   ; index : int
+  ; tab : int
   };;
 
 let urlParameter = "u";;
 let navigationPathParameters = "p";;
 let indexParameter = "i";;
+let tabParameter = "t";;
 let navigationPathSeparator = ",";;
 
 let extractNavigationPath params =
   params
   |> URLSearchParams.get navigationPathParameters
   <$> (Utils.String.split navigationPathSeparator ||> Array.to_list)
-  |> Utils.defaultTo [];;
+  |> Utils.defaultTo []
+;;
 
 let extractIndex params =
   params
   |> URLSearchParams.get indexParameter
   >>= Belt.Int.fromString
-  |> Utils.defaultTo 0;;
+  |> Utils.defaultTo 0
+;;
+
+let extractTab params =
+  params
+  |> URLSearchParams.get tabParameter
+  >>= Belt.Int.fromString
+  |> Utils.defaultTo 1
+;;
 
 let read () =
   let params = location |> Location.search |> URLSearchParams.make
   in let urls = params |> URLSearchParams.getAll urlParameter |> Array.to_list
   and navigationPath = extractNavigationPath params
   and index = extractIndex params
+  and tab = extractTab params
   in
     { urls = urls
     ; navigationPath = navigationPath
     ; index = index
+    ; tab = tab
     };;
 
-let write ({ urls; navigationPath; index }) =
+let write ({ urls; navigationPath; index; tab }) =
   let search = Location.search location
   in let () = Js.log index
   in let params = URLSearchParams.make search
@@ -55,6 +68,11 @@ let write ({ urls; navigationPath; index }) =
     and _ = URLSearchParams.set
       indexParameter
       (index |> string_of_int)
+      params
+    and _ = URLSearchParams.delete tabParameter params
+    and _ = URLSearchParams.set
+      tabParameter
+      (tab |> string_of_int)
       params
     and updatedSearch = URLSearchParams.toString params
   in
