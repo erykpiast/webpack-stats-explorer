@@ -9,7 +9,7 @@ describe("CompareStats", () => {
       files: ["chunk.js"],
       filteredModules: 0,
       hash: "",
-      id: 0,
+      id: "0",
       initial: false,
       modules: [],
       names: ["chunk"],

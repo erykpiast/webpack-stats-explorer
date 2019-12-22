@@ -2,7 +2,7 @@ type t =
   { assets : string list
   ; built : bool
   ; cacheable : bool
-  ; chunks : int list
+  ; chunks : string list
   ; depth : int
   ; errors : int
   ; failed : bool
@@ -56,7 +56,7 @@ let rec decode json =
     { assets = json |> field "assets" (list string)
     ; built = json |> field "built" bool
     ; cacheable = json |> optional (field "cacheable" bool) |> Utils.defaultTo(false)
-    ; chunks = json |> field "chunks" (list int)
+    ; chunks = json |> field "chunks" (list Utils.Json.Decode.forceString)
     ; depth = json |> field "depth" int
     ; errors = json |> field "errors" int
     ; failed = json |> field "failed" bool
@@ -94,7 +94,7 @@ let rec encode r =
       [ "assets", r.assets |> list string
       ; "built", r.built |> bool
       ; "cacheable", r.cacheable |> bool
-      ; "chunks", r.chunks |> list int
+      ; "chunks", r.chunks |> list string
       ; "depth", r.depth |> int
       ; "errors", r.errors |> int
       ; "failed", r.failed |> bool

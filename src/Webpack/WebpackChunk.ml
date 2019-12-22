@@ -4,7 +4,7 @@ type t =
   ; files : string list
   ; filteredModules : int
   ; hash : string
-  ; id : int
+  ; id : string
   ; initial : bool
   ; modules : WebpackModule.t list
   ; names : string list
@@ -23,7 +23,7 @@ let decode json =
     ; files = json |> field "files" (list string)
     ; filteredModules = json |> field "filteredModules" int
     ; hash = json |> field "hash" string
-    ; id = json |> field "id" int
+    ; id = json |> field "id" Utils.Json.Decode.forceString
     ; initial = json |> field "initial" bool
     ; modules = json |> field "modules" (list WebpackModule.decode)
     ; names = json |> field "names" (list string)
@@ -44,7 +44,7 @@ let encode r =
       ; "files", r.files |> list string
       ; "filteredModules", r.filteredModules |> int
       ; "hash", r.hash |> string
-      ; "id", r.id |> int
+      ; "id", r.id |> string
       ; "initial", r.initial |> bool
       ; "modules", r.modules |> list WebpackModule.encode
       ; "names", r.names |> list string

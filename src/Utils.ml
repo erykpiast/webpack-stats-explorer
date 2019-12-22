@@ -9,7 +9,18 @@ let defaultTo value option =
   | None -> value
 ;;
 
-let identity (a : 'a) = a
+let identity (a : 'a) = a;;
+module Json = struct
+  module Decode = struct
+    let forceString value = Json.Decode.(
+      try string value
+      with DecodeError _ -> (
+        try float value |> Js.Float.toString
+        with DecodeError _ -> int value |> Js.Int.toString
+      )
+    );;
+  end
+end
 
 module Function = struct
   let unary (fn : 'a) : 'a = [%raw "(a) => fn(a)"]
