@@ -2,7 +2,7 @@ type t =
   { assets : string list
   ; childAssets : string Js.Dict.t
   ; children : string Js.Dict.t
-  ; chunks : int list
+  ; chunks : string list
   }
 
 let decode json =
@@ -10,7 +10,7 @@ let decode json =
     { assets = json |> field "assets" (list string)
     ; childAssets = json |> field "childAssets" (dict string)
     ; children = json |> field "children" (dict string)
-    ; chunks = json |> field "chunks" (list int)
+    ; chunks = json |> field "chunks" (list Utils.Json.Decode.forceString)
     }
 ;;
 
@@ -20,6 +20,6 @@ let encode r =
       [ "assets", r.assets |> list string
       ; "childAssets", r.childAssets |> dict string
       ; "children", r.children |> dict string
-      ; "chunks", r.chunks |> list int
+      ; "chunks", r.chunks |> list string
       ])
 ;;
