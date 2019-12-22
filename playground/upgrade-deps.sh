@@ -20,8 +20,7 @@ for EXAMPLE in ${EXAMPLES[@]}; do
 
         if [[ -d "$DIR" ]]; then
             cd "$DIR";
-            ncu -u;
-            npm i;
+            npm audit fix;
         fi;
     done;
 done;
