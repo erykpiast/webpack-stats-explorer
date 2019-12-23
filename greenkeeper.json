@@ -7,11 +7,36 @@
     },
     "playground": {
       "packages": [
-        "playground/babel/package.json",
-        "playground/enhanced/package.json",
-        "playground/minimal/package.json",
-        "playground/timeline/package.json",
-        "playground/uglify/package.json"
+        "playground/babel/a/package.json",
+        "playground/babel/b/package.json",
+        "playground/babel/c/package.json",
+        "playground/babel/d/package.json",
+        "playground/babel/e/package.json",
+        "playground/enhanced/a/package.json",
+        "playground/enhanced/b/package.json",
+        "playground/enhanced/c/package.json",
+        "playground/enhanced/d/package.json",
+        "playground/enhanced/e/package.json",
+        "playground/minimal/a/package.json",
+        "playground/minimal/b/package.json",
+        "playground/minimal/c/package.json",
+        "playground/minimal/d/package.json",
+        "playground/minimal/e/package.json",
+        "playground/minimal/f/package.json",
+        "playground/named/a/package.json",
+        "playground/named/b/package.json",
+        "playground/timeline/a/package.json",
+        "playground/timeline/b/package.json",
+        "playground/timeline/c/package.json",
+        "playground/timeline/d/package.json",
+        "playground/timeline/e/package.json",
+        "playground/timeline/f/package.json",
+        "playground/timeline/g/package.json",
+        "playground/timeline/h/package.json",
+        "playground/timeline/i/package.json",
+        "playground/uglify/a/package.json",
+        "playground/uglify/b/package.json",
+        "playground/uglify/c/package.json"
       ]
     }
   }
