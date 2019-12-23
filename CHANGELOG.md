@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.15.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.14.0...v1.15.0) (2019-12-23)
+
+
+### Features
+
+* **scripts:** clean world before compilation and add clean script ([1603d15](https://github.com/erykpiast/webpack-stats-explorer/commit/1603d15df299f31af9214dec13e434900ffeed67))
+* **ui:** allow to load stats from external URLs ([d93a0bd](https://github.com/erykpiast/webpack-stats-explorer/commit/d93a0bd584e403fe6136acbf41f1ef98450291f4))
+* **ui:** handle fetch errors ([52ab39e](https://github.com/erykpiast/webpack-stats-explorer/commit/52ab39e10ddc9224ce9c0e665929077fe12f195a))
+* **ui:** read initial URLs from app query params ([0a29e84](https://github.com/erykpiast/webpack-stats-explorer/commit/0a29e8450760cd37d0efa94f6c306c43c0af4164))
+* **ui:** save currently chosen comparison and navigation path in URL ([9e041eb](https://github.com/erykpiast/webpack-stats-explorer/commit/9e041ebeca9dcab11beba700babb42dab8d06082))
+* **ui:** save currently chosen tab in URL ([315b553](https://github.com/erykpiast/webpack-stats-explorer/commit/315b553946c191fc61fec6895d974b5473a8dfa6))
+* **ui:** write currently loaded URLs to app URL query params ([b6e4488](https://github.com/erykpiast/webpack-stats-explorer/commit/b6e44881056c837cc1393bd651bec8f99e465d69))
+
+
+### Bug Fixes
+
+* **deps:** fix Greenkeeper configuration for playground ([fdd7f08](https://github.com/erykpiast/webpack-stats-explorer/commit/fdd7f08713fc0047c956ee32316d7d8ea051d75f))
+* **format:** force chunk ID to be string ([576dff3](https://github.com/erykpiast/webpack-stats-explorer/commit/576dff3235b9b2f9b7fe0326270669fb2d985a1e))
+* **package:** update bs-webapi to version 0.15.6 ([d8c07cf](https://github.com/erykpiast/webpack-stats-explorer/commit/d8c07cf4d1ec9cb3a95f13cee6f15b3e38addab3))
+* **package:** update date-fns to version 2.8.0 ([525cbd4](https://github.com/erykpiast/webpack-stats-explorer/commit/525cbd497a54d419d0b36a81d8ee8f2330a2e42f))
+* **package:** update date-fns to version 2.8.1 ([33cb1eb](https://github.com/erykpiast/webpack-stats-explorer/commit/33cb1ebc9c554b985cc1cebba52b3fe3e9095df6))
+* **package:** update react-dropzone to version 10.2.1 ([d494aea](https://github.com/erykpiast/webpack-stats-explorer/commit/d494aea471fa8c360fcb2d7479d6438b1c376067))
+* **ui:** reflect URLs from state in textarea ([e867882](https://github.com/erykpiast/webpack-stats-explorer/commit/e8678829023f405893691a8644538729a5803dc0))
+
 ## [1.14.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.13.1...v1.14.0) (2019-11-19)
 
 
