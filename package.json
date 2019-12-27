@@ -53,7 +53,7 @@
     "bs-css": "github:erykpiast/bs-css#feature/font-family",
     "bs-fetch": "0.5.0",
     "bs-jsverify": "0.10.0",
-    "bs-react-dropzone": "0.5.0",
+    "bs-react-dropzone": "0.5.1",
     "bs-webapi": "0.15.6",
     "date-fns": "2.8.1",
     "diff": "4.0.1",
