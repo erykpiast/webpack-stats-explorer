@@ -9,9 +9,9 @@ type t =
   ; modules : WebpackModule.t list
   ; names : string list
   ; origins : WebpackOrigin.t list
-  ; parents : int list
+  ; parents : string list
   ; rendered : bool
-  ; siblings : int list
+  ; siblings : string list
   ; size : int
   ; parsedSize : int option
   }
@@ -28,9 +28,9 @@ let decode json =
     ; modules = json |> field "modules" (list WebpackModule.decode)
     ; names = json |> field "names" (list string)
     ; origins = json |> field "origins" (list WebpackOrigin.decode)
-    ; parents = json |> field "parents" (list int)
+    ; parents = json |> field "parents" (list Utils.Json.Decode.forceString)
     ; rendered = json |> field "rendered" bool
-    ; siblings = json |> field "siblings" (list int)
+    ; siblings = json |> field "siblings" (list Utils.Json.Decode.forceString)
     ; size = json |> field "size" int
     ; parsedSize = json |> optional (field "size" int)
     }
@@ -49,9 +49,9 @@ let encode r =
       ; "modules", r.modules |> list WebpackModule.encode
       ; "names", r.names |> list string
       ; "origins", r.origins |> list WebpackOrigin.encode
-      ; "parents", r.parents |> list int
+      ; "parents", r.parents |> list string
       ; "rendered", r.rendered |> bool
-      ; "siblings", r.siblings |> list int
+      ; "siblings", r.siblings |> list string
       ; "size", r.size |> int
       ; "parsedSize", r.parsedSize |> nullable int
       ])
