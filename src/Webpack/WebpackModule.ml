@@ -6,7 +6,7 @@ type t =
   ; depth : int
   ; errors : int
   ; failed : bool
-  ; id : int option
+  ; id : string option
   ; identifier : string
   ; index : int option
   ; index2 : int option
@@ -60,7 +60,7 @@ let rec decode json =
     ; depth = json |> field "depth" int
     ; errors = json |> field "errors" int
     ; failed = json |> field "failed" bool
-    ; id = json |> field "id" (optional int)
+    ; id = json |> field "id" (optional Utils.Json.Decode.forceString)
     ; identifier = json |> field "identifier" string
     ; index = json |> field "index" (optional int)
     ; index2 = json |> field "index2" (optional int)
@@ -98,7 +98,7 @@ let rec encode r =
       ; "depth", r.depth |> int
       ; "errors", r.errors |> int
       ; "failed", r.failed |> bool
-      ; "id", r.id |> nullable int
+      ; "id", r.id |> nullable string
       ; "identifier", r.identifier |> string
       ; "index", r.index |> nullable int
       ; "index2", r.index2 |> nullable int
