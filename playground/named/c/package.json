@@ -1,7 +1,7 @@
 {
-  "name": "webpack-stats-explorer-playground-timeline",
-  "version": "8.0.0",
-  "description": "Timeline configuration playground for Webpack Stats Explorer",
+  "name": "webpack-stats-explorer-playground-named",
+  "version": "3.0.0",
+  "description": "Playground configuration with named chunks plugin for Webpack Stats Explorer",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
