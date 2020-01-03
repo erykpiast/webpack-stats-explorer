@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.15.1](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.15.0...v1.15.1) (2020-01-03)
+
+
+### Bug Fixes
+
+* **format:** Force parents & siblings to have string IDs ([8a7ccc8](https://github.com/erykpiast/webpack-stats-explorer/commit/8a7ccc866dd897eca0843c2414f5a18ee9aad65d))
+* **package:** update bs-react-dropzone to version 0.5.1 ([61a8a45](https://github.com/erykpiast/webpack-stats-explorer/commit/61a8a45abeba07bc18e68ed28125b6abd2c0da61))
+* **package:** update re-classnames to version 4.1.0 ([3d8687b](https://github.com/erykpiast/webpack-stats-explorer/commit/3d8687b2cda90007aabf06d59646bd8d1e98b00c))
+* **playground:** align package name and version with the rest of examples ([37072bd](https://github.com/erykpiast/webpack-stats-explorer/commit/37072bdc6fd10e278869bd43b6a7cc108fc35acf))
+
 ## [1.15.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.14.0...v1.15.0) (2019-12-23)
 
 
