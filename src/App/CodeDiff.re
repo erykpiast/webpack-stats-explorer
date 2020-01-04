@@ -1,29 +1,38 @@
-module Styles = {
-  open Css;
-
-  let root = style([whiteSpace(`preWrap), wordBreak(`breakAll)]);
-
-  let removed = style([backgroundColor(Theme.Color.Removed.background)]);
-
-  let added = style([backgroundColor(Theme.Color.Added.background)]);
-};
+open Rationale.Function.Infix;
 
 [@react.component]
 let make = (~after, ~before, ~className) => {
-  <pre className={Cn.make([className, Styles.root])}>
-    JsDiff.(
-      make(after, before)
-      |> List.map(diff =>
-           switch (diff) {
-           | Intact(value) => React.string(value)
-           | Added(value) =>
-             <span className=Styles.added> {React.string(value)} </span>
-           | Removed(value) =>
-             <span className=Styles.removed> {React.string(value)} </span>
-           }
-         )
-      |> Array.of_list
-      |> React.array
-    )
-  </pre>;
+  let diff = JsDiff.make(after, before);
+  let diffString =
+    diff
+    |> List.map(
+         JsDiff.(
+           diff =>
+             switch (diff) {
+             | Intact(value) => value
+             | Added(value) => value
+             | Removed(value) => value
+             }
+         ),
+       )
+    |> Array.of_list
+    |> Utils.Array.join("\n");
+  let mapLines = mapper => Utils.String.split("\n") ||> Array.map(mapper) ||> Array.to_list;
+  let diffMap =
+    diff
+    |> List.map(
+         JsDiff.(
+           diff =>
+             switch (diff) {
+             | Intact(value) => value |> mapLines((line) => Intact(line))
+             | Added(value) => value |> mapLines((line) => Added(line))
+             | Removed(value) => value |> mapLines((line) => Removed(line))
+             }
+         ),
+       )
+    |> List.flatten
+    |> List.nth_opt
+    ||> Utils.defaultTo(JsDiff.Intact(""));
+
+  <Code className diffMap> diffString </Code>;
 };

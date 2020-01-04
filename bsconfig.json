@@ -42,7 +42,8 @@
     "bs-fetch",
     "bs-react-dropzone",
     "bs-webapi",
-    "re-classnames"
+    "re-classnames",
+    "bs-react-syntax-highlighter"
   ],
   "bs-dev-dependencies": [
     "@glennsl/bs-jest",
