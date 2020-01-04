@@ -55,7 +55,8 @@ let make = (~className="", ~selectedIndex=0, ~onChange=_ => (), ~children) => {
                 Styles.tab,
                 Cn.ifTrue(Styles.selectedTab, index === selectedIndex),
               ])}
-              onClick={_event => onChange(index)}>
+              onClick={_event => onChange(index)}
+              key={index |> string_of_int}>
               child
             </button>;
           }
