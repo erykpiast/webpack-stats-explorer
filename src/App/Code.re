@@ -4,15 +4,14 @@ module Styles = {
   let root =
     ReactDOMRe.Style.make(
       ~padding="0px",
-      ~zIndex="-1",
-      ~whiteSpace="nowrap",
+      ~marginLeft="4px",
       (),
     );
 
   let lineNumberContainer =
     ReactDOMRe.Style.make(
       ~backgroundColor="white",
-      ~paddingLeft="16px",
+      ~paddingLeft="12px",
       ~paddingRight="16px",
       ~marginRight="16px",
       ~minHeight="100%",
