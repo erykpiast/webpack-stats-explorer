@@ -21,7 +21,6 @@ module Styles = {
 
     style([
       display(`block),
-      whiteSpace(`preWrap),
       position(`relative),
       before([
         backgroundColor(Theme.Color.Background.bright),
@@ -40,13 +39,15 @@ module Styles = {
         | _ => [
             contentRule(`string("")),
             position(`absolute),
-            left(Calc.(
-              ch(float_of_int(lineNumberWidth)) +
-              ch(float_of_int(columnNumber)) +
-              lineNumberLeftPadding +
-              lineNumberRightPadding +
-              lineNumberRightMargin
-            )),
+            left(
+              Calc.(
+                ch(float_of_int(lineNumberWidth))
+                + ch(float_of_int(columnNumber))
+                + lineNumberLeftPadding
+                + lineNumberRightPadding
+                + lineNumberRightMargin
+              ),
+            ),
             top(px(0)),
             bottom(px(0)),
             width(px(1)),
@@ -77,6 +78,17 @@ module Styles = {
   };
 };
 
+[@bs.deriving abstract]
+type rendererOptions = {
+  rowHeight: int,
+  [@bs.optional] overscanRowCount: int,
+};
+
+[@bs.module "react-syntax-highlighter-virtualized-renderer"]
+external virtualizedRenderer:
+  rendererOptions => ReactSyntaxHighlighter.Prism.Renderer.t =
+  "default";
+
 [@react.component]
 let make = (~className="", ~columnGuideline=0, ~children) => {
   let theGreatestLineNumberLength =
@@ -86,22 +98,27 @@ let make = (~className="", ~columnGuideline=0, ~children) => {
     |> string_of_int
     |> Js.String.length;
 
+  let lineClassName =
+    Styles.getLineClassName(theGreatestLineNumberLength, columnGuideline);
+
   let lineProps =
-    `Plain(
-      ReactDOMRe.props(
-        ~className=Styles.getLineClassName(theGreatestLineNumberLength, columnGuideline),
-        ~style=
-          ReactDOMRe.Style.make(
-            ~counterIncrement=
-              Css.Types.CounterOperation.increment(
-                Styles.counterName,
-                ~value=1,
-              )
-              |> Css.Types.CounterOperation.toString,
-            (),
-          ),
-        (),
-      ),
+    `Factory(
+      lineNumber =>
+        ReactDOMRe.props(
+          ~className=lineClassName,
+          ~style=
+            ReactDOMRe.Style.make(
+              ~counterReset=
+                Css.Types.CounterOperation.set(
+                  Styles.counterName,
+                  ~value=lineNumber,
+                )
+                |> Css.Types.CounterOperation.toString,
+              ~height="24px",
+              (),
+            ),
+          (),
+        ),
     );
 
   <ReactSyntaxHighlighter.Prism
@@ -110,7 +127,8 @@ let make = (~className="", ~columnGuideline=0, ~children) => {
     className
     customStyle=Styles.rootStyle
     lineProps
-    wrapLines=true>
+    wrapLines=true
+    renderer={virtualizedRenderer(rendererOptions(~rowHeight=24, ()))}>
     children
   </ReactSyntaxHighlighter.Prism>;
 };
