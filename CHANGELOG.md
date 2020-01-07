@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.16.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.15.1...v1.16.0) (2020-01-07)
+
+
+### Features
+
+* **ui:** highlight code syntax and show line numbers ([08fd6ed](https://github.com/erykpiast/webpack-stats-explorer/commit/08fd6ed7b0eb35585864cebdc9ef118498741b48))
+
+
+### Bug Fixes
+
+* **ui:** handle vertical scrolling of long files and long module lists ([b04118e](https://github.com/erykpiast/webpack-stats-explorer/commit/b04118e6fa5e73686b8ac36f3f0551a393838b5e))
+
 ### [1.15.1](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.15.0...v1.15.1) (2020-01-03)
 
 
