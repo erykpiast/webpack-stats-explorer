@@ -27,7 +27,8 @@ module Styles = {
     style([
       display(`flex),
       flexGrow(1.0),
-      // maxHeight(Calc.(`percent(100.0) - headerHeight)),
+      minHeight(px(0)),
+      overflowY(`hidden),
     ]);
 
   let side =
@@ -37,6 +38,7 @@ module Styles = {
       backgroundColor(Theme.Color.Background.default),
       maxHeight(`percent(100.0)),
       flexShrink(0.0),
+      overflowY(`auto)
     ]);
 
   let main =

@@ -29,19 +29,33 @@ let renderName = item =>
 
 [@react.component]
 let make = (~items, ~onClick) => {
-  let separator =
-    <li className=Styles.separator> {{js|▷|js} |> React.string} </li>;
-
   let breadcrumbs =
     items
     |> List.map2(
-         (index, (item, _: CompareKind.t)) =>
-           <li className=Styles.item onClick={_ => onClick(index)}>
-             {item |> renderName |> React.string}
-           </li>,
+         (index, (item, _: CompareKind.t)) => {
+           let name = item |> renderName;
+           (
+             <li className=Styles.item onClick={_ => onClick(index)} key=name>
+               {name |> React.string}
+             </li>,
+             name,
+           );
+         },
          Rebase.List.range(1, List.length(items)),
        )
-    |> Utils.List.join(separator);
+    |> List.fold_left(
+         (acc, (item, name)) => {
+           [
+             item,
+             <li className=Styles.separator key={name ++ "_separator"}>
+               {{js|▷|js} |> React.string}
+             </li>,
+           ]
+           |> List.append(acc)
+         },
+         [],
+       )
+      |> Utils.List.removeLast;
 
   <ul className=Styles.list>
     {breadcrumbs |> Array.of_list |> React.array}

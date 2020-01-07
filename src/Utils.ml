@@ -79,6 +79,13 @@ module List = struct
   let sumInt = List.fold_left (+) 0;;
 
   let flatMap mapper = List.map mapper ||> List.concat;;
+
+  let rec removeLast list =
+    match list with
+    | [] -> []
+    | x::[_] -> [x]
+    | x::xs -> x::(removeLast xs)
+  ;;
 end
 
 module Array = struct

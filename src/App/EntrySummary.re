@@ -55,11 +55,10 @@ module Styles = {
     style([
       display(`flex),
       flexGrow(1.0),
-      overflow(`auto),
-      maxHeight(`percent(100.0)),
+      minHeight(px(0)),
     ]);
 
-  let code = style([padding(Theme.Space.default)]);
+  let code = style([padding(Theme.Space.default), width(`percent(100.0))]);
 
   module Kind = {
     let added = style([color(Theme.Color.Added.default)]);
