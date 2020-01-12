@@ -3,20 +3,21 @@ module Styles = {
 
   let root =
     ReactDOMRe.Style.make(
-      ~padding="0px",
-      ~margin="0",
+      ~padding=px(0) |> Types.Length.toString,
+      ~margin=px(0) |> Types.Length.toString,
+      ~marginLeft=Theme.Space.half |> Types.Length.toString,
       (),
     );
 
   let lineNumberContainer =
     ReactDOMRe.Style.make(
-      ~backgroundColor="white",
-      ~paddingLeft="12px",
-      ~paddingRight="16px",
-      ~marginRight="16px",
-      ~minHeight="100%",
-      ~float="left",
-      ~textAlign="right",
+      ~backgroundColor=Theme.Color.Background.bright |> Types.Color.toString,
+      ~paddingLeft=Calc.(Theme.Space.double - Theme.Space.half) |> Types.Length.toString,
+      ~paddingRight=Theme.Space.double |> Types.Length.toString,
+      ~marginRight=Theme.Space.double |> Types.Length.toString,
+      ~minHeight=`percent(100.0) |> Types.Length.toString,
+      ~float=`left |> Types.Float.toString,
+      ~textAlign=`right |> Types.TextAlign.toString,
       (),
     );
 
