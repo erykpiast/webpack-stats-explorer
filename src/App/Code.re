@@ -4,7 +4,7 @@ module Styles = {
   let root =
     ReactDOMRe.Style.make(
       ~padding="0px",
-      ~marginLeft="4px",
+      ~margin="0",
       (),
     );
 

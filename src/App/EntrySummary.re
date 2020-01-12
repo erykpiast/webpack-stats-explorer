@@ -6,9 +6,7 @@ module Styles = {
   open Css;
 
   let term = style([fontWeight(`bold), display(`none)]);
-
   let definition = style([margin(px(0))]);
-
   let wrapper =
     style([
       display(`flex),
@@ -16,9 +14,7 @@ module Styles = {
       height(`percent(100.0)),
       width(`percent(100.0)),
     ]);
-
   let list = style([margin(px(0))]);
-
   let header =
     style([
       flexGrow(0.0),
@@ -48,16 +44,8 @@ module Styles = {
     ]);
 
   let size = style([marginTop(Theme.Space.default)]);
-
   let sizeTerm = style([display(`block), marginRight(Theme.Space.default)]);
-
-  let content =
-    style([
-      display(`flex),
-      flexGrow(1.0),
-      minHeight(px(0)),
-    ]);
-
+  let content = style([display(`flex), flexGrow(1.0), minHeight(px(0))]);
   let code = style([padding(Theme.Space.default), width(`percent(100.0))]);
 
   module Kind = {
@@ -88,6 +76,16 @@ module Styles = {
       ]);
 
     let prompt = style([userSelect(`none)]);
+  };
+
+  module PrettyPrint = {
+    let wrapper =
+      style([
+        background(Theme.Color.Background.default),
+        display(`flex),
+        alignItems(`center),
+        padding(Theme.Space.default),
+      ]);
   };
 };
 
@@ -151,7 +149,7 @@ let renderSize = (label, data) =>
       <dd className=Styles.definition> <Size value=size /> diff </dd>
     </>;
   };
-let renderSource = data =>
+let renderSource = (format, data) =>
   switch (data) {
   | None =>
     // NOTE: there are some cases when plugin is configured but some
@@ -206,10 +204,10 @@ module.exports = {
     </div>
   | Some(data) =>
     switch (data) {
-    | EntryData({source}) => <Code className=Styles.code> ...source </Code>
+    | EntryData({source}) => <Code className=Styles.code> ...(source |> format) </Code>
     | ModifiedEntryData({source}) =>
-      let before = source |> fst;
-      let after = source |> snd;
+      let before = source |> fst |> format;
+      let after = source |> snd |> format;
 
       if (after == before) {
         <Code className=Styles.code> ...after </Code>;
@@ -218,6 +216,8 @@ module.exports = {
       };
     }
   };
+
+let prettyPrintInputId = "pretty-print";
 
 [@react.component]
 let make = (~entry, ~onTab, ~tab, ~kind) => {
@@ -231,6 +231,15 @@ let make = (~entry, ~onTab, ~tab, ~kind) => {
     | _ => stat
     };
   let (kindClassName, kindLabel) = getKindProps(kind);
+  let (isPrettyPrintEnabled, setPrettyPrintEnabled) =
+    React.useState(() => false);
+  let formatter = isPrettyPrintEnabled
+    ? (code) => JsBeautify.beautify(
+      ~indent_size=2,
+      ~wrap_line_length=120,
+      code,
+    )
+    : Utils.identity;
 
   <div className=Styles.wrapper>
     <header className=Styles.header>
@@ -251,10 +260,7 @@ let make = (~entry, ~onTab, ~tab, ~kind) => {
             {entry |> getId |> React.string}
           </dd>
         </div>
-        <Tabs
-          className=Styles.size
-          selectedIndex=tab
-          onChange={onTab}>
+        <Tabs className=Styles.size selectedIndex=tab onChange=onTab>
           [|
             original |> renderSize(L10N.Summary.original),
             stat |> renderSize(L10N.Summary.stat),
@@ -263,6 +269,21 @@ let make = (~entry, ~onTab, ~tab, ~kind) => {
         </Tabs>
       </dl>
     </header>
-    <div className=Styles.content> {currentData |> renderSource} </div>
+    <div className=Styles.content>
+      {currentData |> renderSource(formatter)}
+    </div>
+    <form className=Styles.PrettyPrint.wrapper>
+      <input
+        type_="checkbox"
+        id=prettyPrintInputId
+        onChange={e => {
+          let target = e |> ReactEvent.Form.target;
+          setPrettyPrintEnabled(_ => target##checked);
+        }}
+      />
+      <label htmlFor=prettyPrintInputId>
+        {L10N.prettyPrint |> React.string}
+      </label>
+    </form>
   </div>;
 };

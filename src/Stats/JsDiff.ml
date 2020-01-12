@@ -1,7 +1,6 @@
 open Rationale.Function.Infix
 
-external diffLines : string -> string -> Js.Json.t array = "diffLines"
-  [@@bs.module "diff"]
+external diffLines: string -> string -> Js.Json.t array = "diffLines" [@@bs.module "diff"];;
 
 module Diff = struct
   type t =
@@ -37,6 +36,7 @@ type t =
   | Added of string
   | Removed of string
   | Intact of string
+;;
 
 let make a b =
   Diff.make a b
