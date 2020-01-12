@@ -18,6 +18,8 @@ module Styles = {
       ~minHeight=`percent(100.0) |> Types.Length.toString,
       ~float=`left |> Types.Float.toString,
       ~textAlign=`right |> Types.TextAlign.toString,
+      ~position=`sticky |> Types.Position.toString,
+      ~left=px(0) |> Types.Length.toString,
       (),
     );
 
