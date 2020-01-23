@@ -4,11 +4,11 @@ module Styles = {
   let less =
     style([
       color(Theme.Color.Removed.default),
-      before([contentRule("-")]),
+      before([contentRule(`string("-"))]),
     ]);
 
   let more =
-    style([color(Theme.Color.Added.default), before([contentRule("+")])]);
+    style([color(Theme.Color.Added.default), before([contentRule(`string("+"))])]);
 };
 
 [@react.component]
