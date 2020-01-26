@@ -1,5 +1,3 @@
-open Rationale.Function.Infix;
-
 module Styles = {
   open Css;
 
@@ -13,11 +11,9 @@ module Styles = {
 
   let wordDiff = [padding(px(0))];
 
-  let contentText = [
-    important(lineHeight(`initial)),
-  ];
+  let contentText = [important(lineHeight(`initial))];
 
-  let getContent = (columnNumber) => [
+  let getContent = columnNumber => [
     borderSpacing(px(0)),
     padding(px(0)),
     position(`relative),
@@ -69,13 +65,11 @@ let make = (~after, ~before, ~columnGuideline, ~className) => {
     <ReactSyntaxHighlighter.Prism
       language=`JavaScript
       showLineNumbers=false
-      //  className={Cn.make([className, Styles.getColumnGuidelineClass(theGreatestLineNumberLength, columnGuideline)])}
       customStyle=Styles.preStyle
-      // lineProps
       wrapLines=true
       _PreTag={`intrinsic("span")}>
-      //  lineNumberContainerProps
-       content </ReactSyntaxHighlighter.Prism>;
+      content
+    </ReactSyntaxHighlighter.Prism>;
   <ReactDiffViewer
     oldValue=before
     newValue=after
