@@ -14,7 +14,7 @@
     "@babel/preset-env": "7.8.2",
     "@babel/plugin-transform-runtime": "7.8.0",
     "babel-loader": "8.0.6",
-    "terser-webpack-plugin": "2.3.2",
+    "terser-webpack-plugin": "2.3.3",
     "webpack": "4.41.5",
     "webpack-enhanced-stats-plugin": "2.2.1"
   }
