@@ -53,6 +53,7 @@
     "bs-css": "github:erykpiast/bs-css#feature/counter",
     "bs-fetch": "0.5.1",
     "bs-jsverify": "0.10.0",
+    "bs-react-diff-viewer": "0.1.0",
     "bs-react-dropzone": "0.5.1",
     "bs-react-syntax-highlighter": "0.2.1",
     "bs-webapi": "0.15.6",

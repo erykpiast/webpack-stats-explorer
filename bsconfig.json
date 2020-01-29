@@ -43,7 +43,8 @@
     "bs-react-dropzone",
     "bs-webapi",
     "re-classnames",
-    "bs-react-syntax-highlighter"
+    "bs-react-syntax-highlighter",
+    "bs-react-diff-viewer"
   ],
   "bs-dev-dependencies": [
     "@glennsl/bs-jest",
