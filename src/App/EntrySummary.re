@@ -254,7 +254,7 @@ let make = (~entry, ~onTab, ~tab, ~kind) => {
   let formatter =
     isPrettyPrintEnabled
       ? code =>
-          JsBeautify.beautify(
+          JsBeautify.js(
             ~indent_size=2,
             ~wrap_line_length=wrapLineLength,
             code,
