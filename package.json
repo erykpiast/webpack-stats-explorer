@@ -51,7 +51,7 @@
     "@glennsl/rebase": "0.2.1",
     "@zpnester/bs-filereader": "0.4.0",
     "bs-css": "github:erykpiast/bs-css#feature/font-family",
-    "bs-fetch": "0.5.0",
+    "bs-fetch": "0.5.1",
     "bs-jsverify": "0.10.0",
     "bs-react-dropzone": "0.5.1",
     "bs-react-syntax-highlighter": "0.2.1",
