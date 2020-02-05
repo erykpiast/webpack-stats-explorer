@@ -1,64 +1,116 @@
 module Styles = {
   open Css;
 
-  let root =
+  let counterName = "line-number";
+
+  let rootStyle =
     ReactDOMRe.Style.make(
-      ~padding="0px",
-      ~marginLeft="4px",
+      ~padding=px(0) |> Types.Length.toString,
+      ~margin=px(0) |> Types.Length.toString,
+      ~marginLeft=Theme.Space.half |> Types.Length.toString,
+      ~counterReset=
+        Types.CounterOperation.reset(counterName)
+        |> Types.CounterOperation.toString,
       (),
     );
 
-  let lineNumberContainer =
-    ReactDOMRe.Style.make(
-      ~backgroundColor="white",
-      ~paddingLeft="12px",
-      ~paddingRight="16px",
-      ~marginRight="16px",
-      ~minHeight="100%",
-      ~float="left",
-      ~textAlign="right",
-      (),
-    );
+  let getLineClassName = (lineNumberWidth, columnNumber) => {
+    let lineNumberLeftPadding = Calc.(Theme.Space.double - Theme.Space.half);
+    let lineNumberRightPadding = Theme.Space.double;
+    let lineNumberRightMargin = Theme.Space.double;
 
-  let default = style([paddingLeft(Theme.Space.double), display(`block)]);
+    style([
+      display(`block),
+      whiteSpace(`preWrap),
+      position(`relative),
+      before([
+        backgroundColor(Theme.Color.Background.bright),
+        color(Theme.Color.Text.primary),
+        contentRule(Types.Counter.counter(counterName)),
+        display(`inlineBlock),
+        paddingLeft(lineNumberLeftPadding),
+        paddingRight(lineNumberRightPadding),
+        marginRight(lineNumberRightMargin),
+        width(ch(float_of_int(lineNumberWidth))),
+        textAlign(`right),
+      ]),
+      after(
+        switch (columnNumber) {
+        | 0 => []
+        | _ => [
+            contentRule(`string("")),
+            position(`absolute),
+            left(Calc.(
+              ch(float_of_int(lineNumberWidth)) +
+              ch(float_of_int(columnNumber)) +
+              lineNumberLeftPadding +
+              lineNumberRightPadding +
+              lineNumberRightMargin
+            )),
+            top(px(0)),
+            bottom(px(0)),
+            width(px(1)),
+            backgroundColor(Theme.Color.Border.default),
+          ]
+        },
+      ),
+    ]);
+  };
 
-  let removed = style([backgroundColor(Theme.Color.Removed.background)]);
-
-  let added = style([backgroundColor(Theme.Color.Added.background)]);
+  module LineNumberContainer = {
+    let leftPadding = Calc.(Theme.Space.double - Theme.Space.half);
+    let rightPadding = Theme.Space.double;
+    let rightMargin = Theme.Space.double;
+    let style =
+      ReactDOMRe.Style.make(
+        ~backgroundColor=Theme.Color.Background.bright |> Types.Color.toString,
+        ~paddingLeft=leftPadding |> Types.Length.toString,
+        ~paddingRight=rightPadding |> Types.Length.toString,
+        ~marginRight=rightMargin |> Types.Length.toString,
+        ~minHeight=`percent(100.0) |> Types.Length.toString,
+        ~float=`left |> Types.Float.toString,
+        ~textAlign=`right |> Types.TextAlign.toString,
+        ~position=`sticky |> Types.Position.toString,
+        ~left=px(0) |> Types.Length.toString,
+        (),
+      );
+  };
 };
 
 [@react.component]
-let make =
-    (~className="", ~diffMap=?, ~children) => {
-  let defaultClassName = Styles.default;
-  let addedClassName = Cn.make([Styles.default, Styles.added]);
-  let removedClassName = Cn.make([Styles.default, Styles.removed]);
-  let lineProps = switch (diffMap) {
-    | Some(diffMap) => `Factory((lineNumber) => {
-      let className = JsDiff.(
-        switch (lineNumber |> diffMap) {
-        | Intact(_) => defaultClassName
-        | Added(_) => addedClassName
-        | Removed(_) => removedClassName
-        }
-      );
+let make = (~className="", ~columnGuideline=0, ~children) => {
+  let theGreatestLineNumberLength =
+    children
+    |> Utils.String.split("\n")
+    |> Array.length
+    |> string_of_int
+    |> Js.String.length;
 
-      ReactDOMRe.props(~className=className, ());
-    })
-    | None => `Plain(ReactDOMRe.props(()))
-  };
+  let lineProps =
+    `Plain(
+      ReactDOMRe.props(
+        ~className=Styles.getLineClassName(theGreatestLineNumberLength, columnGuideline),
+        ~style=
+          ReactDOMRe.Style.make(
+            ~counterIncrement=
+              Css.Types.CounterOperation.increment(
+                Styles.counterName,
+                ~value=1,
+              )
+              |> Css.Types.CounterOperation.toString,
+            (),
+          ),
+        (),
+      ),
+    );
 
   <ReactSyntaxHighlighter.Prism
     language=`JavaScript
-    showLineNumbers=true
+    showLineNumbers=false
     className
-    customStyle=Styles.root
+    customStyle=Styles.rootStyle
     lineProps
-    wrapLines=true
-    lineNumberContainerProps={ReactDOMRe.props(
-      ~style=Styles.lineNumberContainer,
-      (),
-    )}>
+    wrapLines=true>
     children
   </ReactSyntaxHighlighter.Prism>;
 };

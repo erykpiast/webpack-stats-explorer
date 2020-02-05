@@ -1,6 +1,7 @@
 excluded_words
   - bsconfig
   - fns
-  - fns
   - bsb
   - exn
+  - fst
+  - snd

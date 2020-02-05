@@ -11,6 +11,9 @@ let removed = "Removed";
 let modules = "Modules";
 let module_ = "Module";
 let submodules = "Submodules";
+let prettyPrint = "Pretty print";
+let lineWrap = "Hard line wrap";
+let columns = "columns";
 
 module Welcome = {
   let paste = "Paste URLs to webpack stats uploaded somewhere";
