@@ -3,6 +3,7 @@ webpack-stats-explorer
 
 [![Build Status](https://travis-ci.com/erykpiast/webpack-stats-explorer.svg?branch=master)](https://travis-ci.com/erykpiast/webpack-stats-explorer)
 [![dependencies Status](https://david-dm.org/erykpiast/webpack-stats-explorer/status.svg)](https://david-dm.org/erykpiast/webpack-stats-explorer)
+[![devDependencies Status](https://david-dm.org/erykpiast/webpack-stats-explorer/dev-status.svg)](https://david-dm.org/erykpiast/webpack-stats-explorer?type=dev)
 [![Greenkeeper badge](https://badges.greenkeeper.io/erykpiast/webpack-stats-explorer.svg)](https://greenkeeper.io/)
 
 Tool for exploring webpack stats and comparing them between builds. See [an introduction at dev.to](https://dev.to/erykpiast/why-does-your-bundle-grow-a7n).
