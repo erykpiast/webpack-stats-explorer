@@ -1,7 +1,7 @@
 webpack-stats-explorer
 ======================
 
-[![Build Status](https://travis-ci.org/erykpiast/webpack-stats-explorer.svg?branch=master)](https://travis-ci.org/erykpiast/webpack-stats-explorer)
+[![Build Status](https://travis-ci.com/erykpiast/webpack-stats-explorer.svg?branch=master)](https://travis-ci.com/erykpiast/webpack-stats-explorer)
 [![dependencies Status](https://david-dm.org/erykpiast/webpack-stats-explorer/status.svg)](https://david-dm.org/erykpiast/webpack-stats-explorer)
 [![Greenkeeper badge](https://badges.greenkeeper.io/erykpiast/webpack-stats-explorer.svg)](https://greenkeeper.io/)
 
