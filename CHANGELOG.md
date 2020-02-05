@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.17.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.16.0...v1.17.0) (2020-02-05)
+
+
+### Features
+
+* **ui:** add checkbox for breaking lines and show lines diff for modified files ([2f2b9c9](https://github.com/erykpiast/webpack-stats-explorer/commit/2f2b9c9eba33cc6914455fc2b374f5ec2373bcc5))
+* **ui:** add pretty print feature to code viewers ([11aa365](https://github.com/erykpiast/webpack-stats-explorer/commit/11aa3655dbafab2e416bed98166f5a028b181e6d))
+* **ui:** make line numbers sticky ([9570777](https://github.com/erykpiast/webpack-stats-explorer/commit/957077769f4c8dd2242fac6043f93a7f6a1ea84f))
+
+
+### Bug Fixes
+
+* **package:** update @glennsl/bs-json to version 5.0.2 ([738beae](https://github.com/erykpiast/webpack-stats-explorer/commit/738beaed1e2561823c946b9950fdcd495bc7f846))
+* **package:** update bs-fetch to version 0.5.1 ([d7d4922](https://github.com/erykpiast/webpack-stats-explorer/commit/d7d4922f7593cee99533a0195adf627b9692a35e))
+* **package:** update bs-react-syntax-highlighter to version 0.2.1 ([bfada70](https://github.com/erykpiast/webpack-stats-explorer/commit/bfada70275e17ff9e4f5e321e4a4d918be328285))
+* **package:** update date-fns to version 2.9.0 ([113e1f4](https://github.com/erykpiast/webpack-stats-explorer/commit/113e1f4b730ff443027e9eb61fdf8c79ea3dcb63))
+* **package:** update diff to version 4.0.2 ([6837775](https://github.com/erykpiast/webpack-stats-explorer/commit/68377759b5922a733aecb94ddbd711bbb6aa4330))
+
 ## [1.16.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.15.1...v1.16.0) (2020-01-07)
 
 
