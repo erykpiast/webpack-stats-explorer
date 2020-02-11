@@ -1,5 +1,8 @@
 open Rationale.Function.Infix;
 
+let downTriangle = {js|▼|js};
+let rightTriangle = {js|▶|js};
+
 module Styles = {
   open Css;
 
@@ -24,6 +27,41 @@ module Styles = {
   let selectedItem =
     style([backgroundColor(Theme.Color.Background.selected)]);
 
+  let parentItem =
+    style([
+      before([
+        contentRule(`string(rightTriangle)),
+        marginRight(Theme.Space.default),
+        fontSize(em(1.136)),
+        color(Theme.Color.Border.default),
+      ]),
+    ]);
+
+  let expandedParentItem =
+    style([
+      before([contentRule(`string(downTriangle)), fontSize(em(1.02))]),
+    ]);
+
+  let levelGradient =
+    repeatingLinearGradient(
+      deg(90.0),
+      [
+        (px(0), `transparent),
+        (Theme.Space.double, `transparent),
+        (Theme.Space.double, Theme.Color.Border.default),
+        (px(Theme.Space.Raw.double + 1), Theme.Color.Border.default),
+        (px(Theme.Space.Raw.double + 1), `transparent),
+        (Theme.Space.triple, `transparent),
+      ],
+    );
+
+  let childItem =
+    style([
+      backgroundImage(levelGradient),
+      backgroundRepeat(`noRepeat),
+      backgroundSize(`size((px(0), px(0)))),
+    ]);
+
   let name =
     style([
       overflow(`hidden),
@@ -42,15 +80,28 @@ module Styles = {
     ]);
 
   let diff = style([flexShrink(0.0)]);
+  let soleDiff = style([marginLeft(`auto)]);
 
   module Level = {
     let l0 = style([paddingLeft(Theme.Space.default)]);
 
-    let l1 = style([paddingLeft(Theme.Space.triple)]);
+    let l1 =
+      style([
+        paddingLeft(Theme.Space.quadruple),
+        backgroundSize(`size((Theme.Space.quadruple, `percent(100.0)))),
+      ]);
 
-    let l2 = style([paddingLeft(Theme.Space.fivefold)]);
+    let l2 =
+      style([
+        paddingLeft(Theme.Space.sevenfold),
+        backgroundSize(`size((Theme.Space.sevenfold, `percent(100.0)))),
+      ]);
 
-    let l3 = style([paddingLeft(Theme.Space.sevenfold)]);
+    let l3 =
+      style([
+        paddingLeft(Theme.Space.tenfold),
+        backgroundSize(`size((Theme.Space.tenfold, `percent(100.0)))),
+      ]);
   };
 };
 
@@ -85,6 +136,13 @@ module Mapper = (Context: MapperContext) => {
     value: props,
     children: list(t),
   };
+
+  let hasChildren =
+    CompareEntry.(
+      fun
+      | Entry(entry) => List.length(entry.children) > 0
+      | ModifiedEntry(entry) => entry.children |> count |> snd > 0
+    );
 
   let sortProps =
     List.sort(({value: a}, {value: b}) => {
@@ -224,10 +282,18 @@ module Mapper = (Context: MapperContext) => {
       };
     });
 
-  let rec flatten = nested =>
+  let rec flatten = (hasParent, nested) =>
     Utils.List.flatMap(
       ({selected, value, children}) =>
-        [(selected, value), ...flatten(children)],
+        [
+          (
+            selected,
+            List.length(children) > 0,
+            value,
+            (hasChildren(value.value), hasParent),
+          ),
+          ...flatten(true, children),
+        ],
       nested,
     );
 };
@@ -245,7 +311,7 @@ let mapToProps = (onEntry, navigationPath, comp: CompareEntry.t) => {
     comp.modified |> TheMapper.modified,
   ])
   |> TheMapper.sortProps
-  |> TheMapper.flatten;
+  |> TheMapper.flatten(false);
 };
 
 let getLevelClass = level =>
@@ -255,6 +321,13 @@ let getLevelClass = level =>
   | 2 => Styles.Level.l2
   | _ => Styles.Level.l3
   };
+
+let getFamilyClass =
+  fun
+  | (true, true) => Cn.make([Styles.parentItem, Styles.childItem])
+  | (true, false) => Styles.parentItem
+  | (false, true) => Styles.childItem
+  | (false, false) => "";
 
 [@react.component]
 let make =
@@ -267,24 +340,42 @@ let make =
     <ul className=Styles.list>
       {data
        |> List.map(
-            ((selected, {after, before, value, name, level, onChange})) =>
+            (
+              (
+                selected,
+                expanded,
+                {after, before, value, name, level, onChange},
+                familyRelations,
+              ),
+            ) => {
+            let isModifiedOrIntact = before !== 0 && after !== 0;
+
             <li
               onClick={_ => onChange(value)}
               className={Cn.make([
                 Styles.item,
                 Cn.ifTrue(Styles.selectedItem, selected),
+                Cn.ifTrue(Styles.expandedParentItem, expanded),
                 getLevelClass(level),
+                getFamilyClass(familyRelations),
               ])}
               title=name
-              key=name>
+              key={string_of_int(level) ++ name}>
               <ReversedText className=Styles.name>
                 ...{name |> React.string}
               </ReversedText>
-              {before !== 0 && after !== 0
+              {isModifiedOrIntact
                  ? <Size className=Styles.size value=after /> : React.null}
-              <NumericDiff className=Styles.diff after before />
-            </li>
-          )
+              <NumericDiff
+                className={Cn.make([
+                  Styles.diff,
+                  Cn.ifTrue(Styles.soleDiff, !isModifiedOrIntact),
+                ])}
+                after
+                before
+              />
+            </li>;
+          })
        |> Array.of_list
        |> React.array}
     </ul>
