@@ -197,7 +197,31 @@ let make = (~stats) => {
         <EntryOverview
           size={comp |> CompareEntry.size}
           count={comp |> CompareEntry.count |> snd}
+          level={`top}
         />
+      | [(entry, kind)] =>
+        let (size, count, name) =
+          CompareEntry.(
+            switch (entry) {
+            | Entry(entry) =>
+              let size =
+                switch (kind) {
+                | Added => (0, entry.size)
+                | Removed => (entry.size, 0)
+                | Intact => (entry.size, entry.size)
+                | _ => (0, 0)
+                };
+
+              (size, List.length(entry.children), entry.id);
+            | ModifiedEntry(entry) => (
+                entry.size,
+                entry.children |> CompareEntry.count |> snd,
+                entry.id
+              )
+            }
+          );
+
+        <EntryOverview size count name level={`chunk} />;
       | [(entry, kind), ..._] =>
         <EntrySummary
           tab={state.tab}
