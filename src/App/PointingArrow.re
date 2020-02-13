@@ -6,17 +6,23 @@ module Styles = {
   let root =
     style([position(`relative), display(`flex), alignItems(`center)]);
 
+  let rootSide = style([flexDirection(`row)]);
+
+  let rootBelow = style([flexDirection(`column)]);
+
   let arrow = style([height(arrowSize), width(arrowSize)]);
 
-  let arrowLeft = style([transform(rotate(deg(45.0))), order(1)]);
+  let arrowSide = style([transform(rotate(deg(45.0))), order(1)]);
 
-  let arrowRight = style([transform(rotate(deg(135.0))), order(2)]);
+  let arrowBelow =
+    style([transforms([rotate(deg(25.0)), scaleY(-1.0)]), order(2)]);
 
-  let label = style([fontSize(Theme.Size.Text.big)]);
+  let label = style([fontSize(Theme.Size.Text.big), order(2)]);
 
-  let labelLeft = style([order(2), textAlign(`left)]);
+  let labelSide = style([]);
 
-  let labelRight = style([order(1), textAlign(`right)]);
+  let labelBelow =
+    style([margin(px(0)), marginTop(px(- Theme.Space.Raw.double))]);
 
   let credit =
     style([
@@ -25,32 +31,41 @@ module Styles = {
       textAlign(`right),
       textDecoration(`none),
       color(Theme.Color.Text.primary),
+      top(px(150)),
+      right(px(150)),
     ]);
 
-  let creditLeft = style([top(px(75)), left(px(175))]);
+  let creditSide = style([]);
 
-  let creditRight = style([top(px(150)), right(px(65))]);
+  let creditBelow = style([right(`unset)]);
 };
-
-type direction =
-  | ToLeft
-  | ToRight;
 
 let copyright = {js|©|js};
 
 [@react.component]
-let make = (~className="", ~direction=ToLeft, ~children) => {
+let make = (~className="", ~mode=`side, ~children) => {
   let (
     arrowDirectionClassName,
     labelDirectionClassName,
-    creditDirectionClassName,
+    creditClassName,
+    rootClassName,
   ) =
-    switch (direction) {
-    | ToLeft => (Styles.arrowLeft, Styles.labelLeft, Styles.creditLeft)
-    | ToRight => (Styles.arrowRight, Styles.labelRight, Styles.creditRight)
+    switch (mode) {
+    | `side => (
+        Styles.arrowSide,
+        Styles.labelSide,
+        Styles.creditSide,
+        Styles.rootSide,
+      )
+    | `below => (
+        Styles.arrowBelow,
+        Styles.labelBelow,
+        Styles.creditBelow,
+        Styles.rootBelow,
+      )
     };
 
-  <div className={Cn.make([className, Styles.root])}>
+  <div className={Cn.make([className, rootClassName, Styles.root])}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="380.1"
@@ -62,7 +77,7 @@ let make = (~className="", ~direction=ToLeft, ~children) => {
       />
     </svg>
     <a
-      className={Cn.make([Styles.credit, creditDirectionClassName])}
+      className={Cn.make([Styles.credit, creditClassName])}
       href="https://www.flaticon.com/authors/freepik"
       title="Icon made by Freepik from www.flaticon.com">
       {copyright |> React.string}

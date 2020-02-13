@@ -15,6 +15,10 @@ let prettyPrint = "Pretty print";
 let lineWrap = "Hard line wrap";
 let columns = "columns";
 
+let choose = "Choose the";
+
+let here = "here";
+
 module Welcome = {
   let paste = "Paste URLs to webpack stats uploaded somewhere";
   let download = "Download stats";

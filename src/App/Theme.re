@@ -128,6 +128,7 @@ module Space = {
     let fivefold = default * 5;
     let hexfold = default * 6;
     let sevenfold = default * 7;
+    let octafold = default * 8;
     let tenfold = default * 10;
     let hexteenfold = default * 16;
     let doublehexteenfold = hexteenfold * 2;
@@ -150,6 +151,8 @@ module Space = {
   let hexfold = `px(Raw.hexfold);
 
   let sevenfold = `px(Raw.sevenfold);
+
+  let octafold = `px(Raw.octafold);
 
   let tenfold = `px(Raw.tenfold);
 
