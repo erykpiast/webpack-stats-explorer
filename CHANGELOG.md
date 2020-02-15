@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.18.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.17.0...v1.18.0) (2020-02-15)
+
+
+### Features
+
+* **ui:** display entry overview for chunk ([4ed41ac](https://github.com/erykpiast/webpack-stats-explorer/commit/4ed41ac659f6cb655e11f37f6aa9302b517fddc4))
+* **ui:** make modules hierarchy more distinguishable ([8f344cd](https://github.com/erykpiast/webpack-stats-explorer/commit/8f344cd17c5063cb0a51f10c4381e406ab6e72bd))
+
+
+### Bug Fixes
+
+* **package:** update bs-webapi to version 0.15.7 ([520d1a8](https://github.com/erykpiast/webpack-stats-explorer/commit/520d1a82c882cb7f13afea678f18cac1a777ffd1))
+
 ## [1.17.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.16.0...v1.17.0) (2020-02-05)
 
 
