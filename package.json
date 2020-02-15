@@ -20,7 +20,7 @@
     "precompile": "npm run clean",
     "compile": "bsb -make-world",
     "prebuild": "npm run compile",
-    "build": "run-p build:*",
+    "build": "npm run build:app",
     "build:app": "NODE_ENV=production webpack",
     "build:playground": "npm run playground:play",
     "start": "bsb -make-world -w",
