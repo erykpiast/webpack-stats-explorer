@@ -119,11 +119,11 @@ let make = (~urls, ~onStats, ~onUrls, ~children) => {
           promise
           |> then_(Array.map(WebpackStats.FromText.make) ||> all)
           |> then_(stats =>
-               if (Array.length(stats) <= 1) {
-                 reject(NotEnoughFilesExn);
-               } else {
-                 resolve(stats);
-               }
+              switch (Array.length(stats)) {
+              | 0 => reject(NotEnoughFilesExn)
+              | 1 => resolve(Array.concat([stats, stats]))
+              | _ => resolve(stats)
+              }
              )
           |> then_(Array.to_list ||> onStats ||> (_ => Success |> resolve))
           |> catch(failureHandler ||> (err => Fail(err) |> resolve))
