@@ -80,11 +80,11 @@ let reducer = (state, action) =>
         }
       | ReplaceStats(stats) => {
           tab: state.tab,
-          index: Js.Math.min_int(state.index, List.length(stats)),
+          index: 0,
           stats,
-          navigationPath: state.navigationPath,
+          navigationPath: [],
           isTimelineVisible: false,
-          urls: state.urls,
+          urls: [],
         }
       | AddStats(stats) => {
           tab: state.tab,
