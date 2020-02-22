@@ -156,10 +156,7 @@ let make = (~stats) => {
   if (List.length(comparisons) === 0) {
     <WelcomeScreen
       onStats={stats => dispatch(ReplaceStats(stats))}
-      onUrls={urls => {
-        Js.log(("oh my, URLS!", urls));
-        dispatch(UpdateUrls(urls));
-      }}
+      onUrls={urls => dispatch(UpdateUrls(urls))}
       urls={state.urls}>
       {loader =>
          <NavigationLayout
