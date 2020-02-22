@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.19.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.18.0...v1.19.0) (2020-02-22)
+
+
+### Features
+
+* **ui:** allow to add a stat when app is running ([cbb658b](https://github.com/erykpiast/webpack-stats-explorer/commit/cbb658b5820fdbdb713b86da5b360349aff8d070))
+* **ui:** allow to upload just a single stat file ([d25b542](https://github.com/erykpiast/webpack-stats-explorer/commit/d25b542b536629793e53a48d34d1a78ac9a3bbfe))
+* **ui:** display overlay when app is ready for dropping files ([fdd7210](https://github.com/erykpiast/webpack-stats-explorer/commit/fdd72102133dd2883cb5961da3408e1856999c9d))
+
+
+### Bug Fixes
+
+* **ci:** do not build playground in build step, just in tests on CI ([eb22a9b](https://github.com/erykpiast/webpack-stats-explorer/commit/eb22a9bf403a58daa4cb58374924299e70b07f42))
+* **package:** update bs-fetch to version 0.5.2 ([36511c6](https://github.com/erykpiast/webpack-stats-explorer/commit/36511c6ba5569b624eeb111664f502827edadaab))
+* **package:** update bs-webapi to version 0.15.8 ([a923169](https://github.com/erykpiast/webpack-stats-explorer/commit/a923169c98a8a01ac9da161e9620db558116bfcc))
+* **ui:** don't fold unchanged lines in diff view ([77d0024](https://github.com/erykpiast/webpack-stats-explorer/commit/77d0024d02fc8e9eccd8da7d258ff327c5ddeba4))
+* **ui:** reset app state when stats are replaced ([6bd8994](https://github.com/erykpiast/webpack-stats-explorer/commit/6bd899483c8c5fe6d862e294d0ab16985a350b65))
+* **ui:** stretch line number background and wrapping column guideline ([25b87b9](https://github.com/erykpiast/webpack-stats-explorer/commit/25b87b9f76d830c40b8b2ae20393671f88c7737c))
+
 ## [1.18.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.17.0...v1.18.0) (2020-02-15)
 
 
