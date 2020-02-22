@@ -3,9 +3,40 @@ open Rationale.Function.Infix;
 module Styles = {
   open Css;
 
-  let input = style([]);
-
   let label = style([backgroundColor(Theme.Color.Background.danger)]);
+
+  let fadeIn = keyframes([(0, [opacity(0.0)]), (100, [opacity(0.5)])]);
+
+  let dragActive =
+    style([
+      position(`relative),
+      before([
+        contentRule(`string("")),
+        position(`absolute),
+        top(Theme.Space.double),
+        right(Theme.Space.double),
+        bottom(Theme.Space.double),
+        left(Theme.Space.double),
+        backgroundColor(Theme.Color.Background.bright),
+        border(Theme.Space.default, `dashed, Theme.Color.Border.accent),
+        animation(
+          ~duration=250,
+          ~timingFunction=`easeInOut,
+          ~fillMode=`forwards,
+          fadeIn,
+        ),
+        zIndex(1),
+        boxShadow(
+          Shadow.box(
+            ~x=px(0),
+            ~y=px(0),
+            ~blur=px(0),
+            ~spread=Theme.Space.double,
+            Theme.Color.Background.bright,
+          ),
+        ),
+      ]),
+    ]);
 };
 
 [@react.component]
@@ -23,12 +54,15 @@ let make = (~onFiles, ~label, ~className="", ~children) => {
         |> all
         |> onFiles
     )>
-    {({getInputProps, getRootProps}) => {
+    {({getInputProps, getRootProps, isDragActive}) => {
        let inputProps = getInputProps();
        let rootProps = getRootProps();
 
        <div
-         className
+         className={Cn.make([
+           className,
+           Cn.ifTrue(Styles.dragActive, isDragActive),
+         ])}
          onBlur={rootProps.onBlur}
          onDragEnter={rootProps.onDragEnter}
          onDragLeave={rootProps.onDragLeave}
@@ -39,18 +73,16 @@ let make = (~onFiles, ~label, ~className="", ~children) => {
          onKeyDown={rootProps.onKeyDown}
          ref={ReactDOMRe.Ref.callbackDomRef(rootProps.ref)}
          tabIndex={rootProps.tabIndex}>
-         <div className=Styles.input>
-           <input
-             autoComplete={inputProps.autoComplete}
-             onChange={inputProps.onChange}
-             onClick={inputProps.onClick}
-             ref={ReactDOMRe.Ref.callbackDomRef(inputProps.ref)}
-             style={inputProps.style}
-             tabIndex={inputProps.tabIndex}
-             type_={inputProps.type_}
-             multiple={inputProps.multiple}
-           />
-         </div>
+         <input
+           autoComplete={inputProps.autoComplete}
+           onChange={inputProps.onChange}
+           onClick={inputProps.onClick}
+           ref={ReactDOMRe.Ref.callbackDomRef(inputProps.ref)}
+           style={inputProps.style}
+           tabIndex={inputProps.tabIndex}
+           type_={inputProps.type_}
+           multiple={inputProps.multiple}
+         />
          {switch (label) {
           | Some(label) =>
             <Snackbar className=Styles.label>
