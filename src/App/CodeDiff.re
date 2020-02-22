@@ -75,6 +75,7 @@ let make = (~after, ~before, ~columnGuideline, ~className) => {
     newValue=after
     compareMethod=`words
     splitView=false
+    showDiffOnly=false
     renderContent
     styles={ReactDiffViewer.Styles.make(
       ~wordDiff=Styles.wordDiff,

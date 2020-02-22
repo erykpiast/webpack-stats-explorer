@@ -5,7 +5,8 @@ type action =
   | Navigate(State.NavigationPath.Segment.t, int)
   | NavigateThroughBreadcrumbs(int)
   | ToggleTimeline
-  | UpdateStats(list(WebpackStats.t))
+  | ReplaceStats(list(WebpackStats.t))
+  | AddStats(list(WebpackStats.t))
   | UpdateUrls(list(string))
   | SelectTab(int);
 
@@ -77,10 +78,18 @@ let reducer = (state, action) =>
           isTimelineVisible: !state.isTimelineVisible,
           urls: state.urls,
         }
-      | UpdateStats(stats) => {
+      | ReplaceStats(stats) => {
           tab: state.tab,
-          index: Js.Math.min_int(state.index, List.length(stats)),
+          index: 0,
           stats,
+          navigationPath: [],
+          isTimelineVisible: false,
+          urls: [],
+        }
+      | AddStats(stats) => {
+          tab: state.tab,
+          index: state.index,
+          stats: List.concat([state.stats, stats]),
           navigationPath: state.navigationPath,
           isTimelineVisible: false,
           urls: state.urls,
@@ -139,15 +148,15 @@ let make = (~stats) => {
     },
     (state.urls, state.navigationPath, state.index, state.tab),
   );
-  let comparisons = state.stats |> CompareStats.make;
+  let comparisons = switch (state.stats) {
+  | [singleStat] => [singleStat, singleStat]
+  | multipleStats => multipleStats
+  } |> CompareStats.make;
 
   if (List.length(comparisons) === 0) {
     <WelcomeScreen
-      onStats={stats => dispatch(UpdateStats(stats))}
-      onUrls={urls => {
-        Js.log(("oh my, URLS!", urls));
-        dispatch(UpdateUrls(urls));
-      }}
+      onStats={stats => dispatch(ReplaceStats(stats))}
+      onUrls={urls => dispatch(UpdateUrls(urls))}
       urls={state.urls}>
       {loader =>
          <NavigationLayout
@@ -158,94 +167,99 @@ let make = (~stats) => {
          />}
     </WelcomeScreen>;
   } else {
-    let comp = List.nth(comparisons, state.index);
-    let navigationPath =
-      state.navigationPath
-      |> NavigationPath.fromState(CompareEntry.ModifiedChildren(comp));
-    let revPath = navigationPath |> List.rev;
-    let topContent =
-      <>
-        <Logo onClick={_ => dispatch(NavigateThroughBreadcrumbs(0))} />
-        <Breadcrumbs
-          items=navigationPath
-          onClick={index => dispatch(NavigateThroughBreadcrumbs(index))}
-        />
-        <ComparisonChooser
-          comparisons
-          currentIndex={state.index}
-          onPrev={_ => dispatch(Prev)}
-          onNext={_ => dispatch(Next)}
-        />
-        <ToggleTimeline
-          isVisible={state.isTimelineVisible}
-          onToggle={() => dispatch(ToggleTimeline)}
-        />
-      </>;
+    <AddStats initial={false} onStats={stats => dispatch(AddStats(stats))}>
+      {(triggerUpload, _) => {
+         let comp = List.nth(comparisons, state.index);
+         let navigationPath =
+           state.navigationPath
+           |> NavigationPath.fromState(CompareEntry.ModifiedChildren(comp));
+         let revPath = navigationPath |> List.rev;
+         let topContent =
+           <>
+             <Logo onClick={_ => dispatch(NavigateThroughBreadcrumbs(0))} />
+             <Breadcrumbs
+               items=navigationPath
+               onClick={index => dispatch(NavigateThroughBreadcrumbs(index))}
+             />
+             <AddStatsButton onClick=triggerUpload />
+             <ComparisonChooser
+               comparisons
+               currentIndex={state.index}
+               onPrev={_ => dispatch(Prev)}
+               onNext={_ => dispatch(Next)}
+             />
+             <ToggleTimeline
+               isVisible={state.isTimelineVisible}
+               onToggle={() => dispatch(ToggleTimeline)}
+             />
+           </>;
 
-    let aboveTopContent =
-      state.isTimelineVisible
-        ? <Timeline
-            stats={state.stats}
-            selectedIndex={state.index}
-            onChange={index => dispatch(Choose(index))}
-          />
-        : React.null;
+         let aboveTopContent =
+           state.isTimelineVisible
+             ? <Timeline
+                 stats={state.stats}
+                 selectedIndex={state.index}
+                 onChange={index => dispatch(Choose(index))}
+               />
+             : React.null;
 
-    let mainContent =
-      switch (revPath) {
-      | [] =>
-        <EntryOverview
-          size={comp |> CompareEntry.size}
-          count={comp |> CompareEntry.count |> snd}
-          level={`top}
-        />
-      | [(entry, kind)] =>
-        let (size, count, name) =
-          CompareEntry.(
-            switch (entry) {
-            | Entry(entry) =>
-              let size =
-                switch (kind) {
-                | Added => (0, entry.size)
-                | Removed => (entry.size, 0)
-                | Intact => (entry.size, entry.size)
-                | _ => (0, 0)
-                };
+         let mainContent =
+           switch (revPath) {
+           | [] =>
+             <EntryOverview
+               size={comp |> CompareEntry.size}
+               count={comp |> CompareEntry.count |> snd}
+               level=`top
+             />
+           | [(entry, kind)] =>
+             let (size, count, name) =
+               CompareEntry.(
+                 switch (entry) {
+                 | Entry(entry) =>
+                   let size =
+                     switch (kind) {
+                     | Added => (0, entry.size)
+                     | Removed => (entry.size, 0)
+                     | Intact => (entry.size, entry.size)
+                     | _ => (0, 0)
+                     };
 
-              (size, List.length(entry.children), entry.id);
-            | ModifiedEntry(entry) => (
-                entry.size,
-                entry.children |> CompareEntry.count |> snd,
-                entry.id
-              )
-            }
-          );
+                   (size, List.length(entry.children), entry.id);
+                 | ModifiedEntry(entry) => (
+                     entry.size,
+                     entry.children |> CompareEntry.count |> snd,
+                     entry.id,
+                   )
+                 }
+               );
 
-        <EntryOverview size count name level={`chunk} />;
-      | [(entry, kind), ..._] =>
-        <EntrySummary
-          tab={state.tab}
-          onTab={tab => dispatch(SelectTab(tab))}
-          entry
-          kind
-        />
-      };
+             <EntryOverview size count name level=`chunk />;
+           | [(entry, kind), ..._] =>
+             <EntrySummary
+               tab={state.tab}
+               onTab={tab => dispatch(SelectTab(tab))}
+               entry
+               kind
+             />
+           };
 
-    let sideContent =
-      <EntryTree
-        comp
-        navigationPath
-        onEntry={(level, segment) =>
-          Navigate(NavigationPath.Segment.toState(segment), level)
-          |> dispatch
-        }
-      />;
+         let sideContent =
+           <EntryTree
+             comp
+             navigationPath
+             onEntry={(level, segment) =>
+               Navigate(NavigationPath.Segment.toState(segment), level)
+               |> dispatch
+             }
+           />;
 
-    <NavigationLayout
-      side=sideContent
-      main=mainContent
-      top=topContent
-      aboveTop=aboveTopContent
-    />;
+         <NavigationLayout
+           side=sideContent
+           main=mainContent
+           top=topContent
+           aboveTop=aboveTopContent
+         />;
+       }}
+    </AddStats>;
   };
 };
