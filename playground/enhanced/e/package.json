@@ -16,6 +16,6 @@
     "babel-loader": "8.0.6",
     "terser-webpack-plugin": "2.3.5",
     "webpack": "4.41.6",
-    "webpack-enhanced-stats-plugin": "2.2.1"
+    "webpack-enhanced-stats-plugin": "2.3.0"
   }
 }
