@@ -151,12 +151,13 @@ module FromChunk = struct
     | [] -> filename
   ;;
 
-  let getFilename (chunk : WebpackChunk.t) =
+  let getFirstJsFilename (chunk : WebpackChunk.t) =
     chunk.files
     |> Utils.List.findOpt (Utils.String.endsWith ".js")
     |> Utils.defaultTo (List.nth chunk.files 0)
-    |> removeHash
   ;;
+
+  let getFilename = Rationale.Function.Infix.(getFirstJsFilename ||> removeHash);;
 
   let getId (chunk : WebpackChunk.t) =
     match chunk.names with
@@ -165,9 +166,9 @@ module FromChunk = struct
   ;;
 
   let findChunkAsset (chunk : WebpackChunk.t) (assets : WebpackAsset.t list) =
-    let firstFile = List.nth chunk.files 0
+    let firstJsFile = getFirstJsFilename chunk
     in Utils.List.findOpt
-      (fun (asset : WebpackAsset.t) -> asset.name = firstFile)
+      (fun (asset : WebpackAsset.t) -> asset.name = firstJsFile)
       assets
   ;;
 
