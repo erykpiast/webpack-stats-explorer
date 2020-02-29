@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.19.1](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.19.0...v1.19.1) (2020-02-29)
+
+
+### Bug Fixes
+
+* **format:** find the first JavaScript file to name the chunk ([9b61795](https://github.com/erykpiast/webpack-stats-explorer/commit/9b617955f7c9af2bceef5e7b86dfba36325b7e75))
+* **package:** update date-fns to version 2.10.0 ([2677d14](https://github.com/erykpiast/webpack-stats-explorer/commit/2677d14e71c5e52fa94aacdab4ffce2a7190a284))
+* **package:** update react to version 16.13.0 ([541e589](https://github.com/erykpiast/webpack-stats-explorer/commit/541e589ef6f7f294b4fab08d3101ad536639a94f))
+* **package:** update react-dom to version 16.13.0 ([2bbe90c](https://github.com/erykpiast/webpack-stats-explorer/commit/2bbe90c2c71d92331c1f1419f5afa42da2253ec2))
+* **ui:** turn on pretty printing for stat and parsed code by default ([69553c9](https://github.com/erykpiast/webpack-stats-explorer/commit/69553c9dffe910984b98d54fa1e0782fe83ddaa4))
+
 ## [1.19.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.18.0...v1.19.0) (2020-02-22)
 
 
