@@ -76,7 +76,7 @@
     "@babel/cli": "7.8.4",
     "@babel/core": "7.8.6",
     "@babel/preset-env": "7.8.6",
-    "@glennsl/bs-jest": "0.4.9",
+    "@glennsl/bs-jest": "0.4.10",
     "babel-jest": "25.1.0",
     "bs-enzyme": "0.6.1",
     "bs-platform": "7.1.1",
