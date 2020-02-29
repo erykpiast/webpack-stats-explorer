@@ -231,6 +231,8 @@ module.exports = {
     }
   };
 
+let getDefaultFormattingForTab = (!==)(0);
+
 let prettyPrintInputId = "pretty-print";
 let lineWrapInputId = "line-wrap";
 
@@ -247,9 +249,15 @@ let make = (~entry, ~onTab, ~tab, ~kind) => {
     };
   let (kindClassName, kindLabel) = getKindProps(kind);
   let (isPrettyPrintEnabled, setPrettyPrintEnabled) =
-    React.useState(() => false);
+    React.useState(() => getDefaultFormattingForTab(tab));
   let (isLineWrappingEnabled, setLineWrappingEnabled) =
-    React.useState(() => false);
+    React.useState(() => getDefaultFormattingForTab(tab));
+  let switchTab = (index) => {
+    let defaultFormatting = getDefaultFormattingForTab(index);
+    setPrettyPrintEnabled((_) => defaultFormatting);
+    setLineWrappingEnabled((_) => defaultFormatting);
+    onTab(index);
+  };
   let wrapLineLength = isLineWrappingEnabled ? hardLineWrapLimit : 0;
   let formatter =
     isPrettyPrintEnabled
@@ -282,7 +290,7 @@ let make = (~entry, ~onTab, ~tab, ~kind) => {
             {entry |> getId |> React.string}
           </dd>
         </div>
-        <Tabs className=Styles.size selectedIndex=tab onChange=onTab>
+        <Tabs className=Styles.size selectedIndex=tab onChange=switchTab>
           [|
             original |> renderSize(L10N.Summary.original),
             stat |> renderSize(L10N.Summary.stat),
