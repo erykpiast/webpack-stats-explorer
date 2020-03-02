@@ -11,6 +11,6 @@
   "license": "MIT",
   "devDependencies": {
     "terser-webpack-plugin": "2.3.5",
-    "webpack": "4.41.6"
+    "webpack": "4.42.0"
   }
 }
