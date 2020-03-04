@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.19.2](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.19.1...v1.19.2) (2020-03-04)
+
+
+### Bug Fixes
+
+* **ui:** preserve navigation path when changing comparison ([f47ecf4](https://github.com/erykpiast/webpack-stats-explorer/commit/f47ecf4df3df8c7ccf40e881a40358483ab03db0))
+
 ### [1.19.1](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.19.0...v1.19.1) (2020-02-29)
 
 
