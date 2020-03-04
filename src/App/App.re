@@ -31,7 +31,7 @@ let reducer = (state, action) =>
           tab: state.tab,
           index: (state.index + 1) mod maxIndex,
           stats: state.stats,
-          navigationPath: [],
+          navigationPath: state.navigationPath,
           isTimelineVisible: state.isTimelineVisible,
           urls: state.urls,
         }
@@ -39,7 +39,7 @@ let reducer = (state, action) =>
           tab: state.tab,
           index: (state.index - 1 + maxIndex) mod maxIndex,
           stats: state.stats,
-          navigationPath: [],
+          navigationPath: state.navigationPath,
           isTimelineVisible: state.isTimelineVisible,
           urls: state.urls,
         }
@@ -47,7 +47,7 @@ let reducer = (state, action) =>
           tab: state.tab,
           index,
           stats: state.stats,
-          navigationPath: [],
+          navigationPath: state.navigationPath,
           isTimelineVisible: state.isTimelineVisible,
           urls: state.urls,
         }
