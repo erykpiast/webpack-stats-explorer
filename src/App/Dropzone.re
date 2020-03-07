@@ -11,7 +11,7 @@ module Styles = {
     style([
       position(`relative),
       before([
-        contentRule(`string("")),
+        contentRule(`text("")),
         position(`absolute),
         top(Theme.Space.double),
         right(Theme.Space.double),

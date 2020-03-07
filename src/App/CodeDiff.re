@@ -21,7 +21,7 @@ module Styles = {
       switch (columnNumber) {
       | 0 => []
       | _ => [
-          contentRule(`string("")),
+          contentRule(`text("")),
           position(`absolute),
           left(ch(float_of_int(columnNumber))),
           top(px(0)),
