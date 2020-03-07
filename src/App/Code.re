@@ -14,15 +14,15 @@ module Styles = {
       ~margin=px(0) |> Types.Length.toString,
       ~marginLeft=lineNumberLeftMargin |> Types.Length.toString,
       ~counterReset=
-        Types.CounterOperation.reset(counterName)
-        |> Types.CounterOperation.toString,
+        Types.CounterReset.reset(counterName)
+        |> Types.CounterReset.toString,
       (),
     );
 
   let getRootClassName = (lineNumberWidth, columnNumber) =>
     style([
       before([
-        contentRule(`string("")),
+        contentRule(`text("")),
         backgroundColor(Theme.Color.Background.bright),
         width(ch(float_of_int(lineNumberWidth))),
         position(`absolute),
@@ -36,7 +36,7 @@ module Styles = {
         switch (columnNumber) {
         | 0 => []
         | _ => [
-            contentRule(`string("")),
+            contentRule(`text("")),
             position(`absolute),
             left(
               Calc.(
@@ -111,11 +111,11 @@ let make = (~className="", ~columnGuideline=0, ~children) => {
         ~style=
           ReactDOMRe.Style.make(
             ~counterIncrement=
-              Css.Types.CounterOperation.increment(
+              Css.Types.CounterIncrement.increment(
                 Styles.counterName,
                 ~value=1,
               )
-              |> Css.Types.CounterOperation.toString,
+              |> Css.Types.CounterIncrement.toString,
             (),
           ),
         (),

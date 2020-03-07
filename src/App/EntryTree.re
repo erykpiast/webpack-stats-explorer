@@ -30,7 +30,7 @@ module Styles = {
   let parentItem =
     style([
       before([
-        contentRule(`string(rightTriangle)),
+        contentRule(`text(rightTriangle)),
         marginRight(Theme.Space.default),
         fontSize(em(1.136)),
         color(Theme.Color.Border.default),
@@ -39,7 +39,7 @@ module Styles = {
 
   let expandedParentItem =
     style([
-      before([contentRule(`string(downTriangle)), fontSize(em(1.02))]),
+      before([contentRule(`text(downTriangle)), fontSize(em(1.02))]),
     ]);
 
   let levelGradient =

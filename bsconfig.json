@@ -39,6 +39,7 @@
     "reason-date-fns",
     "reason-react",
     "bs-css",
+    "bs-css-emotion",
     "bs-fetch",
     "bs-react-dropzone",
     "bs-webapi",
