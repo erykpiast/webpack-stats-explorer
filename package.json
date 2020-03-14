@@ -58,7 +58,7 @@
     "bs-react-diff-viewer": "0.1.1",
     "bs-react-dropzone": "0.5.2",
     "bs-react-syntax-highlighter": "0.2.1",
-    "bs-webapi": "0.15.8",
+    "bs-webapi": "0.15.9",
     "date-fns": "2.11.0",
     "diff": "4.0.2",
     "js-beautify": "1.10.3",
