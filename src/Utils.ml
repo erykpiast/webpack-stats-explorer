@@ -45,8 +45,6 @@ module List = struct
     | _, _ -> false
   ;;
 
-  (* one of lists empty *)
-
   let diff isEqual a b =
     a |> List.filter (fun x -> b |> List.exists (fun y -> isEqual x y) |> not)
   ;;

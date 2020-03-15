@@ -32,24 +32,7 @@ type t =
   ; usedExports : bool option
   ; warnings : int
   }
-
-let removeSubmodules = Js.String.replaceByRe [%re "/ \\+ \\d+ modules?$/"] "";;
-
-(* inspired by https://github.com/webpack-contrib/webpack-bundle-analyzer/blob/fe3c71e25238a1f9c557180404e9ef1d98e3801f/src/tree/utils.js#L10-L18 *)
-
-let normalizeName = Rationale.Function.Infix.(
-  Js.String.split "!"
-  ||> Utils.Array.last
-  ||> Js.String.split "/"
-  ||> Array.map (fun part -> match part with
-  | "~" -> "node_modules"
-  | "." -> ""
-  | part -> part
-  )
-  ||> Js.Array.filter (fun part -> String.length part > 0)
-  ||> Js.Array.joinWith "/"
-  ||> removeSubmodules
-);;
+;;
 
 let rec decode json =
   Json.Decode.
@@ -69,7 +52,7 @@ let rec decode json =
     ; issuerName = json |> field "issuerName" (optional string)
     ; issuerPath = json |> field "issuerPath" (optional (list string))
     ; modules = json |> optional (field "modules" (list decode))
-    ; name = json |> field "name" string |> normalizeName
+    ; name = json |> field "name" string
     ; optimizationBailout = json |> field "optimizationBailout" (list string)
     ; optional = json |> field "optional" bool
     ; prefetched = json |> field "prefetched" bool
@@ -193,29 +176,6 @@ let make
   ; usedExports
   ; warnings
   }
-;;
-
-(* TODO:
-  this logic has to take MEANINGFUL size into account
-  like in many other places; maybe it's a good time to create
-  intermediate format with used properties only and computed
-  meaningfulSize and meaningfulSource values one along stat,
-  parsed and original; the same goes with chunks so maybe it's
-  a good time for unification; seems like a huge refactor, though
- *)
-let rec eql a b =
-  a.name = b.name
-  && a.size = b.size
-  && a.source = b.source
-  && (
-    match a.modules, b.modules with
-    | None, None -> true
-    | None, Some _ -> false
-    | Some _, None -> false
-    | Some ams, Some bms ->
-      List.length ams = List.length bms
-      && List.fold_left2 (fun acc a b -> acc && eql a b) true ams bms
-  )
 ;;
 
 let isEntryPoint module_ = match module_.reasons with
