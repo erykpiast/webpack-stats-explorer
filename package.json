@@ -51,7 +51,7 @@
     "@glennsl/rebase": "0.2.1",
     "@zpnester/bs-filereader": "0.4.0",
     "bs-css": "12.1.0",
-    "bs-css-emotion": "1.0.1",
+    "bs-css-emotion": "1.1.0",
     "bs-fetch": "0.5.2",
     "bs-js-beautify": "0.1.0",
     "bs-jsverify": "0.10.0",
