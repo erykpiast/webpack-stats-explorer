@@ -273,12 +273,14 @@ let make = (~className="", ~stats=[], ~onChange, ~selectedIndex) => {
               sizeUnit
               payload={
                 props->payload
-                |> Array.map(payload =>
-                     TimelineTooltip.{
-                       name: payload->name,
-                       color: payload->color,
-                       value: payload->value *. sizeDivider,
-                     }
+                |> Array.map((payload) =>
+                     (
+                       {
+                         name: payload->name,
+                         color: payload->color,
+                         value: payload->value *. sizeDivider,
+                       }: TimelineTooltip.payload
+                     )
                    )
               }
             />

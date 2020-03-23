@@ -34,7 +34,7 @@ let loadExampleData = _ => [Data.a, Data.b, Data.c, Data.d, Data.e];
 
 [@react.component]
 let make = (~urls, ~onStats, ~onUrls, ~children) => {
-  <AddStats initial=true onStats>
+  <AddStats onStats>
     {(triggerUpload, onFiles) =>
        children(
          <div className=Styles.wrapper>

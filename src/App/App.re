@@ -196,7 +196,7 @@ let make = (~stats) => {
          />}
     </WelcomeScreen>;
   } else {
-    <AddStats initial=false onStats={stats => dispatch(AddStats(stats))}>
+    <AddStats onStats={stats => dispatch(AddStats(stats))}>
       {(triggerUpload, _) => {
          let comp = List.nth(comparisons, state.index);
          let navigationPath =

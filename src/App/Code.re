@@ -1,10 +1,13 @@
 module Styles = {
   open Css;
 
+  let (+) = Calc.(+);
+  let (-) = Calc.(-);
+
   let counterName = "line-number";
 
   let lineNumberLeftMargin = Theme.Space.half;
-  let lineNumberLeftPadding = Calc.(Theme.Space.double - Theme.Space.half);
+  let lineNumberLeftPadding = Theme.Space.double - Theme.Space.half;
   let lineNumberRightPadding = Theme.Space.double;
   let lineNumberRightMargin = Theme.Space.double;
 
@@ -14,8 +17,7 @@ module Styles = {
       ~margin=px(0) |> Types.Length.toString,
       ~marginLeft=lineNumberLeftMargin |> Types.Length.toString,
       ~counterReset=
-        Types.CounterReset.reset(counterName)
-        |> Types.CounterReset.toString,
+        Types.CounterReset.reset(counterName) |> Types.CounterReset.toString,
       (),
     );
 
@@ -35,24 +37,23 @@ module Styles = {
       after(
         switch (columnNumber) {
         | 0 => []
-        | _ => [
+        | _ =>
+          [
             contentRule(`text("")),
             position(`absolute),
             left(
-              Calc.(
-                ch(float_of_int(lineNumberWidth))
-                + ch(float_of_int(columnNumber))
-                + lineNumberLeftMargin
-                + lineNumberLeftPadding
-                + lineNumberRightPadding
-                + lineNumberRightMargin
-              ),
+              ch(float_of_int(lineNumberWidth))
+              + ch(float_of_int(columnNumber))
+              + lineNumberLeftMargin
+              + lineNumberLeftPadding
+              + lineNumberRightPadding
+              + lineNumberRightMargin,
             ),
             top(px(0)),
             bottom(px(0)),
             width(px(1)),
             backgroundColor(Theme.Color.Border.default),
-          ]
+          ];
         },
       ),
     ]);
@@ -76,7 +77,7 @@ module Styles = {
   };
 
   module LineNumberContainer = {
-    let leftPadding = Calc.(Theme.Space.double - Theme.Space.half);
+    let leftPadding = Theme.Space.double - Theme.Space.half;
     let rightPadding = Theme.Space.double;
     let rightMargin = Theme.Space.double;
     let style =

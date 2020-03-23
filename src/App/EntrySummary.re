@@ -240,7 +240,7 @@ module.exports = {
       if (after == before) {
         <Code className=Styles.code columnGuideline> ...after </Code>;
       } else {
-        <CodeDiff className=Styles.code columnGuideline before after />;
+        <CodeDiff columnGuideline before after />;
       };
     }
   };

@@ -323,10 +323,10 @@ let mapToProps = (onEntry, navigationPath, comp: CompareEntry.t) => {
       let navigationPath = navigationPath;
     });
   List.concat([
-    comp.added |> TheMapper.added,
-    comp.removed |> TheMapper.removed,
-    comp.intact |> TheMapper.intact,
-    comp.modified |> TheMapper.modified,
+    TheMapper.added(comp.added),
+    TheMapper.removed(comp.removed),
+    TheMapper.intact(comp.intact),
+    TheMapper.modified(comp.modified),
   ])
   |> TheMapper.sortProps
   |> TheMapper.flatten(false);

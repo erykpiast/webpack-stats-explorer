@@ -56,7 +56,7 @@ let getLabel = status =>
   };
 
 [@react.component]
-let make = (~onStats, ~initial, ~children) => {
+let make = (~onStats, ~children) => {
   let (status, setStatus) = React.useState(() => Unknown);
   React.useEffect1(
     () => {

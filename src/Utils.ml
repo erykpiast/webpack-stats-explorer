@@ -15,7 +15,7 @@ module Json = struct
     let forceString value = Json.Decode.(
       try string value
       with DecodeError _ -> (
-        try float value |> Js.Float.toString
+        try Json.Decode.float value |> Js.Float.toString
         with DecodeError _ -> int value |> Js.Int.toString
       )
     );;
