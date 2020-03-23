@@ -76,7 +76,7 @@ module FromModule = struct
       ||> Utils.String.split separator
       ||> Array.map (fun part -> match part with
       | "~" -> "node_modules"
-      | "." -> ""
+      | "(webpack)" -> "./node_modules/webpack"
       | part -> part
       )
       ||> Utils.Array.filter (fun part -> String.length part > 0)

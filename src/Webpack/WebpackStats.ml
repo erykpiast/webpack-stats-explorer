@@ -105,7 +105,7 @@ module Version = struct
     ||> Utils.List.nth 0
     ||> (=) "4"
   );;
-end;;
+end
 
 module FromText = struct
   exception UnsupportedVersionExn;;
@@ -125,4 +125,6 @@ module FromText = struct
           in reject(ParsingFailedExn);
         else reject UnsupportedVersionExn
   );;
-end;;
+end
+
+let sortByBuildTime = List.sort (fun a b -> a.builtAt - b.builtAt);;

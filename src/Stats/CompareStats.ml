@@ -1,13 +1,19 @@
 open Rationale.Function.Infix
 
-let make =
-  List.sort (fun (a: WebpackStats.t) (b: WebpackStats.t) -> a.builtAt - b.builtAt)
-  ||> (List.map (fun (stat: WebpackStats.t) ->
-    stat.chunks |> List.map (Entry.FromChunk.make stat.assets)
-  ))
+let make rebuildSourceTree =
+  WebpackStats.sortByBuildTime
+  ||> List.map Entry.FromStats.make
+  ||> (
+    match rebuildSourceTree with
+    | true -> List.map (List.map SourceTree.make)
+    | false -> Utils.identity
+  )
   ||> List.fold_left (
       fun acc a -> match acc with
-      | (None, []) -> (Some a, [])
+      | (None, []) -> (
+        Some a,
+        []
+      )
       | (Some b, acc) -> (
           Some a,
           (CompareEntry.make b a) :: acc

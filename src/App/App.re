@@ -8,7 +8,8 @@ type action =
   | ReplaceStats(list(WebpackStats.t))
   | AddStats(list(WebpackStats.t))
   | UpdateUrls(list(string))
-  | SelectTab(int);
+  | SelectTab(int)
+  | SwitchSourceTree;
 
 let updateNavigationPath = (path: list('a), segment, depth): list('a) => {
   let tail =
@@ -34,6 +35,7 @@ let reducer = (state, action) =>
           navigationPath: state.navigationPath,
           isTimelineVisible: state.isTimelineVisible,
           urls: state.urls,
+          sourceTree: state.sourceTree,
         }
       | Prev => {
           tab: state.tab,
@@ -42,6 +44,7 @@ let reducer = (state, action) =>
           navigationPath: state.navigationPath,
           isTimelineVisible: state.isTimelineVisible,
           urls: state.urls,
+          sourceTree: state.sourceTree,
         }
       | Choose(index) => {
           tab: state.tab,
@@ -50,6 +53,7 @@ let reducer = (state, action) =>
           navigationPath: state.navigationPath,
           isTimelineVisible: state.isTimelineVisible,
           urls: state.urls,
+          sourceTree: state.sourceTree,
         }
       | Navigate(segment, depth) => {
           tab: state.tab,
@@ -59,6 +63,7 @@ let reducer = (state, action) =>
             updateNavigationPath(state.navigationPath, segment, depth),
           isTimelineVisible: state.isTimelineVisible,
           urls: state.urls,
+          sourceTree: state.sourceTree,
         }
       | NavigateThroughBreadcrumbs(index) => {
           tab: state.tab,
@@ -69,6 +74,7 @@ let reducer = (state, action) =>
             |> Utils.defaultTo([]),
           isTimelineVisible: state.isTimelineVisible,
           urls: state.urls,
+          sourceTree: state.sourceTree,
         }
       | ToggleTimeline => {
           tab: state.tab,
@@ -77,6 +83,7 @@ let reducer = (state, action) =>
           navigationPath: state.navigationPath,
           isTimelineVisible: !state.isTimelineVisible,
           urls: state.urls,
+          sourceTree: state.sourceTree,
         }
       | ReplaceStats(stats) => {
           tab: state.tab,
@@ -85,6 +92,7 @@ let reducer = (state, action) =>
           navigationPath: [],
           isTimelineVisible: false,
           urls: [],
+          sourceTree: state.sourceTree,
         }
       | AddStats(stats) => {
           tab: state.tab,
@@ -93,6 +101,7 @@ let reducer = (state, action) =>
           navigationPath: state.navigationPath,
           isTimelineVisible: false,
           urls: state.urls,
+          sourceTree: state.sourceTree,
         }
       | UpdateUrls(urls) => {
           tab: 1,
@@ -101,6 +110,7 @@ let reducer = (state, action) =>
           navigationPath: state.navigationPath,
           isTimelineVisible: state.isTimelineVisible,
           urls,
+          sourceTree: state.sourceTree,
         }
       | SelectTab(tab) => {
           tab,
@@ -109,6 +119,19 @@ let reducer = (state, action) =>
           navigationPath: state.navigationPath,
           isTimelineVisible: state.isTimelineVisible,
           urls: state.urls,
+          sourceTree: state.sourceTree,
+        }
+      | SwitchSourceTree => {
+          tab: state.tab,
+          index: state.index,
+          stats: state.stats,
+          navigationPath:
+            state.sourceTree
+              ? State.NavigationPath.convertFromSourceTree(state.navigationPath)
+              : State.NavigationPath.convertToSourceTree(state.navigationPath),
+          isTimelineVisible: state.isTimelineVisible,
+          urls: state.urls,
+          sourceTree: !state.sourceTree,
         }
       };
     }
@@ -131,6 +154,7 @@ let make = (~stats) => {
           |> List.map(Belt.Option.getExn),
         isTimelineVisible: false,
         urls: urlState.urls,
+        sourceTree: urlState.sourceTree,
       },
     );
   React.useEffect4(
@@ -142,16 +166,21 @@ let make = (~stats) => {
           |> List.map(State.NavigationPath.Segment.toString),
         index: state.index,
         tab: state.tab,
+        sourceTree: state.sourceTree,
       }
       |> UrlState.write;
       None;
     },
     (state.urls, state.navigationPath, state.index, state.tab),
   );
-  let comparisons = switch (state.stats) {
-  | [singleStat] => [singleStat, singleStat]
-  | multipleStats => multipleStats
-  } |> CompareStats.make;
+  let comparisons =
+    (
+      switch (state.stats) {
+      | [singleStat] => [singleStat, singleStat]
+      | multipleStats => multipleStats
+      }
+    )
+    |> CompareStats.make(state.sourceTree);
 
   if (List.length(comparisons) === 0) {
     <WelcomeScreen
@@ -167,7 +196,7 @@ let make = (~stats) => {
          />}
     </WelcomeScreen>;
   } else {
-    <AddStats initial={false} onStats={stats => dispatch(AddStats(stats))}>
+    <AddStats initial=false onStats={stats => dispatch(AddStats(stats))}>
       {(triggerUpload, _) => {
          let comp = List.nth(comparisons, state.index);
          let navigationPath =
@@ -244,14 +273,20 @@ let make = (~stats) => {
            };
 
          let sideContent =
-           <EntryTree
-             comp
-             navigationPath
-             onEntry={(level, segment) =>
-               Navigate(NavigationPath.Segment.toState(segment), level)
-               |> dispatch
-             }
-           />;
+           <Sidebar>
+             <EntryTree
+               comp
+               navigationPath
+               onEntry={(level, segment) =>
+                 Navigate(NavigationPath.Segment.toState(segment), level)
+                 |> dispatch
+               }
+             />
+             <SourceTreeSwitcher
+               selected={state.sourceTree}
+               onSwitch={() => dispatch(SwitchSourceTree)}
+             />
+           </Sidebar>;
 
          <NavigationLayout
            side=sideContent

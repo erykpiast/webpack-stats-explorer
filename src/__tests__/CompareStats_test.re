@@ -44,7 +44,7 @@ describe("CompareStats", () => {
   let d = mockStats(4);
 
   test("one comparision less than stats compared", () => {
-    let comparison = CompareStats.make([a, b, c, d]);
+    let comparison = CompareStats.make(false, [a, b, c, d]);
 
     expect(comparison |> Array.of_list) |> toHaveLength(3);
   });
@@ -52,10 +52,10 @@ describe("CompareStats", () => {
   test(
     "uploading multiple stats is equal to doing it one by one sorted by build time",
     () => {
-      let comparison = CompareStats.make([d, a, c, b]);
-      let ab = CompareStats.make([a, b]);
-      let bc = CompareStats.make([b, c]);
-      let cd = CompareStats.make([c, d]);
+      let comparison = CompareStats.make(false, [d, a, c, b]);
+      let ab = CompareStats.make(false, [a, b]);
+      let bc = CompareStats.make(false, [b, c]);
+      let cd = CompareStats.make(false, [c, d]);
 
       expect(comparison) |> toEqual(List.flatten([ab, bc, cd]));
     },

@@ -10,6 +10,7 @@ module Styles = {
       height(`percent(100.0)),
       justifyContent(`center),
       position(`relative),
+      width(`percent(100.0))
     ]);
   let arrow =
     style([
@@ -28,6 +29,7 @@ let make = (~size, ~level, ~name="", ~count) => {
   let (one, many, arrowMode) = switch (level) {
   | `top => (L10N.chunk, L10N.chunks, `side)
   | `chunk => (L10N.module_, L10N.modules, `below)
+  | `module_ => (L10N.module_, L10N.modules, `below)
   };
 
   <section className=Styles.root>

@@ -57,6 +57,8 @@ module Styles = {
     ]);
   let code = style([padding(Theme.Space.default), width(`percent(100.0))]);
 
+  let tabsPlaceholder = style([height(Theme.Space.default)]);
+
   module Kind = {
     let added = style([color(Theme.Color.Added.default)]);
     let removed = style([color(Theme.Color.Removed.default)]);
@@ -132,6 +134,18 @@ let getParsed = entry =>
   switch (entry) {
   | Entry(entry) => entry.parsed <$> makeEntryData
   | ModifiedEntry(entry) => entry.parsed <$> makeModifiedEntryData
+  };
+
+let getSize = entry =>
+  switch (entry) {
+  | Entry(entry) => (entry.size, entry.size)
+  | ModifiedEntry(entry) => entry.size
+  };
+
+let getChildrenCount = entry =>
+  switch (entry) {
+  | Entry(entry) => entry.children |> List.length
+  | ModifiedEntry(entry) => entry.children |> CompareEntry.count |> snd
   };
 
 let renderSize = (label, data) =>
@@ -252,10 +266,10 @@ let make = (~entry, ~onTab, ~tab, ~kind) => {
     React.useState(() => getDefaultFormattingForTab(tab));
   let (isLineWrappingEnabled, setLineWrappingEnabled) =
     React.useState(() => getDefaultFormattingForTab(tab));
-  let switchTab = (index) => {
+  let switchTab = index => {
     let defaultFormatting = getDefaultFormattingForTab(index);
-    setPrettyPrintEnabled((_) => defaultFormatting);
-    setLineWrappingEnabled((_) => defaultFormatting);
+    setPrettyPrintEnabled(_ => defaultFormatting);
+    setLineWrappingEnabled(_ => defaultFormatting);
     onTab(index);
   };
   let wrapLineLength = isLineWrappingEnabled ? hardLineWrapLimit : 0;
@@ -290,17 +304,30 @@ let make = (~entry, ~onTab, ~tab, ~kind) => {
             {entry |> getId |> React.string}
           </dd>
         </div>
-        <Tabs className=Styles.size selectedIndex=tab onChange=switchTab>
-          [|
-            original |> renderSize(L10N.Summary.original),
-            stat |> renderSize(L10N.Summary.stat),
-            parsed |> renderSize(L10N.Summary.parsed),
-          |]
-        </Tabs>
+        {switch (original, stat, parsed) {
+         | (None, None, None) => <div className=Styles.tabsPlaceholder/>
+         | _ =>
+           <Tabs className=Styles.size selectedIndex=tab onChange=switchTab>
+             [|
+               original |> renderSize(L10N.Summary.original),
+               stat |> renderSize(L10N.Summary.stat),
+               parsed |> renderSize(L10N.Summary.parsed),
+             |]
+           </Tabs>
+         }}
       </dl>
     </header>
     <div className=Styles.content>
-      {currentData |> renderSource(formatter, columnGuideline)}
+      {switch (original, stat, parsed) {
+       | (None, None, None) =>
+         <EntryOverview
+           size={entry |> getSize}
+           level=`module_
+           count={entry |> getChildrenCount}
+           name={entry |> getId}
+         />
+       | _ => currentData |> renderSource(formatter, columnGuideline)
+       }}
     </div>
     <form className=Styles.ViewSettings.wrapper>
       <input

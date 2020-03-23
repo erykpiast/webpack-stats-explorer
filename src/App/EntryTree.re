@@ -102,6 +102,24 @@ module Styles = {
         paddingLeft(Theme.Space.tenfold),
         backgroundSize(`size((Theme.Space.tenfold, `percent(100.0)))),
       ]);
+
+    let l4 =
+      style([
+        paddingLeft(Theme.Space.thirteenfold),
+        backgroundSize(`size((Theme.Space.thirteenfold, `percent(100.0)))),
+      ]);
+
+    let l5 =
+      style([
+        paddingLeft(Theme.Space.hexteenfold),
+        backgroundSize(`size((Theme.Space.hexteenfold, `percent(100.0)))),
+      ]);
+
+    let l6 =
+      style([
+        paddingLeft(Theme.Space.nineteenfold),
+        backgroundSize(`size((Theme.Space.nineteenfold, `percent(100.0)))),
+      ]);
   };
 };
 
@@ -319,7 +337,10 @@ let getLevelClass = level =>
   | 0 => Styles.Level.l0
   | 1 => Styles.Level.l1
   | 2 => Styles.Level.l2
-  | _ => Styles.Level.l3
+  | 3 => Styles.Level.l3
+  | 4 => Styles.Level.l4
+  | 5 => Styles.Level.l5
+  | _ => Styles.Level.l6
   };
 
 let getFamilyClass =

@@ -35,7 +35,7 @@ let make = (~items, ~onClick) => {
          (index, (item, _: CompareKind.t)) => {
            let name = item |> renderName;
            (
-             <li className=Styles.item onClick={_ => onClick(index)} key=name>
+             <li className=Styles.item onClick={_ => onClick(index)} key={name ++ "_" ++ string_of_int(index)}>
                {name |> React.string}
              </li>,
              name,

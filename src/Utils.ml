@@ -84,6 +84,8 @@ module List = struct
     | x::[_] -> [x]
     | x::xs -> x::(removeLast xs)
   ;;
+
+  let prepend element list = element::list;;
 end
 
 module Array = struct
