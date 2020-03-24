@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.20.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.19.2...v1.20.0) (2020-03-24)
+
+
+### Features
+
+* **ui:** add source tree view to sidebar ([021740c](https://github.com/erykpiast/webpack-stats-explorer/commit/021740c77455058bdeddabd31d5b694e9574db17))
+
+
+### Bug Fixes
+
+* **package:** update bs-css to version 12.1.0 ([ee851b9](https://github.com/erykpiast/webpack-stats-explorer/commit/ee851b9579770631d2d9bebf5120e875b1075c24))
+* **package:** update bs-css-emotion to version 1.1.0 ([ff6b688](https://github.com/erykpiast/webpack-stats-explorer/commit/ff6b68868cf7023958debf92ab63e9927552d4af))
+* **package:** update bs-react-diff-viewer to version 0.1.1 ([56166b7](https://github.com/erykpiast/webpack-stats-explorer/commit/56166b7b7eb96e911d245e7c9f2e6dac0a14835f))
+* **package:** update bs-webapi to version 0.15.9 ([86d1ece](https://github.com/erykpiast/webpack-stats-explorer/commit/86d1ece983284473dd7f45e859aa53445ab7a10a))
+* **package:** update date-fns to version 2.11.0 ([51d2434](https://github.com/erykpiast/webpack-stats-explorer/commit/51d2434bce8a3e88305f08f4250d770cd895fb91))
+* **package:** update react to version 16.13.1 ([fc86481](https://github.com/erykpiast/webpack-stats-explorer/commit/fc86481d35396e77848d80f7480bde1965da713e))
+* **package:** update react-diff-viewer to version 3.0.2 ([9b0a42a](https://github.com/erykpiast/webpack-stats-explorer/commit/9b0a42a2480f6854dfeeeee54693b2ebc1851467))
+* **package:** update react-dom to version 16.13.1 ([bd832fe](https://github.com/erykpiast/webpack-stats-explorer/commit/bd832fe5d71c0f69057e6e1716cb248aed21b128))
+
 ### [1.19.2](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.19.1...v1.19.2) (2020-03-04)
 
 
