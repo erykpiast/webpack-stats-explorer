@@ -11,7 +11,7 @@ module Styles = {
 let arrow = {js|»|js};
 
 [@react.component]
-let make = (~className="", ~onToggle, ~isVisible) => {
+let make = (~onToggle, ~isVisible) => {
   <Button onClick={_ => onToggle()}>
     <span
       className={Cn.make([Styles.arrow, isVisible ? Styles.down : Styles.up])}>

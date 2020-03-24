@@ -68,13 +68,15 @@ module FromModule = struct
   open Rationale.Option.Infix;;
   open Rationale.Function.Infix;;
 
+  (* inspired by https://github.com/webpack-contrib/webpack-bundle-analyzer/blob/fe3c71e25238a1f9c557180404e9ef1d98e3801f/src/tree/utils.js#L10-L18 *)
+
   let getId = let separator = "/"
     in Utils.String.split "!"
       ||> Utils.Array.last
       ||> Utils.String.split separator
       ||> Array.map (fun part -> match part with
       | "~" -> "node_modules"
-      | "." -> ""
+      | "(webpack)" -> "./node_modules/webpack"
       | part -> part
       )
       ||> Utils.Array.filter (fun part -> String.length part > 0)
@@ -209,4 +211,9 @@ module FromChunk = struct
       ; children = modules
       }
   ;;
+end
+
+module FromStats = struct
+  let make (stat: WebpackStats.t) =
+  stat.chunks |> List.map (FromChunk.make stat.assets);;
 end

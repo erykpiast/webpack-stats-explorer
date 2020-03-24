@@ -252,7 +252,7 @@ describe("Entry", () => {
       test("filepath with .", () => {
         let id = Entry.FromModule.getId("./foo/bar");
 
-        expect(id) |> toEqual("foo/bar");
+        expect(id) |> toEqual("./foo/bar");
       });
 
       test("filepath with submodules", () => {

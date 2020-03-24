@@ -60,7 +60,7 @@ module Styles = {
 };
 
 [@react.component]
-let make = (~after, ~before, ~columnGuideline, ~className) => {
+let make = (~after, ~before, ~columnGuideline) => {
   let renderContent = content =>
     <ReactSyntaxHighlighter.Prism
       language=`JavaScript

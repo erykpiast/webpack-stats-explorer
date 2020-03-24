@@ -19,6 +19,10 @@ let choose = "Choose the";
 
 let here = "here";
 
+let sourceTree = "Source tree";
+
+let webpackTree = "Webpack tree";
+
 module Welcome = {
   let paste = "Paste URLs to webpack stats uploaded somewhere";
   let download = "Download stats";

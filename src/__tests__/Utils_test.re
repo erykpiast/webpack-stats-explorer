@@ -212,5 +212,25 @@ describe("Utils", () =>
         createSuiteForType("strings", arb_string);
       });
     });
+
+    describe("prepend", () => {
+       test("single element list for empty list", () => {
+        let result = prepend(1, []);
+
+        expect(result) |> toEqual([1]);
+      });
+
+      test("two elements list for single element list", () => {
+        let result = prepend(1, [2]);
+
+        expect(result) |> toEqual([1, 2]);
+      });
+
+      test("three elements list for two element list", () => {
+        let result = prepend(1, [2, 3]);
+
+        expect(result) |> toEqual([1, 2, 3]);
+      });
+    });
   })
 );

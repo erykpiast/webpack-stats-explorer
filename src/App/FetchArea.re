@@ -1,5 +1,4 @@
-open Rationale.Function;
-open Rationale.Function.Infix;
+ open Rationale.Function.Infix;
 
 exception CorsExn;
 exception NotFoundExn;

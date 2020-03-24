@@ -15,7 +15,7 @@ module Json = struct
     let forceString value = Json.Decode.(
       try string value
       with DecodeError _ -> (
-        try float value |> Js.Float.toString
+        try Json.Decode.float value |> Js.Float.toString
         with DecodeError _ -> int value |> Js.Int.toString
       )
     );;
@@ -44,8 +44,6 @@ module List = struct
     | aHead :: aTail, bHead :: bTail -> eql aHead bHead && isEqual aTail bTail ~eql ()
     | _, _ -> false
   ;;
-
-  (* one of lists empty *)
 
   let diff isEqual a b =
     a |> List.filter (fun x -> b |> List.exists (fun y -> isEqual x y) |> not)
@@ -86,6 +84,8 @@ module List = struct
     | x::[_] -> [x]
     | x::xs -> x::(removeLast xs)
   ;;
+
+  let prepend element list = element::list;;
 end
 
 module Array = struct

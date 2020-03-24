@@ -49,7 +49,7 @@ type type_ =
   | Primary;
 
 [@react.component]
-let make = (~onClick=_ => (), ~className="", ~type_=Default, ~children) => {
+let make = (~onClick=_ => (), ~className="", ~type_=Default, ~disabled=false, ~children) => {
   let typeClassName =
     Cn.mapSome(Some(type_), t =>
       switch (t) {
@@ -59,5 +59,5 @@ let make = (~onClick=_ => (), ~className="", ~type_=Default, ~children) => {
     );
   let className = Cn.make([Styles.button, typeClassName, className]);
 
-  <button className onClick> children </button>;
+  <button className onClick disabled> children </button>;
 };
