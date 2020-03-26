@@ -67,7 +67,7 @@
     "react": "16.13.1",
     "react-diff-viewer": "3.0.2",
     "react-dom": "16.13.1",
-    "react-dropzone": "10.2.1",
+    "react-dropzone": "10.2.2",
     "react-syntax-highlighter": "12.2.1",
     "reason-date-fns": "0.10.4",
     "reason-react": "0.7.0",
