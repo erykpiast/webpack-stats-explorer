@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
 const WebpackEnhancedStatsPlugin = require('webpack-enhanced-stats-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
   entry: './src/index.js',
@@ -64,5 +65,9 @@ module.exports = {
     new WebpackEnhancedStatsPlugin({
       filename: 'stats.json'
     }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      openAnalyzer: false
+    })
   ]
 };
