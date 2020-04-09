@@ -59,7 +59,7 @@
     "bs-react-dropzone": "0.5.2",
     "bs-react-syntax-highlighter": "0.2.1",
     "bs-webapi": "0.15.9",
-    "date-fns": "2.11.1",
+    "date-fns": "2.12.0",
     "diff": "4.0.2",
     "js-beautify": "1.11.0",
     "rationale": "0.2.0",
