@@ -99,12 +99,8 @@ module FromModule = struct
     )
   ;;
 
-  let rec make (module_ : WebpackModule.t) =
+  let rec make useParsedSize (module_ : WebpackModule.t) =
     let mainSubmodule = findMainSubmodule module_
-    and getSubmodulesParsedSize =
-      List.map
-        (fun (module_: WebpackModule.t) -> module_.parsedSize |> Utils.defaultTo 0)
-      ||> Utils.List.sumInt
     in let modules =
       module_.modules
       |> Utils.defaultTo []
@@ -112,23 +108,27 @@ module FromModule = struct
           (!=) mainSubmodule;
           isMeaningfulModule
         ])
+    in let statSize = mainSubmodule.source |> Utils.defaultTo "" |> String.length
     in
       { id = getId mainSubmodule.name
       ; size = (
-        match mainSubmodule.parsedSize with
-        | Some size -> size + (modules |> getSubmodulesParsedSize)
-        | None -> module_.size
-      )
+        match useParsedSize with
+        | true -> mainSubmodule.parsedSize |> Utils.defaultTo 0
+        | false -> statSize
+        )
       ; stat = Data.make
-          (Some (mainSubmodule.source |> Utils.defaultTo ""))
-          (Some mainSubmodule.size)
+          mainSubmodule.source
+          (Some statSize)
       ; original = Data.make
           mainSubmodule.originalSource
           mainSubmodule.originalSize
       ; parsed = Data.make
           mainSubmodule.parsedSource
           mainSubmodule.parsedSize
-      ; children = modules |> List.map make
+      ; children =
+          modules
+            |> List.map (make useParsedSize)
+            |> List.filter (fun { children; size } -> size != 0 || (List.length children) != 0)
       }
 end
 
@@ -174,11 +174,15 @@ module FromChunk = struct
       assets
   ;;
 
-  let calculateOriginalSize modules =
+  let rec calculateOriginalSize modules =
     let size = modules
-      |> List.map (fun (entry: t) -> match entry.original with
-        | None -> 0
-        | Some { size } -> size
+      |> List.map (fun (entry: t) ->
+        let ownSize =
+          match entry.original with
+          | None -> 0
+          | Some { size } -> size
+        and submodulesSize = entry.children |> calculateOriginalSize |> Utils.defaultTo 0
+        in ownSize + submodulesSize
       )
       |> List.fold_left (+) 0
     in
@@ -189,9 +193,17 @@ module FromChunk = struct
   ;;
 
   let make (assets : WebpackAsset.t list) (chunk : WebpackChunk.t) =
-    let modules = chunk.modules
-      |> List.filter FromModule.isMeaningfulModule
-      |> List.map FromModule.make
+    let meaningfulModules = chunk.modules |> List.filter FromModule.isMeaningfulModule
+    in let useParsedSize = (
+      match meaningfulModules with
+      | [] -> false
+      | someModule::_ -> (
+        match someModule.parsedSize with
+        | Some _ -> true
+        | None -> false
+      )
+    )
+    in let modules = meaningfulModules  |> List.map (FromModule.make useParsedSize)
     and makeData = Data.make (Some "")
     and asset = findChunkAsset chunk assets
     in let parsed =

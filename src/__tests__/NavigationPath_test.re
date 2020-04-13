@@ -115,7 +115,7 @@ describe("NavigationPath", () => {
     });
   });
 
-  Only.describe("from state", () => {
+  describe("from state", () => {
     let qux = makeEntry("qux");
     let baz = makeEntry(~children=[makeEntry("bax"), qux], "baz");
     let bar = makeEntry(~children=[baz, makeEntry("fux")], "bar");

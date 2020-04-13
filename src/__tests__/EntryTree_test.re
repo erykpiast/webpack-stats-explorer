@@ -1,7 +1,7 @@
 open Jest;
 open ExpectJs;
 
-Only.describe("EntryTree.Mapper", () => {
+describe("EntryTree.Mapper", () => {
   module Mapper =
     EntryTree.Mapper({
       let onEntry = (_, _) => ();
