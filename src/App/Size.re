@@ -24,7 +24,7 @@ let displayValue = (unit, value) =>
 let guessUnit = value =>
   if (value < 10) {
     B;
-  } else if (value < 100 * 1024) {
+  } else if (value < 500 * 1024) {
     KB;
   } else {
     MB;
