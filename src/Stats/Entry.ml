@@ -194,14 +194,15 @@ module FromChunk = struct
 
   let make (assets : WebpackAsset.t list) (chunk : WebpackChunk.t) =
     let meaningfulModules = chunk.modules |> List.filter FromModule.isMeaningfulModule
+    in let moduleWithSource = meaningfulModules |> List.find_opt WebpackModule.hasCode
     in let useParsedSize = (
-      match meaningfulModules with
-      | [] -> false
-      | someModule::_ -> (
-        match someModule.parsedSize with
+      match moduleWithSource with
+      | Some module_ -> (
+        match module_.parsedSize with
         | Some _ -> true
         | None -> false
       )
+      | None -> false
     )
     in let modules = meaningfulModules  |> List.map (FromModule.make useParsedSize)
     and makeData = Data.make (Some "")
