@@ -38,7 +38,6 @@ module Styles = {
       backgroundColor(Theme.Color.Background.default),
       maxHeight(`percent(100.0)),
       flexShrink(0.0),
-      overflowY(`auto)
     ]);
 
   let main =

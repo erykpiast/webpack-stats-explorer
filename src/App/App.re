@@ -127,7 +127,9 @@ let reducer = (state, action) =>
           stats: state.stats,
           navigationPath:
             state.sourceTree
-              ? State.NavigationPath.convertFromSourceTree(state.navigationPath)
+              ? State.NavigationPath.convertFromSourceTree(
+                  state.navigationPath,
+                )
               : State.NavigationPath.convertToSourceTree(state.navigationPath),
           isTimelineVisible: state.isTimelineVisible,
           urls: state.urls,
@@ -272,21 +274,22 @@ let make = (~stats) => {
              />
            };
 
-         let sideContent =
-           <Sidebar>
-             <EntryTree
-               comp
-               navigationPath
-               onEntry={(level, segment) =>
-                 Navigate(NavigationPath.Segment.toState(segment), level)
-                 |> dispatch
-               }
-             />
-             <SourceTreeSwitcher
-               selected={state.sourceTree}
-               onSwitch={() => dispatch(SwitchSourceTree)}
-             />
-           </Sidebar>;
+         let treeSwitcher =
+           <SourceTreeSwitcher
+             selected={state.sourceTree}
+             onSwitch={() => dispatch(SwitchSourceTree)}
+           />;
+         let entryTree =
+           <EntryTree
+             comp
+             navigationPath
+             onEntry={(level, segment) =>
+               Navigate(NavigationPath.Segment.toState(segment), level)
+               |> dispatch
+             }
+           />;
+
+         let sideContent = <Sidebar scrollable=entryTree fixed=treeSwitcher />;
 
          <NavigationLayout
            side=sideContent

@@ -96,6 +96,8 @@ module Styles = {
         display(`flex),
         alignItems(`center),
         padding(Theme.Space.default),
+        fontSize(Theme.Size.Text.button),
+        lineHeight(Theme.Size.LineHeight.default)
       ]);
 
     let label = style([marginRight(Theme.Space.default)]);
