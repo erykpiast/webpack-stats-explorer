@@ -82,6 +82,33 @@ describe("Entry", () => {
              },
            );
       });
+
+      test("module without parsed source and size", () => {
+        let module_ =
+          mockModule(
+            ~name="foo",
+            ~size=666,
+            ~source=Some("I am Foo"),
+            ~originalSize=None,
+            ~originalSource=None,
+            ~parsedSize=None,
+            ~parsedSource=None,
+            (),
+          );
+        let entry = makeModule(module_);
+
+        expect(entry)
+        |> toEqual(
+             Entry.{
+               id: "foo",
+               size: 8,
+               original: None,
+               stat: Entry.Data.make(Some("I am Foo"), Some(8)),
+               parsed: None,
+               children: [],
+             },
+           );
+      });
     });
 
     describe("stat size", () => {

@@ -112,9 +112,9 @@ module FromModule = struct
     in
       { id = getId mainSubmodule.name
       ; size = (
-        match useParsedSize with
-        | true -> mainSubmodule.parsedSize |> Utils.defaultTo 0
-        | false -> statSize
+        match (useParsedSize, mainSubmodule.parsedSize) with
+        | (true, Some size) -> size
+        | _ -> statSize
         )
       ; stat = Data.make
           mainSubmodule.source
