@@ -1,17 +1,37 @@
 module Styles = {
   open Css;
 
-  let list =
+  let ltr = {js|\u200e|js};
+
+  let root =
     style([
-      display(`flex),
-      alignItems(`center),
-      width(`percent(100.0)),
-      margin(px(0)),
-      marginLeft(Theme.Space.double),
-      padding(px(0)),
+      overflowX(`hidden),
+      flexGrow(1.0),
+      margin2(~h=Theme.Space.default, ~v=px(0)),
     ]);
 
-  let item = style([display(block), cursor(`pointer)]);
+  let list =
+    style([
+      width(`percent(100.0)),
+      overflowX(`auto),
+      padding2(~v=Theme.Space.double, ~h=px(0)),
+      whiteSpace(`nowrap),
+      maxHeight(Theme.Size.LineHeight.default),
+      direction(`rtl),
+      before([
+        display(`inlineBlock),
+        width(px(0)),
+        contentRule(`text(ltr)),
+      ]),
+      after([
+        display(`inlineBlock),
+        width(px(0)),
+        contentRule(`text(ltr)),
+      ]),
+      textAlign(`left),
+    ]);
+
+  let item = style([display(`inlineBlock), cursor(`pointer)]);
 
   let separator =
     style([
@@ -31,12 +51,16 @@ let renderName = item =>
 let make = (~items, ~onClick) => {
   let breadcrumbs =
     items
+    |> List.rev
     |> List.map2(
          (index, (item, _: CompareKind.t)) => {
            let name = item |> renderName;
            (
-             <li className=Styles.item onClick={_ => onClick(index)} key={name ++ "_" ++ string_of_int(index)}>
-               {name |> React.string}
+             <li
+               className=Styles.item
+               onClick={_ => onClick(index)}
+               key={name ++ "_" ++ string_of_int(index)}>
+               <ReversedText> {name |> React.string} </ReversedText>
              </li>,
              name,
            );
@@ -55,9 +79,11 @@ let make = (~items, ~onClick) => {
          },
          [],
        )
-      |> Utils.List.removeLast;
+    |> Utils.List.removeLast;
 
-  <ul className=Styles.list>
-    {breadcrumbs |> Array.of_list |> React.array}
-  </ul>;
+  <div className=Styles.root>
+    <ul className=Styles.list>
+      {breadcrumbs |> Array.of_list |> React.array}
+    </ul>
+  </div>;
 };
