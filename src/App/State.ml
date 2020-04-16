@@ -1,37 +1,20 @@
 module NavigationPath = struct
   module Segment = struct
-    type t = string * CompareKind.t;;
+    type t = string;;
 
-    let make (kind : CompareKind.t) item = CompareEntry.(
+    let make item = CompareEntry.(
       match (item) with
-        | Entry(entry) -> (entry.id, kind)
-        | ModifiedEntry(modifiedEntry) -> (modifiedEntry.id, kind)
+        | Entry(entry) -> entry.id
+        | ModifiedEntry(modifiedEntry) -> modifiedEntry.id
     );;
 
-    let encode (id, kind) =
-      [|
-        id;
-        kind |> CompareKind.encode
-      |] |> Json.Encode.jsonArray
-    ;;
+    let encode id = id |> Json.Encode.string;;
 
     let entryAndKindSeparator = "|";;
 
-    let toString (id, kind) = id ^ entryAndKindSeparator ^ (kind |> CompareKind.toString);;
+    let toString id = id;;
 
-    let fromString entry =
-      let parts = entry |> Utils.String.split entryAndKindSeparator |> Array.to_list
-      in
-        match (parts) with
-        | id::kindString::[] ->
-          let maybeKind = CompareKind.fromString kindString
-          in (
-            match (maybeKind) with
-            | Some kind -> Some (id ^ "", kind)
-            | None -> None
-          )
-        | _ -> None
-    ;;
+    let fromString id = id;;
   end
 
   type t = Segment.t list;;
@@ -42,11 +25,10 @@ module NavigationPath = struct
     match (path |> List.rev) with
     | [] -> []
     | chunkSegment::[] -> [chunkSegment]
-    | (lastSegment, kind)::_ ->
+    | lastSegment::_ ->
       let chunkSegment = path |> List.hd
       in lastSegment
         |> SourceTree.parsePath
-        |> List.map (fun segment -> (segment, kind))
         |> Utils.List.prepend chunkSegment
   ;;
 

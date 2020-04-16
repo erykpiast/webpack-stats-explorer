@@ -181,7 +181,6 @@ module Mapper = (Context: MapperContext) => {
 
   let rec expandNotModifiedEntryChildren =
           (
-            expectedKind,
             kindMapper,
             ~level=0,
             ~parent=None,
@@ -192,29 +191,24 @@ module Mapper = (Context: MapperContext) => {
 
       switch (navigationPath) {
       | [] => {selected: false, value: props, children: []}
-      | [(segment, kind), ...tail] =>
-        if (kind === expectedKind) {
-          switch (segment) {
-          | CompareEntry.Entry(segmentEntry) =>
-            if (segmentEntry == entry) {
-              let children =
-                entry.children
-                |> expandNotModifiedEntryChildren(
-                     expectedKind,
-                     kindMapper,
-                     ~level=level + 1,
-                     ~parent=Some(CompareEntry.Entry(entry)),
-                     ~navigationPath=tail,
-                   )
-                |> sortProps;
-              {selected: true, value: props, children};
-            } else {
-              {selected: false, value: props, children: []};
-            }
-          | _ => {selected: false, value: props, children: []}
-          };
-        } else {
-          {selected: false, value: props, children: []};
+      | [segment, ...tail] =>
+        switch (segment) {
+        | CompareEntry.Entry(segmentEntry) =>
+          if (segmentEntry == entry) {
+            let children =
+              entry.children
+              |> expandNotModifiedEntryChildren(
+                   kindMapper,
+                   ~level=level + 1,
+                   ~parent=Some(CompareEntry.Entry(entry)),
+                   ~navigationPath=tail,
+                 )
+              |> sortProps;
+            {selected: true, value: props, children};
+          } else {
+            {selected: false, value: props, children: []};
+          }
+        | _ => {selected: false, value: props, children: []}
         }
       };
     });
@@ -226,7 +220,7 @@ module Mapper = (Context: MapperContext) => {
     level,
     value: Entry(entry),
     parent,
-    onChange: NavigationPath.Segment.make(Added) ||> Context.onEntry(level),
+    onChange: NavigationPath.Segment.make ||> Context.onEntry(level),
   };
   let mapRemoved = (level, parent, entry: Entry.t) => {
     after: 0,
@@ -236,7 +230,7 @@ module Mapper = (Context: MapperContext) => {
     value: Entry(entry),
     parent,
     onChange:
-      NavigationPath.Segment.make(Removed) ||> Context.onEntry(level),
+      NavigationPath.Segment.make ||> Context.onEntry(level),
   };
   let mapIntact = (level, parent, entry: Entry.t) => {
     after: entry.size,
@@ -245,7 +239,7 @@ module Mapper = (Context: MapperContext) => {
     level,
     value: Entry(entry),
     parent,
-    onChange: NavigationPath.Segment.make(Intact) ||> Context.onEntry(level),
+    onChange: NavigationPath.Segment.make ||> Context.onEntry(level),
   };
   let mapModified = (level, parent, entry: ModifiedEntry.t(CompareEntry.t)) => {
     after: entry.size |> snd,
@@ -255,12 +249,12 @@ module Mapper = (Context: MapperContext) => {
     value: ModifiedEntry(entry),
     parent,
     onChange:
-      NavigationPath.Segment.make(Modified) ||> Context.onEntry(level),
+      NavigationPath.Segment.make ||> Context.onEntry(level),
   };
 
-  let added = expandNotModifiedEntryChildren(Added, mapAdded);
-  let removed = expandNotModifiedEntryChildren(Removed, mapRemoved);
-  let intact = expandNotModifiedEntryChildren(Intact, mapIntact);
+  let added = expandNotModifiedEntryChildren(mapAdded);
+  let removed = expandNotModifiedEntryChildren(mapRemoved);
+  let intact = expandNotModifiedEntryChildren(mapIntact);
   let rec modified =
           (~level=0, ~parent=None, ~navigationPath=Context.navigationPath) =>
     List.map((entry: ModifiedEntry.t(CompareEntry.t)) => {
@@ -268,8 +262,7 @@ module Mapper = (Context: MapperContext) => {
 
       switch (navigationPath) {
       | [] => {selected: false, value: props, children: []}
-      | [(segment, kind), ...tail] =>
-        if (kind === Modified) {
+      | [segment, ...tail] =>
           switch (segment) {
           | ModifiedEntry(segmentEntry) =>
             if (segmentEntry == entry) {
@@ -294,9 +287,6 @@ module Mapper = (Context: MapperContext) => {
             }
           | _ => {selected: false, value: props, children: []}
           };
-        } else {
-          {selected: false, value: props, children: []};
-        }
       };
     });
 

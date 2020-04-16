@@ -29,15 +29,15 @@ describe("NavigationPath", () => {
     describe("from entries", () => {
       test("there is an entry with given ID", () => {
         let result =
-          fromEntries(("bar", CompareKind.Added), [foo, bar, baz]);
-        let expected = Some((CompareEntry.Entry(bar), CompareKind.Added));
+          fromEntries("bar", [foo, bar, baz]);
+        let expected = Some(CompareEntry.Entry(bar));
 
         expect(result) |> toEqual(expected);
       });
 
       test("no entry with given ID", () => {
         let result =
-          fromEntries(("qux", CompareKind.Added), [foo, bar, baz]);
+          fromEntries("qux", [foo, bar, baz]);
 
         expect(result) |> toEqual(None);
       });
@@ -54,61 +54,40 @@ describe("NavigationPath", () => {
 
       test("there is an added entry with given ID", () => {
         let result =
-          fromCompareEntry(("bar", CompareKind.Added), comparison);
-        let expected = Some((CompareEntry.Entry(bar), CompareKind.Added));
+          fromCompareEntry("bar", comparison);
+        let expected = Some(CompareEntry.Entry(bar));
 
         expect(result) |> toEqual(expected);
       });
 
       test("there is a removed entry with given ID", () => {
         let result =
-          fromCompareEntry(("baz", CompareKind.Removed), comparison);
-        let expected = Some((CompareEntry.Entry(baz), CompareKind.Removed));
+          fromCompareEntry("baz", comparison);
+        let expected = Some(CompareEntry.Entry(baz));
 
         expect(result) |> toEqual(expected);
       });
 
       test("there is an intact entry with given ID", () => {
         let result =
-          fromCompareEntry(("qux", CompareKind.Intact), comparison);
-        let expected = Some((CompareEntry.Entry(qux), CompareKind.Intact));
+          fromCompareEntry("qux", comparison);
+        let expected = Some(CompareEntry.Entry(qux));
 
         expect(result) |> toEqual(expected);
       });
 
       test("there is a modified entry with given ID", () => {
         let result =
-          fromCompareEntry(("bax", CompareKind.Modified), comparison);
+          fromCompareEntry("bax", comparison);
         let expected =
-          Some((CompareEntry.ModifiedEntry(bax), CompareKind.Modified));
+          Some(CompareEntry.ModifiedEntry(bax));
 
         expect(result) |> toEqual(expected);
       });
 
-      test("no added entry with given ID", () => {
+      test("no entry with given ID", () => {
         let result =
-          fromCompareEntry(("sax", CompareKind.Added), comparison);
-
-        expect(result) |> toEqual(None);
-      });
-
-      test("no removed entry with given ID", () => {
-        let result =
-          fromCompareEntry(("sax", CompareKind.Removed), comparison);
-
-        expect(result) |> toEqual(None);
-      });
-
-      test("no intact entry with given ID", () => {
-        let result =
-          fromCompareEntry(("sax", CompareKind.Intact), comparison);
-
-        expect(result) |> toEqual(None);
-      });
-
-      test("no modified entry with given ID", () => {
-        let result =
-          fromCompareEntry(("sax", CompareKind.Modified), comparison);
+          fromCompareEntry("sax", comparison);
 
         expect(result) |> toEqual(None);
       });
@@ -133,16 +112,16 @@ describe("NavigationPath", () => {
         fromState(
           CompareEntry.ModifiedChildren(comparison),
           [
-            ("bar", CompareKind.Added),
-            ("baz", CompareKind.Added),
-            ("qux", CompareKind.Added),
+            "bar",
+            "baz",
+            "qux",
           ],
         );
 
       let expected = [
-        (CompareEntry.Entry(bar), CompareKind.Added),
-        (CompareEntry.Entry(baz), CompareKind.Added),
-        (CompareEntry.Entry(qux), CompareKind.Added),
+        CompareEntry.Entry(bar),
+        CompareEntry.Entry(baz),
+        CompareEntry.Entry(qux),
       ];
 
       expect(result) |> toEqual(expected);
@@ -161,16 +140,16 @@ describe("NavigationPath", () => {
         fromState(
           CompareEntry.ModifiedChildren(comparison),
           [
-            ("bar", CompareKind.Removed),
-            ("baz", CompareKind.Removed),
-            ("qux", CompareKind.Removed),
+            "bar",
+            "baz",
+            "qux",
           ],
         );
 
       let expected = [
-        (CompareEntry.Entry(bar), CompareKind.Removed),
-        (CompareEntry.Entry(baz), CompareKind.Removed),
-        (CompareEntry.Entry(qux), CompareKind.Removed),
+        CompareEntry.Entry(bar),
+        CompareEntry.Entry(baz),
+        CompareEntry.Entry(qux),
       ];
 
       expect(result) |> toEqual(expected);
@@ -189,16 +168,16 @@ describe("NavigationPath", () => {
         fromState(
           CompareEntry.ModifiedChildren(comparison),
           [
-            ("bar", CompareKind.Intact),
-            ("baz", CompareKind.Intact),
-            ("qux", CompareKind.Intact),
+            "bar",
+            "baz",
+            "qux",
           ],
         );
 
       let expected = [
-        (CompareEntry.Entry(bar), CompareKind.Intact),
-        (CompareEntry.Entry(baz), CompareKind.Intact),
-        (CompareEntry.Entry(qux), CompareKind.Intact),
+        CompareEntry.Entry(bar),
+        CompareEntry.Entry(baz),
+        CompareEntry.Entry(qux),
       ];
 
       expect(result) |> toEqual(expected);
@@ -237,18 +216,18 @@ describe("NavigationPath", () => {
         fromState(
           CompareEntry.ModifiedChildren(comparison),
           [
-            ("foo", CompareKind.Modified),
-            ("bar", CompareKind.Modified),
-            ("baz", CompareKind.Added),
-            ("qux", CompareKind.Added),
+            "foo",
+            "bar",
+            "baz",
+            "qux",
           ],
         );
 
       let expected = [
-        (CompareEntry.ModifiedEntry(foo), CompareKind.Modified),
-        (CompareEntry.ModifiedEntry(bar), CompareKind.Modified),
-        (CompareEntry.Entry(baz), CompareKind.Added),
-        (CompareEntry.Entry(qux), CompareKind.Added),
+        CompareEntry.ModifiedEntry(foo),
+        CompareEntry.ModifiedEntry(bar),
+        CompareEntry.Entry(baz),
+        CompareEntry.Entry(qux),
       ];
 
       expect(result) |> toEqual(expected);
