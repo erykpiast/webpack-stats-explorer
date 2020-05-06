@@ -31,7 +31,8 @@ describe("EntryTree.Mapper", () => {
           value,
           parent,
           level,
-          onChange: _ => (),
+          onFold: _ => (),
+          onUnfold: _ => (),
         },
         children: [],
       };

@@ -130,7 +130,8 @@ type props = {
   level: int,
   value: CompareEntry.entry,
   parent: option(CompareEntry.entry),
-  onChange: CompareEntry.entry => unit,
+  onUnfold: ReactEvent.Mouse.t => unit,
+  onFold: ReactEvent.Mouse.t => unit,
 };
 
 let encode = r =>
@@ -213,6 +214,19 @@ module Mapper = (Context: MapperContext) => {
       };
     });
 
+  let createFoldHandler = (parent, currentLevel) =>
+    switch (parent) {
+    | Some(parentEntry) => (
+        _ =>
+          parentEntry
+          |> NavigationPath.Segment.make
+          |> Context.onEntry(currentLevel - 1)
+      )
+    | None => (_ => ())
+    };
+  let createUnfoldHandler = (entry, currentLevel) =>
+    (_) => entry |> NavigationPath.Segment.make |> Context.onEntry(currentLevel);
+
   let mapAdded = (level, parent, entry: Entry.t) => {
     after: entry.size,
     before: 0,
@@ -220,7 +234,8 @@ module Mapper = (Context: MapperContext) => {
     level,
     value: Entry(entry),
     parent,
-    onChange: NavigationPath.Segment.make ||> Context.onEntry(level),
+    onUnfold: createUnfoldHandler(Entry(entry), level),
+    onFold: createFoldHandler(parent, level),
   };
   let mapRemoved = (level, parent, entry: Entry.t) => {
     after: 0,
@@ -229,8 +244,8 @@ module Mapper = (Context: MapperContext) => {
     level,
     value: Entry(entry),
     parent,
-    onChange:
-      NavigationPath.Segment.make ||> Context.onEntry(level),
+    onUnfold: createUnfoldHandler(Entry(entry), level),
+    onFold: createFoldHandler(parent, level),
   };
   let mapIntact = (level, parent, entry: Entry.t) => {
     after: entry.size,
@@ -239,7 +254,8 @@ module Mapper = (Context: MapperContext) => {
     level,
     value: Entry(entry),
     parent,
-    onChange: NavigationPath.Segment.make ||> Context.onEntry(level),
+    onUnfold: createUnfoldHandler(Entry(entry), level),
+    onFold: createFoldHandler(parent, level),
   };
   let mapModified = (level, parent, entry: ModifiedEntry.t(CompareEntry.t)) => {
     after: entry.size |> snd,
@@ -248,8 +264,8 @@ module Mapper = (Context: MapperContext) => {
     level,
     value: ModifiedEntry(entry),
     parent,
-    onChange:
-      NavigationPath.Segment.make ||> Context.onEntry(level),
+    onUnfold: createUnfoldHandler(ModifiedEntry(entry), level),
+    onFold: createFoldHandler(parent, level),
   };
 
   let added = expandNotModifiedEntryChildren(mapAdded);
@@ -263,30 +279,30 @@ module Mapper = (Context: MapperContext) => {
       switch (navigationPath) {
       | [] => {selected: false, value: props, children: []}
       | [segment, ...tail] =>
-          switch (segment) {
-          | ModifiedEntry(segmentEntry) =>
-            if (segmentEntry == entry) {
-              let parent = Some(CompareEntry.ModifiedEntry(entry));
-              let level = level + 1;
-              let navigationPath = tail;
-              let children =
-                List.concat([
-                  entry.children.added
-                  |> added(~parent, ~level, ~navigationPath),
-                  entry.children.removed
-                  |> removed(~parent, ~level, ~navigationPath),
-                  entry.children.intact
-                  |> intact(~parent, ~level, ~navigationPath),
-                  entry.children.modified
-                  |> modified(~parent, ~level, ~navigationPath),
-                ])
-                |> sortProps;
-              {selected: true, value: props, children};
-            } else {
-              {selected: false, value: props, children: []};
-            }
-          | _ => {selected: false, value: props, children: []}
-          };
+        switch (segment) {
+        | ModifiedEntry(segmentEntry) =>
+          if (segmentEntry == entry) {
+            let parent = Some(CompareEntry.ModifiedEntry(entry));
+            let level = level + 1;
+            let navigationPath = tail;
+            let children =
+              List.concat([
+                entry.children.added
+                |> added(~parent, ~level, ~navigationPath),
+                entry.children.removed
+                |> removed(~parent, ~level, ~navigationPath),
+                entry.children.intact
+                |> intact(~parent, ~level, ~navigationPath),
+                entry.children.modified
+                |> modified(~parent, ~level, ~navigationPath),
+              ])
+              |> sortProps;
+            {selected: true, value: props, children};
+          } else {
+            {selected: false, value: props, children: []};
+          }
+        | _ => {selected: false, value: props, children: []}
+        }
       };
     });
 
@@ -355,14 +371,15 @@ let make =
               (
                 selected,
                 expanded,
-                {after, before, value, name, level, onChange},
+                {after, before, value, name, level, onUnfold, onFold},
                 familyRelations,
               ),
             ) => {
             let isModifiedOrIntact = before !== 0 && after !== 0;
+            let onClick = expanded === false ? onUnfold : onFold;
 
             <li
-              onClick={_ => onChange(value)}
+              onClick
               className={Cn.make([
                 Styles.item,
                 Cn.ifTrue(Styles.selectedItem, selected),
