@@ -109,11 +109,26 @@ module FromModule = struct
           isMeaningfulModule
         ])
     in let statSize = mainSubmodule.source |> Utils.defaultTo "" |> String.length
+    and id = getId mainSubmodule.name
     in
-      { id = getId mainSubmodule.name
+      { id
       ; size = (
         match (useParsedSize, mainSubmodule.parsedSize) with
         | (true, Some size) -> size
+        | (true, None) ->
+          (**
+           * NOTE: JavaScript files without parsed size are most probably
+           * built solely from re-exports, so they practically don't exist
+           * in final bundle
+           * The rest, like JSON, should be handled by webpack-enhanced-stats-plugin
+           * See: https://github.com/erykpiast/webpack-enhanced-stats-plugin/issues/3
+           *)
+          let ext = String.split_on_char '.' id |> List.rev |> List.hd
+          in (
+            match ext with
+            | "js" -> 0
+            | _ -> statSize
+          )
         | _ -> statSize
         )
       ; stat = Data.make
