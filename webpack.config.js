@@ -14,7 +14,9 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      template: isProd
+        ? './src/index.html'
+        : './src/dev.html'
     }),
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
