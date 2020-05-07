@@ -52,188 +52,247 @@ describe("Entry", () => {
     };
 
   describe("FromModule", () => {
-    test("module without source", () => {
-      let module_ = mockModule(~name="foo", ~size=666, ());
-      let entry = Entry.FromModule.make(module_);
+    describe("parsed size", () => {
+      let makeModule = Entry.FromModule.make(true);
 
-      expect(entry)
-      |> toEqual(
-           Entry.{
-             id: "foo",
-             size: 666,
-             original: None,
-             stat: Entry.Data.make(Some(""), Some(666)),
-             parsed: None,
-             children: [],
-           },
-         );
+      test("module with original and parsed sources and sizes", () => {
+        let module_ =
+          mockModule(
+            ~name="foo",
+            ~size=666,
+            ~source=Some("I am Foo"),
+            ~originalSize=Some(999),
+            ~originalSource=Some("I am original Foo"),
+            ~parsedSize=Some(444),
+            ~parsedSource=Some("I'm Foo"),
+            (),
+          );
+        let entry = makeModule(module_);
+
+        expect(entry)
+        |> toEqual(
+             Entry.{
+               id: "foo",
+               size: 444,
+               original:
+                 Entry.Data.make(Some("I am original Foo"), Some(999)),
+               stat: Entry.Data.make(Some("I am Foo"), Some(8)),
+               parsed: Entry.Data.make(Some("I'm Foo"), Some(444)),
+               children: [],
+             },
+           );
+      });
+
+      test("module without parsed source and size", () => {
+        let module_ =
+          mockModule(
+            ~name="foo",
+            ~size=666,
+            ~source=Some("I am Foo"),
+            ~originalSize=None,
+            ~originalSource=None,
+            ~parsedSize=None,
+            ~parsedSource=None,
+            (),
+          );
+        let entry = makeModule(module_);
+
+        expect(entry)
+        |> toEqual(
+             Entry.{
+               id: "foo",
+               size: 8,
+               original: None,
+               stat: Entry.Data.make(Some("I am Foo"), Some(8)),
+               parsed: None,
+               children: [],
+             },
+           );
+      });
     });
 
-    test("module with just a source", () => {
-      let module_ =
-        mockModule(~name="foo", ~size=666, ~source=Some("I am Foo"), ());
-      let entry = Entry.FromModule.make(module_);
+    describe("stat size", () => {
+      let makeModule = Entry.FromModule.make(false);
 
-      expect(entry)
-      |> toEqual(
-           Entry.{
-             id: "foo",
-             size: 666,
-             original: None,
-             stat: Entry.Data.make(Some("I am Foo"), Some(666)),
-             parsed: None,
-             children: [],
-           },
-         );
-    });
+      test("module without source", () => {
+        let module_ = mockModule(~name="foo", ~size=666, ());
+        let entry = makeModule(module_);
 
-    test("module with original and parsed sources and sizes", () => {
-      let module_ =
-        mockModule(
-          ~name="foo",
-          ~size=666,
-          ~source=Some("I am Foo"),
-          ~originalSize=Some(999),
-          ~originalSource=Some("I am original Foo"),
-          ~parsedSize=Some(444),
-          ~parsedSource=Some("I'm Foo"),
-          (),
-        );
-      let entry = Entry.FromModule.make(module_);
+        expect(entry)
+        |> toEqual(
+             Entry.{
+               id: "foo",
+               size: 0,
+               original: None,
+               stat: None,
+               parsed: None,
+               children: [],
+             },
+           );
+      });
 
-      expect(entry)
-      |> toEqual(
-           Entry.{
-             id: "foo",
-             size: 444,
-             original:
-               Entry.Data.make(Some("I am original Foo"), Some(999)),
-             stat: Entry.Data.make(Some("I am Foo"), Some(666)),
-             parsed: Entry.Data.make(Some("I'm Foo"), Some(444)),
-             children: [],
-           },
-         );
-    });
+      test("module with just a source", () => {
+        let module_ =
+          mockModule(~name="foo", ~size=666, ~source=Some("I am Foo"), ());
+        let entry = makeModule(module_);
 
-    test("module with submodules", () => {
-      let submodule1 =
-        mockModule(~name="foo", ~size=666, ~source=Some("I am Foo"), ());
-      let submodule2 =
-        mockModule(~name="bar", ~size=555, ~source=Some("I am Bar"), ());
-      let module_ =
-        mockModule(
-          ~name="baz",
-          ~size=444,
-          ~source=Some("I am Baz"),
-          ~modules=Some([submodule1, submodule2]),
-          (),
-        );
-      let entry = Entry.FromModule.make(module_);
+        expect(entry)
+        |> toEqual(
+             Entry.{
+               id: "foo",
+               size: 8,
+               original: None,
+               stat: Entry.Data.make(Some("I am Foo"), Some(8)),
+               parsed: None,
+               children: [],
+             },
+           );
+      });
 
-      expect(entry)
-      |> toEqual(
-           Entry.{
-             id: "baz",
-             size: 444,
-             original: None,
-             stat: Entry.Data.make(Some("I am Baz"), Some(444)),
-             parsed: None,
-             children: [
-               Entry.FromModule.make(submodule1),
-               Entry.FromModule.make(submodule2),
-             ],
-           },
-         );
-    });
+      test("module with original and parsed sources and sizes", () => {
+        let module_ =
+          mockModule(
+            ~name="foo",
+            ~size=666,
+            ~source=Some("I am Foo"),
+            ~originalSize=Some(999),
+            ~originalSource=Some("I am original Foo"),
+            ~parsedSize=Some(444),
+            ~parsedSource=Some("I'm Foo"),
+            (),
+          );
+        let entry = makeModule(module_);
 
-    test("module with main submodule", () => {
-      let submodule =
-        mockModule(~name="foo", ~size=666, ~source=Some("I am Foo"), ());
-      let mainSubmodule =
-        mockModule(~name="bar", ~size=555, ~source=Some("I am Bar"), ());
-      let module_ =
-        mockModule(
-          ~name="bar",
-          ~size=444,
-          ~source=None,
-          ~modules=Some([submodule, mainSubmodule]),
-          (),
-        );
-      let entry = Entry.FromModule.make(module_);
+        expect(entry)
+        |> toEqual(
+             Entry.{
+               id: "foo",
+               size: 8,
+               original:
+                 Entry.Data.make(Some("I am original Foo"), Some(999)),
+               stat: Entry.Data.make(Some("I am Foo"), Some(8)),
+               parsed: Entry.Data.make(Some("I'm Foo"), Some(444)),
+               children: [],
+             },
+           );
+      });
 
-      expect(entry)
-      |> toEqual(
-           Entry.{
-             id: "bar",
-             size: 444,
-             original: None,
-             stat: Entry.Data.make(Some("I am Bar"), Some(555)),
-             parsed: None,
-             children: [Entry.FromModule.make(submodule)],
-           },
-         );
-    });
+      test("module with submodules", () => {
+        let submodule1 =
+          mockModule(~name="foo", ~size=666, ~source=Some("I am Foo"), ());
+        let submodule2 =
+          mockModule(~name="bar", ~size=555, ~source=Some("I am Bar"), ());
+        let module_ =
+          mockModule(
+            ~name="baz",
+            ~size=444,
+            ~source=Some("I am Baz"),
+            ~modules=Some([submodule1, submodule2]),
+            (),
+          );
+        let entry = makeModule(module_);
 
-    test("filtering meaningless submodules", () => {
-      let notBuilt =
-        mockModule(
-          ~name="baz",
-          ~size=444,
-          ~source=Some("I am Baz"),
-          ~built=false,
-          (),
-        );
-      let entryPoint =
-        mockModule(
-          ~name="moo",
-          ~size=222,
-          ~source=None,
-          ~reasons=[
-            WebpackReason.{
-              module_: None,
-              moduleId: None,
-              moduleIdentifier: None,
-              moduleName: None,
-              type_: "some",
-              userRequest: "gimme",
-              loc: "0",
-            },
-          ],
-          (),
-        );
-      let withSubmodules =
-        mockModule(
-          ~name="taz",
-          ~size=333,
-          ~source=None,
-          ~modules=
-            Some([
-              mockModule(
-                ~name="bar",
-                ~size=555,
-                ~source=Some("I am Bar"),
-                (),
-              ),
-            ]),
-          (),
-        );
-      let withSource =
-        mockModule(~name="foo", ~size=666, ~source=Some("I am Foo"), ());
-      let module_ =
-        mockModule(
-          ~name="faz",
-          ~size=111,
-          ~source=None,
-          ~modules=Some([notBuilt, withSource, entryPoint, withSubmodules]),
-          (),
-        );
-      let entry = Entry.FromModule.make(module_);
+        expect(entry)
+        |> toEqual(
+             Entry.{
+               id: "baz",
+               size: 8,
+               original: None,
+               stat: Entry.Data.make(Some("I am Baz"), Some(8)),
+               parsed: None,
+               children: [makeModule(submodule1), makeModule(submodule2)],
+             },
+           );
+      });
 
-      expect(entry.children)
-      |> toEqual([
-           Entry.FromModule.make(withSource),
-           Entry.FromModule.make(withSubmodules),
-         ]);
+      test("module with main submodule", () => {
+        let submodule =
+          mockModule(~name="foo", ~size=666, ~source=Some("I am Foo"), ());
+        let mainSubmodule =
+          mockModule(~name="bar", ~size=555, ~source=Some("I am Bar"), ());
+        let module_ =
+          mockModule(
+            ~name="bar",
+            ~size=444,
+            ~source=None,
+            ~modules=Some([submodule, mainSubmodule]),
+            (),
+          );
+        let entry = makeModule(module_);
+
+        expect(entry)
+        |> toEqual(
+             Entry.{
+               id: "bar",
+               size: 8,
+               original: None,
+               stat: Entry.Data.make(Some("I am Bar"), Some(8)),
+               parsed: None,
+               children: [makeModule(submodule)],
+             },
+           );
+      });
+
+      test("filtering meaningless submodules", () => {
+        let notBuilt =
+          mockModule(
+            ~name="baz",
+            ~size=444,
+            ~source=Some("I am Baz"),
+            ~built=false,
+            (),
+          );
+        let entryPoint =
+          mockModule(
+            ~name="moo",
+            ~size=222,
+            ~source=None,
+            ~reasons=[
+              WebpackReason.{
+                module_: None,
+                moduleId: None,
+                moduleIdentifier: None,
+                moduleName: None,
+                type_: "some",
+                userRequest: "gimme",
+                loc: "0",
+              },
+            ],
+            (),
+          );
+        let withSubmodules =
+          mockModule(
+            ~name="taz",
+            ~size=333,
+            ~source=None,
+            ~modules=
+              Some([
+                mockModule(
+                  ~name="bar",
+                  ~size=555,
+                  ~source=Some("I am Bar"),
+                  (),
+                ),
+              ]),
+            (),
+          );
+        let withSource =
+          mockModule(~name="foo", ~size=666, ~source=Some("I am Foo"), ());
+        let empty = mockModule(~name="empty", ~size=0, ~source=None, ());
+        let module_ =
+          mockModule(
+            ~name="faz",
+            ~size=0,
+            ~source=None,
+            ~modules=
+              Some([notBuilt, withSource, entryPoint, withSubmodules, empty]),
+            (),
+          );
+        let entry = makeModule(module_);
+
+        expect(entry.children)
+        |> toEqual([makeModule(withSource), makeModule(withSubmodules)]);
+      });
     });
 
     describe("getId", () => {
@@ -334,12 +393,32 @@ describe("Entry", () => {
     });
 
     test("should create entry for chunk with submodules", () => {
+      let childModule1 =
+        mockModule(
+          ~name="baz",
+          ~originalSize=Some(333),
+          ~originalSource=Some("I am original Baz"),
+          ~size=444,
+          ~source=Some("I'm a bit processed Baz"),
+          (),
+        );
+      let childModule2 =
+        mockModule(
+          ~name="faz",
+          ~originalSize=Some(444),
+          ~originalSource=Some("I am original Faz"),
+          ~size=555,
+          ~source=Some("I'm a bit processed Faz"),
+          (),
+        );
       let submodule1 =
         mockModule(
           ~name="foo",
           ~originalSize=Some(111),
           ~originalSource=Some("I am original Foo"),
-          ~size=0,
+          ~size=222,
+          ~source=Some("I'm a bit processed Foo"),
+          ~modules=Some([childModule1]),
           (),
         );
       let submodule2 =
@@ -350,12 +429,14 @@ describe("Entry", () => {
           ~size=0,
           (),
         );
+      let submodule3 =
+        mockModule(~name="qux", ~size=0, ~modules=Some([childModule2]), ());
       let chunk =
         mockChunk(
           ~file="foo.js",
           ~name="foo",
           ~size=666,
-          ~modules=[submodule1, submodule2],
+          ~modules=[submodule1, submodule2, submodule3],
           (),
         );
       let assets = [];
@@ -366,12 +447,13 @@ describe("Entry", () => {
            Entry.{
              id: "foo",
              size: 666,
-             original: Entry.Data.make(Some(""), Some(333)),
+             original: Entry.Data.make(Some(""), Some(1110)),
              stat: Entry.Data.make(Some(""), Some(666)),
              parsed: None,
              children: [
-               Entry.FromModule.make(submodule1),
-               Entry.FromModule.make(submodule2),
+               Entry.FromModule.make(false, submodule1),
+               Entry.FromModule.make(false, submodule2),
+               Entry.FromModule.make(false, submodule3),
              ],
            },
          );
@@ -434,8 +516,8 @@ describe("Entry", () => {
 
       expect(entry.children)
       |> toEqual([
-           Entry.FromModule.make(withSource),
-           Entry.FromModule.make(withSubmodules),
+           Entry.FromModule.make(false, withSource),
+           Entry.FromModule.make(false, withSubmodules),
          ]);
     });
 

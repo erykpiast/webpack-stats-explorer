@@ -6,9 +6,8 @@ let make rebuildSourceTree =
   ||> (
     match rebuildSourceTree with
     | true -> List.map (List.map SourceTree.make)
-    | false -> Utils.identity
-  )
-  ||> List.fold_left (
+    | false -> List.map (List.map WebpackTree.make)
+  ) ||> List.fold_left (
       fun acc a -> match acc with
       | (None, []) -> (
         Some a,

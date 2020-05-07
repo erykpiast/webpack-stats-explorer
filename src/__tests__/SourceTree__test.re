@@ -182,5 +182,36 @@ describe("SourceTree", () => {
 
       expect(rebuilt) |> toEqual(expected);
     });
+
+    test("duplicated entry", () => {
+      let rebuilt =
+        mockEntry(
+          ~size=0,
+          ~children=[
+            mockEntry(~size=0, "./foo/bar"),
+            mockEntry(~size=222, ~code="foobar", "./foo/bar"),
+            mockEntry(~size=444, ~code="barbaz", "./foo/baz"),
+          ],
+          "./foo",
+        )
+        |> SourceTree.make;
+      let expected =
+        mockEntry(
+          ~size=666,
+          ~children=[
+            mockEntry(
+              ~size=666,
+              ~children=[
+                mockEntry(~size=444, ~code="barbaz", "baz"),
+                mockEntry(~size=222, ~code="foobar", "bar"),
+              ],
+              "foo",
+            ),
+          ],
+          "./foo",
+        );
+
+      expect(rebuilt) |> toEqual(expected);
+    });
   });
 });

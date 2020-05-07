@@ -1,31 +1,31 @@
 open Rationale.Option.Infix;;
 
 module Segment = struct
-  type t = CompareEntry.entry * CompareKind.t;;
+  type t = CompareEntry.entry;;
 
-  let make (kind : CompareKind.t) entry = (entry, kind);;
+  let make entry = entry;;
 
-  let encode = Json.Encode.tuple2 CompareEntry.encodeEntry CompareKind.encode;;
+  let encode = CompareEntry.encodeEntry;;
 
   let findEntryById id = Utils.List.findOpt (Entry.hasId id);;
 
   let findModifiedEntryById id = Utils.List.findOpt (ModifiedEntry.hasId id);;
 
-  let fromEntries (id, kind) (entries : Entry.t list) =
-    entries |> findEntryById id <$> (fun entry -> (CompareEntry.Entry(entry), kind))
+  let fromEntries id (entries : Entry.t list) =
+    entries |> findEntryById id <$> (fun entry -> CompareEntry.Entry(entry))
   ;;
 
-  let fromCompareEntry (id, kind) (comp : CompareEntry.t) = CompareKind.(
-    match (kind) with
-    | Added -> comp.added |> fromEntries (id, kind)
-    | Removed -> comp.removed |> fromEntries (id, kind)
-    | Intact -> comp.intact |> fromEntries (id, kind)
-    | Modified -> comp.modified
+  let fromCompareEntry id (comp : CompareEntry.t) =
+    let addedEntry = comp.added |> fromEntries id
+    and removedEntry = comp.removed |> fromEntries id
+    and intactEntry = comp.intact |> fromEntries id
+    and modifiedEntry = comp.modified
       |> (findModifiedEntryById id)
-      <$> (fun entry -> (CompareEntry.ModifiedEntry(entry), kind))
-  );;
+      <$> (fun entry -> CompareEntry.ModifiedEntry(entry))
+    in addedEntry |? removedEntry |? intactEntry |? modifiedEntry
+  ;;
 
-  let toState (entry, kind) = State.NavigationPath.Segment.make kind entry;;
+  let toState entry = State.NavigationPath.Segment.make entry;;
 end
 
 type t = Segment.t list;;
@@ -44,7 +44,7 @@ let rec fromState (comp : CompareEntry.children) (statePath : State.NavigationPa
       match (maybeSegment) with
       | None -> []
       | Some segment -> (
-        match (segment |> fst) with
+        match segment with
         | Entry entry -> segment::(fromState (NotModifiedChildren entry.children) rest)
         | ModifiedEntry entry -> segment::(fromState (ModifiedChildren entry.children) rest)
       )

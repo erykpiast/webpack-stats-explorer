@@ -173,8 +173,13 @@ module Space = {
 
 module Size = {
   module Text = {
+    let button = px(13);
     let default = px(16);
     let big = px(28);
+  };
+
+  module LineHeight = {
+    let default = em(1.75);
   };
 
   module Border = {

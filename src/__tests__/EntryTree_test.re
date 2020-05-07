@@ -1,7 +1,7 @@
 open Jest;
 open ExpectJs;
 
-Only.describe("EntryTree.Mapper", () => {
+describe("EntryTree.Mapper", () => {
   module Mapper =
     EntryTree.Mapper({
       let onEntry = (_, _) => ();
@@ -31,7 +31,8 @@ Only.describe("EntryTree.Mapper", () => {
           value,
           parent,
           level,
-          onChange: _ => (),
+          onFold: _ => (),
+          onUnfold: _ => (),
         },
         children: [],
       };

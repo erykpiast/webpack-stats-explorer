@@ -127,7 +127,9 @@ let reducer = (state, action) =>
           stats: state.stats,
           navigationPath:
             state.sourceTree
-              ? State.NavigationPath.convertFromSourceTree(state.navigationPath)
+              ? State.NavigationPath.convertFromSourceTree(
+                  state.navigationPath,
+                )
               : State.NavigationPath.convertToSourceTree(state.navigationPath),
           isTimelineVisible: state.isTimelineVisible,
           urls: state.urls,
@@ -149,9 +151,7 @@ let make = (~stats) => {
         stats,
         navigationPath:
           urlState.navigationPath
-          |> List.map(State.NavigationPath.Segment.fromString)
-          |> List.filter((!=)(None))
-          |> List.map(Belt.Option.getExn),
+          |> List.map(State.NavigationPath.Segment.fromString),
         isTimelineVisible: false,
         urls: urlState.urls,
         sourceTree: urlState.sourceTree,
@@ -207,7 +207,7 @@ let make = (~stats) => {
            <>
              <Logo onClick={_ => dispatch(NavigateThroughBreadcrumbs(0))} />
              <Breadcrumbs
-               items=navigationPath
+               items={state.navigationPath}
                onClick={index => dispatch(NavigateThroughBreadcrumbs(index))}
              />
              <AddStatsButton onClick=triggerUpload />
@@ -240,17 +240,23 @@ let make = (~stats) => {
                count={comp |> CompareEntry.count |> snd}
                level=`top
              />
-           | [(entry, kind)] =>
+           | [entry] =>
              let (size, count, name) =
                CompareEntry.(
                  switch (entry) {
                  | Entry(entry) =>
+                   let maybeKind =
+                     CompareEntry.kind(comp, CompareEntry.Entry(entry));
                    let size =
-                     switch (kind) {
-                     | Added => (0, entry.size)
-                     | Removed => (entry.size, 0)
-                     | Intact => (entry.size, entry.size)
-                     | _ => (0, 0)
+                     switch (maybeKind) {
+                     | None => (0, 0)
+                     | Some(kind) =>
+                       switch (kind) {
+                       | Added => (0, entry.size)
+                       | Removed => (entry.size, 0)
+                       | Intact => (entry.size, entry.size)
+                       | _ => (0, 0)
+                       }
                      };
 
                    (size, List.length(entry.children), entry.id);
@@ -263,30 +269,34 @@ let make = (~stats) => {
                );
 
              <EntryOverview size count name level=`chunk />;
-           | [(entry, kind), ..._] =>
+           | [entry, ..._] =>
+             let kind =
+               CompareEntry.kind(comp, entry)
+               |> Utils.defaultTo(CompareKind.Intact);
              <EntrySummary
                tab={state.tab}
                onTab={tab => dispatch(SelectTab(tab))}
                entry
                kind
-             />
+             />;
            };
 
-         let sideContent =
-           <Sidebar>
-             <EntryTree
-               comp
-               navigationPath
-               onEntry={(level, segment) =>
-                 Navigate(NavigationPath.Segment.toState(segment), level)
-                 |> dispatch
-               }
-             />
-             <SourceTreeSwitcher
-               selected={state.sourceTree}
-               onSwitch={() => dispatch(SwitchSourceTree)}
-             />
-           </Sidebar>;
+         let treeSwitcher =
+           <SourceTreeSwitcher
+             selected={state.sourceTree}
+             onSwitch={() => dispatch(SwitchSourceTree)}
+           />;
+         let entryTree =
+           <EntryTree
+             comp
+             navigationPath
+             onEntry={(level, segment) =>
+               Navigate(NavigationPath.Segment.toState(segment), level)
+               |> dispatch
+             }
+           />;
+
+         let sideContent = <Sidebar scrollable=entryTree fixed=treeSwitcher />;
 
          <NavigationLayout
            side=sideContent

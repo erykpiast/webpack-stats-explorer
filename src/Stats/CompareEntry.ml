@@ -81,6 +81,18 @@ let encodeEntry entry =
   | ModifiedEntry(e) -> ModifiedEntry.encode encode e
 ;;
 
+let kind (comp: t) (entry: entry) = 
+  match entry with
+  | Entry entry -> Rationale.Option.Infix.(
+    let findEntry entry = List.find_opt (fun e -> e == entry)
+    in let added = comp.added |> findEntry entry <$> (fun _ -> CompareKind.Added)
+    and removed = comp.removed |> findEntry entry <$> (fun _ -> CompareKind.Removed)
+    and intact = comp.intact |> findEntry entry <$> (fun _ -> CompareKind.Intact)
+    in added |? removed |? intact
+  )
+  | ModifiedEntry _ -> Some CompareKind.Modified
+;;
+
 type data =
   | EntryData of Entry.Data.t
   | ModifiedEntryData of ModifiedEntry.Data.t

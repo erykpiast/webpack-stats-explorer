@@ -33,10 +33,18 @@ let make (entry: Entry.t) =
               ; children = []
               })
           in (intermediateEntry, allChildren)
-        | ([existingEntry], otherChildren) -> (
-          existingEntry,
-          otherChildren
-        )
+        | ([existingEntry], otherChildren) ->
+          let actualEntry =
+            if existingEntry.size != 0 || pathRest != [] then
+              existingEntry
+            else
+               Entry.(
+                { existingEntry with size = entry.size
+                ; stat = entry.stat
+                ; original = entry.original
+                ; parsed = entry.parsed
+                })
+          in (actualEntry, otherChildren)
         | _ -> raise NotUniqueIdExn
       in Entry.(
         { acc with size = acc.size + entry.size
