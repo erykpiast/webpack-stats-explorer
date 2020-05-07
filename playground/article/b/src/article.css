@@ -1,17 +1,3 @@
-.root {
-    font-family: sans-serif;
-}
-
-.title {
-    margin-left: 1rem;
-}
-
-.loader {
-    display: block;
-    width: calc(100% - 2rem);
-    margin: 0 1rem;
-}
-
 .tagsContainer {
     display: flex;
     align-items: center;
@@ -30,14 +16,14 @@
     padding: 0.5em;
 }
 
-.article {
+.root {
     padding: 1em;
     border: 1px solid gray;
     margin: 1em;
     box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.5);
 }
 
-.articleTitle {
+.title {
     margin-top: 0;
 }
 

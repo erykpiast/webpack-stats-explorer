@@ -5,7 +5,7 @@ function extractJson(response) {
 }
 
 export function fetchFullArticles() {
-    return fetch(`${API_URL}`)
+    return fetch(`${API_URL}?per_page=5`)
         .then(extractJson)
         .then((articles) => {
             const fullArticles = articles.map((article) =>

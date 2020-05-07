@@ -20,12 +20,7 @@ module.exports = {
         options: {
           presets: [
             '@babel/preset-env',
-            [
-              '@babel/preset-react',
-              {
-                'pragma': 'DOM.createElement',
-              }
-            ]
+            'babel-preset-preact'
           ],
         }
       }

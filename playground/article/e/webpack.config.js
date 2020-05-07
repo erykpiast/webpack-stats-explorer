@@ -21,12 +21,7 @@ module.exports = {
         options: {
           presets: [
             '@babel/preset-env',
-            [
-              '@babel/preset-react',
-              {
-                'pragma': 'DOM.createElement',
-              }
-            ]
+            'babel-preset-preact'
           ],
           plugins: ['babel-plugin-lodash']
         }
@@ -60,7 +55,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin(),
-    new LodashModuleReplacementPlugin(),
+    new LodashModuleReplacementPlugin({ currying: true }),
     new MiniCssExtractPlugin(),
     new WebpackEnhancedStatsPlugin({
       filename: 'stats.json'

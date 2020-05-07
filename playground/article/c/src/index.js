@@ -1,15 +1,5 @@
-import view from './view';
-import {
-    fetchFullArticles
-} from './api';
+import { h, render } from 'preact';
 
-const initialView = view({ articles: [] });
+import App from './app';
 
-document.body.appendChild(initialView);
-
-fetchFullArticles().then((articles) => {
-    const newView = view({
-        articles
-    });
-    document.body.replaceChild(newView, initialView);
-});
+render(<App />, document.body);
