@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.21.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.20.0...v1.21.0) (2020-05-08)
+
+
+### Features
+
+* **analytics:** add HotJar snippet ([6c6060c](https://github.com/erykpiast/webpack-stats-explorer/commit/6c6060c00c25f8f13c4571901ebb138f5ecd23ec))
+* **ui:** allow to toggle subtree by clicking on it ([e5a3e15](https://github.com/erykpiast/webpack-stats-explorer/commit/e5a3e15a78dce834f7f094cda8a8f5bb8b98e991))
+
+
+### Bug Fixes
+
+* **analytics:** don't attach analytic scripts in dev mode ([a2fa536](https://github.com/erykpiast/webpack-stats-explorer/commit/a2fa5360e1394b813b9cf7969837cb27fa71e1c3))
+* **format:** handle re-exports only JS modules without parsed size ([c49abf3](https://github.com/erykpiast/webpack-stats-explorer/commit/c49abf31293ccf33818de85c5ce66d6edd5d6468))
+* **package:** update bs-css to version 12.2.0 ([e4d3cdc](https://github.com/erykpiast/webpack-stats-explorer/commit/e4d3cdc0b299f756ff8bb474df7d6f676d0ab8e4))
+* **package:** update bs-css-emotion to version 1.2.0 ([b37f963](https://github.com/erykpiast/webpack-stats-explorer/commit/b37f9639c1a15baa65fdb153f6ea73131c394bd5))
+* **package:** update date-fns to version 2.11.1 ([804c443](https://github.com/erykpiast/webpack-stats-explorer/commit/804c4439fcb7804cb84bf7a6f9ba1664df23c338))
+* **package:** update date-fns to version 2.12.0 ([8fb0725](https://github.com/erykpiast/webpack-stats-explorer/commit/8fb072586c0a35c7ccfa524db8f4e7c203a4a4d7))
+* **package:** update date-fns to version 2.13.0 ([d2e0d0b](https://github.com/erykpiast/webpack-stats-explorer/commit/d2e0d0b003f9c3e48f29e76ba3918d12b9274b84))
+* **package:** update js-beautify to version 1.11.0 ([c66a109](https://github.com/erykpiast/webpack-stats-explorer/commit/c66a10976b04357c4fb52ba0c7b6698e4a2906f4))
+* **package:** update react-dropzone to version 10.2.2 ([08193b2](https://github.com/erykpiast/webpack-stats-explorer/commit/08193b2bbeae73fb2bfeed0bcbf9004d2d272d9a))
+* **package:** update react-dropzone to version 11.0.0 ([8533c60](https://github.com/erykpiast/webpack-stats-explorer/commit/8533c60722767f72037e17f8cf27d5e365453315))
+* **package:** update reason-react to version 0.7.1 ([7c7bd5d](https://github.com/erykpiast/webpack-stats-explorer/commit/7c7bd5db27b2fc56ffc293c4218ef9230238bcbd))
+* **package:** update reason-react to version 0.8.0 ([b36f1ce](https://github.com/erykpiast/webpack-stats-explorer/commit/b36f1ce28f22b99f4d85564b9c8af13f78cefc42))
+* **parsing:** show real size of modules with children ([c9c8cbb](https://github.com/erykpiast/webpack-stats-explorer/commit/c9c8cbbdc3d3f86853fb6d00b96be454f3d604a1))
+* **parsing:** use module with source to check if parsed size is available ([56a80cd](https://github.com/erykpiast/webpack-stats-explorer/commit/56a80cd075bcadfd0ac410ffbc1e1180cad042f5))
+* **parsing:** use stat source size for modules without parsed size ([901a659](https://github.com/erykpiast/webpack-stats-explorer/commit/901a65998f6cd250bff156b88d8debf6f6fa9cfd))
+* **ui:** fix tree switcher to the bottom of the screen ([306a691](https://github.com/erykpiast/webpack-stats-explorer/commit/306a6914fecbf0ec5b79617e9d4a10a522716934))
+* **ui:** keep navigation path when switching comparison ([570edfb](https://github.com/erykpiast/webpack-stats-explorer/commit/570edfba109023a30cbee28dbfcc650c5ac907b2))
+* **ui:** show correct size of modules without code on Webpack Tree ([04b2393](https://github.com/erykpiast/webpack-stats-explorer/commit/04b2393e0e78bb1e96fff87553ff8c7f41e6affc))
+* **ui:** show everything below 0.5 MB in kilobytes ([8163978](https://github.com/erykpiast/webpack-stats-explorer/commit/816397839ff3ced91e6ea98f576f8c56ef459dec))
+* **ui:** use reversed text for breadcrumbs ([3c2cf95](https://github.com/erykpiast/webpack-stats-explorer/commit/3c2cf955b0fe64ba938b9bb10166f8b56f16a149))
+
 ## [1.20.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.19.2...v1.20.0) (2020-03-24)
 
 
