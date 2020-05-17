@@ -1,0 +1,44 @@
+.tagsContainer {
+    display: flex;
+    align-items: center;
+}
+
+.tags {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.tag {
+    border: 1px solid black;
+    margin-right: 1em;
+    padding: 0.5em;
+}
+
+.root {
+    padding: 1em;
+    border: 1px solid gray;
+    margin: 1em;
+    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.5);
+}
+
+.title {
+    margin-top: 0;
+}
+
+.content {
+    max-height: 10em;
+    overflow: hidden;
+    position: relative;
+}
+
+.content:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 2em;
+    background: linear-gradient(180deg, transparent 0%, white 100%);
+}

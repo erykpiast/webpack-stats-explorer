@@ -6,6 +6,17 @@ const WebpackEnhancedStatsPlugin = require('webpack-enhanced-stats-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
+  plugins: [
+    new HtmlWebpackPlugin(),
+    new MiniCssExtractPlugin(),
+    new WebpackEnhancedStatsPlugin({
+      filename: 'stats.json'
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      openAnalyzer: false
+    })
+  ],
   entry: './src/index.js',
   devtool: 'source-map',
   resolve: {
@@ -17,13 +28,6 @@ module.exports = {
       exclude: [path.join(__dirname, 'node_modules')],
       use: {
         loader: 'babel-loader',
-        options: {
-          presets: [
-            '@babel/preset-env',
-            'babel-preset-preact'
-          ],
-          plugins: ['babel-plugin-lodash']
-        }
       }
     }, {
       test: /\.css$/,
@@ -52,15 +56,4 @@ module.exports = {
       sourceMap: true
     })],
   },
-  plugins: [
-    new HtmlWebpackPlugin(),
-    new MiniCssExtractPlugin(),
-    new WebpackEnhancedStatsPlugin({
-      filename: 'stats.json'
-    }),
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      openAnalyzer: false
-    })
-  ]
 };
