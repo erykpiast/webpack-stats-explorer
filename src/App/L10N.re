@@ -15,10 +15,6 @@ let prettyPrint = "Pretty print";
 let lineWrap = "Hard line wrap";
 let columns = "columns";
 
-let choose = "Choose the";
-
-let here = "here";
-
 let sourceTree = "Source tree";
 
 let webpackTree = "Webpack tree";

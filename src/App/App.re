@@ -245,18 +245,14 @@ let make = (~stats) => {
                CompareEntry.(
                  switch (entry) {
                  | Entry(entry) =>
-                   let maybeKind =
-                     CompareEntry.kind(comp, CompareEntry.Entry(entry));
+                   let kind =
+                     CompareEntry.kind(comp, CompareEntry.Entry(entry), []);
                    let size =
-                     switch (maybeKind) {
-                     | None => (0, 0)
-                     | Some(kind) =>
-                       switch (kind) {
-                       | Added => (0, entry.size)
-                       | Removed => (entry.size, 0)
-                       | Intact => (entry.size, entry.size)
-                       | _ => (0, 0)
-                       }
+                     switch (kind) {
+                     | Added => (0, entry.size)
+                     | Removed => (entry.size, 0)
+                     | Intact => (entry.size, entry.size)
+                     | _ => (0, 0)
                      };
 
                    (size, List.length(entry.children), entry.id);
@@ -269,10 +265,9 @@ let make = (~stats) => {
                );
 
              <EntryOverview size count name level=`chunk />;
-           | [entry, ..._] =>
-             let kind =
-               CompareEntry.kind(comp, entry)
-               |> Utils.defaultTo(CompareKind.Intact);
+           | [entry, ...rest] =>
+             let kind = CompareEntry.kind(comp, entry, rest);
+
              <EntrySummary
                tab={state.tab}
                onTab={tab => dispatch(SelectTab(tab))}

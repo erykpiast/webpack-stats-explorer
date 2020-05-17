@@ -81,16 +81,36 @@ let encodeEntry entry =
   | ModifiedEntry(e) -> ModifiedEntry.encode encode e
 ;;
 
-let kind (comp: t) (entry: entry) = 
-  match entry with
-  | Entry entry -> Rationale.Option.Infix.(
-    let findEntry entry = List.find_opt (fun e -> e == entry)
-    in let added = comp.added |> findEntry entry <$> (fun _ -> CompareKind.Added)
-    and removed = comp.removed |> findEntry entry <$> (fun _ -> CompareKind.Removed)
-    and intact = comp.intact |> findEntry entry <$> (fun _ -> CompareKind.Intact)
-    in added |? removed |? intact
-  )
-  | ModifiedEntry _ -> Some CompareKind.Modified
+let kind (comp: t) (entry: entry) (rest: entry list) =
+  let (theDeepestCompChildOpt, theDeepestCompOpt) =
+    Belt.List.reduce
+      rest
+      (None, None)
+      (fun (prev, found) curr ->
+        match found with
+        | Some _ -> (prev, found)
+        | None -> (
+          match curr with
+          | Entry _ -> (Some curr, None)
+          | ModifiedEntry modifiedEntry -> (
+              prev,
+              Some modifiedEntry.children
+            )
+        )
+      )
+  in let theDeepestComp = theDeepestCompOpt |> (Utils.defaultTo comp)
+  and theDeepestCompChild = theDeepestCompChildOpt |> (Utils.defaultTo entry)
+  in (
+    match theDeepestCompChild with
+    | Entry entry -> Rationale.Option.Infix.(
+      let findEntry entry = List.find_opt (fun e -> e == entry)
+      in let added = theDeepestComp.added |> findEntry entry <$> (fun _ -> CompareKind.Added)
+      and removed = theDeepestComp.removed |> findEntry entry <$> (fun _ -> CompareKind.Removed)
+      and intact = theDeepestComp.intact |> findEntry entry <$> (fun _ -> CompareKind.Intact)
+      in added |? removed |? intact
+    )
+    | ModifiedEntry _ -> Some CompareKind.Modified
+  ) |> Utils.defaultTo CompareKind.Intact
 ;;
 
 type data =

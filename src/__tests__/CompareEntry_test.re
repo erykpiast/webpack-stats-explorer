@@ -3,34 +3,12 @@ open ExpectJs;
 
 describe("CompareEntry", () => {
   let makeModified = ModifiedEntry.make((_, _) => CompareEntry.make([], []));
+  let makeEntry = (~children=[], ~size=123, ~code="", id) =>
+    Entry.{id, size, children, original: None, stat: Entry.Data.make(Some(code), Some(size)), parsed: None};
 
-  let foo1 =
-    Entry.{
-      id: "foo",
-      size: 666,
-      original: None,
-      parsed: None,
-      stat: Entry.Data.make(Some("I am foo"), Some(666)),
-      children: [],
-    };
-  let foo2 =
-    Entry.{
-      id: "foo",
-      size: 555,
-      original: None,
-      parsed: None,
-      stat: Entry.Data.make(Some("I am different foo"), Some(555)),
-      children: [],
-    };
-  let bar1 =
-    Entry.{
-      id: "bar",
-      size: 555,
-      original: None,
-      parsed: None,
-      stat: Entry.Data.make(Some("I am Boo"), Some(555)),
-      children: [],
-    };
+  let foo1 = makeEntry(~code="I am foo", ~size=666, "foo");
+  let foo2 = makeEntry(~code="I am different foo", ~size=555, "foo");
+  let bar1 = makeEntry(~code="I am Boo", ~size=555, "bar");
 
   test("added", () => {
     let a = [];
@@ -98,5 +76,107 @@ describe("CompareEntry", () => {
            modified: [makeModified(foo1, foo2)],
          },
        );
+  });
+
+  describe("kind", () => {
+    let foo3 = makeEntry(~children=[bar1], "foo");
+    let bar2 = ModifiedEntry.{
+      id: "bar2",
+      size: (123, 321),
+      children: CompareEntry.{
+        added: [foo2],
+        removed: [foo3],
+        modified: [],
+        intact: [bar1]
+      },
+      original: None,
+      stat: ModifiedEntry.Data.make(
+        Entry.Data.make(Some("I am another bar"), Some(123)),
+        Entry.Data.make(Some("I am another version of another bar"), Some(321))
+      ),
+      parsed: None
+    };
+    
+    
+    test("top level", () => {
+      let comp = CompareEntry.{
+        added: [foo2, bar1],
+        removed: [foo1],
+        modified: [],
+        intact: []
+      };
+
+      let kind = CompareEntry.kind(comp, Entry(foo2), []);
+
+      expect(kind) |> toEqual(CompareKind.Added);
+    });
+
+    test("nested not modified", () => {
+      let comp = CompareEntry.{
+        added: [foo2],
+        removed: [foo3],
+        modified: [],
+        intact: []
+      };
+
+      let kind = CompareEntry.kind(comp, Entry(bar1), [Entry(foo3)]);
+
+      expect(kind) |> toEqual(CompareKind.Removed);
+    });
+
+    test("nested modified", () => {
+      let comp = CompareEntry.{
+        added: [],
+        removed: [foo1],
+        modified: [bar2],
+        intact: []
+      }
+
+      let kind = CompareEntry.kind(comp, Entry(foo2), [ModifiedEntry(bar2)]);
+
+      expect(kind) |> toEqual(CompareKind.Added);
+    });
+
+    test("not modified nested in modified", () => {
+      let comp = CompareEntry.{
+        added: [],
+        removed: [foo1],
+        modified: [bar2],
+        intact: []
+      }
+
+      let kind = CompareEntry.kind(comp, Entry(foo2), [Entry(foo3), ModifiedEntry(bar2)]);
+
+      expect(kind) |> toEqual(CompareKind.Removed);
+    });
+
+    test("double nested modified", () => {
+      let bar3 = ModifiedEntry.{
+        id: "bar3",
+        size: (123, 321),
+        children: CompareEntry.{
+          added: [],
+          removed: [],
+          modified: [bar2],
+          intact: []
+        },
+        original: None,
+        stat: ModifiedEntry.Data.make(
+          Entry.Data.make(Some("I am one another bar"), Some(123)),
+          Entry.Data.make(Some("I am another version of one another bar"), Some(321))
+        ),
+        parsed: None
+      };
+      let comp = CompareEntry.{
+        added: [],
+        removed: [foo1],
+        modified: [bar3],
+        intact: []
+      }
+
+      let kind = CompareEntry.kind(comp, Entry(foo2), [ModifiedEntry(bar2), ModifiedEntry(bar3)]);
+
+      expect(kind) |> toEqual(CompareKind.Added);
+    });
   });
 });
