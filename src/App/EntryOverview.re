@@ -21,26 +21,18 @@ module Styles = {
   let size = style([display(`block), color(Theme.Color.Text.secondary)]);
   let count = style([color(Theme.Color.Text.primary), margin(px(0))]);
   let diff = style([display(`block)]);
-  let name = style([]);
+  let name = style([marginTop(px(0))]);
 };
 
 [@react.component]
 let make = (~size, ~level, ~name="", ~count) => {
-  let (one, many, arrowMode) = switch (level) {
-  | `top => (L10N.chunk, L10N.chunks, `side)
-  | `chunk => (L10N.module_, L10N.modules, `below)
-  | `module_ => (L10N.module_, L10N.modules, `below)
+  let (one, many) = switch (level) {
+  | `top => (L10N.chunk, L10N.chunks)
+  | `chunk => (L10N.module_, L10N.modules)
+  | `module_ => (L10N.module_, L10N.modules)
   };
 
   <section className=Styles.root>
-    <PointingArrow
-      mode=arrowMode
-      className=Styles.arrow
-    >
-      {L10N.choose |> React.string}
-      <br />
-      {one ++ " " ++ L10N.here ++ "!" |> React.string}
-    </PointingArrow>
     {String.length(name) > 0
       ? <h2 className=Styles.name>
       {name |> React.string}
