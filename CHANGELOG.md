@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.22.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.21.0...v1.22.0) (2020-05-17)
+
+
+### Features
+
+* **ui:** get rid of pointing arrow ([82251a6](https://github.com/erykpiast/webpack-stats-explorer/commit/82251a604f49e6f9bffaf74b0340ae0dc1834314))
+
+
+### Bug Fixes
+
+* **format:** search for module kind resursively ([c0bd1df](https://github.com/erykpiast/webpack-stats-explorer/commit/c0bd1dfe6745a4ac4756d380d2d230f91bd99f83))
+* **package:** update react-diff-viewer to version 3.1.0 ([37f755c](https://github.com/erykpiast/webpack-stats-explorer/commit/37f755c800979df20e895ebb6b806daafdf0697f))
+
 ## [1.21.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.20.0...v1.21.0) (2020-05-08)
 
 
