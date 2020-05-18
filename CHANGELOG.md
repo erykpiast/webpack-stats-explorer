@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.23.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.22.1...v1.23.0) (2020-05-18)
+
+
+### Features
+
+* **deploy:** prepare and deploy stats for article on CI ([f8e4831](https://github.com/erykpiast/webpack-stats-explorer/commit/f8e48315297ed4ef73c6e7c3c3484a2f6c4e1797))
+
 ### [1.22.1](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.22.0...v1.22.1) (2020-05-18)
 
 
