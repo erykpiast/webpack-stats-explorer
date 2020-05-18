@@ -80,7 +80,7 @@ let make = (~className="", ~urls, ~onFiles, ~onUrls) => {
       };
       None;
     },
-    [|urls|],
+    [|value|],
   );
 
   <div className={Cn.make([className, Styles.root])}>

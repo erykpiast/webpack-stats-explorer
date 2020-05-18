@@ -5,7 +5,6 @@ type action =
   | Navigate(State.NavigationPath.Segment.t, int)
   | NavigateThroughBreadcrumbs(int)
   | ToggleTimeline
-  | ReplaceStats(list(WebpackStats.t))
   | AddStats(list(WebpackStats.t))
   | UpdateUrls(list(string))
   | SelectTab(int)
@@ -83,15 +82,6 @@ let reducer = (state, action) =>
           navigationPath: state.navigationPath,
           isTimelineVisible: !state.isTimelineVisible,
           urls: state.urls,
-          sourceTree: state.sourceTree,
-        }
-      | ReplaceStats(stats) => {
-          tab: state.tab,
-          index: 0,
-          stats,
-          navigationPath: [],
-          isTimelineVisible: false,
-          urls: [],
           sourceTree: state.sourceTree,
         }
       | AddStats(stats) => {
@@ -184,7 +174,7 @@ let make = (~stats) => {
 
   if (List.length(comparisons) === 0) {
     <WelcomeScreen
-      onStats={stats => dispatch(ReplaceStats(stats))}
+      onStats={stats => dispatch(AddStats(stats))}
       onUrls={urls => dispatch(UpdateUrls(urls))}
       urls={state.urls}>
       {loader =>
