@@ -7,7 +7,11 @@ jobs:
     - stage: test
       script: npm test && npm run build:playground
     - stage: deploy
-      script: npm run build
+      script: |
+        npm run build
+        npm run playground:play -- article 
+        mkdir -p dist/a
+        mv ./playground/article/*.json ./dist/a/
       deploy:
         provider: pages
         skip-cleanup: true
