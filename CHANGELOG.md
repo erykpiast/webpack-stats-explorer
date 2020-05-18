@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.22.1](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.22.0...v1.22.1) (2020-05-18)
+
+
+### Bug Fixes
+
+* **package:** update date-fns to version 2.14.0 ([a9de445](https://github.com/erykpiast/webpack-stats-explorer/commit/a9de445bf49f8f1425f018b8c550ce788750018a))
+* **ui:** do not reset URLs after fetching stats ([31309c9](https://github.com/erykpiast/webpack-stats-explorer/commit/31309c95f60d4fea8da9c5fc02c99d9659a7fcee))
+
 ## [1.22.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.21.0...v1.22.0) (2020-05-17)
 
 
