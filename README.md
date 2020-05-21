@@ -6,7 +6,7 @@ webpack-stats-explorer
 [![devDependencies Status](https://david-dm.org/erykpiast/webpack-stats-explorer/dev-status.svg)](https://david-dm.org/erykpiast/webpack-stats-explorer?type=dev)
 [![Greenkeeper badge](https://badges.greenkeeper.io/erykpiast/webpack-stats-explorer.svg)](https://greenkeeper.io/)
 
-Tool for exploring webpack stats and comparing them between builds. See [an introduction at dev.to](https://dev.to/erykpiast/why-does-your-bundle-grow-a7n).
+Tool for exploring webpack stats and comparing them between builds. See [an introduction](https://dev.to/erykpiast/why-does-your-bundle-grow-a7n) and [a follow-up article at dev.to](https://dev.to/erykpiast/the-story-about-a-few-imports-40jm).
 
 ## Demo
 
