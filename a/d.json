@@ -5,8 +5,8 @@
   ],
   "version": "4.43.0",
   "hash": "c89b536deb0402099800",
-  "time": 4783,
-  "builtAt": 1589895631880,
+  "time": 4655,
+  "builtAt": 1590084637614,
   "publicPath": "",
   "outputPath": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/dist",
   "assetsByChunkName": {
@@ -10217,9 +10217,9 @@
           "chunks": [
             0
           ],
-          "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_hasPath.js",
-          "issuerId": 212,
-          "issuerName": "./node_modules/lodash/_hasPath.js",
+          "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseGet.js",
+          "issuerId": 94,
+          "issuerName": "./node_modules/lodash/_baseGet.js",
           "issuerPath": [
             {
               "id": null,
@@ -10257,14 +10257,14 @@
               "name": "./node_modules/lodash/_baseMatchesProperty.js"
             },
             {
-              "id": 210,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/hasIn.js",
-              "name": "./node_modules/lodash/hasIn.js"
+              "id": 207,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/get.js",
+              "name": "./node_modules/lodash/get.js"
             },
             {
-              "id": 212,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_hasPath.js",
-              "name": "./node_modules/lodash/_hasPath.js"
+              "id": 94,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseGet.js",
+              "name": "./node_modules/lodash/_baseGet.js"
             }
           ],
           "failed": false,
@@ -34197,9 +34197,9 @@
       "chunks": [
         0
       ],
-      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_hasPath.js",
-      "issuerId": 212,
-      "issuerName": "./node_modules/lodash/_hasPath.js",
+      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseGet.js",
+      "issuerId": 94,
+      "issuerName": "./node_modules/lodash/_baseGet.js",
       "issuerPath": [
         {
           "id": null,
@@ -34237,14 +34237,14 @@
           "name": "./node_modules/lodash/_baseMatchesProperty.js"
         },
         {
-          "id": 210,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/hasIn.js",
-          "name": "./node_modules/lodash/hasIn.js"
+          "id": 207,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/get.js",
+          "name": "./node_modules/lodash/get.js"
         },
         {
-          "id": 212,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_hasPath.js",
-          "name": "./node_modules/lodash/_hasPath.js"
+          "id": 94,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseGet.js",
+          "name": "./node_modules/lodash/_baseGet.js"
         }
       ],
       "failed": false,
