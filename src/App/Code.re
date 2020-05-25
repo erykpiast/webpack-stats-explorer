@@ -97,7 +97,7 @@ module Styles = {
 };
 
 [@react.component]
-let make = (~className="", ~columnGuideline=0, ~children) => {
+let make = (~className="", ~columnGuideline=0, ~language=`JavaScript, ~children) => {
   let theGreatestLineNumberLength =
     children
     |> Utils.String.split("\n")
@@ -124,7 +124,7 @@ let make = (~className="", ~columnGuideline=0, ~children) => {
     );
 
   <ReactSyntaxHighlighter.Prism
-    language=`JavaScript
+    language
     showLineNumbers=false
     className={Cn.make([
       className,

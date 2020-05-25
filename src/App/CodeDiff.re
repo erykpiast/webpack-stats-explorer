@@ -60,10 +60,10 @@ module Styles = {
 };
 
 [@react.component]
-let make = (~after, ~before, ~columnGuideline) => {
+let make = (~after, ~before, ~columnGuideline, ~language=`JavaScript) => {
   let renderContent = content =>
     <ReactSyntaxHighlighter.Prism
-      language=`JavaScript
+      language
       showLineNumbers=false
       customStyle=Styles.preStyle
       wrapLines=true

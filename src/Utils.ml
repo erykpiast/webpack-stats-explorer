@@ -100,6 +100,10 @@ module Array = struct
   let join = Js.Array.joinWith;;
 
   let map = Js.Array.map;;
+
+  let shallowCopy array = Js.Array.slice ~start:0 ~end_:(Js.Array.length array) array;;
+
+  let reverse array = array |> shallowCopy |> Js.Array.reverseInPlace;;
 end
 
 module String = struct

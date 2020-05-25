@@ -122,6 +122,7 @@ let getId = entry =>
   | Entry(entry) => entry.id
   | ModifiedEntry(entry) => entry.id
   };
+
 let getStat = entry =>
   switch (entry) {
   | Entry(entry) => entry.stat <$> makeEntryData
@@ -150,6 +151,20 @@ let getChildrenCount = entry =>
   | ModifiedEntry(entry) => entry.children |> CompareEntry.count |> snd
   };
 
+let getLanguage = id => {
+  let extension = id |> Utils.String.split(".") |> Utils.Array.reverse |> Utils.Array.nth(0);
+
+  switch extension {
+  | "json" => `Json
+  | "css" => `Css
+  | "pcss" => `Css
+  | "scss" => `Scss
+  | "ts" => `TypeScript
+  | "tsx" => `TypeScript
+  | _ => `JavaScript
+  };
+};
+
 let renderSize = (label, data) =>
   switch (data) {
   | None => <> {label |> React.string} </>
@@ -176,7 +191,7 @@ let renderSize = (label, data) =>
       <dd className=Styles.definition> <Size value=size /> diff </dd>
     </>;
   };
-let renderSource = (format, columnGuideline, data) =>
+let renderSource = (format, columnGuideline, language, data) =>
   switch (data) {
   | None =>
     // NOTE: there are some cases when plugin is configured but some
@@ -232,7 +247,7 @@ module.exports = {
   | Some(data) =>
     switch (data) {
     | EntryData({source}) =>
-      <Code className=Styles.code columnGuideline>
+      <Code className=Styles.code columnGuideline language>
         ...{source |> format}
       </Code>
     | ModifiedEntryData({source}) =>
@@ -240,9 +255,9 @@ module.exports = {
       let after = source |> snd |> format;
 
       if (after == before) {
-        <Code className=Styles.code columnGuideline> ...after </Code>;
+        <Code className=Styles.code columnGuideline language> ...after </Code>;
       } else {
-        <CodeDiff columnGuideline before after />;
+        <CodeDiff columnGuideline before after language />;
       };
     }
   };
@@ -257,11 +272,12 @@ let make = (~entry, ~onTab, ~tab, ~kind) => {
   let original = entry |> getOriginal;
   let stat = entry |> getStat;
   let parsed = entry |> getParsed;
-  let currentData =
+  let id = entry |> getId;
+  let (language, currentData) =
     switch (tab) {
-    | 0 => original
-    | 2 => parsed
-    | _ => stat
+    | 0 => (id |> getLanguage, original)
+    | 2 => (`JavaScript, parsed)
+    | _ => (`JavaScript, stat)
     };
   let (kindClassName, kindLabel) = getKindProps(kind);
   let (isPrettyPrintEnabled, setPrettyPrintEnabled) =
@@ -303,7 +319,7 @@ let make = (~entry, ~onTab, ~tab, ~kind) => {
         <div className=Styles.name>
           <dt className=Styles.term> {L10N.Summary.name |> React.string} </dt>
           <dd className=Styles.definition>
-            {entry |> getId |> React.string}
+            {id |> React.string}
           </dd>
         </div>
         {switch (original, stat, parsed) {
@@ -328,7 +344,7 @@ let make = (~entry, ~onTab, ~tab, ~kind) => {
            count={entry |> getChildrenCount}
            name={entry |> getId}
          />
-       | _ => currentData |> renderSource(formatter, columnGuideline)
+       | _ => currentData |> renderSource(formatter, columnGuideline, language)
        }}
     </div>
     <form className=Styles.ViewSettings.wrapper>
