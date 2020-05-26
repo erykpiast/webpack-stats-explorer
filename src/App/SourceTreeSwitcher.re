@@ -30,7 +30,7 @@ let make = (~className="", ~selected=true, ~onSwitch) => {
         Styles.button,
         Cn.ifTrue(Styles.selectedButton, selected),
       ])}>
-      {L10N.sourceTree |> React.string}
+      {L10N.treeView |> React.string}
     </Button>
     <Button
       disabled={!selected}
@@ -39,7 +39,7 @@ let make = (~className="", ~selected=true, ~onSwitch) => {
         Styles.button,
         Cn.ifTrue(Styles.selectedButton, !selected),
       ])}>
-      {L10N.webpackTree |> React.string}
+      {L10N.moduleListView |> React.string}
     </Button>
   </div>;
 };

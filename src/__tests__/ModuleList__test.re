@@ -1,7 +1,7 @@
 open Jest;
 open ExpectJs;
 
-describe("WebpackTree", () => {
+describe("ModuleList", () => {
   let mockEntry = (~children=[], ~size=666, ~code="", id) =>
     Entry.{
       id,
@@ -19,7 +19,7 @@ describe("WebpackTree", () => {
   describe("make", () => {
     test("no children", () => {
       let input = mockEntry(~code="foobar", "./foo");
-      let output = input |> WebpackTree.make;
+      let output = input |> ModuleList.make;
 
       expect(output) |> toEqual(input);
     });
@@ -41,9 +41,18 @@ describe("WebpackTree", () => {
           ],
           "./foo",
         );
-      let output = input |> WebpackTree.make;
+      let output = input |> ModuleList.make;
+      let expected = mockEntry(
+          ~size=666,
+          ~children=[
+            mockEntry(~size=222, ~code="foobar", "./foo/bar"),
+            mockEntry(~size=111, ~code="bazqux", "./foo/bar/baz"),
+            mockEntry(~size=444, ~code="barbaz", "./foo/baz"),
+          ],
+          "./foo",
+        )
 
-      expect(output) |> toEqual(input);
+      expect(output) |> toEqual(expected);
     });
 
     test("child without size", () => {
@@ -64,20 +73,13 @@ describe("WebpackTree", () => {
           ],
           "./foo",
         );
-      let output = input |> WebpackTree.make;
+      let output = input |> ModuleList.make;
       let expected =
         mockEntry(
           ~size=666,
           ~children=[
-            mockEntry(
-              ~size=333,
-              ~code="",
-              "./foo/bar",
-              ~children=[
-                mockEntry(~size=111, ~code="bazqux", "./foo/bar/baz"),
-                mockEntry(~size=222, ~code="quxfaz", "./foo/bar/qux"),
-              ],
-            ),
+            mockEntry(~size=111, ~code="bazqux", "./foo/bar/baz"),
+            mockEntry(~size=222, ~code="quxfaz", "./foo/bar/qux"),
             mockEntry(~size=444, ~code="barbaz", "./foo/baz"),
           ],
           "./foo",
