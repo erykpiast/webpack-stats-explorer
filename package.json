@@ -53,7 +53,7 @@
     "bs-css": "12.2.0",
     "bs-css-emotion": "1.2.0",
     "bs-fetch": "0.5.2",
-    "bs-js-beautify": "0.1.0",
+    "bs-js-beautify": "0.1.1",
     "bs-jsverify": "0.10.0",
     "bs-react-diff-viewer": "0.1.1",
     "bs-react-dropzone": "0.5.2",
