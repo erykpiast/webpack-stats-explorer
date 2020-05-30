@@ -75,7 +75,7 @@
   },
   "devDependencies": {
     "@babel/cli": "7.10.1",
-    "@babel/core": "7.10.1",
+    "@babel/core": "7.10.2",
     "@babel/preset-env": "7.10.1",
     "@glennsl/bs-jest": "0.5.1",
     "babel-jest": "25.1.0",
