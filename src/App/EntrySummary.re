@@ -97,7 +97,7 @@ module Styles = {
         alignItems(`center),
         padding(Theme.Space.default),
         fontSize(Theme.Size.Text.button),
-        lineHeight(Theme.Size.LineHeight.default)
+        lineHeight(Theme.Size.LineHeight.default),
       ]);
 
     let label = style([marginRight(Theme.Space.default)]);
@@ -152,9 +152,13 @@ let getChildrenCount = entry =>
   };
 
 let getLanguage = id => {
-  let extension = id |> Utils.String.split(".") |> Utils.Array.reverse |> Utils.Array.nth(0);
+  let extension =
+    id
+    |> Utils.String.split(".")
+    |> Utils.Array.reverse
+    |> Utils.Array.nth(0);
 
-  switch extension {
+  switch (extension) {
   | "json" => `Json
   | "css" => `Css
   | "pcss" => `Css
@@ -318,12 +322,10 @@ let make = (~entry, ~onTab, ~tab, ~kind) => {
         </div>
         <div className=Styles.name>
           <dt className=Styles.term> {L10N.Summary.name |> React.string} </dt>
-          <dd className=Styles.definition>
-            {id |> React.string}
-          </dd>
+          <dd className=Styles.definition> {id |> React.string} </dd>
         </div>
         {switch (original, stat, parsed) {
-         | (None, None, None) => <div className=Styles.tabsPlaceholder/>
+         | (None, None, None) => <div className=Styles.tabsPlaceholder />
          | _ =>
            <Tabs className=Styles.size selectedIndex=tab onChange=switchTab>
              [|
@@ -344,7 +346,8 @@ let make = (~entry, ~onTab, ~tab, ~kind) => {
            count={entry |> getChildrenCount}
            name={entry |> getId}
          />
-       | _ => currentData |> renderSource(formatter, columnGuideline, language)
+       | _ =>
+         currentData |> renderSource(formatter, columnGuideline, language)
        }}
     </div>
     <form className=Styles.ViewSettings.wrapper>

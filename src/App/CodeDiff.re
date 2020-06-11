@@ -1,6 +1,15 @@
 module Styles = {
   open Css;
 
+  let codeFontFamily =
+    fontFamilies([
+      `custom("Consolas"),
+      `custom("Monaco"),
+      `custom("Andale Mono"),
+      `custom("Ubuntu Mono"),
+      `monospace,
+    ]);
+
   let preStyle =
     ReactDOMRe.Style.make(
       ~padding=px(0) |> Types.Length.toString,
@@ -13,54 +22,136 @@ module Styles = {
 
   let contentText = [important(lineHeight(`initial))];
 
-  let getContent = columnNumber => [
+  let getBackgroundLayer = color =>
+    before([
+      contentRule(`text("")),
+      backgroundColor(color),
+      position(`absolute),
+      left(px(0)),
+      right(px(0)),
+      top(px(0)),
+      height(px(100)),
+    ]);
+
+  let getContent = columnGuideline => [
+    display(`block),
     borderSpacing(px(0)),
+    flexGrow(1.0),
+    flexShrink(0.0),
     padding(px(0)),
     position(`relative),
-    after(
-      switch (columnNumber) {
+    selector("pre", [minWidth(ch(120.0))]),
+    width(`auto),
+    before(
+      switch (columnGuideline) {
       | 0 => []
       | _ => [
           contentRule(`text("")),
-          position(`absolute),
-          left(ch(float_of_int(columnNumber))),
-          top(px(0)),
-          bottom(px(0)),
-          width(px(1)),
           backgroundColor(Theme.Color.Border.default),
-          fontSize(Theme.Size.Text.default),
-          fontFamilies([
-            `custom("Consolas"),
-            `custom("Monaco"),
-            `custom("Andale Mono"),
-            `custom("Ubuntu Mono"),
-            `monospace,
-          ]),
+          display(`block),
+          position(`absolute),
+          left(ch(float_of_int(columnGuideline))),
+          bottom(px(0)),
+          top(px(0)),
+          right(px(0)),
+          width(px(1)),
         ]
       },
     ),
   ];
 
-  let lineNumber = [fontSize(Theme.Size.Text.default)];
+  let line = [
+    display(`flex),
+    flexShrink(0.0),
+    flexGrow(0.0),
+    height(px(25)),
+    selector("&:last-of-type", [flexGrow(1.0)]),
+  ];
 
-  let gutter = [
+  let lineNumber = [
+    fontSize(Theme.Size.Text.default),
+    fontFamilies(Theme.FontFamily.code),
+  ];
+
+  let marker = [
+    width(ch(1.0)),
+    padding2(~v=px(0), ~h=Theme.Space.default),
+    boxSizing(`contentBox),
+    flexShrink(0.0),
+  ];
+
+  let getGutter = lineNumberWidth => [
+    backgroundColor(Theme.Color.Background.bright),
     padding(px(0)),
     padding2(~h=Theme.Space.double, ~v=px(0)),
     borderSpacing(px(0)),
+    width(ch(float_of_int(lineNumberWidth))),
     minWidth(px(0)),
+    position(`relative),
+    display(`block),
+    boxSizing(`contentBox),
+    flexShrink(0.0),
   ];
 
+  let getColumnGuideline = (columnGuideline, lineNumberWidth) =>
+    style([
+      position(`absolute),
+      left(px(0)),
+      transform(
+        translateX(
+          Calc.(
+            ch(float_of_int(lineNumberWidth * 3))
+            + Theme.Space.octafold
+            + ch(float_of_int(columnGuideline))
+            + px(20)
+          ),
+        ),
+      ),
+      bottom(px(0)),
+      top(px(0)),
+      width(px(1)),
+      backgroundColor(Theme.Color.Border.default),
+      fontSize(Theme.Size.Text.default),
+      codeFontFamily,
+    ]);
+
   let diffContainer = [
+    background(`none),
+    codeFontFamily,
+    display(`block),
+    position(`relative),
+    width(`percent(100.0)),
     zIndex(-1),
     selector(
+      "tbody",
+      [
+        backgroundColor(Theme.Color.Background.code),
+        display(`flex),
+        flexDirection(`column),
+        minHeight(`percent(100.0)),
+        minWidth(`percent(100.0)),
+        width(`maxContent),
+      ],
+    ),
+    selector(
       "pre",
-      [important(lineHeight(`initial)), important(opacity(1.0))],
+      [
+        important(lineHeight(px(25))),
+        important(opacity(1.0)),
+        codeFontFamily,
+      ],
     ),
   ];
 };
 
 [@react.component]
 let make = (~after, ~before, ~columnGuideline, ~language=`JavaScript) => {
+  let greatestLineNumberWidth =
+    [|
+      Code.getTheGreatestLineNumberLength(after),
+      Code.getTheGreatestLineNumberLength(before),
+    |]
+    |> Utils.Array.maxInt;
   let renderContent = content =>
     <ReactSyntaxHighlighter.Prism
       language
@@ -70,21 +161,25 @@ let make = (~after, ~before, ~columnGuideline, ~language=`JavaScript) => {
       _PreTag={`intrinsic("span")}>
       content
     </ReactSyntaxHighlighter.Prism>;
-  <ReactDiffViewer
-    oldValue=before
-    newValue=after
-    compareMethod=`words
-    splitView=false
-    showDiffOnly=false
-    renderContent
-    styles={ReactDiffViewer.Styles.make(
-      ~wordDiff=Styles.wordDiff,
-      ~content=Styles.getContent(columnGuideline),
-      ~contentText=Styles.contentText,
-      ~lineNumber=Styles.lineNumber,
-      ~gutter=Styles.gutter,
-      ~diffContainer=Styles.diffContainer,
-      (),
-    )}
-  />;
+  <>
+    <ReactDiffViewer
+      oldValue=before
+      newValue=after
+      compareMethod=`words
+      splitView=false
+      showDiffOnly=false
+      renderContent
+      styles={ReactDiffViewer.Styles.make(
+        ~wordDiff=Styles.wordDiff,
+        ~content=Styles.getContent(columnGuideline),
+        ~contentText=Styles.contentText,
+        ~line=Styles.line,
+        ~lineNumber=Styles.lineNumber,
+        ~gutter=Styles.getGutter(greatestLineNumberWidth),
+        ~marker=Styles.marker,
+        ~diffContainer=Styles.diffContainer,
+        (),
+      )}
+    />
+  </>;
 };

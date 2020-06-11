@@ -104,6 +104,8 @@ module Array = struct
   let shallowCopy array = Js.Array.slice ~start:0 ~end_:(Js.Array.length array) array;;
 
   let reverse array = array |> shallowCopy |> Js.Array.reverseInPlace;;
+
+  let maxInt = Js.Math.maxMany_int;;
 end
 
 module String = struct

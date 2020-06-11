@@ -15,6 +15,8 @@ module Color = {
     let danger = rgb(211, 47, 47);
 
     let bright = rgb(255, 255, 255);
+
+    let code = rgb(245, 245, 245);
   };
 
   module Border = {
@@ -48,12 +50,12 @@ module Color = {
   };
 
   module Shadow = {
-    let default = rgba(0, 0, 0, 0.3);
+    let default = rgba(0, 0, 0, `num(0.3));
 
     module Button = {
-      let primary = rgba(0, 0, 0, 0.2);
-      let secondary = rgba(0, 0, 0, 0.14);
-      let tertiary = rgba(0, 0, 0, 0.12);
+      let primary = rgba(0, 0, 0, `num(0.2));
+      let secondary = rgba(0, 0, 0, `num(0.14));
+      let tertiary = rgba(0, 0, 0, `num(0.12));
     };
   };
 
@@ -188,6 +190,16 @@ module Size = {
     };
   };
 };
+
+module FontFamily = {
+  let code = [
+    `custom("Consolas"),
+    `custom("Monaco"),
+    `custom("Andale Mono"),
+    `custom("Ubuntu Mono"),
+    `monospace,
+  ];
+}
 
 let betterColor = rgb(205, 255, 216);
 let changeColor = rgb(247, 202, 136);
