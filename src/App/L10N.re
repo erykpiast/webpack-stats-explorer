@@ -15,9 +15,9 @@ let prettyPrint = "Pretty print";
 let lineWrap = "Hard line wrap";
 let columns = "columns";
 
-let sourceTree = "Source tree";
+let treeView = "Tree";
 
-let webpackTree = "Webpack tree";
+let moduleListView = "Modules";
 
 module Welcome = {
   let paste = "Paste URLs to webpack stats uploaded somewhere";

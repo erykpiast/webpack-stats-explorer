@@ -4,7 +4,7 @@ set -e;
 
 OLD_PWD=$(pwd);
 EXAMPLE=$1;
-VERSIONS=("a" "b" "c" "d" "e" "f" "g" "h" "i");
+VERSIONS=("a" "b" "c" "d" "e" "f" "g" "h" "i" "j");
 
 if [ -z $EXAMPLE ]; then
     EXAMPLES=$(find playground -mindepth 1 -maxdepth 1 -type d -exec basename {} \;);
