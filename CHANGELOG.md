@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.24.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.23.0...v1.24.0) (2020-06-16)
+
+
+### Features
+
+* **ui:** show flat modules list instead of webpack tree ([1febac3](https://github.com/erykpiast/webpack-stats-explorer/commit/1febac3aeefe7fce948fdc724ba7b401158b45e8))
+* **ui:** support more languages in syntax higlighting of original source ([3284f2e](https://github.com/erykpiast/webpack-stats-explorer/commit/3284f2e15942b395e2421d5dc4473b0b060e5755))
+
+
+### Bug Fixes
+
+* **ci:** use older version of node explicitely to fix issues with terser-webpack-plugin ([6afbb1d](https://github.com/erykpiast/webpack-stats-explorer/commit/6afbb1daa351d9b52341d560abd03590d483042f))
+* **package:** update bs-js-beautify to version 0.1.1 ([96a8cdc](https://github.com/erykpiast/webpack-stats-explorer/commit/96a8cdc4bd51c39379bb9d15c84c4af50878ec71))
+* **package:** update bs-react-diff-viewer to version 0.1.2 ([33b9f3f](https://github.com/erykpiast/webpack-stats-explorer/commit/33b9f3fe9c58809c6cb3b4865b1ff48cc0af9dff))
+* **package:** update bs-react-dropzone to version 0.5.3 ([c29fe1d](https://github.com/erykpiast/webpack-stats-explorer/commit/c29fe1d1ed0b4efed2d992a65fdfbdc5133d0b3d))
+* **package:** update bs-react-syntax-highlighter to version 0.2.2 ([72b49e9](https://github.com/erykpiast/webpack-stats-explorer/commit/72b49e999e91eb9ff64674e937c37348474a389c))
+* **package:** update react-diff-viewer to version 3.1.1 ([84fb336](https://github.com/erykpiast/webpack-stats-explorer/commit/84fb336db46c2d3948338c7d6523a3704920dbe7))
+* **ui:** align look of modified code and all the rest ([688db46](https://github.com/erykpiast/webpack-stats-explorer/commit/688db46da9260dab6159cf7b1ca425d3b1037195))
+
 ## [1.23.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.22.1...v1.23.0) (2020-05-18)
 
 
