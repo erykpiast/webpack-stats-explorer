@@ -10,11 +10,19 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+<<<<<<< HEAD
     "autoprefixer": "9.8.5",
     "css-loader": "4.0.0",
     "postcss-loader": "3.0.0",
     "style-loader": "1.2.1",
     "webpack": "4.44.0",
+=======
+    "autoprefixer": "9.8.2",
+    "css-loader": "3.6.0",
+    "postcss-loader": "3.0.0",
+    "style-loader": "1.2.1",
+    "webpack": "4.43.0",
+>>>>>>> chore(testing): update playground dependencies
     "webpack-enhanced-stats-plugin": "2.5.0"
   }
 }
