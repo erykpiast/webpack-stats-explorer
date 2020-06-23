@@ -8,6 +8,7 @@ module Styles = {
 let logStats = (title, stats) => {
   Js.log(title);
   stats |> WebpackStats.encode |> Js.log;
+  stats;
 };
 
 let logComp = (title, comp) => {

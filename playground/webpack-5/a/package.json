@@ -1,0 +1,22 @@
+{
+  "name": "webpack-stats-explorer-playground-minimal",
+  "version": "1.0.0",
+  "description": "Minimal configuration playground for Webpack Stats Explorer",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js --json 1> ../$(basename $(pwd)).json"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "7.10.3",
+    "@babel/plugin-transform-runtime": "7.10.3",
+    "@babel/preset-env": "7.10.3",
+    "babel-loader": "8.1.0",
+    "terser-webpack-plugin": "3.0.6",
+    "webpack": "5.0.0-beta.17",
+    "webpack-cli": "4.0.0-beta.8",
+    "webpack-enhanced-stats-plugin": "2.5.0"
+  }
+}
