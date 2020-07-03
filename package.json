@@ -52,7 +52,7 @@
     "@zpnester/bs-filereader": "0.4.0",
     "bs-css": "https://gitpkg.now.sh/erykpiast/bs-css/bs-css?width-values",
     "bs-css-emotion": "https://gitpkg.now.sh/erykpiast/bs-css/bs-css-emotion?width-values",
-    "bs-fetch": "0.5.2",
+    "bs-fetch": "0.6.1",
     "bs-js-beautify": "0.1.1",
     "bs-jsverify": "0.10.0",
     "bs-react-diff-viewer": "0.1.2",
