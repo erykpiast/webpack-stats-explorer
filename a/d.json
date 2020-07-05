@@ -5,8 +5,8 @@
   ],
   "version": "4.43.0",
   "hash": "c89b536deb0402099800",
-  "time": 4633,
-  "builtAt": 1593967494621,
+  "time": 4612,
+  "builtAt": 1593971179390,
   "publicPath": "",
   "outputPath": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/dist",
   "assetsByChunkName": {
@@ -6004,9 +6004,9 @@
           "chunks": [
             0
           ],
-          "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseFlatten.js",
-          "issuerId": 218,
-          "issuerName": "./node_modules/lodash/_baseFlatten.js",
+          "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_getSymbolsIn.js",
+          "issuerId": 86,
+          "issuerName": "./node_modules/lodash/_getSymbolsIn.js",
           "issuerPath": [
             {
               "id": null,
@@ -6039,24 +6039,24 @@
               "name": "./node_modules/lodash/fp/_util.js"
             },
             {
-              "id": 216,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/rearg.js",
-              "name": "./node_modules/lodash/rearg.js"
+              "id": 144,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/clone.js",
+              "name": "./node_modules/lodash/clone.js"
             },
             {
-              "id": 97,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_flatRest.js",
-              "name": "./node_modules/lodash/_flatRest.js"
+              "id": 82,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseClone.js",
+              "name": "./node_modules/lodash/_baseClone.js"
             },
             {
-              "id": 217,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/flatten.js",
-              "name": "./node_modules/lodash/flatten.js"
+              "id": 172,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_copySymbolsIn.js",
+              "name": "./node_modules/lodash/_copySymbolsIn.js"
             },
             {
-              "id": 218,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseFlatten.js",
-              "name": "./node_modules/lodash/_baseFlatten.js"
+              "id": 86,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_getSymbolsIn.js",
+              "name": "./node_modules/lodash/_getSymbolsIn.js"
             }
           ],
           "failed": false,
@@ -29984,9 +29984,9 @@
       "chunks": [
         0
       ],
-      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseFlatten.js",
-      "issuerId": 218,
-      "issuerName": "./node_modules/lodash/_baseFlatten.js",
+      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_getSymbolsIn.js",
+      "issuerId": 86,
+      "issuerName": "./node_modules/lodash/_getSymbolsIn.js",
       "issuerPath": [
         {
           "id": null,
@@ -30019,24 +30019,24 @@
           "name": "./node_modules/lodash/fp/_util.js"
         },
         {
-          "id": 216,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/rearg.js",
-          "name": "./node_modules/lodash/rearg.js"
+          "id": 144,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/clone.js",
+          "name": "./node_modules/lodash/clone.js"
         },
         {
-          "id": 97,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_flatRest.js",
-          "name": "./node_modules/lodash/_flatRest.js"
+          "id": 82,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseClone.js",
+          "name": "./node_modules/lodash/_baseClone.js"
         },
         {
-          "id": 217,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/flatten.js",
-          "name": "./node_modules/lodash/flatten.js"
+          "id": 172,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_copySymbolsIn.js",
+          "name": "./node_modules/lodash/_copySymbolsIn.js"
         },
         {
-          "id": 218,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseFlatten.js",
-          "name": "./node_modules/lodash/_baseFlatten.js"
+          "id": 86,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_getSymbolsIn.js",
+          "name": "./node_modules/lodash/_getSymbolsIn.js"
         }
       ],
       "failed": false,
