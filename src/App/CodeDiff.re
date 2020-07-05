@@ -1,3 +1,7 @@
+type mode =
+  | Unified
+  | Split;
+
 module Styles = {
   open Css;
 
@@ -40,24 +44,24 @@ module Styles = {
     flexShrink(0.0),
     padding(px(0)),
     position(`relative),
-    selector("pre", [minWidth(ch(120.0))]),
-    width(`auto),
-    before(
-      switch (columnGuideline) {
-      | 0 => []
-      | _ => [
-          contentRule(`text("")),
-          backgroundColor(Theme.Color.Border.default),
-          display(`block),
-          position(`absolute),
-          left(ch(float_of_int(columnGuideline))),
-          bottom(px(0)),
-          top(px(0)),
-          right(px(0)),
-          width(px(1)),
-        ]
-      },
-    ),
+    ...switch (columnGuideline) {
+       | 0 => []
+       | _ => [
+           selector("pre", [minWidth(ch(float_of_int(columnGuideline)))]),
+           width(`auto),
+           before([
+             contentRule(`text("")),
+             backgroundColor(Theme.Color.Border.default),
+             display(`block),
+             position(`absolute),
+             left(ch(float_of_int(columnGuideline))),
+             bottom(px(0)),
+             top(px(0)),
+             right(px(0)),
+             width(px(1)),
+           ]),
+         ]
+       },
   ];
 
   let line = [
@@ -145,28 +149,35 @@ module Styles = {
 };
 
 [@react.component]
-let make = (~after, ~before, ~columnGuideline, ~language=`JavaScript) => {
+let make =
+    (~after, ~before, ~columnGuideline, ~mode=Unified, ~language=`JavaScript) => {
   let greatestLineNumberWidth =
     [|
       Code.getTheGreatestLineNumberLength(after),
       Code.getTheGreatestLineNumberLength(before),
     |]
     |> Utils.Array.maxInt;
-  let renderContent = content =>
+  let renderContent = content => {
     <ReactSyntaxHighlighter.Prism
       language
       showLineNumbers=false
       customStyle=Styles.preStyle
       wrapLines=true
       _PreTag={`intrinsic("span")}>
-      content
+      {content |> Utils.defaultTo("")}
     </ReactSyntaxHighlighter.Prism>;
+  };
   <>
     <ReactDiffViewer
       oldValue=before
       newValue=after
       compareMethod=`words
-      splitView=false
+      splitView={
+        switch (mode) {
+        | Unified => false
+        | Split => true
+        }
+      }
       showDiffOnly=false
       renderContent
       styles={ReactDiffViewer.Styles.make(

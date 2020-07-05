@@ -13,6 +13,7 @@ module Styles = {
       margin(px(0)),
       maxHeight(`percent(100.0)),
       overflowY(`auto),
+      overflowX(`hidden),
       flexShrink(0.0),
     ]);
 

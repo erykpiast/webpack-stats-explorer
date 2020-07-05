@@ -23,7 +23,7 @@ module Styles = {
       (),
     );
 
-  let rootClassName =
+  let getRootClassName = columnGuideline =>
     style([
       selector(
         "code",
@@ -32,7 +32,7 @@ module Styles = {
           flexDirection(`column),
           width(`maxContent),
           minHeight(`percent(100.0)),
-          minWidth(ch(120.0)),
+          minWidth(ch(float_of_int(columnGuideline))),
         ],
       ),
     ]);
@@ -155,7 +155,10 @@ let make =
   <ReactSyntaxHighlighter.Prism
     language
     showLineNumbers=false
-    className={Cn.make([className, Styles.rootClassName])}
+    className={Cn.make([
+      className,
+      Styles.getRootClassName(columnGuideline),
+    ])}
     customStyle=Styles.rootStyle
     lineProps
     wrapLines=true>

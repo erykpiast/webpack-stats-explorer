@@ -5,9 +5,11 @@ type action =
   | Navigate(State.NavigationPath.Segment.t, int)
   | NavigateThroughBreadcrumbs(int)
   | ToggleTimeline
+  | ToggleSidebar
   | AddStats(list(WebpackStats.t))
   | UpdateUrls(list(string))
   | SelectTab(int)
+  | SelectDiffMode(CodeDiff.mode)
   | SwitchSourceTree;
 
 let updateNavigationPath = (path: list('a), segment, depth): list('a) => {
@@ -33,6 +35,8 @@ let reducer = (state, action) =>
           stats: state.stats,
           navigationPath: state.navigationPath,
           isTimelineVisible: state.isTimelineVisible,
+          isSidebarCollapsed: state.isSidebarCollapsed,
+          diffMode: state.diffMode,
           urls: state.urls,
           sourceTree: state.sourceTree,
         }
@@ -42,6 +46,8 @@ let reducer = (state, action) =>
           stats: state.stats,
           navigationPath: state.navigationPath,
           isTimelineVisible: state.isTimelineVisible,
+          isSidebarCollapsed: state.isSidebarCollapsed,
+          diffMode: state.diffMode,
           urls: state.urls,
           sourceTree: state.sourceTree,
         }
@@ -51,6 +57,8 @@ let reducer = (state, action) =>
           stats: state.stats,
           navigationPath: state.navigationPath,
           isTimelineVisible: state.isTimelineVisible,
+          isSidebarCollapsed: state.isSidebarCollapsed,
+          diffMode: state.diffMode,
           urls: state.urls,
           sourceTree: state.sourceTree,
         }
@@ -61,6 +69,8 @@ let reducer = (state, action) =>
           navigationPath:
             updateNavigationPath(state.navigationPath, segment, depth),
           isTimelineVisible: state.isTimelineVisible,
+          isSidebarCollapsed: state.isSidebarCollapsed,
+          diffMode: state.diffMode,
           urls: state.urls,
           sourceTree: state.sourceTree,
         }
@@ -72,6 +82,8 @@ let reducer = (state, action) =>
             Belt.List.take(state.navigationPath, index)
             |> Utils.defaultTo([]),
           isTimelineVisible: state.isTimelineVisible,
+          isSidebarCollapsed: state.isSidebarCollapsed,
+          diffMode: state.diffMode,
           urls: state.urls,
           sourceTree: state.sourceTree,
         }
@@ -81,6 +93,19 @@ let reducer = (state, action) =>
           stats: state.stats,
           navigationPath: state.navigationPath,
           isTimelineVisible: !state.isTimelineVisible,
+          isSidebarCollapsed: state.isSidebarCollapsed,
+          diffMode: state.diffMode,
+          urls: state.urls,
+          sourceTree: state.sourceTree,
+        }
+      | ToggleSidebar => {
+          tab: state.tab,
+          index: state.index,
+          stats: state.stats,
+          navigationPath: state.navigationPath,
+          isTimelineVisible: state.isTimelineVisible,
+          isSidebarCollapsed: !state.isSidebarCollapsed,
+          diffMode: state.diffMode,
           urls: state.urls,
           sourceTree: state.sourceTree,
         }
@@ -89,7 +114,9 @@ let reducer = (state, action) =>
           index: state.index,
           stats: List.concat([state.stats, stats]),
           navigationPath: state.navigationPath,
+          isSidebarCollapsed: state.isSidebarCollapsed,
           isTimelineVisible: false,
+          diffMode: state.diffMode,
           urls: state.urls,
           sourceTree: state.sourceTree,
         }
@@ -99,6 +126,8 @@ let reducer = (state, action) =>
           stats: [],
           navigationPath: state.navigationPath,
           isTimelineVisible: state.isTimelineVisible,
+          isSidebarCollapsed: state.isSidebarCollapsed,
+          diffMode: state.diffMode,
           urls,
           sourceTree: state.sourceTree,
         }
@@ -108,6 +137,8 @@ let reducer = (state, action) =>
           stats: state.stats,
           navigationPath: state.navigationPath,
           isTimelineVisible: state.isTimelineVisible,
+          isSidebarCollapsed: state.isSidebarCollapsed,
+          diffMode: state.diffMode,
           urls: state.urls,
           sourceTree: state.sourceTree,
         }
@@ -122,8 +153,27 @@ let reducer = (state, action) =>
                 )
               : State.NavigationPath.convertToSourceTree(state.navigationPath),
           isTimelineVisible: state.isTimelineVisible,
+          isSidebarCollapsed: state.isSidebarCollapsed,
+          diffMode: state.diffMode,
           urls: state.urls,
           sourceTree: !state.sourceTree,
+        }
+      | SelectDiffMode(diffMode) => {
+          tab: state.tab,
+          index: state.index,
+          stats: state.stats,
+          navigationPath: state.navigationPath,
+          isTimelineVisible: state.isTimelineVisible,
+          isSidebarCollapsed:
+            CodeDiff.(
+              switch (diffMode) {
+              | Unified => false
+              | Split => true
+              }
+            ),
+          diffMode,
+          urls: state.urls,
+          sourceTree: state.sourceTree,
         }
       };
     }
@@ -143,6 +193,8 @@ let make = (~stats) => {
           urlState.navigationPath
           |> List.map(State.NavigationPath.Segment.fromString),
         isTimelineVisible: false,
+        isSidebarCollapsed: false,
+        diffMode: CodeDiff.Unified,
         urls: urlState.urls,
         sourceTree: urlState.sourceTree,
       },
@@ -183,6 +235,8 @@ let make = (~stats) => {
            main=loader
            top={<Logo onClick={() => ()} />}
            aboveTop=React.null
+           isSidebarCollapsed={state.isSidebarCollapsed}
+           onSidebarToggle={() => dispatch(ToggleSidebar)}
          />}
     </WelcomeScreen>;
   } else {
@@ -259,10 +313,12 @@ let make = (~stats) => {
              let kind = CompareEntry.kind(comp, entry, rest);
 
              <EntrySummary
-               tab={state.tab}
-               onTab={tab => dispatch(SelectTab(tab))}
                entry
                kind
+               tab={state.tab}
+               diffMode={state.diffMode}
+               onTab={tab => dispatch(SelectTab(tab))}
+               onDiffMode={diffMode => dispatch(SelectDiffMode(diffMode))}
              />;
            };
 
@@ -288,6 +344,8 @@ let make = (~stats) => {
            main=mainContent
            top=topContent
            aboveTop=aboveTopContent
+           isSidebarCollapsed={state.isSidebarCollapsed}
+           onSidebarToggle={() => dispatch(ToggleSidebar)}
          />;
        }}
     </AddStats>;

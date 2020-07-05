@@ -11,7 +11,7 @@ module Styles = {
       width(`percent(100.0)),
     ]);
 
-  let top =
+  let topSection =
     style([
       display(`flex),
       height(headerHeight),
@@ -20,8 +20,7 @@ module Styles = {
       alignItems(`center),
     ]);
 
-  let aboveTop =
-    style([]);
+  let aboveTop = style([]);
 
   let contentWrapper =
     style([
@@ -31,13 +30,50 @@ module Styles = {
       overflowY(`hidden),
     ]);
 
-  let side =
+  let getSideSection = isSidebarCollapsed =>
     style([
       display(`block),
-      width(Theme.Space.triplehexteenfold),
+      width(
+        isSidebarCollapsed
+          ? Theme.Space.octafold : Theme.Space.triplehexteenfold,
+      ),
       backgroundColor(Theme.Color.Background.default),
       maxHeight(`percent(100.0)),
+      overflow(`hidden),
       flexShrink(0.0),
+      position(`relative),
+      transition(
+        ~duration=250,
+        ~timingFunction=`easeInOut,
+        "width",
+      ),
+    ]);
+
+  let getSideToggle = isSidebarCollapsed =>
+    style([
+      width(Theme.Space.double),
+      bottom(px(0)),
+      position(`absolute),
+      top(px(0)),
+      right(px(0)),
+      display(`flex),
+      flexDirection(`column),
+      justifyContent(`center),
+      transition(
+        ~duration=250,
+        ~timingFunction=`easeInOut,
+        "background-color",
+      ),
+      after([
+        contentRule(`text(isSidebarCollapsed ? {js|▶|js} : {js|◀|js})),
+        color(Theme.Color.Text.secondary),
+        transition(~duration=250, ~timingFunction=`easeInOut, "color"),
+      ]),
+      hover([
+        backgroundColor(Theme.Color.Background.selected),
+        cursor(`pointer),
+        after([color(Theme.Color.Text.primary)]),
+      ]),
     ]);
 
   let main =
@@ -60,12 +96,19 @@ module Styles = {
 };
 
 [@react.component]
-let make = (~side, ~main, ~top, ~aboveTop) => {
+let make =
+    (~side, ~main, ~top, ~aboveTop, ~isSidebarCollapsed, ~onSidebarToggle) => {
   <div className=Styles.root>
     <div className=Styles.aboveTop> aboveTop </div>
-    <div className=Styles.top> top </div>
+    <div className=Styles.topSection> top </div>
     <div className=Styles.contentWrapper>
-      <div className=Styles.side> side </div>
+      <div className={Styles.getSideSection(isSidebarCollapsed)}>
+        side
+        <div
+          className={Styles.getSideToggle(isSidebarCollapsed)}
+          onClick={_ => onSidebarToggle()}
+        />
+      </div>
       <div className=Styles.main> main </div>
     </div>
   </div>;
