@@ -11,9 +11,9 @@ module Styles = {
   let lineNumberRightPadding = Theme.Space.double;
   let lineNumberRightMargin = Theme.Space.double;
 
-  let rootStyle =
+  let getRootStyle = backgroundColor =>
     ReactDOMRe.Style.make(
-      ~backgroundColor=Theme.Color.Background.code |> Types.Color.toString,
+      ~backgroundColor=backgroundColor |> Types.Color.toString,
       ~padding=px(0) |> Types.Length.toString,
       ~margin=px(0) |> Types.Length.toString,
       ~marginLeft=lineNumberLeftMargin |> Types.Length.toString,
@@ -127,8 +127,15 @@ let getTheGreatestLineNumberLength =
 
 [@react.component]
 let make =
-    (~className="", ~columnGuideline=0, ~language=`JavaScript, ~children) => {
+    (
+      ~className="",
+      ~columnGuideline=0,
+      ~language=`JavaScript,
+      ~backgroundColor=Theme.Color.Background.bright,
+      ~children,
+    ) => {
   let theGreatestLineNumberLength = getTheGreatestLineNumberLength(children);
+
 
   let lineProps =
     `Plain(
@@ -156,7 +163,7 @@ let make =
     language
     showLineNumbers=false
     className={Cn.make([className, Styles.rootClassName])}
-    customStyle=Styles.rootStyle
+    customStyle={Styles.getRootStyle(backgroundColor)}
     lineProps
     wrapLines=true>
     children

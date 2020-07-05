@@ -195,7 +195,7 @@ let renderSize = (label, data) =>
       <dd className=Styles.definition> <Size value=size /> diff </dd>
     </>;
   };
-let renderSource = (format, columnGuideline, language, data) =>
+let renderSource = (~format, ~columnGuideline, ~language, ~kind, data) =>
   switch (data) {
   | None =>
     // NOTE: there are some cases when plugin is configured but some
@@ -251,9 +251,15 @@ module.exports = {
   | Some(data) =>
     switch (data) {
     | EntryData({source}) =>
-      <Code className=Styles.code columnGuideline language>
+      let backgroundColor =
+        switch (kind) {
+        | Added => Theme.Color.Removed.background;
+        | Removed => Theme.Color.Added.background
+        | _ => Theme.Color.Background.bright
+        };
+      <Code className=Styles.code columnGuideline language backgroundColor>
         ...{source |> format}
-      </Code>
+      </Code>;
     | ModifiedEntryData({source}) =>
       let before = source |> fst |> format;
       let after = source |> snd |> format;
@@ -347,7 +353,13 @@ let make = (~entry, ~onTab, ~tab, ~kind) => {
            name={entry |> getId}
          />
        | _ =>
-         currentData |> renderSource(formatter, columnGuideline, language)
+         currentData
+         |> renderSource(
+              ~format=formatter,
+              ~columnGuideline,
+              ~language,
+              ~kind,
+            )
        }}
     </div>
     <form className=Styles.ViewSettings.wrapper>
