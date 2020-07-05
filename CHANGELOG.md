@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.25.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.24.0...v1.25.0) (2020-07-05)
+
+
+### Features
+
+* **ui:** add split mode for modified files ([d7a0cec](https://github.com/erykpiast/webpack-stats-explorer/commit/d7a0cec1f139861aa2ad338405a363c108229c35))
+
+
+### Bug Fixes
+
+* upgrade bs-fetch from 0.5.2 to 0.6.1 ([5fcae85](https://github.com/erykpiast/webpack-stats-explorer/commit/5fcae858438acd839396397d183c6acc680a4fb3))
+* upgrade preact from 10.4.1 to 10.4.4 ([b6d3bde](https://github.com/erykpiast/webpack-stats-explorer/commit/b6d3bde968ba99074b325828aecb9bb9f55f1b54))
+* upgrade preact from 10.4.1 to 10.4.4 ([ad3a7f0](https://github.com/erykpiast/webpack-stats-explorer/commit/ad3a7f08cfd934527748d01786aa3def3a1fafbb))
+* upgrade preact from 10.4.1 to 10.4.4 ([41ebe1a](https://github.com/erykpiast/webpack-stats-explorer/commit/41ebe1a006a4500168e5908158b36502182c0945))
+* upgrade preact from 10.4.1 to 10.4.4 ([93bd7b0](https://github.com/erykpiast/webpack-stats-explorer/commit/93bd7b03f67bc15fa6bbae758efd4edc5fa32527))
+* upgrade rambda from 5.4.0 to 5.6.2 ([ef9486f](https://github.com/erykpiast/webpack-stats-explorer/commit/ef9486f6c0980e53c126d2c08aa5c3e5f6e46239))
+* upgrade react-dropzone from 11.0.0 to 11.0.1 ([851d4ad](https://github.com/erykpiast/webpack-stats-explorer/commit/851d4ad2ba69ba69bddb05967df10b4078e61081))
+* upgrade reason-react from 0.8.0 to 0.9.1 ([f752051](https://github.com/erykpiast/webpack-stats-explorer/commit/f75205193370ce22664ac82265af493b982b067a))
+
 ## [1.24.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.23.0...v1.24.0) (2020-06-16)
 
 
