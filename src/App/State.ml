@@ -49,6 +49,8 @@ type t =
   ; stats : WebpackStats.t list
   ; navigationPath : NavigationPath.t
   ; isTimelineVisible : bool
+  ; isSidebarCollapsed : bool
+  ; diffMode : CodeDiff.mode
   ; urls : string list
   ; sourceTree : bool
   }

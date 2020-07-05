@@ -2,8 +2,6 @@ open CompareEntry;
 open CompareKind;
 open Rationale.Option.Infix;
 
-let hardLineWrapLimit = 120;
-
 module Styles = {
   open Css;
 
@@ -58,6 +56,8 @@ module Styles = {
   let code = style([padding(Theme.Space.default), width(`percent(100.0))]);
 
   let tabsPlaceholder = style([height(Theme.Space.default)]);
+
+  let diffSwitch = style([marginLeft(`auto)]);
 
   module Kind = {
     let added = style([color(Theme.Color.Added.default)]);
@@ -195,7 +195,7 @@ let renderSize = (label, data) =>
       <dd className=Styles.definition> <Size value=size /> diff </dd>
     </>;
   };
-let renderSource = (format, columnGuideline, language, data) =>
+let renderSource = (~formatter, ~columnGuideline, ~language, ~diffMode, data) =>
   switch (data) {
   | None =>
     // NOTE: there are some cases when plugin is configured but some
@@ -252,16 +252,16 @@ module.exports = {
     switch (data) {
     | EntryData({source}) =>
       <Code className=Styles.code columnGuideline language>
-        ...{source |> format}
+        ...{source |> formatter}
       </Code>
     | ModifiedEntryData({source}) =>
-      let before = source |> fst |> format;
-      let after = source |> snd |> format;
+      let before = source |> fst |> formatter;
+      let after = source |> snd |> formatter;
 
       if (after == before) {
         <Code className=Styles.code columnGuideline language> ...after </Code>;
       } else {
-        <CodeDiff columnGuideline before after language />;
+        <CodeDiff columnGuideline before after language mode=diffMode />;
       };
     }
   };
@@ -272,7 +272,7 @@ let prettyPrintInputId = "pretty-print";
 let lineWrapInputId = "line-wrap";
 
 [@react.component]
-let make = (~entry, ~onTab, ~tab, ~kind) => {
+let make = (~entry, ~onTab, ~tab, ~onDiffMode, ~diffMode, ~kind) => {
   let original = entry |> getOriginal;
   let stat = entry |> getStat;
   let parsed = entry |> getParsed;
@@ -294,6 +294,13 @@ let make = (~entry, ~onTab, ~tab, ~kind) => {
     setLineWrappingEnabled(_ => defaultFormatting);
     onTab(index);
   };
+  let hardLineWrapLimit =
+    CodeDiff.(
+      switch (diffMode) {
+      | Unified => 120
+      | Split => 80
+      }
+    );
   let wrapLineLength = isLineWrappingEnabled ? hardLineWrapLimit : 0;
   let formatter =
     isPrettyPrintEnabled
@@ -347,7 +354,8 @@ let make = (~entry, ~onTab, ~tab, ~kind) => {
            name={entry |> getId}
          />
        | _ =>
-         currentData |> renderSource(formatter, columnGuideline, language)
+         currentData
+         |> renderSource(~formatter, ~columnGuideline, ~language, ~diffMode)
        }}
     </div>
     <form className=Styles.ViewSettings.wrapper>
@@ -381,6 +389,15 @@ let make = (~entry, ~onTab, ~tab, ~kind) => {
         {L10N.columns |> React.string}
         {")" |> React.string}
       </label>
+      {kind === Modified
+         ? <DoubleSwitch
+             className=Styles.diffSwitch
+             onSwitch=onDiffMode
+             current=diffMode
+             a=(CodeDiff.Unified, "Unified")
+             b=(CodeDiff.Split, "Split")
+           />
+         : React.null}
     </form>
   </div>;
 };
