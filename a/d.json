@@ -5,8 +5,8 @@
   ],
   "version": "4.43.0",
   "hash": "5945644db3ffaf284c8f",
-  "time": 4807,
-  "builtAt": 1594106160692,
+  "time": 4604,
+  "builtAt": 1594106636689,
   "publicPath": "",
   "outputPath": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/dist",
   "assetsByChunkName": {
@@ -6424,9 +6424,9 @@
           "chunks": [
             0
           ],
-          "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseMatchesProperty.js",
-          "issuerId": 206,
-          "issuerName": "./node_modules/lodash/_baseMatchesProperty.js",
+          "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/property.js",
+          "issuerId": 213,
+          "issuerName": "./node_modules/lodash/property.js",
           "issuerPath": [
             {
               "id": null,
@@ -6459,9 +6459,9 @@
               "name": "./node_modules/lodash/_baseIteratee.js"
             },
             {
-              "id": 206,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseMatchesProperty.js",
-              "name": "./node_modules/lodash/_baseMatchesProperty.js"
+              "id": 213,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/property.js",
+              "name": "./node_modules/lodash/property.js"
             }
           ],
           "failed": false,
@@ -10121,9 +10121,9 @@
           "chunks": [
             0
           ],
-          "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/get.js",
-          "issuerId": 207,
-          "issuerName": "./node_modules/lodash/get.js",
+          "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_basePropertyDeep.js",
+          "issuerId": 215,
+          "issuerName": "./node_modules/lodash/_basePropertyDeep.js",
           "issuerPath": [
             {
               "id": null,
@@ -10156,14 +10156,14 @@
               "name": "./node_modules/lodash/_baseIteratee.js"
             },
             {
-              "id": 206,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseMatchesProperty.js",
-              "name": "./node_modules/lodash/_baseMatchesProperty.js"
+              "id": 213,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/property.js",
+              "name": "./node_modules/lodash/property.js"
             },
             {
-              "id": 207,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/get.js",
-              "name": "./node_modules/lodash/get.js"
+              "id": 215,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_basePropertyDeep.js",
+              "name": "./node_modules/lodash/_basePropertyDeep.js"
             }
           ],
           "failed": false,
@@ -10252,14 +10252,14 @@
               "name": "./node_modules/lodash/_baseIteratee.js"
             },
             {
-              "id": 206,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseMatchesProperty.js",
-              "name": "./node_modules/lodash/_baseMatchesProperty.js"
+              "id": 213,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/property.js",
+              "name": "./node_modules/lodash/property.js"
             },
             {
-              "id": 207,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/get.js",
-              "name": "./node_modules/lodash/get.js"
+              "id": 215,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_basePropertyDeep.js",
+              "name": "./node_modules/lodash/_basePropertyDeep.js"
             },
             {
               "id": 94,
@@ -30404,9 +30404,9 @@
       "chunks": [
         0
       ],
-      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseMatchesProperty.js",
-      "issuerId": 206,
-      "issuerName": "./node_modules/lodash/_baseMatchesProperty.js",
+      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/property.js",
+      "issuerId": 213,
+      "issuerName": "./node_modules/lodash/property.js",
       "issuerPath": [
         {
           "id": null,
@@ -30439,9 +30439,9 @@
           "name": "./node_modules/lodash/_baseIteratee.js"
         },
         {
-          "id": 206,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseMatchesProperty.js",
-          "name": "./node_modules/lodash/_baseMatchesProperty.js"
+          "id": 213,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/property.js",
+          "name": "./node_modules/lodash/property.js"
         }
       ],
       "failed": false,
@@ -34101,9 +34101,9 @@
       "chunks": [
         0
       ],
-      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/get.js",
-      "issuerId": 207,
-      "issuerName": "./node_modules/lodash/get.js",
+      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_basePropertyDeep.js",
+      "issuerId": 215,
+      "issuerName": "./node_modules/lodash/_basePropertyDeep.js",
       "issuerPath": [
         {
           "id": null,
@@ -34136,14 +34136,14 @@
           "name": "./node_modules/lodash/_baseIteratee.js"
         },
         {
-          "id": 206,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseMatchesProperty.js",
-          "name": "./node_modules/lodash/_baseMatchesProperty.js"
+          "id": 213,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/property.js",
+          "name": "./node_modules/lodash/property.js"
         },
         {
-          "id": 207,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/get.js",
-          "name": "./node_modules/lodash/get.js"
+          "id": 215,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_basePropertyDeep.js",
+          "name": "./node_modules/lodash/_basePropertyDeep.js"
         }
       ],
       "failed": false,
@@ -34232,14 +34232,14 @@
           "name": "./node_modules/lodash/_baseIteratee.js"
         },
         {
-          "id": 206,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseMatchesProperty.js",
-          "name": "./node_modules/lodash/_baseMatchesProperty.js"
+          "id": 213,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/property.js",
+          "name": "./node_modules/lodash/property.js"
         },
         {
-          "id": 207,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/get.js",
-          "name": "./node_modules/lodash/get.js"
+          "id": 215,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_basePropertyDeep.js",
+          "name": "./node_modules/lodash/_basePropertyDeep.js"
         },
         {
           "id": 94,
