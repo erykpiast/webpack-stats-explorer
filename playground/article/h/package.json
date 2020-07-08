@@ -27,7 +27,7 @@
     "webpack-enhanced-stats-plugin": "2.3.0"
   },
   "dependencies": {
-    "preact": "10.4.1",
+    "preact": "10.4.4",
     "rambda": "5.7.0"
   }
 }
