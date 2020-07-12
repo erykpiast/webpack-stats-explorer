@@ -28,6 +28,6 @@
   },
   "dependencies": {
     "preact": "10.4.4",
-    "rambda": "5.7.0"
+    "rambda": "5.8.0"
   }
 }
