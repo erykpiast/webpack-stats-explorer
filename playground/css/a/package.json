@@ -12,6 +12,6 @@
   "devDependencies": {
     "css-loader": "3.5.3",
     "webpack": "4.43.0",
-    "webpack-enhanced-stats-plugin": "2.4.0"
+    "webpack-enhanced-stats-plugin": "2.5.0"
   }
 }
