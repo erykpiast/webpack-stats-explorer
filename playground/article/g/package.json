@@ -18,7 +18,7 @@
     "babel-plugin-transform-imports": "2.0.0",
     "babel-preset-preact": "2.0.0",
     "css-loader": "3.4.2",
-    "html-webpack-plugin": "3.2.0",
+    "html-webpack-plugin": "4.3.0",
     "mini-css-extract-plugin": "0.9.0",
     "nanoutils": "0.1.2",
     "raw-loader": "4.0.0",
