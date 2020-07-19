@@ -22,7 +22,7 @@
     "raw-loader": "4.0.0",
     "terser-webpack-plugin": "2.3.5",
     "webpack": "4.42.0",
-    "webpack-bundle-analyzer": "3.6.1",
+    "webpack-bundle-analyzer": "3.8.0",
     "webpack-dev-server": "3.10.3",
     "webpack-enhanced-stats-plugin": "2.3.0"
   },
