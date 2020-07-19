@@ -59,7 +59,7 @@
     "bs-react-dropzone": "0.5.3",
     "bs-react-syntax-highlighter": "0.2.2",
     "bs-webapi": "0.16.1",
-    "date-fns": "2.14.0",
+    "date-fns": "2.15.0",
     "diff": "4.0.2",
     "js-beautify": "1.11.0",
     "rationale": "0.2.0",
@@ -75,7 +75,7 @@
   },
   "devDependencies": {
     "@babel/cli": "7.10.5",
-    "@babel/core": "7.10.2",
+    "@babel/core": "7.10.5",
     "@babel/preset-env": "7.10.2",
     "@glennsl/bs-jest": "0.5.1",
     "babel-jest": "25.1.0",
