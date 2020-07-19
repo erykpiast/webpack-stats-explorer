@@ -5,8 +5,8 @@
   ],
   "version": "4.43.0",
   "hash": "230412b20a084b298d39",
-  "time": 3706,
-  "builtAt": 1594918218114,
+  "time": 3523,
+  "builtAt": 1595169183120,
   "publicPath": "",
   "outputPath": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/dist",
   "assetsByChunkName": {
@@ -616,9 +616,9 @@
           "chunks": [
             0
           ],
-          "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/lodash/_createBind.js",
-          "issuerId": 48,
-          "issuerName": "./node_modules/lodash/_createBind.js",
+          "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/lodash/_createCurry.js",
+          "issuerId": 51,
+          "issuerName": "./node_modules/lodash/_createCurry.js",
           "issuerPath": [
             {
               "id": null,
@@ -661,9 +661,9 @@
               "name": "./node_modules/lodash/_createWrap.js"
             },
             {
-              "id": 48,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/lodash/_createBind.js",
-              "name": "./node_modules/lodash/_createBind.js"
+              "id": 51,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/lodash/_createCurry.js",
+              "name": "./node_modules/lodash/_createCurry.js"
             }
           ],
           "failed": false,
@@ -735,9 +735,9 @@
           "chunks": [
             0
           ],
-          "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/lodash/_createBind.js",
-          "issuerId": 48,
-          "issuerName": "./node_modules/lodash/_createBind.js",
+          "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/lodash/_createCurry.js",
+          "issuerId": 51,
+          "issuerName": "./node_modules/lodash/_createCurry.js",
           "issuerPath": [
             {
               "id": null,
@@ -780,9 +780,9 @@
               "name": "./node_modules/lodash/_createWrap.js"
             },
             {
-              "id": 48,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/lodash/_createBind.js",
-              "name": "./node_modules/lodash/_createBind.js"
+              "id": 51,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/lodash/_createCurry.js",
+              "name": "./node_modules/lodash/_createCurry.js"
             }
           ],
           "failed": false,
@@ -4666,9 +4666,9 @@
               "name": "./node_modules/lodash/_createWrap.js"
             },
             {
-              "id": 48,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/lodash/_createBind.js",
-              "name": "./node_modules/lodash/_createBind.js"
+              "id": 51,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/lodash/_createCurry.js",
+              "name": "./node_modules/lodash/_createCurry.js"
             },
             {
               "id": 4,
@@ -10956,9 +10956,9 @@
       "chunks": [
         0
       ],
-      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/lodash/_createBind.js",
-      "issuerId": 48,
-      "issuerName": "./node_modules/lodash/_createBind.js",
+      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/lodash/_createCurry.js",
+      "issuerId": 51,
+      "issuerName": "./node_modules/lodash/_createCurry.js",
       "issuerPath": [
         {
           "id": null,
@@ -11001,9 +11001,9 @@
           "name": "./node_modules/lodash/_createWrap.js"
         },
         {
-          "id": 48,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/lodash/_createBind.js",
-          "name": "./node_modules/lodash/_createBind.js"
+          "id": 51,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/lodash/_createCurry.js",
+          "name": "./node_modules/lodash/_createCurry.js"
         }
       ],
       "failed": false,
@@ -11075,9 +11075,9 @@
       "chunks": [
         0
       ],
-      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/lodash/_createBind.js",
-      "issuerId": 48,
-      "issuerName": "./node_modules/lodash/_createBind.js",
+      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/lodash/_createCurry.js",
+      "issuerId": 51,
+      "issuerName": "./node_modules/lodash/_createCurry.js",
       "issuerPath": [
         {
           "id": null,
@@ -11120,9 +11120,9 @@
           "name": "./node_modules/lodash/_createWrap.js"
         },
         {
-          "id": 48,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/lodash/_createBind.js",
-          "name": "./node_modules/lodash/_createBind.js"
+          "id": 51,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/lodash/_createCurry.js",
+          "name": "./node_modules/lodash/_createCurry.js"
         }
       ],
       "failed": false,
@@ -15006,9 +15006,9 @@
           "name": "./node_modules/lodash/_createWrap.js"
         },
         {
-          "id": 48,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/lodash/_createBind.js",
-          "name": "./node_modules/lodash/_createBind.js"
+          "id": 51,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/e/node_modules/lodash/_createCurry.js",
+          "name": "./node_modules/lodash/_createCurry.js"
         },
         {
           "id": 4,
