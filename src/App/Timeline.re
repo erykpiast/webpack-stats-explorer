@@ -200,7 +200,7 @@ let make = (~className="", ~stats=[], ~onChange, ~selectedIndex) => {
 
   BsRecharts.(
     <div
-      className={Cn.make([className, Styles.root])}
+      className={Cn.fromList([className, Styles.root])}
       ref={ReactDOMRe.Ref.callbackDomRef(element => {
         setRootElement(_ => element);
         getRootWidth(element) |> ignore;

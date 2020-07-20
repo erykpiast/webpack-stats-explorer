@@ -16,8 +16,8 @@ let make = (~a, ~b, ~current, ~onSwitch, ~className="") => {
     let active = current === fst(value);
     <Button
       onClick={_ => value |> fst |> onSwitch}
-      disabled={active}
-      className={Cn.make([className, Styles.button])}>
+      disabled=active
+      className={Cn.fromList([className, Styles.button])}>
       {value |> snd |> React.string}
     </Button>;
   };

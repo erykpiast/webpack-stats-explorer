@@ -59,9 +59,9 @@ let make = (~onFiles, ~label, ~className="", ~children) => {
        let rootProps = getRootProps();
 
        <div
-         className={Cn.make([
+         className={Cn.fromList([
            className,
-           Cn.ifTrue(Styles.dragActive, isDragActive),
+           Cn.on(Styles.dragActive, isDragActive),
          ])}
          onBlur={rootProps.onBlur}
          onDragEnter={rootProps.onDragEnter}

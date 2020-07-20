@@ -14,7 +14,10 @@ let arrow = {js|»|js};
 let make = (~onToggle, ~isVisible) => {
   <Button onClick={_ => onToggle()}>
     <span
-      className={Cn.make([Styles.arrow, isVisible ? Styles.down : Styles.up])}>
+      className={Cn.fromList([
+        Styles.arrow,
+        isVisible ? Styles.down : Styles.up,
+      ])}>
       {arrow |> React.string}
     </span>
   </Button>;

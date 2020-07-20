@@ -1,4 +1,4 @@
- open Rationale.Function.Infix;
+open Rationale.Function.Infix;
 
 exception CorsExn;
 exception NotFoundExn;
@@ -83,7 +83,7 @@ let make = (~className="", ~urls, ~onFiles, ~onUrls) => {
     [|value|],
   );
 
-  <div className={Cn.make([className, Styles.root])}>
+  <div className={Cn.fromList([className, Styles.root])}>
     <textarea
       className=Styles.textArea
       value

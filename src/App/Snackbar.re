@@ -20,5 +20,5 @@ module Styles = {
 
 [@react.component]
 let make = (~className="", ~children) => {
-  <div className={Cn.make([className, Styles.root])}> children </div>;
+  <div className={Cn.fromList([className, Styles.root])}> children </div>;
 };
