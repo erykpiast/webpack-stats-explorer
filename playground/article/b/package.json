@@ -28,6 +28,6 @@
     "webpack-enhanced-stats-plugin": "2.3.0"
   },
   "dependencies": {
-    "preact": "10.4.4"
+    "preact": "10.4.6"
   }
 }
