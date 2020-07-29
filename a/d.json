@@ -5,8 +5,8 @@
   ],
   "version": "4.44.0",
   "hash": "7a9b4edc39f4e97cd08d",
-  "time": 8289,
-  "builtAt": 1596052053388,
+  "time": 8677,
+  "builtAt": 1596052192771,
   "publicPath": "",
   "outputPath": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/dist",
   "assetsByChunkName": {
