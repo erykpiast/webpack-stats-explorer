@@ -44,16 +44,16 @@ module Styles = {
 
 [@react.component]
 let make = (~className="", ~selectedIndex=0, ~onChange=_ => (), ~children) => {
-  <div className={Cn.make([className, Styles.root])}>
+  <div className={Cn.fromList([className, Styles.root])}>
     {children
      |> Array.mapi((index, child) =>
           if (child === React.null) {
             React.null;
           } else {
             <button
-              className={Cn.make([
+              className={Cn.fromList([
                 Styles.tab,
-                Cn.ifTrue(Styles.selectedTab, index === selectedIndex),
+                Cn.on(Styles.selectedTab, index === selectedIndex),
               ])}
               onClick={_event => onChange(index)}
               key={index |> string_of_int}>

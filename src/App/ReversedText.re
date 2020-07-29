@@ -8,7 +8,7 @@ let ltr = {js|\u200e|js};
 
 [@react.component]
 let make = (~className="", ~children) => {
-  <span className={Cn.make([className, Styles.root])}>
+  <span className={Cn.fromList([className, Styles.root])}>
     {ltr |> React.string}
     children
     {ltr |> React.string}

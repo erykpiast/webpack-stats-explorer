@@ -10,11 +10,11 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "autoprefixer": "9.8.0",
-    "css-loader": "3.5.3",
+    "autoprefixer": "9.8.5",
+    "css-loader": "4.0.0",
     "postcss-loader": "3.0.0",
     "style-loader": "1.2.1",
-    "webpack": "4.43.0",
-    "webpack-enhanced-stats-plugin": "2.4.0"
+    "webpack": "4.44.0",
+    "webpack-enhanced-stats-plugin": "2.5.0"
   }
 }

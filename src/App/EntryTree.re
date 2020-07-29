@@ -225,8 +225,8 @@ module Mapper = (Context: MapperContext) => {
       )
     | None => (_ => ())
     };
-  let createUnfoldHandler = (entry, currentLevel) =>
-    (_) => entry |> NavigationPath.Segment.make |> Context.onEntry(currentLevel);
+  let createUnfoldHandler = (entry, currentLevel, _) =>
+    entry |> NavigationPath.Segment.make |> Context.onEntry(currentLevel);
 
   let mapAdded = (level, parent, entry: Entry.t) => {
     after: entry.size,
@@ -352,7 +352,7 @@ let getLevelClass = level =>
 
 let getFamilyClass =
   fun
-  | (true, true) => Cn.make([Styles.parentItem, Styles.childItem])
+  | (true, true) => Cn.fromList([Styles.parentItem, Styles.childItem])
   | (true, false) => Styles.parentItem
   | (false, true) => Styles.childItem
   | (false, false) => "";
@@ -381,10 +381,10 @@ let make =
 
             <li
               onClick
-              className={Cn.make([
+              className={Cn.fromList([
                 Styles.item,
-                Cn.ifTrue(Styles.selectedItem, selected),
-                Cn.ifTrue(Styles.expandedParentItem, expanded),
+                Cn.on(Styles.selectedItem, selected),
+                Cn.on(Styles.expandedParentItem, expanded),
                 getLevelClass(level),
                 getFamilyClass(familyRelations),
               ])}
@@ -396,9 +396,9 @@ let make =
               {isModifiedOrIntact
                  ? <Size className=Styles.size value=after /> : React.null}
               <NumericDiff
-                className={Cn.make([
+                className={Cn.fromList([
                   Styles.diff,
-                  Cn.ifTrue(Styles.soleDiff, !isModifiedOrIntact),
+                  Cn.on(Styles.soleDiff, !isModifiedOrIntact),
                 ])}
                 after
                 before

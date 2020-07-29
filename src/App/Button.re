@@ -50,7 +50,14 @@ type type_ =
   | Primary;
 
 [@react.component]
-let make = (~onClick=_ => (), ~className="", ~type_=Default, ~disabled=false, ~children) => {
+let make =
+    (
+      ~onClick=_ => (),
+      ~className="",
+      ~type_=Default,
+      ~disabled=false,
+      ~children,
+    ) => {
   let typeClassName =
     Cn.mapSome(Some(type_), t =>
       switch (t) {
@@ -58,7 +65,7 @@ let make = (~onClick=_ => (), ~className="", ~type_=Default, ~disabled=false, ~c
       | Primary => Styles.primary
       }
     );
-  let className = Cn.make([Styles.button, typeClassName, className]);
+  let className = Cn.fromList([Styles.button, typeClassName, className]);
 
   <button className onClick disabled> children </button>;
 };

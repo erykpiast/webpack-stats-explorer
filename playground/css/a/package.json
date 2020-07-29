@@ -10,8 +10,8 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "css-loader": "3.5.3",
-    "webpack": "4.43.0",
-    "webpack-enhanced-stats-plugin": "2.4.0"
+    "css-loader": "4.0.0",
+    "webpack": "4.44.0",
+    "webpack-enhanced-stats-plugin": "2.5.0"
   }
 }

@@ -155,7 +155,7 @@ let make =
   <ReactSyntaxHighlighter.Prism
     language
     showLineNumbers=false
-    className={Cn.make([
+    className={Cn.fromList([
       className,
       Styles.getRootClassName(columnGuideline),
     ])}

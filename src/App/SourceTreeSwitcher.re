@@ -2,11 +2,7 @@ module Styles = {
   open Css;
 
   let root =
-    style([
-      marginTop(`auto),
-      display(`flex),
-      flexDirection(`row),
-    ]);
+    style([marginTop(`auto), display(`flex), flexDirection(`row)]);
 
   let button =
     style([
@@ -22,22 +18,22 @@ module Styles = {
 
 [@react.component]
 let make = (~className="", ~selected=true, ~onSwitch) => {
-  <div className={Cn.make([className, Styles.root])}>
+  <div className={Cn.fromList([className, Styles.root])}>
     <Button
       disabled=selected
       onClick={_ => onSwitch()}
-      className={Cn.make([
+      className={Cn.fromList([
         Styles.button,
-        Cn.ifTrue(Styles.selectedButton, selected),
+        Cn.on(Styles.selectedButton, selected),
       ])}>
       {L10N.treeView |> React.string}
     </Button>
     <Button
       disabled={!selected}
       onClick={_ => onSwitch()}
-      className={Cn.make([
+      className={Cn.fromList([
         Styles.button,
-        Cn.ifTrue(Styles.selectedButton, !selected),
+        Cn.on(Styles.selectedButton, !selected),
       ])}>
       {L10N.moduleListView |> React.string}
     </Button>

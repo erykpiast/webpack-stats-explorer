@@ -189,7 +189,7 @@ let renderSize = (label, data) =>
       };
 
     <>
-      <dt className={Cn.make([Styles.term, Styles.sizeTerm])}>
+      <dt className={Cn.fromList([Styles.term, Styles.sizeTerm])}>
         {label |> React.string}
       </dt>
       <dd className=Styles.definition> <Size value=size /> diff </dd>
@@ -321,7 +321,7 @@ let make = (~entry, ~onTab, ~tab, ~onDiffMode, ~diffMode, ~kind) => {
           <dt className=Styles.term>
             {L10N.Summary.status |> React.string}
           </dt>
-          <dd className={Cn.make([Styles.definition, kindClassName])}>
+          <dd className={Cn.fromList([Styles.definition, kindClassName])}>
             {kindLabel |> React.string}
             {nbsp |> React.string}
             {L10N.module_ |> React.string}

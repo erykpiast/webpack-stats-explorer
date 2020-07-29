@@ -16,7 +16,7 @@ type payload = {
 
 [@react.component]
 let make = (~className="", ~payload: array('a), ~sizeUnit: Size.sizeUnit) => {
-  <div className={Cn.make([className, Styles.root])}>
+  <div className={Cn.fromList([className, Styles.root])}>
     {payload
      |> Array.map(({name, color, value}) =>
           if (value === 0.0) {

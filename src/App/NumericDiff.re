@@ -8,7 +8,10 @@ module Styles = {
     ]);
 
   let more =
-    style([color(Theme.Color.Added.default), before([contentRule(`text("+"))])]);
+    style([
+      color(Theme.Color.Added.default),
+      before([contentRule(`text("+"))]),
+    ]);
 };
 
 [@react.component]
@@ -25,7 +28,7 @@ let make = (~className="", ~after, ~before) => {
     React.null;
   } else {
     <Size
-      className={Cn.make([className, kindClassName])}
+      className={Cn.fromList([className, kindClassName])}
       value={Js.Math.abs_int(diff)}
     />;
   };
