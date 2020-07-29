@@ -3,7 +3,7 @@ type t =
   ; built : bool
   ; cacheable : bool
   ; chunks : string list
-  ; depth : int
+  ; depth : int option
   ; errors : int
   ; failed : bool
   ; id : string option
@@ -18,11 +18,15 @@ type t =
   ; name : string
   ; optimizationBailout : string list
   ; optional : bool
-  ; prefetched : bool
+  ; postOrderIndex : int option
+  ; preOrderIndex : int option
+  ; prefetched : bool option
   ; profile : WebpackProfile.t option
   ; providedExports : string list option
   ; reasons : WebpackReason.t list
+  ; runtime : bool option
   ; size : int
+  ; sizes : string Js.Dict.t option
   ; ownSize : int
   ; source : string option
   ; originalSize : int option
@@ -40,26 +44,30 @@ let rec decode json =
     ; built = json |> field "built" bool
     ; cacheable = json |> optional (field "cacheable" bool) |> Utils.defaultTo(false)
     ; chunks = json |> field "chunks" (list Utils.Json.Decode.forceString)
-    ; depth = json |> field "depth" int
+    ; depth = json |> optional (field "depth" int)
     ; errors = json |> field "errors" int
     ; failed = json |> field "failed" bool
     ; id = json |> field "id" (optional Utils.Json.Decode.forceString)
     ; identifier = json |> field "identifier" string
     ; index = json |> field "index" (optional int)
     ; index2 = json |> field "index2" (optional int)
-    ; issuer = json |> field "issuer" (optional string)
-    ; issuerId = json |> field "issuerId" (optional string)
-    ; issuerName = json |> field "issuerName" (optional string)
-    ; issuerPath = json |> field "issuerPath" (optional (list string))
+    ; issuer = json |> optional (field "issuer" string)
+    ; issuerId = json |> optional (field "issuerId" string)
+    ; issuerName = json |> optional (field "issuerName" string)
+    ; issuerPath = json |> optional (field "issuerPath" (list string))
     ; modules = json |> optional (field "modules" (list decode))
     ; name = json |> field "name" string
     ; optimizationBailout = json |> field "optimizationBailout" (list string)
     ; optional = json |> field "optional" bool
-    ; prefetched = json |> field "prefetched" bool
+    ; postOrderIndex = json |> optional (field "postOrderIndex" int)
+    ; preOrderIndex = json |> optional (field "preOrderIndex" int)
+    ; prefetched = json |> optional (field "prefetched" bool)
     ; profile = json |> optional (field "profile" WebpackProfile.decode)
     ; providedExports = json |> field "providedExports" (optional (list string))
     ; reasons = json |> field "reasons" (list WebpackReason.decode)
+    ; runtime = json |> optional (field "runtime" bool)
     ; size = json |> field "size" int
+    ; sizes = json |> optional (field "sizes" (dict string))
     ; ownSize = json |> field "size" int
     ; source = json |> optional (field "source" string)
     ; originalSize = json |> optional (field "originalSize" int)
@@ -78,7 +86,7 @@ let rec encode r =
       ; "built", r.built |> bool
       ; "cacheable", r.cacheable |> bool
       ; "chunks", r.chunks |> list string
-      ; "depth", r.depth |> int
+      ; "depth", r.depth |> nullable int
       ; "errors", r.errors |> int
       ; "failed", r.failed |> bool
       ; "id", r.id |> nullable string
@@ -93,10 +101,13 @@ let rec encode r =
       ; "name", r.name |> string
       ; "optimizationBailout", r.optimizationBailout |> list string
       ; "optional", r.optional |> bool
-      ; "prefetched", r.prefetched |> bool
+      ; "postOrderIndex", r.postOrderIndex |> nullable int
+      ; "preOrderIndex", r.preOrderIndex |> nullable int
+      ; "prefetched", r.prefetched |> nullable bool
       ; "profile", r.profile |> nullable WebpackProfile.encode
       ; "providedExports", r.providedExports |> nullable (list string)
       ; "reasons", r.reasons |> list WebpackReason.encode
+      ; "runtime", r.runtime |> nullable bool
       ; "size", r.size |> int
       ; "ownSize", r.ownSize |> int
       ; "source", r.source |> nullable string
@@ -129,11 +140,15 @@ let make
     name
     optimizationBailout
     optional
+    postOrderIndex
+    preOrderIndex
     prefetched
     profile
     providedExports
     reasons
+    runtime
     size
+    sizes
     ownSize
     source
     originalSize
@@ -162,11 +177,15 @@ let make
   ; name
   ; optimizationBailout
   ; optional
+  ; postOrderIndex
+  ; preOrderIndex
   ; prefetched
   ; profile
   ; providedExports
   ; reasons
+  ; runtime
   ; size
+  ; sizes
   ; ownSize
   ; source
   ; originalSize

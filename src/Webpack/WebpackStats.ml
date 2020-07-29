@@ -35,7 +35,7 @@ let decode json =
     ; outputPath = json |> field "outputPath" string
     ; time = json |> field "time" int
     ; version = json |> field "version" string
-    ; warnings = json |> field "warnings" (list string)
+    ; warnings = json |> field "warnings" (either (list string) (list (field "message" string)))
     }
 ;;
 
@@ -103,7 +103,7 @@ module Version = struct
     Js.String.split "."
     ||> Array.to_list
     ||> Utils.List.nth 0
-    ||> (=) "4"
+    ||> Utils.Function.anyPass [(=) "4"; (=) "5"]
   );;
 end
 

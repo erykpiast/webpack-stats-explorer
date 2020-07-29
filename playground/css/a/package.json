@@ -10,8 +10,13 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+<<<<<<< HEAD
     "css-loader": "4.0.0",
     "webpack": "4.44.0",
+=======
+    "css-loader": "3.6.0",
+    "webpack": "4.43.0",
+>>>>>>> chore(testing): update playground dependencies
     "webpack-enhanced-stats-plugin": "2.5.0"
   }
 }
