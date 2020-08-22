@@ -31,6 +31,7 @@ let make (entry: Entry.t) =
               ; stat = None
               ; parsed = None
               ; children = []
+              ; reasons = []
               })
           in (intermediateEntry, allChildren)
         | ([existingEntry], otherChildren) ->
@@ -43,6 +44,7 @@ let make (entry: Entry.t) =
                 ; stat = entry.stat
                 ; original = entry.original
                 ; parsed = entry.parsed
+                ; reasons = entry.reasons
                 })
           in (actualEntry, otherChildren)
         | _ -> raise NotUniqueIdExn
@@ -61,5 +63,6 @@ let make (entry: Entry.t) =
         ; stat = None
         ; parsed = None
         ; children = []
+        ; reasons = []
         })
 ;;

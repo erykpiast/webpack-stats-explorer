@@ -4,6 +4,7 @@ type action =
   | Choose(int)
   | Navigate(State.NavigationPath.Segment.t, int)
   | NavigateThroughBreadcrumbs(int)
+  | NavigateAbsolutely(list(State.NavigationPath.Segment.t))
   | ToggleTimeline
   | ToggleSidebar
   | AddStats(list(WebpackStats.t))
@@ -81,6 +82,17 @@ let reducer = (state, action) =>
           navigationPath:
             Belt.List.take(state.navigationPath, index)
             |> Utils.defaultTo([]),
+          isTimelineVisible: state.isTimelineVisible,
+          isSidebarCollapsed: state.isSidebarCollapsed,
+          diffMode: state.diffMode,
+          urls: state.urls,
+          sourceTree: state.sourceTree,
+        }
+      | NavigateAbsolutely(navigationPath) => {
+          tab: state.tab,
+          index: state.index,
+          stats: state.stats,
+          navigationPath,
           isTimelineVisible: state.isTimelineVisible,
           isSidebarCollapsed: state.isSidebarCollapsed,
           diffMode: state.diffMode,
@@ -333,6 +345,12 @@ let make = (~stats) => {
              navigationPath
              onEntry={(level, segment) =>
                Navigate(NavigationPath.Segment.toState(segment), level)
+               |> dispatch
+             }
+             onPath={path =>
+               NavigateAbsolutely(
+                 path |> List.map(NavigationPath.Segment.toState),
+               )
                |> dispatch
              }
            />;

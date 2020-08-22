@@ -5,7 +5,15 @@ describe("NavigationPath", () => {
   open NavigationPath;
 
   let makeEntry = (~children=[], id) =>
-    Entry.{id, size: 666, children, original: None, stat: None, parsed: None};
+    Entry.{
+      id,
+      size: 666,
+      children,
+      original: None,
+      stat: None,
+      parsed: None,
+      reasons: [],
+    };
   let makeModifiedEntry = (~children=CompareEntry.empty, id) =>
     ModifiedEntry.{
       id,
@@ -14,6 +22,7 @@ describe("NavigationPath", () => {
       original: None,
       stat: None,
       parsed: None,
+      reasons: ([], []),
     };
 
   describe("Segment", () => {
@@ -28,16 +37,14 @@ describe("NavigationPath", () => {
 
     describe("from entries", () => {
       test("there is an entry with given ID", () => {
-        let result =
-          fromEntries("bar", [foo, bar, baz]);
+        let result = fromEntries("bar", [foo, bar, baz]);
         let expected = Some(CompareEntry.Entry(bar));
 
         expect(result) |> toEqual(expected);
       });
 
       test("no entry with given ID", () => {
-        let result =
-          fromEntries("qux", [foo, bar, baz]);
+        let result = fromEntries("qux", [foo, bar, baz]);
 
         expect(result) |> toEqual(None);
       });
@@ -53,41 +60,35 @@ describe("NavigationPath", () => {
         };
 
       test("there is an added entry with given ID", () => {
-        let result =
-          fromCompareEntry("bar", comparison);
+        let result = fromCompareEntry("bar", comparison);
         let expected = Some(CompareEntry.Entry(bar));
 
         expect(result) |> toEqual(expected);
       });
 
       test("there is a removed entry with given ID", () => {
-        let result =
-          fromCompareEntry("baz", comparison);
+        let result = fromCompareEntry("baz", comparison);
         let expected = Some(CompareEntry.Entry(baz));
 
         expect(result) |> toEqual(expected);
       });
 
       test("there is an intact entry with given ID", () => {
-        let result =
-          fromCompareEntry("qux", comparison);
+        let result = fromCompareEntry("qux", comparison);
         let expected = Some(CompareEntry.Entry(qux));
 
         expect(result) |> toEqual(expected);
       });
 
       test("there is a modified entry with given ID", () => {
-        let result =
-          fromCompareEntry("bax", comparison);
-        let expected =
-          Some(CompareEntry.ModifiedEntry(bax));
+        let result = fromCompareEntry("bax", comparison);
+        let expected = Some(CompareEntry.ModifiedEntry(bax));
 
         expect(result) |> toEqual(expected);
       });
 
       test("no entry with given ID", () => {
-        let result =
-          fromCompareEntry("sax", comparison);
+        let result = fromCompareEntry("sax", comparison);
 
         expect(result) |> toEqual(None);
       });
@@ -111,11 +112,7 @@ describe("NavigationPath", () => {
       let result =
         fromState(
           CompareEntry.ModifiedChildren(comparison),
-          [
-            "bar",
-            "baz",
-            "qux",
-          ],
+          ["bar", "baz", "qux"],
         );
 
       let expected = [
@@ -139,11 +136,7 @@ describe("NavigationPath", () => {
       let result =
         fromState(
           CompareEntry.ModifiedChildren(comparison),
-          [
-            "bar",
-            "baz",
-            "qux",
-          ],
+          ["bar", "baz", "qux"],
         );
 
       let expected = [
@@ -167,11 +160,7 @@ describe("NavigationPath", () => {
       let result =
         fromState(
           CompareEntry.ModifiedChildren(comparison),
-          [
-            "bar",
-            "baz",
-            "qux",
-          ],
+          ["bar", "baz", "qux"],
         );
 
       let expected = [
@@ -215,12 +204,7 @@ describe("NavigationPath", () => {
       let result =
         fromState(
           CompareEntry.ModifiedChildren(comparison),
-          [
-            "foo",
-            "bar",
-            "baz",
-            "qux",
-          ],
+          ["foo", "bar", "baz", "qux"],
         );
 
       let expected = [

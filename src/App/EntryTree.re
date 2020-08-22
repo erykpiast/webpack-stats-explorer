@@ -23,22 +23,32 @@ module Styles = {
       cursor(`pointer),
       justifyContent(`spaceBetween),
       padding(Theme.Space.default),
+      before([display(`none)]),
     ]);
 
   let selectedItem =
-    style([backgroundColor(Theme.Color.Background.selected)]);
+    style([
+      backgroundColor(Theme.Color.Background.selected),
+      before([contentRule(`text(downTriangle)), fontSize(em(1.02))]),
+    ]);
+
+  let reasonItem = style([backgroundColor(Theme.Color.Background.reason)]);
 
   let parentItem =
     style([
       before([
-        contentRule(`text(rightTriangle)),
+        display(`block),
         marginRight(Theme.Space.default),
-        fontSize(em(1.136)),
         color(Theme.Color.Border.default),
       ]),
     ]);
 
-  let expandedParentItem =
+  let collapsedItem =
+    style([
+      before([contentRule(`text(rightTriangle)), fontSize(em(1.136))]),
+    ]);
+
+  let expandedItem =
     style([
       before([contentRule(`text(downTriangle)), fontSize(em(1.02))]),
     ]);
@@ -131,8 +141,9 @@ type props = {
   level: int,
   value: CompareEntry.entry,
   parent: option(CompareEntry.entry),
-  onUnfold: ReactEvent.Mouse.t => unit,
-  onFold: ReactEvent.Mouse.t => unit,
+  onExpand: ReactEvent.Mouse.t => unit,
+  onCollapse: ReactEvent.Mouse.t => unit,
+  onSelect: (list(NavigationPath.Segment.t), ReactEvent.Mouse.t) => unit,
 };
 
 let encode = r =>
@@ -147,12 +158,19 @@ let encode = r =>
 
 module type MapperContext = {
   let onEntry: (int, NavigationPath.Segment.t) => unit;
+  let onPath: list(NavigationPath.Segment.t) => unit;
   let navigationPath: list(NavigationPath.Segment.t);
+  let reasons: list(list(NavigationPath.Segment.t));
 };
 
 module Mapper = (Context: MapperContext) => {
   type t = {
-    selected: bool,
+    state: [
+      | `selected
+      | `reason(list(NavigationPath.Segment.t))
+      | `expanded
+      | `collapsed
+    ],
     value: props,
     children: list(t),
   };
@@ -181,52 +199,110 @@ module Mapper = (Context: MapperContext) => {
       };
     });
 
+  let getReasonHighlight = (level, entry) => {
+    let reason =
+      Context.reasons
+      |> List.find_opt(reasonPath =>
+           List.length(reasonPath) > level
+           && entry == List.nth(reasonPath, level)
+         )
+      |> Utils.defaultTo([]);
+
+    `reason(reason);
+  };
+
   let rec expandNotModifiedEntryChildren =
           (
             kindMapper,
             ~level=0,
             ~parent=None,
             ~navigationPath=Context.navigationPath,
+            ~reasons=Context.reasons,
           ) =>
+    // TODO: pass reasons here as well, shorten after each step
     List.map((entry: Entry.t) => {
       let props = kindMapper(level, parent, entry);
 
-      switch (navigationPath) {
-      | [] => {selected: false, value: props, children: []}
-      | [segment, ...tail] =>
-        switch (segment) {
-        | CompareEntry.Entry(segmentEntry) =>
-          if (segmentEntry == entry) {
-            let children =
-              entry.children
-              |> expandNotModifiedEntryChildren(
-                   kindMapper,
-                   ~level=level + 1,
-                   ~parent=Some(CompareEntry.Entry(entry)),
-                   ~navigationPath=tail,
-                 )
-              |> sortProps;
-            {selected: true, value: props, children};
-          } else {
-            {selected: false, value: props, children: []};
+      let (isSelected, nextNavigationPath) =
+        switch (navigationPath) {
+        | [segment, ...tail] =>
+          switch (segment) {
+          | CompareEntry.Entry(segmentEntry) => (
+              segmentEntry === entry,
+              tail,
+            )
+          | _ => (false, tail)
           }
-        | _ => {selected: false, value: props, children: []}
-        }
+        | [] => (false, [])
+        };
+
+      let nextReasons =
+        reasons
+        |> List.fold_left(
+             (acc, reason) =>
+               switch (reason) {
+               | [segment, ...tail] =>
+                 switch (segment) {
+                 | CompareEntry.Entry(segmentEntry) =>
+                   let matchesEntry = segmentEntry === entry;
+                   if (matchesEntry) {
+                     [tail, ...acc];
+                   } else {
+                     acc;
+                   };
+                 | _ => acc
+                 }
+               | [] => acc
+               },
+             [],
+           );
+      let isReason = List.length(nextReasons) > 0;
+
+      if (!isReason && !isSelected) {
+        {state: `collapsed, value: props, children: []};
+      } else {
+        let children =
+          entry.children
+          |> expandNotModifiedEntryChildren(
+               kindMapper,
+               ~level=level + 1,
+               ~parent=Some(CompareEntry.Entry(entry)),
+               ~navigationPath=nextNavigationPath,
+               ~reasons=nextReasons,
+             )
+          |> sortProps;
+
+        let state =
+          if (isSelected) {
+            List.length(nextNavigationPath) === 0 ? `selected : `expanded;
+          } else if (isReason) {
+            List.length(entry.children) === 0
+              ? getReasonHighlight(level, CompareEntry.Entry(entry))
+              : `expanded;
+          } else {
+            `collapsed;
+          };
+
+        {state, value: props, children};
       };
     });
 
-  let createFoldHandler = (parent, currentLevel) =>
+  let createCollapseHandler = (parent, currentLevel) =>
     switch (parent) {
     | Some(parentEntry) => (
-        _ =>
+        _ => {
           parentEntry
           |> NavigationPath.Segment.make
-          |> Context.onEntry(currentLevel - 1)
+          |> Context.onEntry(currentLevel - 1);
+        }
       )
-    | None => (_ => ())
+    | None => (_ => Context.onPath([]))
     };
-  let createUnfoldHandler = (entry, currentLevel, _) =>
+  let createExpandHandler = (entry, currentLevel, _) =>
     entry |> NavigationPath.Segment.make |> Context.onEntry(currentLevel);
+
+  let createSelectHandler = (navigationPath, _) =>
+    Context.onPath(navigationPath);
 
   let mapAdded = (level, parent, entry: Entry.t) => {
     after: entry.size,
@@ -235,8 +311,9 @@ module Mapper = (Context: MapperContext) => {
     level,
     value: Entry(entry),
     parent,
-    onUnfold: createUnfoldHandler(Entry(entry), level),
-    onFold: createFoldHandler(parent, level),
+    onExpand: createExpandHandler(Entry(entry), level),
+    onCollapse: createCollapseHandler(parent, level),
+    onSelect: createSelectHandler,
   };
   let mapRemoved = (level, parent, entry: Entry.t) => {
     after: 0,
@@ -245,8 +322,9 @@ module Mapper = (Context: MapperContext) => {
     level,
     value: Entry(entry),
     parent,
-    onUnfold: createUnfoldHandler(Entry(entry), level),
-    onFold: createFoldHandler(parent, level),
+    onExpand: createExpandHandler(Entry(entry), level),
+    onCollapse: createCollapseHandler(parent, level),
+    onSelect: createSelectHandler,
   };
   let mapIntact = (level, parent, entry: Entry.t) => {
     after: entry.size,
@@ -255,8 +333,9 @@ module Mapper = (Context: MapperContext) => {
     level,
     value: Entry(entry),
     parent,
-    onUnfold: createUnfoldHandler(Entry(entry), level),
-    onFold: createFoldHandler(parent, level),
+    onExpand: createExpandHandler(Entry(entry), level),
+    onCollapse: createCollapseHandler(parent, level),
+    onSelect: createSelectHandler,
   };
   let mapModified = (level, parent, entry: ModifiedEntry.t(CompareEntry.t)) => {
     after: entry.size |> snd,
@@ -265,70 +344,201 @@ module Mapper = (Context: MapperContext) => {
     level,
     value: ModifiedEntry(entry),
     parent,
-    onUnfold: createUnfoldHandler(ModifiedEntry(entry), level),
-    onFold: createFoldHandler(parent, level),
+    onExpand: createExpandHandler(ModifiedEntry(entry), level),
+    onCollapse: createCollapseHandler(parent, level),
+    onSelect: createSelectHandler,
   };
 
   let added = expandNotModifiedEntryChildren(mapAdded);
   let removed = expandNotModifiedEntryChildren(mapRemoved);
   let intact = expandNotModifiedEntryChildren(mapIntact);
   let rec modified =
-          (~level=0, ~parent=None, ~navigationPath=Context.navigationPath) =>
+          (
+            ~level=0,
+            ~parent=None,
+            ~navigationPath=Context.navigationPath,
+            ~reasons=Context.reasons,
+          ) =>
     List.map((entry: ModifiedEntry.t(CompareEntry.t)) => {
       let props = mapModified(level, parent, entry);
 
-      switch (navigationPath) {
-      | [] => {selected: false, value: props, children: []}
-      | [segment, ...tail] =>
-        switch (segment) {
-        | ModifiedEntry(segmentEntry) =>
-          if (segmentEntry == entry) {
-            let parent = Some(CompareEntry.ModifiedEntry(entry));
-            let level = level + 1;
-            let navigationPath = tail;
-            let children =
-              List.concat([
-                entry.children.added
-                |> added(~parent, ~level, ~navigationPath),
-                entry.children.removed
-                |> removed(~parent, ~level, ~navigationPath),
-                entry.children.intact
-                |> intact(~parent, ~level, ~navigationPath),
-                entry.children.modified
-                |> modified(~parent, ~level, ~navigationPath),
-              ])
-              |> sortProps;
-            {selected: true, value: props, children};
-          } else {
-            {selected: false, value: props, children: []};
+      let (isSelected, nextNavigationPath) =
+        switch (navigationPath) {
+        | [segment, ...tail] =>
+          switch (segment) {
+          | CompareEntry.ModifiedEntry(segmentEntry) => (
+              segmentEntry === entry,
+              tail,
+            )
+          | _ => (false, tail)
           }
-        | _ => {selected: false, value: props, children: []}
-        }
+        | [] => (false, [])
+        };
+      let nextReasons =
+        reasons
+        |> List.fold_left(
+             (acc, reason) =>
+               switch (reason) {
+               | [segment, ...tail] =>
+                 switch (segment) {
+                 | CompareEntry.ModifiedEntry(segmentEntry) =>
+                   let matchesEntry = segmentEntry === entry;
+                   if (matchesEntry) {
+                     [tail, ...acc];
+                   } else {
+                     acc;
+                   };
+                 | _ => acc
+                 }
+               | [] => acc
+               },
+             [],
+           );
+      let isReason = List.length(nextReasons) > 0;
+
+      if (!isReason && !isSelected) {
+        {state: `collapsed, value: props, children: []};
+      } else {
+        let children =
+          List.concat([
+            entry.children.added
+            |> added(
+                 ~parent=Some(CompareEntry.ModifiedEntry(entry)),
+                 ~level=level + 1,
+                 ~navigationPath=nextNavigationPath,
+                 ~reasons=nextReasons,
+               ),
+            entry.children.removed
+            |> removed(
+                 ~parent=Some(CompareEntry.ModifiedEntry(entry)),
+                 ~level=level + 1,
+                 ~navigationPath=nextNavigationPath,
+                 ~reasons=nextReasons,
+               ),
+            entry.children.intact
+            |> intact(
+                 ~parent=Some(CompareEntry.ModifiedEntry(entry)),
+                 ~level=level + 1,
+                 ~navigationPath=nextNavigationPath,
+                 ~reasons=nextReasons,
+               ),
+            entry.children.modified
+            |> modified(
+                 ~parent=Some(CompareEntry.ModifiedEntry(entry)),
+                 ~level=level + 1,
+                 ~navigationPath=nextNavigationPath,
+                 ~reasons=nextReasons,
+               ),
+          ])
+          |> sortProps;
+
+        let state =
+          if (isSelected) {
+            List.length(nextNavigationPath) === 0 ? `selected : `expanded;
+          } else {
+            CompareEntry.count(entry.children) |> snd === 0
+              ? getReasonHighlight(level, CompareEntry.ModifiedEntry(entry))
+              : `expanded;
+          };
+
+        {state, value: props, children};
       };
     });
 
   let rec flatten = (hasParent, nested) =>
     Utils.List.flatMap(
-      ({selected, value, children}) =>
+      ({state, value, children}) =>
         [
-          (
-            selected,
-            List.length(children) > 0,
-            value,
-            (hasChildren(value.value), hasParent),
-          ),
+          (state, value, (hasChildren(value.value), hasParent)),
           ...flatten(true, children),
         ],
       nested,
     );
 };
 
-let mapToProps = (onEntry, navigationPath, comp: CompareEntry.t) => {
+let resolveReason = (initialEntry, chunkId) =>
+  CompareEntry.(
+    Rationale.Option.Infix.(
+      List.tl
+      ||> List.cons(chunkId)
+      ||> List.fold_left(
+            ((acc, children: children), reasonPathSegment) => {
+              let reasonPathEntry =
+                switch (children) {
+                | NotModifiedChildren(children) =>
+                  children
+                  |> List.find_opt(Entry.hasId(reasonPathSegment))
+                  <$> (entry => Entry(entry))
+                | ModifiedChildren(children) =>
+                  List.concat([
+                    children.added,
+                    children.removed,
+                    children.intact,
+                  ])
+                  |> List.find_opt(Entry.hasId(reasonPathSegment))
+                  <$> (entry => Entry(entry))
+                  |? (
+                    children.modified
+                    |> List.find_opt(ModifiedEntry.hasId(reasonPathSegment))
+                    <$> (entry => ModifiedEntry(entry))
+                  )
+                };
+
+              switch (reasonPathEntry) {
+              | None => (acc, children)
+              | Some(entry) => (
+                  [entry, ...acc],
+                  switch (entry) {
+                  | Entry({children}) => NotModifiedChildren(children)
+                  | ModifiedEntry({children}) => ModifiedChildren(children)
+                  },
+                )
+              };
+            },
+            ([], initialEntry),
+          )
+    )
+  );
+
+let mapToProps = (onEntry, onPath, navigationPath, comp: CompareEntry.t) => {
+  /* TODO: Map it to list of entries */
+  let reasons =
+    (
+      switch (navigationPath) {
+      | [] => []
+      | navigationPath =>
+        CompareEntry.(
+          {
+            let last = navigationPath |> List.rev |> List.hd;
+            let firstId =
+              switch (navigationPath |> List.hd) {
+              | Entry(entry) => entry.id
+              | ModifiedEntry(entry) => entry.id
+              };
+            let resolve = resolveReason(ModifiedChildren(comp), firstId);
+
+            switch (last) {
+            | Entry(entry) => entry.reasons |> List.map(resolve ||> fst)
+            | ModifiedEntry(entry) =>
+              List.concat([
+                entry.reasons |> fst |> List.map(resolve ||> fst),
+                entry.reasons |> snd |> List.map(resolve ||> fst),
+              ])
+            };
+          }
+        )
+      }
+    )
+    |> List.map(List.rev);
+
   module TheMapper =
     Mapper({
       let onEntry = onEntry;
+      let onPath = onPath;
       let navigationPath = navigationPath;
+      let reasons = reasons;
     });
+
   List.concat([
     TheMapper.added(comp.added),
     TheMapper.removed(comp.removed),
@@ -359,8 +569,13 @@ let getFamilyClass =
 
 [@react.component]
 let make =
-    (~onEntry, ~comp: CompareEntry.t, ~navigationPath: NavigationPath.t) => {
-  let props = mapToProps(onEntry, navigationPath, comp);
+    (
+      ~onEntry,
+      ~onPath,
+      ~comp: CompareEntry.t,
+      ~navigationPath: NavigationPath.t,
+    ) => {
+  let props = mapToProps(onEntry, onPath, navigationPath, comp);
 
   switch (props) {
   | [] => React.null
@@ -370,26 +585,56 @@ let make =
        |> List.map(
             (
               (
-                selected,
-                expanded,
-                {after, before, value, name, level, onUnfold, onFold},
+                state,
+                {after, before, name, level, onExpand, onCollapse, onSelect},
                 familyRelations,
               ),
             ) => {
             let isModifiedOrIntact = before !== 0 && after !== 0;
-            let onClick = expanded === false ? onUnfold : onFold;
+            let (isParent, _) = familyRelations;
+            let onClick =
+              switch (state, isParent) {
+              | (`reason(path), _) => onSelect(path)
+              | (`expanded, _) => onCollapse
+              | (`selected, true) => onCollapse
+              | (`selected, false) => Utils.noop
+              | (`collapsed, _) => onExpand
+              };
+            let stateClassName =
+              switch (state) {
+              | `selected => Styles.selectedItem
+              | `reason(_) => Styles.reasonItem
+              | `expanded => Styles.expandedItem
+              | `collapsed => Styles.collapsedItem
+              };
+            let stateLabel =
+              switch (state) {
+              | `selected => "selected"
+              | `reason(_) => "reason"
+              | `expanded => "expanded"
+              | `collapsed => "none"
+              };
+
+            Js.log((name, stateLabel, onClick));
 
             <li
               onClick
               className={Cn.fromList([
                 Styles.item,
-                Cn.on(Styles.selectedItem, selected),
-                Cn.on(Styles.expandedParentItem, expanded),
+                stateClassName,
                 getLevelClass(level),
                 getFamilyClass(familyRelations),
               ])}
               title=name
-              key={string_of_int(level) ++ name}>
+              key={
+                string_of_int(level)
+                ++ "_"
+                ++ name
+                ++ "_"
+                ++ string_of_int(after)
+                ++ "_"
+                ++ string_of_int(before)
+              }>
               <ReversedText className=Styles.name>
                 ...{name |> React.string}
               </ReversedText>

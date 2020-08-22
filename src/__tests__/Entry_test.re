@@ -79,6 +79,7 @@ describe("Entry", () => {
                stat: Entry.Data.make(Some("I am Foo"), Some(8)),
                parsed: Entry.Data.make(Some("I'm Foo"), Some(444)),
                children: [],
+               reasons: [],
              },
            );
       });
@@ -106,6 +107,7 @@ describe("Entry", () => {
                stat: Entry.Data.make(Some("I am Foo"), Some(8)),
                parsed: None,
                children: [],
+               reasons: [],
              },
            );
       });
@@ -127,6 +129,7 @@ describe("Entry", () => {
                stat: None,
                parsed: None,
                children: [],
+               reasons: [],
              },
            );
       });
@@ -145,6 +148,7 @@ describe("Entry", () => {
                stat: Entry.Data.make(Some("I am Foo"), Some(8)),
                parsed: None,
                children: [],
+               reasons: [],
              },
            );
       });
@@ -173,6 +177,7 @@ describe("Entry", () => {
                stat: Entry.Data.make(Some("I am Foo"), Some(8)),
                parsed: Entry.Data.make(Some("I'm Foo"), Some(444)),
                children: [],
+               reasons: [],
              },
            );
       });
@@ -201,6 +206,7 @@ describe("Entry", () => {
                stat: Entry.Data.make(Some("I am Baz"), Some(8)),
                parsed: None,
                children: [makeModule(submodule1), makeModule(submodule2)],
+               reasons: [],
              },
            );
       });
@@ -229,6 +235,7 @@ describe("Entry", () => {
                stat: Entry.Data.make(Some("I am Bar"), Some(8)),
                parsed: None,
                children: [makeModule(submodule)],
+               reasons: [],
              },
            );
       });
@@ -370,6 +377,7 @@ describe("Entry", () => {
              stat: Entry.Data.make(Some(""), Some(666)),
              parsed: Entry.Data.make(Some(""), Some(444)),
              children: [],
+             reasons: [],
            },
          );
     });
@@ -388,6 +396,7 @@ describe("Entry", () => {
              stat: Entry.Data.make(Some(""), Some(666)),
              parsed: None,
              children: [],
+             reasons: [],
            },
          );
     });
@@ -455,6 +464,7 @@ describe("Entry", () => {
                Entry.FromModule.make(false, submodule2),
                Entry.FromModule.make(false, submodule3),
              ],
+             reasons: [],
            },
          );
     });

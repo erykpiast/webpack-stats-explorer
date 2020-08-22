@@ -32,6 +32,7 @@ type t =
   ; stat : Data.t option
   ; parsed : Data.t option
   ; children : t list
+  ; reasons : (string list) list
   }
 ;;
 
@@ -43,6 +44,7 @@ let rec encode r =
     ; "stat", r.stat |> nullable Data.encode
     ; "parsed", r.parsed |> nullable Data.encode
     ; "children", r.children |> list encode
+    ; "reasons", r.reasons |> list (list string)
     ]
   )
 ;;
@@ -144,6 +146,12 @@ module FromModule = struct
           modules
             |> List.map (make useParsedSize)
             |> List.filter (fun { children; size } -> size != 0 || (List.length children) != 0)
+      ; reasons = mainSubmodule.reasons
+        |> (List.map (fun (reason: WebpackReason.t) -> reason.moduleName))
+        |> (List.filter Belt.Option.isSome)
+        |> (List.map (Belt.Option.getUnsafe ||> getId))
+        |> (Utils.List.uniq (==))
+        |> (List.map (Utils.String.split "/" ||> Array.to_list))
       }
 end
 
@@ -237,6 +245,7 @@ module FromChunk = struct
       ; stat = makeData (Some chunk.size)
       ; parsed = parsed
       ; children = modules
+      ; reasons = []
       }
   ;;
 end

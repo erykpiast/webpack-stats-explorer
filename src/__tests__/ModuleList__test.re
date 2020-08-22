@@ -14,6 +14,7 @@ describe("ModuleList", () => {
         },
       parsed: None,
       children,
+      reasons: [],
     };
 
   describe("make", () => {
@@ -42,7 +43,8 @@ describe("ModuleList", () => {
           "./foo",
         );
       let output = input |> ModuleList.make;
-      let expected = mockEntry(
+      let expected =
+        mockEntry(
           ~size=666,
           ~children=[
             mockEntry(~size=222, ~code="foobar", "./foo/bar"),
@@ -50,7 +52,7 @@ describe("ModuleList", () => {
             mockEntry(~size=444, ~code="barbaz", "./foo/baz"),
           ],
           "./foo",
-        )
+        );
 
       expect(output) |> toEqual(expected);
     });

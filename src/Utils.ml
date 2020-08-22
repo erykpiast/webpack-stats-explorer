@@ -10,6 +10,11 @@ let defaultTo value option =
 ;;
 
 let identity (a : 'a) = a;;
+
+let stringify (a : 'a) = [%bs.raw {|JSON.stringify(a)|}];;
+
+let noop _ = ();;
+
 module Json = struct
   module Decode = struct
     let forceString value = Json.Decode.(
@@ -86,6 +91,12 @@ module List = struct
   ;;
 
   let prepend element list = element::list;;
+
+  let hd_opt list =
+    match list with
+    | [] -> None
+    | hd::_ -> Some hd
+  ;;
 end
 
 module Array = struct
