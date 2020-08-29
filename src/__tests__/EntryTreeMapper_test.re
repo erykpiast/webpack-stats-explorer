@@ -1,10 +1,10 @@
 open Jest;
 open ExpectJs;
 
-describe("EntryTree.Mapper", () => {
+describe("EntryTreeMapper.Mapper", () => {
   describe("sortProps", () => {
     module Mapper =
-      EntryTree.Mapper({
+      EntryTreeMapper.Mapper({
         let onEntry = (_, _) => ();
         let onPath = _ => ();
         let navigationPath = [];
@@ -85,10 +85,9 @@ describe("EntryTree.Mapper", () => {
     let reason1 = CompareEntry.[Entry(a1), Entry(b1)];
     let reason2 = CompareEntry.[Entry(a1), Entry(b2), Entry(c3)];
 
-
     test("it should expand navigationPath", () => {
       module Mapper =
-        EntryTree.Mapper({
+        EntryTreeMapper.Mapper({
           let onEntry = (_, _) => ();
           let onPath = _ => ();
           let navigationPath =
@@ -97,7 +96,15 @@ describe("EntryTree.Mapper", () => {
         });
 
       let mockMappedEntry =
-          (~state=`collapsed, ~level=0, onCollapse, name, value, parent, children) =>
+          (
+            ~state=`collapsed,
+            ~level=0,
+            onCollapse,
+            name,
+            value,
+            parent,
+            children,
+          ) =>
         Mapper.{
           state,
           value: {
@@ -194,19 +201,24 @@ describe("EntryTree.Mapper", () => {
 
     test("it should expand reasons", () => {
       module Mapper =
-        EntryTree.Mapper({
+        EntryTreeMapper.Mapper({
           let onEntry = (_, _) => ();
           let onPath = _ => ();
           let navigationPath =
             CompareEntry.[Entry(a1), Entry(b2), Entry(c2)];
-          let reasons = [
-            reason1,
-            reason2,
-          ];
+          let reasons = [reason1, reason2];
         });
 
       let mockMappedEntry =
-          (~state=`collapsed, ~level=0, onCollapse, name, value, parent, children) =>
+          (
+            ~state=`collapsed,
+            ~level=0,
+            onCollapse,
+            name,
+            value,
+            parent,
+            children,
+          ) =>
         Mapper.{
           state,
           value: {
