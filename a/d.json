@@ -5,8 +5,8 @@
   ],
   "version": "4.44.1",
   "hash": "1e67060500dbbd9651b7",
-  "time": 8233,
-  "builtAt": 1598734076421,
+  "time": 8243,
+  "builtAt": 1598744765791,
   "publicPath": "",
   "outputPath": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/dist",
   "assetsByChunkName": {
@@ -159,9 +159,9 @@
           "chunks": [
             0
           ],
-          "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "issuerId": 242,
-          "issuerName": "./node_modules/lodash/map.js",
+          "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "issuerId": 232,
+          "issuerName": "./node_modules/lodash/reject.js",
           "issuerPath": [
             {
               "id": null,
@@ -179,14 +179,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             }
           ],
           "failed": false,
@@ -4221,14 +4221,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -6441,9 +6441,9 @@
           "chunks": [
             0
           ],
-          "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "issuerId": 242,
-          "issuerName": "./node_modules/lodash/map.js",
+          "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "issuerId": 232,
+          "issuerName": "./node_modules/lodash/reject.js",
           "issuerPath": [
             {
               "id": null,
@@ -6461,14 +6461,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             }
           ],
           "failed": false,
@@ -6551,14 +6551,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -9773,14 +9773,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -9864,14 +9864,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -9965,14 +9965,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -10056,14 +10056,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -10147,14 +10147,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -10223,9 +10223,9 @@
           "chunks": [
             0
           ],
-          "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseGet.js",
-          "issuerId": 94,
-          "issuerName": "./node_modules/lodash/_baseGet.js",
+          "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_hasPath.js",
+          "issuerId": 212,
+          "issuerName": "./node_modules/lodash/_hasPath.js",
           "issuerPath": [
             {
               "id": null,
@@ -10243,14 +10243,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -10263,14 +10263,14 @@
               "name": "./node_modules/lodash/_baseMatchesProperty.js"
             },
             {
-              "id": 207,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/get.js",
-              "name": "./node_modules/lodash/get.js"
+              "id": 210,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/hasIn.js",
+              "name": "./node_modules/lodash/hasIn.js"
             },
             {
-              "id": 94,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseGet.js",
-              "name": "./node_modules/lodash/_baseGet.js"
+              "id": 212,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_hasPath.js",
+              "name": "./node_modules/lodash/_hasPath.js"
             }
           ],
           "failed": false,
@@ -10749,9 +10749,9 @@
           "chunks": [
             0
           ],
-          "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseMap.js",
-          "issuerId": 243,
-          "issuerName": "./node_modules/lodash/_baseMap.js",
+          "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseFilter.js",
+          "issuerId": 233,
+          "issuerName": "./node_modules/lodash/_baseFilter.js",
           "issuerPath": [
             {
               "id": null,
@@ -10769,19 +10769,19 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
-              "id": 243,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseMap.js",
-              "name": "./node_modules/lodash/_baseMap.js"
+              "id": 233,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseFilter.js",
+              "name": "./node_modules/lodash/_baseFilter.js"
             }
           ],
           "failed": false,
@@ -18937,14 +18937,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -19014,14 +19014,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -19096,14 +19096,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -19183,14 +19183,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -19280,14 +19280,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -19382,14 +19382,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -19484,14 +19484,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -19581,14 +19581,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -19678,14 +19678,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -19770,14 +19770,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -19867,14 +19867,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -19964,14 +19964,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -20056,14 +20056,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -20138,14 +20138,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -20215,14 +20215,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -20476,14 +20476,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -20558,14 +20558,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -20645,14 +20645,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -20732,14 +20732,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -20809,14 +20809,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -20891,14 +20891,14 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
               "id": 55,
@@ -22359,19 +22359,19 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
-              "id": 243,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseMap.js",
-              "name": "./node_modules/lodash/_baseMap.js"
+              "id": 233,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseFilter.js",
+              "name": "./node_modules/lodash/_baseFilter.js"
             },
             {
               "id": 101,
@@ -22441,19 +22441,19 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
-              "id": 243,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseMap.js",
-              "name": "./node_modules/lodash/_baseMap.js"
+              "id": 233,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseFilter.js",
+              "name": "./node_modules/lodash/_baseFilter.js"
             },
             {
               "id": 101,
@@ -22528,19 +22528,19 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
-              "id": 243,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseMap.js",
-              "name": "./node_modules/lodash/_baseMap.js"
+              "id": 233,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseFilter.js",
+              "name": "./node_modules/lodash/_baseFilter.js"
             },
             {
               "id": 101,
@@ -22620,19 +22620,19 @@
               "name": "./src/article.jsx"
             },
             {
-              "id": 59,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-              "name": "./node_modules/lodash/fp/map.js"
+              "id": 104,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+              "name": "./node_modules/lodash/fp/reject.js"
             },
             {
-              "id": 242,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-              "name": "./node_modules/lodash/map.js"
+              "id": 232,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+              "name": "./node_modules/lodash/reject.js"
             },
             {
-              "id": 243,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseMap.js",
-              "name": "./node_modules/lodash/_baseMap.js"
+              "id": 233,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseFilter.js",
+              "name": "./node_modules/lodash/_baseFilter.js"
             },
             {
               "id": 101,
@@ -24133,9 +24133,9 @@
       "chunks": [
         0
       ],
-      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-      "issuerId": 242,
-      "issuerName": "./node_modules/lodash/map.js",
+      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+      "issuerId": 232,
+      "issuerName": "./node_modules/lodash/reject.js",
       "issuerPath": [
         {
           "id": null,
@@ -24153,14 +24153,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         }
       ],
       "failed": false,
@@ -28195,14 +28195,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -30415,9 +30415,9 @@
       "chunks": [
         0
       ],
-      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-      "issuerId": 242,
-      "issuerName": "./node_modules/lodash/map.js",
+      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+      "issuerId": 232,
+      "issuerName": "./node_modules/lodash/reject.js",
       "issuerPath": [
         {
           "id": null,
@@ -30435,14 +30435,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         }
       ],
       "failed": false,
@@ -30525,14 +30525,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -33747,14 +33747,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -33838,14 +33838,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -33939,14 +33939,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -34030,14 +34030,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -34121,14 +34121,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -34197,9 +34197,9 @@
       "chunks": [
         0
       ],
-      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseGet.js",
-      "issuerId": 94,
-      "issuerName": "./node_modules/lodash/_baseGet.js",
+      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_hasPath.js",
+      "issuerId": 212,
+      "issuerName": "./node_modules/lodash/_hasPath.js",
       "issuerPath": [
         {
           "id": null,
@@ -34217,14 +34217,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -34237,14 +34237,14 @@
           "name": "./node_modules/lodash/_baseMatchesProperty.js"
         },
         {
-          "id": 207,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/get.js",
-          "name": "./node_modules/lodash/get.js"
+          "id": 210,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/hasIn.js",
+          "name": "./node_modules/lodash/hasIn.js"
         },
         {
-          "id": 94,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseGet.js",
-          "name": "./node_modules/lodash/_baseGet.js"
+          "id": 212,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_hasPath.js",
+          "name": "./node_modules/lodash/_hasPath.js"
         }
       ],
       "failed": false,
@@ -34723,9 +34723,9 @@
       "chunks": [
         0
       ],
-      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseMap.js",
-      "issuerId": 243,
-      "issuerName": "./node_modules/lodash/_baseMap.js",
+      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseFilter.js",
+      "issuerId": 233,
+      "issuerName": "./node_modules/lodash/_baseFilter.js",
       "issuerPath": [
         {
           "id": null,
@@ -34743,19 +34743,19 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
-          "id": 243,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseMap.js",
-          "name": "./node_modules/lodash/_baseMap.js"
+          "id": 233,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseFilter.js",
+          "name": "./node_modules/lodash/_baseFilter.js"
         }
       ],
       "failed": false,
@@ -42911,14 +42911,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -42988,14 +42988,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -43070,14 +43070,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -43157,14 +43157,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -43254,14 +43254,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -43356,14 +43356,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -43458,14 +43458,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -43555,14 +43555,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -43652,14 +43652,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -43744,14 +43744,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -43841,14 +43841,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -43938,14 +43938,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -44030,14 +44030,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -44112,14 +44112,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -44189,14 +44189,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -44450,14 +44450,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -44532,14 +44532,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -44619,14 +44619,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -44706,14 +44706,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -44783,14 +44783,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -44865,14 +44865,14 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
           "id": 55,
@@ -46333,19 +46333,19 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
-          "id": 243,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseMap.js",
-          "name": "./node_modules/lodash/_baseMap.js"
+          "id": 233,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseFilter.js",
+          "name": "./node_modules/lodash/_baseFilter.js"
         },
         {
           "id": 101,
@@ -46415,19 +46415,19 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
-          "id": 243,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseMap.js",
-          "name": "./node_modules/lodash/_baseMap.js"
+          "id": 233,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseFilter.js",
+          "name": "./node_modules/lodash/_baseFilter.js"
         },
         {
           "id": 101,
@@ -46502,19 +46502,19 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
-          "id": 243,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseMap.js",
-          "name": "./node_modules/lodash/_baseMap.js"
+          "id": 233,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseFilter.js",
+          "name": "./node_modules/lodash/_baseFilter.js"
         },
         {
           "id": 101,
@@ -46594,19 +46594,19 @@
           "name": "./src/article.jsx"
         },
         {
-          "id": 59,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/map.js",
-          "name": "./node_modules/lodash/fp/map.js"
+          "id": 104,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/fp/reject.js",
+          "name": "./node_modules/lodash/fp/reject.js"
         },
         {
-          "id": 242,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/map.js",
-          "name": "./node_modules/lodash/map.js"
+          "id": 232,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/reject.js",
+          "name": "./node_modules/lodash/reject.js"
         },
         {
-          "id": 243,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseMap.js",
-          "name": "./node_modules/lodash/_baseMap.js"
+          "id": 233,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_baseFilter.js",
+          "name": "./node_modules/lodash/_baseFilter.js"
         },
         {
           "id": 101,
