@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.26.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.25.0...v1.26.0) (2020-08-29)
+
+
+### Features
+
+* **deps:** replace Greenkeper with Dependabot ([0ed1997](https://github.com/erykpiast/webpack-stats-explorer/commit/0ed19979382c235a75a19fa946095b70f0c2509a))
+* **ui:** handle history navigation ([eb82472](https://github.com/erykpiast/webpack-stats-explorer/commit/eb82472ce7a65687d8dafde72441a78236f02d81))
+* **ui:** visualize current module reasons ([4011631](https://github.com/erykpiast/webpack-stats-explorer/commit/4011631b5c430688434272dce3a530c6a7a73a5b))
+
+
+### Bug Fixes
+
+* **deps:** remove not existing dirs from dependabot config ([daf5129](https://github.com/erykpiast/webpack-stats-explorer/commit/daf51297cbcda8f919f00819ca49423ab40e8305))
+* **deps:** upgrade bs-enzyme to version compatible with bs-platform@8 ([5d29132](https://github.com/erykpiast/webpack-stats-explorer/commit/5d29132f7553734828b8f721c81ac39316b5f279))
+* **testing:** upgrade deps for real ([51150c9](https://github.com/erykpiast/webpack-stats-explorer/commit/51150c91f15096b6b2bc69780e67f41b04ef28d4))
+* **ui:** change reason highlight color ([a17d4cb](https://github.com/erykpiast/webpack-stats-explorer/commit/a17d4cbf1745c75aba3b19be850deea303fbe24e))
+* upgrade bs-webapi from 0.15.9 to 0.16.0 ([df643b5](https://github.com/erykpiast/webpack-stats-explorer/commit/df643b543bd4cb27015bcfee3a74cf553f1ca2ff))
+* upgrade bs-webapi from 0.16.0 to 0.16.1 ([e19d7ed](https://github.com/erykpiast/webpack-stats-explorer/commit/e19d7ed0fc6ddedc5efc47e4680e317894449ba8))
+* upgrade preact from 10.4.1 to 10.4.4 ([599856c](https://github.com/erykpiast/webpack-stats-explorer/commit/599856cc9dfd6b0dd8508409b8eff2774d29cbed))
+* upgrade preact from 10.4.1 to 10.4.4 ([f88e94b](https://github.com/erykpiast/webpack-stats-explorer/commit/f88e94b0770a27f0c101fb37d313eac20104fd22))
+* upgrade preact from 10.4.1 to 10.4.4 ([e01fe39](https://github.com/erykpiast/webpack-stats-explorer/commit/e01fe39adcd03d3020ad0ca8b8ae1f0571fc02a6))
+* upgrade preact from 10.4.1 to 10.4.4 ([29e7b6f](https://github.com/erykpiast/webpack-stats-explorer/commit/29e7b6f86bd8ec628f699e96bcfe2bcd715b4261))
+* upgrade rambda from 5.6.2 to 5.7.0 ([af6245d](https://github.com/erykpiast/webpack-stats-explorer/commit/af6245d5ed2c7dfa2cc9e72293753799fd8f3031))
+* upgrade rambda from 5.7.0 to 5.8.0 ([10d9502](https://github.com/erykpiast/webpack-stats-explorer/commit/10d95026032cad2ecdc73ce352517591d34ed23b))
+
 ## [1.25.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.24.0...v1.25.0) (2020-07-05)
 
 
