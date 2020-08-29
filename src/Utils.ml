@@ -125,6 +125,8 @@ module String = struct
   let split = Js.String.split;;
 
   let trim = Js.String.trim;;
+
+  let slice from string = Js.String.sliceToEnd ~from:from string;;
 end
 
 module Js = struct
