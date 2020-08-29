@@ -14,6 +14,7 @@ describe("SourceTree", () => {
         },
       parsed: None,
       children,
+      reasons: [],
     };
 
   describe("make", () => {

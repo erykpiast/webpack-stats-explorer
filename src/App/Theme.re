@@ -12,6 +12,8 @@ module Color = {
 
     let selected = rgb(224, 224, 224);
 
+    let reason = rgb(255, 253, 231);
+
     let danger = rgb(211, 47, 47);
 
     let bright = rgb(255, 255, 255);

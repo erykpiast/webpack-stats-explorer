@@ -30,6 +30,7 @@ type 'children t =
   ; original : Data.t option
   ; parsed : Data.t option
   ; children : 'children
+  ; reasons : (string list) list * (string list) list
   }
 ;;
 
@@ -43,6 +44,7 @@ let make compareChildren (a : Entry.t) (b : Entry.t) =
   ; original = Data.make a.original b.original
   ; parsed = Data.make a.parsed b.parsed
   ; children = compareChildren a.children b.children
+  ; reasons = (a.reasons, b.reasons)
   }
 ;;
 
@@ -54,6 +56,7 @@ let encode encodeChildren r =
     ; "stat", r.stat |> nullable Data.encode
     ; "parsed", r.parsed |> nullable Data.encode
     ; "children", r.children |> encodeChildren
+    ; "reasons", r.reasons |> tuple2 (list (list string)) (list (list string))
     ]
   )
 ;;

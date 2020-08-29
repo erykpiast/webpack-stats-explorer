@@ -13,6 +13,7 @@ describe("ModifiedEntry", () => {
         parsed: None,
         children: [],
         stat: Entry.Data.make(Some("I am Foo"), Some(666)),
+        reasons: [],
       };
     let e2 =
       Entry.{
@@ -22,6 +23,7 @@ describe("ModifiedEntry", () => {
         parsed: None,
         children: [],
         stat: Entry.Data.make(Some("I am new Foo"), Some(555)),
+        reasons: [],
       };
     let modified = makeModified(e1, e2);
 
@@ -33,6 +35,7 @@ describe("ModifiedEntry", () => {
            original: None,
            parsed: None,
            children: [],
+           reasons: ([], []),
            stat:
              ModifiedEntry.Data.make(
                Entry.Data.make(Some("I am Foo"), Some(666)),
@@ -51,6 +54,7 @@ describe("ModifiedEntry", () => {
         original: None,
         parsed: None,
         stat: Entry.Data.make(Some("I am Foo"), Some(666)),
+        reasons: [],
       };
     let e2 =
       Entry.{
@@ -60,6 +64,7 @@ describe("ModifiedEntry", () => {
         original: None,
         parsed: Entry.Data.make(Some("I'm nu foo"), Some(222)),
         stat: Entry.Data.make(Some("I am new Foo"), Some(555)),
+        reasons: [],
       };
     let modified = makeModified(e1, e2);
 
@@ -71,6 +76,7 @@ describe("ModifiedEntry", () => {
            original: None,
            parsed: None,
            children: [],
+           reasons: ([], []),
            stat:
              ModifiedEntry.Data.make(
                Entry.Data.make(Some("I am Foo"), Some(666)),
@@ -89,6 +95,7 @@ describe("ModifiedEntry", () => {
         original: None,
         parsed: Entry.Data.make(Some("I'm nu foo"), Some(222)),
         stat: Entry.Data.make(Some("I am Foo"), Some(666)),
+        reasons: [],
       };
     let e2 =
       Entry.{
@@ -98,6 +105,7 @@ describe("ModifiedEntry", () => {
         original: None,
         parsed: None,
         stat: Entry.Data.make(Some("I am new Foo"), Some(555)),
+        reasons: [],
       };
     let modified = makeModified(e1, e2);
 
@@ -109,6 +117,7 @@ describe("ModifiedEntry", () => {
            original: None,
            parsed: None,
            children: [],
+           reasons: ([], []),
            stat:
              ModifiedEntry.Data.make(
                Entry.Data.make(Some("I am Foo"), Some(666)),

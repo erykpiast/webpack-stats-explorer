@@ -1,4 +1,4 @@
-open Rationale.Function.Infix;
+open EntryTreeMapper;
 
 let downTriangle = {js|▼|js};
 let rightTriangle = {js|▶|js};
@@ -23,22 +23,32 @@ module Styles = {
       cursor(`pointer),
       justifyContent(`spaceBetween),
       padding(Theme.Space.default),
+      before([display(`none)]),
     ]);
 
   let selectedItem =
-    style([backgroundColor(Theme.Color.Background.selected)]);
+    style([
+      backgroundColor(Theme.Color.Background.selected),
+      before([contentRule(`text(downTriangle)), fontSize(em(1.02))]),
+    ]);
+
+  let reasonItem = style([backgroundColor(Theme.Color.Background.reason)]);
 
   let parentItem =
     style([
       before([
-        contentRule(`text(rightTriangle)),
+        display(`block),
         marginRight(Theme.Space.default),
-        fontSize(em(1.136)),
         color(Theme.Color.Border.default),
       ]),
     ]);
 
-  let expandedParentItem =
+  let collapsedItem =
+    style([
+      before([contentRule(`text(rightTriangle)), fontSize(em(1.136))]),
+    ]);
+
+  let expandedItem =
     style([
       before([contentRule(`text(downTriangle)), fontSize(em(1.02))]),
     ]);
@@ -124,221 +134,6 @@ module Styles = {
   };
 };
 
-type props = {
-  after: int,
-  before: int,
-  name: string,
-  level: int,
-  value: CompareEntry.entry,
-  parent: option(CompareEntry.entry),
-  onUnfold: ReactEvent.Mouse.t => unit,
-  onFold: ReactEvent.Mouse.t => unit,
-};
-
-let encode = r =>
-  Json.Encode.(
-    object_([
-      ("after", r.after |> int),
-      ("before", r.before |> int),
-      ("level", r.level |> int),
-      ("name", r.name |> string),
-    ])
-  );
-
-module type MapperContext = {
-  let onEntry: (int, NavigationPath.Segment.t) => unit;
-  let navigationPath: list(NavigationPath.Segment.t);
-};
-
-module Mapper = (Context: MapperContext) => {
-  type t = {
-    selected: bool,
-    value: props,
-    children: list(t),
-  };
-
-  let hasChildren =
-    CompareEntry.(
-      fun
-      | Entry(entry) => List.length(entry.children) > 0
-      | ModifiedEntry(entry) => entry.children |> count |> snd > 0
-    );
-
-  let sortProps =
-    List.sort(({value: a}, {value: b}) => {
-      let aDiff = a.after - a.before;
-      let bDiff = b.after - b.before;
-      let diffOfDiffs = bDiff - aDiff;
-
-      if (diffOfDiffs === 0) {
-        0;
-      } else if (aDiff === 0) {
-        1;
-      } else if (bDiff === 0) {
-        (-1);
-      } else {
-        diffOfDiffs;
-      };
-    });
-
-  let rec expandNotModifiedEntryChildren =
-          (
-            kindMapper,
-            ~level=0,
-            ~parent=None,
-            ~navigationPath=Context.navigationPath,
-          ) =>
-    List.map((entry: Entry.t) => {
-      let props = kindMapper(level, parent, entry);
-
-      switch (navigationPath) {
-      | [] => {selected: false, value: props, children: []}
-      | [segment, ...tail] =>
-        switch (segment) {
-        | CompareEntry.Entry(segmentEntry) =>
-          if (segmentEntry == entry) {
-            let children =
-              entry.children
-              |> expandNotModifiedEntryChildren(
-                   kindMapper,
-                   ~level=level + 1,
-                   ~parent=Some(CompareEntry.Entry(entry)),
-                   ~navigationPath=tail,
-                 )
-              |> sortProps;
-            {selected: true, value: props, children};
-          } else {
-            {selected: false, value: props, children: []};
-          }
-        | _ => {selected: false, value: props, children: []}
-        }
-      };
-    });
-
-  let createFoldHandler = (parent, currentLevel) =>
-    switch (parent) {
-    | Some(parentEntry) => (
-        _ =>
-          parentEntry
-          |> NavigationPath.Segment.make
-          |> Context.onEntry(currentLevel - 1)
-      )
-    | None => (_ => ())
-    };
-  let createUnfoldHandler = (entry, currentLevel, _) =>
-    entry |> NavigationPath.Segment.make |> Context.onEntry(currentLevel);
-
-  let mapAdded = (level, parent, entry: Entry.t) => {
-    after: entry.size,
-    before: 0,
-    name: entry.id,
-    level,
-    value: Entry(entry),
-    parent,
-    onUnfold: createUnfoldHandler(Entry(entry), level),
-    onFold: createFoldHandler(parent, level),
-  };
-  let mapRemoved = (level, parent, entry: Entry.t) => {
-    after: 0,
-    before: entry.size,
-    name: entry.id,
-    level,
-    value: Entry(entry),
-    parent,
-    onUnfold: createUnfoldHandler(Entry(entry), level),
-    onFold: createFoldHandler(parent, level),
-  };
-  let mapIntact = (level, parent, entry: Entry.t) => {
-    after: entry.size,
-    before: entry.size,
-    name: entry.id,
-    level,
-    value: Entry(entry),
-    parent,
-    onUnfold: createUnfoldHandler(Entry(entry), level),
-    onFold: createFoldHandler(parent, level),
-  };
-  let mapModified = (level, parent, entry: ModifiedEntry.t(CompareEntry.t)) => {
-    after: entry.size |> snd,
-    before: entry.size |> fst,
-    name: entry.id,
-    level,
-    value: ModifiedEntry(entry),
-    parent,
-    onUnfold: createUnfoldHandler(ModifiedEntry(entry), level),
-    onFold: createFoldHandler(parent, level),
-  };
-
-  let added = expandNotModifiedEntryChildren(mapAdded);
-  let removed = expandNotModifiedEntryChildren(mapRemoved);
-  let intact = expandNotModifiedEntryChildren(mapIntact);
-  let rec modified =
-          (~level=0, ~parent=None, ~navigationPath=Context.navigationPath) =>
-    List.map((entry: ModifiedEntry.t(CompareEntry.t)) => {
-      let props = mapModified(level, parent, entry);
-
-      switch (navigationPath) {
-      | [] => {selected: false, value: props, children: []}
-      | [segment, ...tail] =>
-        switch (segment) {
-        | ModifiedEntry(segmentEntry) =>
-          if (segmentEntry == entry) {
-            let parent = Some(CompareEntry.ModifiedEntry(entry));
-            let level = level + 1;
-            let navigationPath = tail;
-            let children =
-              List.concat([
-                entry.children.added
-                |> added(~parent, ~level, ~navigationPath),
-                entry.children.removed
-                |> removed(~parent, ~level, ~navigationPath),
-                entry.children.intact
-                |> intact(~parent, ~level, ~navigationPath),
-                entry.children.modified
-                |> modified(~parent, ~level, ~navigationPath),
-              ])
-              |> sortProps;
-            {selected: true, value: props, children};
-          } else {
-            {selected: false, value: props, children: []};
-          }
-        | _ => {selected: false, value: props, children: []}
-        }
-      };
-    });
-
-  let rec flatten = (hasParent, nested) =>
-    Utils.List.flatMap(
-      ({selected, value, children}) =>
-        [
-          (
-            selected,
-            List.length(children) > 0,
-            value,
-            (hasChildren(value.value), hasParent),
-          ),
-          ...flatten(true, children),
-        ],
-      nested,
-    );
-};
-
-let mapToProps = (onEntry, navigationPath, comp: CompareEntry.t) => {
-  module TheMapper =
-    Mapper({
-      let onEntry = onEntry;
-      let navigationPath = navigationPath;
-    });
-  List.concat([
-    TheMapper.added(comp.added),
-    TheMapper.removed(comp.removed),
-    TheMapper.intact(comp.intact),
-    TheMapper.modified(comp.modified),
-  ])
-  |> TheMapper.sortProps
-  |> TheMapper.flatten(false);
-};
-
 let getLevelClass = level =>
   switch (level) {
   | 0 => Styles.Level.l0
@@ -359,8 +154,13 @@ let getFamilyClass =
 
 [@react.component]
 let make =
-    (~onEntry, ~comp: CompareEntry.t, ~navigationPath: NavigationPath.t) => {
-  let props = mapToProps(onEntry, navigationPath, comp);
+    (
+      ~onEntry,
+      ~onPath,
+      ~comp: CompareEntry.t,
+      ~navigationPath: NavigationPath.t,
+    ) => {
+  let props = mapToProps(onEntry, onPath, navigationPath, comp);
 
   switch (props) {
   | [] => React.null
@@ -370,26 +170,56 @@ let make =
        |> List.map(
             (
               (
-                selected,
-                expanded,
-                {after, before, value, name, level, onUnfold, onFold},
+                state,
+                {after, before, name, level, onExpand, onCollapse, onSelect},
                 familyRelations,
               ),
             ) => {
             let isModifiedOrIntact = before !== 0 && after !== 0;
-            let onClick = expanded === false ? onUnfold : onFold;
+            let (isParent, _) = familyRelations;
+            let onClick =
+              switch (state, isParent) {
+              | (`reason(path), _) => onSelect(path)
+              | (`expanded, _) => onCollapse
+              | (`selected, true) => onCollapse
+              | (`selected, false) => Utils.noop
+              | (`collapsed, _) => onExpand
+              };
+            let stateClassName =
+              switch (state) {
+              | `selected => Styles.selectedItem
+              | `reason(_) => Styles.reasonItem
+              | `expanded => Styles.expandedItem
+              | `collapsed => Styles.collapsedItem
+              };
+            let stateLabel =
+              switch (state) {
+              | `selected => "selected"
+              | `reason(_) => "reason"
+              | `expanded => "expanded"
+              | `collapsed => "none"
+              };
+
+            Js.log((name, stateLabel, onClick));
 
             <li
               onClick
               className={Cn.fromList([
                 Styles.item,
-                Cn.on(Styles.selectedItem, selected),
-                Cn.on(Styles.expandedParentItem, expanded),
+                stateClassName,
                 getLevelClass(level),
                 getFamilyClass(familyRelations),
               ])}
               title=name
-              key={string_of_int(level) ++ name}>
+              key={
+                string_of_int(level)
+                ++ "_"
+                ++ name
+                ++ "_"
+                ++ string_of_int(after)
+                ++ "_"
+                ++ string_of_int(before)
+              }>
               <ReversedText className=Styles.name>
                 ...{name |> React.string}
               </ReversedText>
