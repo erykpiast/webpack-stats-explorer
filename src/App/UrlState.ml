@@ -62,8 +62,7 @@ let read () =
     };;
 
 let write ({ urls; navigationPath; index; tab; sourceTree }) =
-  let search = Location.search location
-  in let () = Js.log index
+  let search = Location.search location |> (Utils.String.slice 1)
   in let params = URLSearchParams.make search
   in let _ = URLSearchParams.delete urlParameter params
     and _ = List.fold_left (fun params url ->

@@ -1,1 +1,1 @@
-ReactDOMRe.renderToElementWithId(<App stats=[] />, "app");
+ReactDOMRe.renderToElementWithId(<App />, "app");

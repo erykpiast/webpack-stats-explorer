@@ -11,7 +11,8 @@ type action =
   | UpdateUrls(list(string))
   | SelectTab(int)
   | SelectDiffMode(CodeDiff.mode)
-  | SwitchSourceTree;
+  | SwitchSourceTree
+  | SetUrlState(State.t);
 
 let updateNavigationPath = (path: list('a), segment, depth): list('a) => {
   let tail =
@@ -187,30 +188,49 @@ let reducer = (state, action) =>
           urls: state.urls,
           sourceTree: state.sourceTree,
         }
+      | SetUrlState(newState) => {...newState, stats: state.stats}
       };
     }
   );
 
-[@react.component]
-let make = (~stats) => {
+let getStateFromUrl = (state) => {
   let urlState = UrlState.read();
-  let (state, dispatch) =
-    React.useReducer(
-      reducer,
-      {
-        tab: urlState.tab,
-        index: urlState.index,
-        stats,
-        navigationPath:
-          urlState.navigationPath
-          |> List.map(State.NavigationPath.Segment.fromString),
+  let currentState =
+    switch (state) {
+    | Some(existingState) => existingState
+    | None =>
+      State.{
+        tab: 0,
+        index: 0,
+        stats: [],
+        navigationPath: [],
         isTimelineVisible: false,
         isSidebarCollapsed: false,
         diffMode: CodeDiff.Unified,
-        urls: urlState.urls,
-        sourceTree: urlState.sourceTree,
-      },
-    );
+        urls: [],
+        sourceTree: false,
+      }
+    };
+
+  State.{
+    tab: urlState.tab,
+    index: urlState.index,
+    stats: currentState.stats,
+    navigationPath:
+      urlState.navigationPath
+      |> List.map(State.NavigationPath.Segment.fromString),
+    isTimelineVisible: currentState.isTimelineVisible,
+    isSidebarCollapsed: currentState.isSidebarCollapsed,
+    diffMode: currentState.diffMode,
+    urls: urlState.urls,
+    sourceTree: urlState.sourceTree,
+  };
+};
+
+[@react.component]
+let make = () => {
+  let (state, dispatch) =
+    React.useReducer(reducer, getStateFromUrl(None));
   React.useEffect4(
     () => {
       UrlState.{
@@ -227,6 +247,36 @@ let make = (~stats) => {
     },
     (state.urls, state.navigationPath, state.index, state.tab),
   );
+
+  let popstateHandler =
+    React.useCallback0(_ =>
+      dispatch(SetUrlState(getStateFromUrl(Some(state))))
+    );
+
+  React.useEffect(
+    Webapi.Dom.(
+      () => {
+        let windowTarget = Window.asEventTarget(window);
+
+        EventTarget.addEventListener(
+          "popstate",
+          popstateHandler,
+          windowTarget,
+        );
+
+        Some(
+          () => {
+            EventTarget.removeEventListener(
+              "popstate",
+              popstateHandler,
+              windowTarget,
+            )
+          },
+        );
+      }
+    ),
+  );
+
   let comparisons =
     (
       switch (state.stats) {
