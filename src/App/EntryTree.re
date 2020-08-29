@@ -192,15 +192,6 @@ let make =
               | `expanded => Styles.expandedItem
               | `collapsed => Styles.collapsedItem
               };
-            let stateLabel =
-              switch (state) {
-              | `selected => "selected"
-              | `reason(_) => "reason"
-              | `expanded => "expanded"
-              | `collapsed => "none"
-              };
-
-            Js.log((name, stateLabel, onClick));
 
             <li
               onClick
