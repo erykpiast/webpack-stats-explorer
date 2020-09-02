@@ -5,8 +5,8 @@
   ],
   "version": "4.44.1",
   "hash": "ad33b3123a1db5b15098",
-  "time": 5647,
-  "builtAt": 1598744860149,
+  "time": 5607,
+  "builtAt": 1599078272565,
   "publicPath": "",
   "outputPath": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/dist",
   "assetsByChunkName": {
@@ -11449,9 +11449,9 @@
       "optional": false,
       "prefetched": false,
       "chunks": [],
-      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/nanoutils/lib/adjust/index.js",
-      "issuerId": 19,
-      "issuerName": "./node_modules/nanoutils/lib/adjust/index.js",
+      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/nanoutils/lib/adjustIn/index.js",
+      "issuerId": 20,
+      "issuerName": "./node_modules/nanoutils/lib/adjustIn/index.js",
       "issuerPath": [
         {
           "id": null,
@@ -11474,9 +11474,9 @@
           "name": "./node_modules/nanoutils/lib/index.js"
         },
         {
-          "id": 19,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/nanoutils/lib/adjust/index.js",
-          "name": "./node_modules/nanoutils/lib/adjust/index.js"
+          "id": 20,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/nanoutils/lib/adjustIn/index.js",
+          "name": "./node_modules/nanoutils/lib/adjustIn/index.js"
         }
       ],
       "failed": false,
