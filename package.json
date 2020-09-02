@@ -56,7 +56,7 @@
     "bs-js-beautify": "0.1.1",
     "bs-jsverify": "0.10.0",
     "bs-react-diff-viewer": "0.1.3",
-    "bs-react-dropzone": "0.5.3",
+    "bs-react-dropzone": "0.6.0",
     "bs-react-syntax-highlighter": "0.2.2",
     "bs-webapi": "0.19.1",
     "date-fns": "2.16.0",
