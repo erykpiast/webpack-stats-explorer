@@ -42,7 +42,7 @@ module Styles = {
 [@react.component]
 let make = (~onFiles, ~label, ~className="", ~children) => {
   <ReactDropzone
-    accept={ReactDropzone.Single("application/json")}
+    accept={`single("application/json")}
     multiple=true
     onDrop=Js.Promise.(
       (acceptedFiles, _) =>
