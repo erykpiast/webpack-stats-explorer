@@ -15,6 +15,6 @@
     "postcss-loader": "3.0.0",
     "style-loader": "1.2.1",
     "webpack": "4.44.1",
-    "webpack-enhanced-stats-plugin": "2.5.0"
+    "webpack-enhanced-stats-plugin": "2.5.1"
   }
 }
