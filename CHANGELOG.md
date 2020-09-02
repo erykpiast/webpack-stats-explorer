@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.26.1](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.26.0...v1.26.1) (2020-09-02)
+
+
+### Bug Fixes
+
+* **deps:** upgrade bs-react-dropzone ([07aea57](https://github.com/erykpiast/webpack-stats-explorer/commit/07aea575f9810fa3e4e0da5bf81d7710abcab4ab))
+
 ## [1.26.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.25.0...v1.26.0) (2020-08-29)
 
 
