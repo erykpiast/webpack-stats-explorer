@@ -22,6 +22,7 @@ for EXAMPLE in ${EXAMPLES[@]}; do
             cd "$DIR";
             ncu -u;
             npm i;
+            npm audit fix;
         fi;
     done;
 done;
