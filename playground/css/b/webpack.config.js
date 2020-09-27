@@ -13,7 +13,9 @@ module.exports = {
       }, {
         loader: 'postcss-loader',
         options: {
-          plugins: [autoprefixer({ env: 'last 4 versions' })],
+          postcssOptions: {
+            plugins: [autoprefixer({ env: 'last 4 versions' })],
+          },
           sourceMap: true,
         }
       }]
