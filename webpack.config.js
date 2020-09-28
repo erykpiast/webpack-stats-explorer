@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {
   BundleAnalyzerPlugin
 } = require('webpack-bundle-analyzer');
+const DashboardPlugin = require("webpack-dashboard/plugin");
 const path = require('path');
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -23,5 +24,6 @@ module.exports = {
       openAnalyzer: false,
       generateStatsFile: true,
     }),
-  ],
+    !isProd && new DashboardPlugin()
+  ].filter(Boolean),
 };
