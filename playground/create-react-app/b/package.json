@@ -1,0 +1,141 @@
+{
+  "name": "webpack-stats-explorer-playground-create-react-app",
+  "version": "1.0.0",
+  "description": "Create React App configuration playground for Webpack Stats Explorer",
+  "devDependencies": {
+    "@babel/core": "7.11.6",
+    "@svgr/webpack": "5.4.0",
+    "@testing-library/jest-dom": "5.11.4",
+    "@testing-library/react": "11.0.4",
+    "@testing-library/user-event": "12.1.6",
+    "@typescript-eslint/eslint-plugin": "4.2.0",
+    "@typescript-eslint/parser": "4.2.0",
+    "babel-eslint": "10.1.0",
+    "babel-jest": "26.3.0",
+    "babel-loader": "8.1.0",
+    "babel-plugin-named-asset-import": "0.3.6",
+    "babel-preset-react-app": "9.1.2",
+    "camelcase": "6.0.0",
+    "case-sensitive-paths-webpack-plugin": "2.3.0",
+    "css-loader": "4.3.0",
+    "dotenv": "8.2.0",
+    "dotenv-expand": "5.1.0",
+    "eslint": "7.10.0",
+    "eslint-config-react-app": "5.2.1",
+    "eslint-loader": "4.0.2",
+    "eslint-plugin-flowtype": "5.2.0",
+    "eslint-plugin-import": "2.22.0",
+    "eslint-plugin-jsx-a11y": "6.3.1",
+    "eslint-plugin-react": "7.21.2",
+    "eslint-plugin-react-hooks": "4.1.2",
+    "file-loader": "6.1.0",
+    "fs-extra": "9.0.1",
+    "html-webpack-plugin": "4.5.0",
+    "identity-obj-proxy": "3.0.0",
+    "jest": "26.4.2",
+    "jest-environment-jsdom-fourteen": "1.0.1",
+    "jest-resolve": "26.4.0",
+    "jest-watch-typeahead": "0.6.1",
+    "mini-css-extract-plugin": "0.11.2",
+    "moment": "^2.29.0",
+    "optimize-css-assets-webpack-plugin": "5.0.4",
+    "pnp-webpack-plugin": "1.6.4",
+    "postcss-flexbugs-fixes": "4.2.1",
+    "postcss-loader": "4.0.2",
+    "postcss-normalize": "9.0.0",
+    "postcss-preset-env": "6.7.0",
+    "postcss-safe-parser": "5.0.2",
+    "react": "16.13.1",
+    "react-app-polyfill": "1.0.6",
+    "react-dev-utils": "10.2.1",
+    "react-dom": "16.13.1",
+    "resolve": "1.17.0",
+    "resolve-url-loader": "3.1.1",
+    "sass-loader": "10.0.2",
+    "semver": "7.3.2",
+    "style-loader": "1.2.1",
+    "terser-webpack-plugin": "4.2.2",
+    "ts-pnp": "1.2.0",
+    "url-loader": "4.1.0",
+    "webpack": "4.44.2",
+    "webpack-dev-server": "3.11.0",
+    "webpack-enhanced-stats-plugin": "^2.6.1",
+    "webpack-manifest-plugin": "2.2.0",
+    "workbox-webpack-plugin": "5.1.4"
+  },
+  "scripts": {
+    "start": "node scripts/start.js",
+    "build": "NODE_ENV=production node scripts/build.js && mv build/stats.json ../$(basename $(pwd)).json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts"
+    ],
+    "setupFiles": [
+      "react-app-polyfill/jsdom"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/setupTests.js"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
+    ],
+    "testEnvironment": "jest-environment-jsdom-fourteen",
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
+      "^.+\\.module\\.(css|sass|scss)$"
+    ],
+    "modulePaths": [],
+    "moduleNameMapper": {
+      "^react-native$": "react-native-web",
+      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
+    },
+    "moduleFileExtensions": [
+      "web.js",
+      "js",
+      "web.ts",
+      "ts",
+      "web.tsx",
+      "tsx",
+      "json",
+      "web.jsx",
+      "jsx",
+      "node"
+    ],
+    "watchPlugins": [
+      "jest-watch-typeahead/filename",
+      "jest-watch-typeahead/testname"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "react-app"
+    ]
+  }
+}

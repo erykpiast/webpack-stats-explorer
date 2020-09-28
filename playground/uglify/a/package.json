@@ -10,7 +10,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "terser-webpack-plugin": "4.1.0",
-    "webpack": "4.44.1"
+    "terser-webpack-plugin": "4.2.2",
+    "webpack": "4.44.2"
   }
 }
