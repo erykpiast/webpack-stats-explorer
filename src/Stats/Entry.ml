@@ -86,7 +86,7 @@ module FromModule = struct
       ||> Js.String.replaceByRe [%re "/ \\+ \\d+ modules?$/"] ""
   ;;
 
-  let nameEqual (a : WebpackModule.t) (b : WebpackModule.t) = a.name = b.name;;
+  let nameEqual (a : WebpackModule.t) (b : WebpackModule.t) = getId(a.name) = getId(b.name);;
 
   let findMainSubmodule (module_: WebpackModule.t) = module_.modules
     >>= Utils.List.findOpt (nameEqual module_)
