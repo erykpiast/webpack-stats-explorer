@@ -37,32 +37,44 @@ module Styles = {
       height(px(100)),
     ]);
 
-  let getContent = columnGuideline => [
-    display(`block),
-    borderSpacing(px(0)),
-    flexGrow(1.0),
-    flexShrink(0.0),
-    padding(px(0)),
-    position(`relative),
-    ...switch (columnGuideline) {
-       | 0 => []
-       | _ => [
-           selector("pre", [minWidth(ch(float_of_int(columnGuideline)))]),
-           width(`auto),
-           before([
-             contentRule(`text("")),
-             backgroundColor(Theme.Color.Border.default),
-             display(`block),
-             position(`absolute),
-             left(ch(float_of_int(columnGuideline))),
-             bottom(px(0)),
-             top(px(0)),
-             right(px(0)),
-             width(px(1)),
-           ]),
-         ]
-       },
-  ];
+  let getContent = (mode, columnGuideline) =>
+    [
+      display(`block),
+      borderSpacing(px(0)),
+      flexGrow(1.0),
+      flexShrink(0.0),
+      padding(px(0)),
+      position(`relative),
+    ]
+    |> List.append(
+         switch (columnGuideline) {
+         | 0 => []
+         | _ => [
+             selector(
+               "pre",
+               [minWidth(ch(float_of_int(columnGuideline)))],
+             ),
+             width(`auto),
+             before([
+               contentRule(`text("")),
+               backgroundColor(Theme.Color.Border.default),
+               display(`block),
+               position(`absolute),
+               left(ch(float_of_int(columnGuideline))),
+               bottom(px(0)),
+               top(px(0)),
+               right(px(0)),
+               width(px(1)),
+             ]),
+           ]
+         },
+       )
+    |> List.append(
+         switch (mode) {
+         | Unified => []
+         | Split => [width(`percent(50.0)), minWidth(ch(80.0)), maxWidth(vw(60.9))]
+         },
+       );
 
   let line = [
     display(`flex),
@@ -182,7 +194,7 @@ let make =
       renderContent
       styles={ReactDiffViewer.Styles.make(
         ~wordDiff=Styles.wordDiff,
-        ~content=Styles.getContent(columnGuideline),
+        ~content=Styles.getContent(mode, columnGuideline),
         ~contentText=Styles.contentText,
         ~line=Styles.line,
         ~lineNumber=Styles.lineNumber,
