@@ -188,7 +188,12 @@ let reducer = (state, action) =>
           urls: state.urls,
           sourceTree: state.sourceTree,
         }
-      | SetUrlState(newState) => {...newState, stats: state.stats}
+      | SetUrlState(newState) =>
+        if (newState != state) {
+          newState;
+        } else {
+          state;
+        }
       };
     }
   );
@@ -259,6 +264,12 @@ let make = () => {
     Webapi.Dom.(
       () => {
         let windowTarget = Window.asEventTarget(window);
+
+        let popstateHandler = _ => {
+          dispatch(
+            SetUrlState(getStateFromUrl(Some(state), UrlState.read())),
+          );
+        };
 
         EventTarget.addEventListener(
           "popstate",
