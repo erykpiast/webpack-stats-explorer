@@ -1,0 +1,788 @@
+{
+  "errors": [],
+  "warnings": [
+    "configuration\nThe 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.\nYou can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/"
+  ],
+  "version": "4.44.2",
+  "hash": "c0c045dcdef4b07a821e",
+  "time": 2185,
+  "builtAt": 1601497990729,
+  "publicPath": "",
+  "outputPath": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/dist",
+  "assetsByChunkName": {
+    "main": [
+      "main.js",
+      "main.js.map"
+    ]
+  },
+  "assets": [
+    {
+      "name": "main.js",
+      "size": 2408,
+      "chunks": [
+        0
+      ],
+      "chunkNames": [
+        "main"
+      ],
+      "info": {
+        "minimized": true
+      },
+      "emitted": true
+    },
+    {
+      "name": "main.js.map",
+      "size": 8998,
+      "chunks": [
+        0
+      ],
+      "chunkNames": [
+        "main"
+      ],
+      "info": {
+        "development": true
+      },
+      "emitted": true
+    }
+  ],
+  "filteredAssets": 0,
+  "entrypoints": {
+    "main": {
+      "chunks": [
+        0
+      ],
+      "assets": [
+        "main.js",
+        "main.js.map"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "namedChunkGroups": {
+    "main": {
+      "chunks": [
+        0
+      ],
+      "assets": [
+        "main.js",
+        "main.js.map"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "chunks": [
+    {
+      "id": 0,
+      "rendered": true,
+      "initial": true,
+      "entry": true,
+      "size": 2710,
+      "names": [
+        "main"
+      ],
+      "files": [
+        "main.js",
+        "main.js.map"
+      ],
+      "hash": "f9f0d4539e1e1f54b0d7",
+      "siblings": [],
+      "parents": [],
+      "children": [],
+      "childrenByOrder": {},
+      "filteredModules": 0,
+      "origins": [
+        {
+          "module": "",
+          "moduleIdentifier": "",
+          "moduleName": "",
+          "loc": "main",
+          "request": "./src/app.js",
+          "reasons": []
+        }
+      ],
+      "modules": [
+        {
+          "id": 0,
+          "identifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js ea98e15854e80e4b186cc44b8ec36170",
+          "name": "./src/app.js + 3 modules",
+          "index": 0,
+          "index2": 3,
+          "size": 2710,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "issuer": null,
+          "issuerId": null,
+          "issuerName": null,
+          "issuerPath": null,
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": null,
+              "module": null,
+              "moduleName": null,
+              "type": "single entry",
+              "userRequest": "./src/app.js",
+              "loc": "main"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": [],
+          "optimizationBailout": [],
+          "depth": 0,
+          "filteredModules": 0,
+          "parsedSize": 127,
+          "parsedSource": "then((function(){var n=document.querySelector(\"#app\");Promise.all([then((function(e){n.innerHTML+=o(e[0]),n.innerHTML+=(e[1])&&",
+          "originalSize": 438,
+          "originalSource": "import { getUserList, getCurrentUser } from './lib/api';\nimport { renderUserList, renderUser } from './lib/render';\nimport { domReady } from './lib/utils';\n\nfunction init() {\n  const container = document.querySelector('#app');\n\n  Promise.all([\n    getUserList(),\n    getCurrentUser()\n  ]).then((data) => {\n    container.innerHTML += renderUser(data[0]);\n    container.innerHTML += renderUserList(data[1]);\n  });\n}\n\ndomReady().then(init);\n",
+          "modules": [
+            {
+              "id": null,
+              "identifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+              "name": "./src/app.js",
+              "index": 0,
+              "index2": 3,
+              "size": 428,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [],
+              "issuer": null,
+              "issuerId": null,
+              "issuerName": null,
+              "issuerPath": null,
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": null,
+                  "module": null,
+                  "moduleName": null,
+                  "type": "single entry",
+                  "userRequest": "./src/app.js",
+                  "loc": "main"
+                }
+              ],
+              "usedExports": true,
+              "providedExports": [],
+              "optimizationBailout": [
+                "ModuleConcatenation bailout: Module is an entry point"
+              ],
+              "depth": 0,
+              "source": "import { getUserList, getCurrentUser } from './lib/api';\nimport { renderUserList, renderUser } from './lib/render';\nimport { domReady } from './lib/utils';\n\nfunction init() {\n  var container = document.querySelector('#app');\n  Promise.all([getUserList(), getCurrentUser()]).then(function (data) {\n    container.innerHTML += renderUser(data[0]);\n    container.innerHTML += renderUserList(data[1]);\n  });\n}\n\ndomReady().then(init);",
+              "parsedSize": 127,
+              "parsedSource": "then((function(){var n=document.querySelector(\"#app\");Promise.all([then((function(e){n.innerHTML+=o(e[0]),n.innerHTML+=(e[1])&&",
+              "originalSize": 438,
+              "originalSource": "import { getUserList, getCurrentUser } from './lib/api';\nimport { renderUserList, renderUser } from './lib/render';\nimport { domReady } from './lib/utils';\n\nfunction init() {\n  const container = document.querySelector('#app');\n\n  Promise.all([\n    getUserList(),\n    getCurrentUser()\n  ]).then((data) => {\n    container.innerHTML += renderUser(data[0]);\n    container.innerHTML += renderUserList(data[1]);\n  });\n}\n\ndomReady().then(init);\n",
+              "modules": []
+            },
+            {
+              "id": null,
+              "identifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/lib/utils.js",
+              "name": "./src/lib/utils.js",
+              "index": 2,
+              "index2": 0,
+              "size": 753,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [],
+              "issuer": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+              "issuerId": null,
+              "issuerName": "./src/app.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+                  "name": "./src/app.js"
+                }
+              ],
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/lib/render.js",
+                  "module": "./src/lib/render.js",
+                  "moduleName": "./src/lib/render.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./utils",
+                  "loc": "1:0-37"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/lib/api.js",
+                  "module": "./src/lib/api.js",
+                  "moduleName": "./src/lib/api.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./utils",
+                  "loc": "1:0-34"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+                  "module": "./src/app.js",
+                  "moduleName": "./src/app.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./lib/utils",
+                  "loc": "3:0-39"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/lib/api.js",
+                  "module": "./src/lib/api.js",
+                  "moduleName": "./src/lib/api.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./utils",
+                  "loc": "4:9-16"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+                  "module": "./src/app.js",
+                  "moduleName": "./src/app.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./lib/utils",
+                  "loc": "13:0-8"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/lib/render.js",
+                  "module": "./src/lib/render.js",
+                  "moduleName": "./src/lib/render.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./utils",
+                  "loc": "13:244-254"
+                }
+              ],
+              "usedExports": [
+                "domReady",
+                "formatDate",
+                "mapKeys"
+              ],
+              "providedExports": [
+                "formatDate",
+                "mapKeys",
+                "domReady"
+              ],
+              "optimizationBailout": [],
+              "depth": 1,
+              "source": "export function formatDate(date) {\n  var year = String(date.getFullYear());\n  var month = String(date.getMonth() + 1);\n  var day = String(date.getDate());\n\n  if (month.length < 2) {\n    month = '0' + month;\n  }\n\n  if (day.length < 2) {\n    day = '0' + day;\n  }\n\n  return [year, month, day].join('-');\n}\nexport function mapKeys(mapper, object) {\n  var entries = Object.entries(object);\n  var mappedEntries = entries.map(function (entry) {\n    return [mapper(entry[0]), entry[1]];\n  });\n  return Object.fromEntries(mappedEntries);\n}\nexport function domReady() {\n  return new Promise(function (resolve) {\n    if (document.readyState === 'complete') {\n      resolve();\n    } else {\n      document.addEventListener('DOMContentLoaded', resolve);\n    }\n  });\n}",
+              "parsedSize": 356,
+              "parsedSource": "e=t=r=Object.entries(t).map((function(n){return[e(n[0]),n[1]]})),Object.fromEntries(r);var e,t,r}e,t,r,o,e=t=String(e.getFullYear()),r=String(e.getMonth()+1),o=String(e.getDate()),r.length<2&&(r=\"0\"+r),o.length<2&&(o=\"0\"+o),[t,r,o].join(\"-\")),new Promise((function(n){\"complete\"===document.readyState?n():document.addEventListener(\"DOMContentLoaded\",n)})).",
+              "originalSize": 739,
+              "originalSource": "export function formatDate(date) {\n  const year = String(date.getFullYear());\n  let month = String(date.getMonth() + 1);\n  let day = String(date.getDate());\n\n  if (month.length < 2) {\n    month = '0' + month;\n  }\n        \n  if (day.length < 2) {\n    day = '0' + day;\n  }\n\n  return [year, month, day].join('-');\n}\n\nexport function mapKeys(mapper, object) {\n  const entries = Object.entries(object);\n  const mappedEntries = entries.map((entry) => [mapper(entry[0]), entry[1]]);\n  return Object.fromEntries(mappedEntries);\n}\n\nexport function domReady() {\n  return new Promise((resolve) => {\n    if (document.readyState === 'complete') {\n      resolve();\n    } else {\n      document.addEventListener('DOMContentLoaded', resolve);\n    }\n  });\n}",
+              "modules": []
+            },
+            {
+              "id": null,
+              "identifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/lib/api.js",
+              "name": "./src/lib/api.js",
+              "index": 1,
+              "index2": 1,
+              "size": 635,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [],
+              "issuer": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+              "issuerId": null,
+              "issuerName": "./src/app.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+                  "name": "./src/app.js"
+                }
+              ],
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+                  "module": "./src/app.js",
+                  "moduleName": "./src/app.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./lib/api",
+                  "loc": "1:0-56"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+                  "module": "./src/app.js",
+                  "moduleName": "./src/app.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./lib/api",
+                  "loc": "7:15-26"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+                  "module": "./src/app.js",
+                  "moduleName": "./src/app.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./lib/api",
+                  "loc": "7:30-44"
+                }
+              ],
+              "usedExports": [
+                "getUserList",
+                "getCurrentUser"
+              ],
+              "providedExports": [
+                "getCurrentUser",
+                "getUserList"
+              ],
+              "optimizationBailout": [],
+              "depth": 1,
+              "source": "import { mapKeys } from './utils';\n\nfunction transformUserKeys(user) {\n  return mapKeys(function (key) {\n    return key.toLowerCase();\n  }, user);\n}\n\nexport function getCurrentUser() {\n  return fetch('/api/me').then(function (response) {\n    return response.json();\n  }).then(transformUserKeys, function () {\n    return null;\n  });\n}\nexport function getUserList() {\n  return fetch('/api/users').then(function (response) {\n    return response.json();\n  }).then(function (data) {\n    return data.ids.map(function (id) {\n      return data.users[id];\n    }).filter(Boolean).map(transformUserKeys);\n  }, function () {\n    return [];\n  });\n}",
+              "parsedSize": 324,
+              "parsedSource": "function r(n){return function(n){return n.toLowerCase()},n,fetch(\"/api/users\").then((function(n){return n.json()})).then((function(n){return n.ids.map((function(e){return n.users[e]})).filter(Boolean).map(r)}),(function(){return[]})),fetch(\"/api/me\").then((function(n){return n.json()})).then(r,(function(){return null}))]).",
+              "originalSize": 529,
+              "originalSource": "import { mapKeys } from './utils';\n\nfunction transformUserKeys(user) {\n  return mapKeys((key) => key.toLowerCase(), user);\n}\n\nexport function getCurrentUser() {\n  return fetch('/api/me')\n    .then((response) => response.json())\n    .then(transformUserKeys, () => null);\n}\n\nexport function getUserList() {\n  return fetch('/api/users')\n    .then((response) => response.json())\n    .then(\n      (data) => data.ids\n        .map((id) => data.users[id])\n        .filter(Boolean)\n        .map(transformUserKeys),\n      () => []\n    );\n}",
+              "modules": []
+            },
+            {
+              "id": null,
+              "identifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/lib/render.js",
+              "name": "./src/lib/render.js",
+              "index": 3,
+              "index2": 2,
+              "size": 894,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [],
+              "issuer": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+              "issuerId": null,
+              "issuerName": "./src/app.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+                  "name": "./src/app.js"
+                }
+              ],
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+                  "module": "./src/app.js",
+                  "moduleName": "./src/app.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./lib/render",
+                  "loc": "2:0-58"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+                  "module": "./src/app.js",
+                  "moduleName": "./src/app.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./lib/render",
+                  "loc": "8:27-37"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+                  "module": "./src/app.js",
+                  "moduleName": "./src/app.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./lib/render",
+                  "loc": "9:27-41"
+                }
+              ],
+              "usedExports": [
+                "renderUser",
+                "renderUserList"
+              ],
+              "providedExports": [
+                "renderUser",
+                "renderUserList"
+              ],
+              "optimizationBailout": [],
+              "depth": 1,
+              "source": "import { formatDate } from './utils';\nexport function renderUser(user) {\n  if (!user) {\n    user = {\n      name: 'Unknown User',\n      avatar: '/img/default-avatar.png',\n      birthday: 0,\n      role: 'Unknown'\n    };\n  }\n\n  var birthday = new Date(user.birthday);\n  return \"<section>\\n    <header>\\n      <img src=\\\"\".concat(user.avatar, \"\\\">\\n      <h2>\").concat(user.name, \"</h2>\\n    </header>\\n    <dl>\\n      <dt>Birthday</dt>\\n      <dd><time datetime=\\\"\").concat(birthday.toISOString(), \"\\\">\").concat(formatDate(birthday), \"</time></dd>\\n      <dt>Role</dt>\\n      <dd>\").concat(user.role, \"</dd>\\n    </dl>\\n  </section>\");\n}\nexport function renderUserList(users) {\n  if (!users || !users.length) {\n    return '<section>No users</section>';\n  }\n\n  return \"<section>\\n    <header>Users</header>\\n    <ul>\\n      \".concat(users.map(renderUser).join('\\n'), \"\\n    </ul>\\n  </section>\");\n}",
+              "parsedSize": 620,
+              "parsedSource": "function o(n){n||(n={name:\"Unknown User\",avatar:\"/img/default-avatar.png\",birthday:0,role:\"Unknown\"});var i=new Date(n.birthday);return'<section>\\n    <header>\\n      <img src=\"'.concat(n.avatar,'\">\\n      <h2>').concat(n.name,'</h2>\\n    </header>\\n    <dl>\\n      <dt>Birthday</dt>\\n      <dd><time datetime=\"').concat(i.toISOString(),'\">').concat((i,\"</time></dd>\\n      <dt>Role</dt>\\n      <dd>\").concat(n.role,\"</dd>\\n    </dl>\\n  </section>\")}var t;t=t.length?\"<section>\\n    <header>Users</header>\\n    <ul>\\n      \".concat(t.map(o).join(\"\\n\"),\"\\n    </ul>\\n  </section>\"):\"<section>No users</section>\"}))}))}]);",
+              "originalSize": 818,
+              "originalSource": "import { formatDate } from './utils';\n\nexport function renderUser(user) {\n  if (!user) {\n    user = {\n      name: 'Unknown User',\n      avatar: '/img/default-avatar.png',\n      birthday: 0,\n      role: 'Unknown'\n    };\n  }\n\n  const birthday = new Date(user.birthday);\n  return `<section>\n    <header>\n      <img src=\"${user.avatar}\">\n      <h2>${user.name}</h2>\n    </header>\n    <dl>\n      <dt>Birthday</dt>\n      <dd><time datetime=\"${birthday.toISOString()}\">${formatDate(birthday)}</time></dd>\n      <dt>Role</dt>\n      <dd>${user.role}</dd>\n    </dl>\n  </section>`;\n}\n\nexport function renderUserList(users) {\n  if (!users || !users.length) {\n    return '<section>No users</section>';\n  }\n\n  return `<section>\n    <header>Users</header>\n    <ul>\n      ${users.map(renderUser).join('\\n')}\n    </ul>\n  </section>`;\n}",
+              "modules": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "id": 0,
+      "identifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js ea98e15854e80e4b186cc44b8ec36170",
+      "name": "./src/app.js + 3 modules",
+      "index": 0,
+      "index2": 3,
+      "size": 2710,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "issuer": null,
+      "issuerId": null,
+      "issuerName": null,
+      "issuerPath": null,
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "assets": [],
+      "reasons": [
+        {
+          "moduleId": null,
+          "moduleIdentifier": null,
+          "module": null,
+          "moduleName": null,
+          "type": "single entry",
+          "userRequest": "./src/app.js",
+          "loc": "main"
+        }
+      ],
+      "usedExports": true,
+      "providedExports": [],
+      "optimizationBailout": [],
+      "depth": 0,
+      "filteredModules": 0,
+      "parsedSize": 127,
+      "parsedSource": "then((function(){var n=document.querySelector(\"#app\");Promise.all([then((function(e){n.innerHTML+=o(e[0]),n.innerHTML+=(e[1])&&",
+      "originalSize": 438,
+      "originalSource": "import { getUserList, getCurrentUser } from './lib/api';\nimport { renderUserList, renderUser } from './lib/render';\nimport { domReady } from './lib/utils';\n\nfunction init() {\n  const container = document.querySelector('#app');\n\n  Promise.all([\n    getUserList(),\n    getCurrentUser()\n  ]).then((data) => {\n    container.innerHTML += renderUser(data[0]);\n    container.innerHTML += renderUserList(data[1]);\n  });\n}\n\ndomReady().then(init);\n",
+      "modules": [
+        {
+          "id": null,
+          "identifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+          "name": "./src/app.js",
+          "index": 0,
+          "index2": 3,
+          "size": 428,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [],
+          "issuer": null,
+          "issuerId": null,
+          "issuerName": null,
+          "issuerPath": null,
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": null,
+              "module": null,
+              "moduleName": null,
+              "type": "single entry",
+              "userRequest": "./src/app.js",
+              "loc": "main"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": [],
+          "optimizationBailout": [
+            "ModuleConcatenation bailout: Module is an entry point"
+          ],
+          "depth": 0,
+          "source": "import { getUserList, getCurrentUser } from './lib/api';\nimport { renderUserList, renderUser } from './lib/render';\nimport { domReady } from './lib/utils';\n\nfunction init() {\n  var container = document.querySelector('#app');\n  Promise.all([getUserList(), getCurrentUser()]).then(function (data) {\n    container.innerHTML += renderUser(data[0]);\n    container.innerHTML += renderUserList(data[1]);\n  });\n}\n\ndomReady().then(init);",
+          "parsedSize": 127,
+          "parsedSource": "then((function(){var n=document.querySelector(\"#app\");Promise.all([then((function(e){n.innerHTML+=o(e[0]),n.innerHTML+=(e[1])&&",
+          "originalSize": 438,
+          "originalSource": "import { getUserList, getCurrentUser } from './lib/api';\nimport { renderUserList, renderUser } from './lib/render';\nimport { domReady } from './lib/utils';\n\nfunction init() {\n  const container = document.querySelector('#app');\n\n  Promise.all([\n    getUserList(),\n    getCurrentUser()\n  ]).then((data) => {\n    container.innerHTML += renderUser(data[0]);\n    container.innerHTML += renderUserList(data[1]);\n  });\n}\n\ndomReady().then(init);\n",
+          "modules": []
+        },
+        {
+          "id": null,
+          "identifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/lib/utils.js",
+          "name": "./src/lib/utils.js",
+          "index": 2,
+          "index2": 0,
+          "size": 753,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [],
+          "issuer": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+          "issuerId": null,
+          "issuerName": "./src/app.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+              "name": "./src/app.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/lib/render.js",
+              "module": "./src/lib/render.js",
+              "moduleName": "./src/lib/render.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./utils",
+              "loc": "1:0-37"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/lib/api.js",
+              "module": "./src/lib/api.js",
+              "moduleName": "./src/lib/api.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./utils",
+              "loc": "1:0-34"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+              "module": "./src/app.js",
+              "moduleName": "./src/app.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./lib/utils",
+              "loc": "3:0-39"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/lib/api.js",
+              "module": "./src/lib/api.js",
+              "moduleName": "./src/lib/api.js",
+              "type": "harmony import specifier",
+              "userRequest": "./utils",
+              "loc": "4:9-16"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+              "module": "./src/app.js",
+              "moduleName": "./src/app.js",
+              "type": "harmony import specifier",
+              "userRequest": "./lib/utils",
+              "loc": "13:0-8"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/lib/render.js",
+              "module": "./src/lib/render.js",
+              "moduleName": "./src/lib/render.js",
+              "type": "harmony import specifier",
+              "userRequest": "./utils",
+              "loc": "13:244-254"
+            }
+          ],
+          "usedExports": [
+            "domReady",
+            "formatDate",
+            "mapKeys"
+          ],
+          "providedExports": [
+            "formatDate",
+            "mapKeys",
+            "domReady"
+          ],
+          "optimizationBailout": [],
+          "depth": 1,
+          "source": "export function formatDate(date) {\n  var year = String(date.getFullYear());\n  var month = String(date.getMonth() + 1);\n  var day = String(date.getDate());\n\n  if (month.length < 2) {\n    month = '0' + month;\n  }\n\n  if (day.length < 2) {\n    day = '0' + day;\n  }\n\n  return [year, month, day].join('-');\n}\nexport function mapKeys(mapper, object) {\n  var entries = Object.entries(object);\n  var mappedEntries = entries.map(function (entry) {\n    return [mapper(entry[0]), entry[1]];\n  });\n  return Object.fromEntries(mappedEntries);\n}\nexport function domReady() {\n  return new Promise(function (resolve) {\n    if (document.readyState === 'complete') {\n      resolve();\n    } else {\n      document.addEventListener('DOMContentLoaded', resolve);\n    }\n  });\n}",
+          "parsedSize": 356,
+          "parsedSource": "e=t=r=Object.entries(t).map((function(n){return[e(n[0]),n[1]]})),Object.fromEntries(r);var e,t,r}e,t,r,o,e=t=String(e.getFullYear()),r=String(e.getMonth()+1),o=String(e.getDate()),r.length<2&&(r=\"0\"+r),o.length<2&&(o=\"0\"+o),[t,r,o].join(\"-\")),new Promise((function(n){\"complete\"===document.readyState?n():document.addEventListener(\"DOMContentLoaded\",n)})).",
+          "originalSize": 739,
+          "originalSource": "export function formatDate(date) {\n  const year = String(date.getFullYear());\n  let month = String(date.getMonth() + 1);\n  let day = String(date.getDate());\n\n  if (month.length < 2) {\n    month = '0' + month;\n  }\n        \n  if (day.length < 2) {\n    day = '0' + day;\n  }\n\n  return [year, month, day].join('-');\n}\n\nexport function mapKeys(mapper, object) {\n  const entries = Object.entries(object);\n  const mappedEntries = entries.map((entry) => [mapper(entry[0]), entry[1]]);\n  return Object.fromEntries(mappedEntries);\n}\n\nexport function domReady() {\n  return new Promise((resolve) => {\n    if (document.readyState === 'complete') {\n      resolve();\n    } else {\n      document.addEventListener('DOMContentLoaded', resolve);\n    }\n  });\n}",
+          "modules": []
+        },
+        {
+          "id": null,
+          "identifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/lib/api.js",
+          "name": "./src/lib/api.js",
+          "index": 1,
+          "index2": 1,
+          "size": 635,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [],
+          "issuer": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+          "issuerId": null,
+          "issuerName": "./src/app.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+              "name": "./src/app.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+              "module": "./src/app.js",
+              "moduleName": "./src/app.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./lib/api",
+              "loc": "1:0-56"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+              "module": "./src/app.js",
+              "moduleName": "./src/app.js",
+              "type": "harmony import specifier",
+              "userRequest": "./lib/api",
+              "loc": "7:15-26"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+              "module": "./src/app.js",
+              "moduleName": "./src/app.js",
+              "type": "harmony import specifier",
+              "userRequest": "./lib/api",
+              "loc": "7:30-44"
+            }
+          ],
+          "usedExports": [
+            "getUserList",
+            "getCurrentUser"
+          ],
+          "providedExports": [
+            "getCurrentUser",
+            "getUserList"
+          ],
+          "optimizationBailout": [],
+          "depth": 1,
+          "source": "import { mapKeys } from './utils';\n\nfunction transformUserKeys(user) {\n  return mapKeys(function (key) {\n    return key.toLowerCase();\n  }, user);\n}\n\nexport function getCurrentUser() {\n  return fetch('/api/me').then(function (response) {\n    return response.json();\n  }).then(transformUserKeys, function () {\n    return null;\n  });\n}\nexport function getUserList() {\n  return fetch('/api/users').then(function (response) {\n    return response.json();\n  }).then(function (data) {\n    return data.ids.map(function (id) {\n      return data.users[id];\n    }).filter(Boolean).map(transformUserKeys);\n  }, function () {\n    return [];\n  });\n}",
+          "parsedSize": 324,
+          "parsedSource": "function r(n){return function(n){return n.toLowerCase()},n,fetch(\"/api/users\").then((function(n){return n.json()})).then((function(n){return n.ids.map((function(e){return n.users[e]})).filter(Boolean).map(r)}),(function(){return[]})),fetch(\"/api/me\").then((function(n){return n.json()})).then(r,(function(){return null}))]).",
+          "originalSize": 529,
+          "originalSource": "import { mapKeys } from './utils';\n\nfunction transformUserKeys(user) {\n  return mapKeys((key) => key.toLowerCase(), user);\n}\n\nexport function getCurrentUser() {\n  return fetch('/api/me')\n    .then((response) => response.json())\n    .then(transformUserKeys, () => null);\n}\n\nexport function getUserList() {\n  return fetch('/api/users')\n    .then((response) => response.json())\n    .then(\n      (data) => data.ids\n        .map((id) => data.users[id])\n        .filter(Boolean)\n        .map(transformUserKeys),\n      () => []\n    );\n}",
+          "modules": []
+        },
+        {
+          "id": null,
+          "identifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/lib/render.js",
+          "name": "./src/lib/render.js",
+          "index": 3,
+          "index2": 2,
+          "size": 894,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [],
+          "issuer": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+          "issuerId": null,
+          "issuerName": "./src/app.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+              "name": "./src/app.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+              "module": "./src/app.js",
+              "moduleName": "./src/app.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./lib/render",
+              "loc": "2:0-58"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+              "module": "./src/app.js",
+              "moduleName": "./src/app.js",
+              "type": "harmony import specifier",
+              "userRequest": "./lib/render",
+              "loc": "8:27-37"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/babel-loader/lib/index.js??ref--4!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/node_modules/webpack-enhanced-stats-plugin/loader.js!/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/src/app.js",
+              "module": "./src/app.js",
+              "moduleName": "./src/app.js",
+              "type": "harmony import specifier",
+              "userRequest": "./lib/render",
+              "loc": "9:27-41"
+            }
+          ],
+          "usedExports": [
+            "renderUser",
+            "renderUserList"
+          ],
+          "providedExports": [
+            "renderUser",
+            "renderUserList"
+          ],
+          "optimizationBailout": [],
+          "depth": 1,
+          "source": "import { formatDate } from './utils';\nexport function renderUser(user) {\n  if (!user) {\n    user = {\n      name: 'Unknown User',\n      avatar: '/img/default-avatar.png',\n      birthday: 0,\n      role: 'Unknown'\n    };\n  }\n\n  var birthday = new Date(user.birthday);\n  return \"<section>\\n    <header>\\n      <img src=\\\"\".concat(user.avatar, \"\\\">\\n      <h2>\").concat(user.name, \"</h2>\\n    </header>\\n    <dl>\\n      <dt>Birthday</dt>\\n      <dd><time datetime=\\\"\").concat(birthday.toISOString(), \"\\\">\").concat(formatDate(birthday), \"</time></dd>\\n      <dt>Role</dt>\\n      <dd>\").concat(user.role, \"</dd>\\n    </dl>\\n  </section>\");\n}\nexport function renderUserList(users) {\n  if (!users || !users.length) {\n    return '<section>No users</section>';\n  }\n\n  return \"<section>\\n    <header>Users</header>\\n    <ul>\\n      \".concat(users.map(renderUser).join('\\n'), \"\\n    </ul>\\n  </section>\");\n}",
+          "parsedSize": 620,
+          "parsedSource": "function o(n){n||(n={name:\"Unknown User\",avatar:\"/img/default-avatar.png\",birthday:0,role:\"Unknown\"});var i=new Date(n.birthday);return'<section>\\n    <header>\\n      <img src=\"'.concat(n.avatar,'\">\\n      <h2>').concat(n.name,'</h2>\\n    </header>\\n    <dl>\\n      <dt>Birthday</dt>\\n      <dd><time datetime=\"').concat(i.toISOString(),'\">').concat((i,\"</time></dd>\\n      <dt>Role</dt>\\n      <dd>\").concat(n.role,\"</dd>\\n    </dl>\\n  </section>\")}var t;t=t.length?\"<section>\\n    <header>Users</header>\\n    <ul>\\n      \".concat(t.map(o).join(\"\\n\"),\"\\n    </ul>\\n  </section>\"):\"<section>No users</section>\"}))}))}]);",
+          "originalSize": 818,
+          "originalSource": "import { formatDate } from './utils';\n\nexport function renderUser(user) {\n  if (!user) {\n    user = {\n      name: 'Unknown User',\n      avatar: '/img/default-avatar.png',\n      birthday: 0,\n      role: 'Unknown'\n    };\n  }\n\n  const birthday = new Date(user.birthday);\n  return `<section>\n    <header>\n      <img src=\"${user.avatar}\">\n      <h2>${user.name}</h2>\n    </header>\n    <dl>\n      <dt>Birthday</dt>\n      <dd><time datetime=\"${birthday.toISOString()}\">${formatDate(birthday)}</time></dd>\n      <dt>Role</dt>\n      <dd>${user.role}</dd>\n    </dl>\n  </section>`;\n}\n\nexport function renderUserList(users) {\n  if (!users || !users.length) {\n    return '<section>No users</section>';\n  }\n\n  return `<section>\n    <header>Users</header>\n    <ul>\n      ${users.map(renderUser).join('\\n')}\n    </ul>\n  </section>`;\n}",
+          "modules": []
+        }
+      ]
+    }
+  ],
+  "filteredModules": 0,
+  "logging": {
+    "webpack.buildChunkGraph.visitModules": {
+      "entries": [],
+      "filteredEntries": 2,
+      "debug": false
+    }
+  },
+  "children": []
+}

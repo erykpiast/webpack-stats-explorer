@@ -1,0 +1,21 @@
+{
+  "name": "webpack-stats-explorer-playground-example",
+  "version": "2.0.0",
+  "description": "Example configuration for Webpack Stats Explorer ",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js --verbose && mv dist/stats.json ../$(basename $(pwd)).json"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "7.11.6",
+    "@babel/preset-env": "7.11.5",
+    "@babel/plugin-transform-runtime": "7.11.5",
+    "babel-loader": "8.1.0",
+    "terser-webpack-plugin": "4.2.2",
+    "webpack": "4.44.2",
+    "webpack-enhanced-stats-plugin": "2.6.1"
+  }
+}
