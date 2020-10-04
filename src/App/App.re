@@ -193,8 +193,7 @@ let reducer = (state, action) =>
     }
   );
 
-let getStateFromUrl = (state) => {
-  let urlState = UrlState.read();
+let getStateFromUrl = (state, urlState: UrlState.t) => {
   let currentState =
     switch (state) {
     | Some(existingState) => existingState
@@ -221,7 +220,7 @@ let getStateFromUrl = (state) => {
       |> List.map(State.NavigationPath.Segment.fromString),
     isTimelineVisible: currentState.isTimelineVisible,
     isSidebarCollapsed: currentState.isSidebarCollapsed,
-    diffMode: currentState.diffMode,
+    diffMode: urlState.splitView ? CodeDiff.Split : CodeDiff.Unified,
     urls: urlState.urls,
     sourceTree: urlState.sourceTree,
   };
@@ -229,9 +228,10 @@ let getStateFromUrl = (state) => {
 
 [@react.component]
 let make = () => {
+  let urlState = UrlState.read();
   let (state, dispatch) =
-    React.useReducer(reducer, getStateFromUrl(None));
-  React.useEffect4(
+    React.useReducer(reducer, getStateFromUrl(None, urlState));
+  React.useEffect5(
     () => {
       UrlState.{
         urls: state.urls,
@@ -241,17 +241,19 @@ let make = () => {
         index: state.index,
         tab: state.tab,
         sourceTree: state.sourceTree,
+        splitView: state.diffMode === CodeDiff.Split,
       }
       |> UrlState.write;
       None;
     },
-    (state.urls, state.navigationPath, state.index, state.tab),
+    (
+      state.urls,
+      state.navigationPath,
+      state.index,
+      state.tab,
+      state.sourceTree,
+    ),
   );
-
-  let popstateHandler =
-    React.useCallback0(_ =>
-      dispatch(SetUrlState(getStateFromUrl(Some(state))))
-    );
 
   React.useEffect(
     Webapi.Dom.(
