@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.26.2](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.26.1...v1.26.2) (2020-10-29)
+
+
+### Bug Fixes
+
+* **deps:** reinstall github packages to update integrity hashes ([b03d990](https://github.com/erykpiast/webpack-stats-explorer/commit/b03d990a30d9469bac24c259aafd1fd17ec6ae55))
+
 ### [1.26.1](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.26.0...v1.26.1) (2020-09-02)
 
 
