@@ -20,7 +20,8 @@ for EXAMPLE in ${EXAMPLES[@]}; do
 
         if [[ -d "$DIR" ]]; then
             cd "$DIR";
-            ncu -u;
+            ncu -u -t minor -f webpack,webpack-cli,terser-webpack-plugin;
+            ncu -u -t newest -x webpack,webpack-cli,terser-webpack-plugin;
             npm i;
             npm audit fix;
         fi;
