@@ -215,9 +215,27 @@ module FromChunk = struct
         Some(size)
   ;;
 
+  let rec findModuleWithSource modules = 
+    List.fold_left
+      (fun withSource module_ ->
+        match (withSource) with
+        | None -> (
+          if WebpackModule.hasCode module_ then
+            Some module_
+          else
+            match (module_.modules) with
+            | None -> None
+            | Some submodules -> findModuleWithSource submodules
+        )
+        | Some _ -> withSource
+      )
+      None
+      modules
+  ;;
+
   let make (assets : WebpackAsset.t list) (chunk : WebpackChunk.t) =
     let meaningfulModules = chunk.modules |> List.filter FromModule.isMeaningfulModule
-    in let moduleWithSource = meaningfulModules |> List.find_opt WebpackModule.hasCode
+    in let moduleWithSource = findModuleWithSource meaningfulModules
     in let useParsedSize = (
       match moduleWithSource with
       | Some module_ -> (
@@ -227,6 +245,8 @@ module FromChunk = struct
       )
       | None -> false
     )
+    in let () = Js.log ("moduleWithSource", moduleWithSource)
+    in let () = Js.log ("useParsedSize", useParsedSize)
     in let modules = meaningfulModules  |> List.map (FromModule.make useParsedSize)
     and makeData = Data.make (Some "")
     and asset = findChunkAsset chunk assets
