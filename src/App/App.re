@@ -312,6 +312,23 @@ let make = () => {
     )
     |> CompareStats.make(state.sourceTree);
 
+  let onTourState =
+    React.useCallback5(
+      (tourState: UrlState.t) =>
+        if (tourState.index === (-1)) {
+          dispatch(StartOver);
+        } else {
+          dispatch(SetUrlState(getStateFromUrl(Some(state), tourState)));
+        },
+      (
+        dispatch,
+        state.stats,
+        state.isTimelineVisible,
+        state.isSidebarCollapsed,
+        state.diffMode,
+      ),
+    );
+
   if (List.length(comparisons) === 0) {
     <WelcomeScreen
       onStats={stats => dispatch(AddStats(stats))}
@@ -441,14 +458,17 @@ let make = () => {
 
          let sideContent = <Sidebar scrollable=entryTree fixed=treeSwitcher />;
 
-         <NavigationLayout
-           side=sideContent
-           main=mainContent
-           top=topContent
-           aboveTop=aboveTopContent
-           isSidebarCollapsed={state.isSidebarCollapsed}
-           onSidebarToggle={() => dispatch(ToggleSidebar)}
-         />;
+         <>
+           <AppTour state=urlState onState=onTourState />
+           <NavigationLayout
+             side=sideContent
+             main=mainContent
+             top=topContent
+             aboveTop=aboveTopContent
+             isSidebarCollapsed={state.isSidebarCollapsed}
+             onSidebarToggle={() => dispatch(ToggleSidebar)}
+           />
+         </>;
        }}
     </AddStats>;
   };

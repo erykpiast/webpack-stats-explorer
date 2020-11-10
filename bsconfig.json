@@ -21,7 +21,12 @@
         "dir": "Webpack"
       },
       {
-        "dir": "App"
+        "dir": "App",
+        "subdirs": [
+          {
+            "dir": "Tour"
+          }
+        ]
       }
     ]
   },

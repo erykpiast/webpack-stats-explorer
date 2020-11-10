@@ -1,4 +1,4 @@
-Minimal example - "a" version
-=============================
+Example - "a" version
+=====================
 
-It's the simplest config with single empty entrypoint.
+It's very simple webapp with Babel preset env but written with ES5 syntax only, so nothing is actually transpiled.

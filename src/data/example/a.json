@@ -4,26 +4,26 @@
     "configuration\nThe 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.\nYou can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/"
   ],
   "version": "4.44.2",
-  "hash": "c0c045dcdef4b07a821e",
-  "time": 2185,
-  "builtAt": 1601497990729,
+  "hash": "d5fdcf28688e50fe237e",
+  "time": 1703,
+  "builtAt": 1606687530260,
   "publicPath": "",
   "outputPath": "/Users/eryk/Projects/webpack-stats-explorer/playground/example/a/dist",
   "assetsByChunkName": {
-    "main": [
-      "main.js",
-      "main.js.map"
+    "app": [
+      "app.js",
+      "app.js.map"
     ]
   },
   "assets": [
     {
-      "name": "main.js",
-      "size": 2408,
+      "name": "app.js",
+      "size": 2407,
       "chunks": [
         0
       ],
       "chunkNames": [
-        "main"
+        "app"
       ],
       "info": {
         "minimized": true
@@ -31,13 +31,13 @@
       "emitted": true
     },
     {
-      "name": "main.js.map",
-      "size": 8998,
+      "name": "app.js.map",
+      "size": 8997,
       "chunks": [
         0
       ],
       "chunkNames": [
-        "main"
+        "app"
       ],
       "info": {
         "development": true
@@ -47,26 +47,26 @@
   ],
   "filteredAssets": 0,
   "entrypoints": {
-    "main": {
+    "app": {
       "chunks": [
         0
       ],
       "assets": [
-        "main.js",
-        "main.js.map"
+        "app.js",
+        "app.js.map"
       ],
       "children": {},
       "childAssets": {}
     }
   },
   "namedChunkGroups": {
-    "main": {
+    "app": {
       "chunks": [
         0
       ],
       "assets": [
-        "main.js",
-        "main.js.map"
+        "app.js",
+        "app.js.map"
       ],
       "children": {},
       "childAssets": {}
@@ -80,13 +80,13 @@
       "entry": true,
       "size": 2710,
       "names": [
-        "main"
+        "app"
       ],
       "files": [
-        "main.js",
-        "main.js.map"
+        "app.js",
+        "app.js.map"
       ],
-      "hash": "f9f0d4539e1e1f54b0d7",
+      "hash": "cf71d7d31738eff97ac9",
       "siblings": [],
       "parents": [],
       "children": [],
@@ -97,7 +97,7 @@
           "module": "",
           "moduleIdentifier": "",
           "moduleName": "",
-          "loc": "main",
+          "loc": "app",
           "request": "./src/app.js",
           "reasons": []
         }
@@ -133,7 +133,7 @@
               "moduleName": null,
               "type": "single entry",
               "userRequest": "./src/app.js",
-              "loc": "main"
+              "loc": "app"
             }
           ],
           "usedExports": true,
@@ -141,10 +141,6 @@
           "optimizationBailout": [],
           "depth": 0,
           "filteredModules": 0,
-          "parsedSize": 127,
-          "parsedSource": "then((function(){var n=document.querySelector(\"#app\");Promise.all([then((function(e){n.innerHTML+=o(e[0]),n.innerHTML+=(e[1])&&",
-          "originalSize": 438,
-          "originalSource": "import { getUserList, getCurrentUser } from './lib/api';\nimport { renderUserList, renderUser } from './lib/render';\nimport { domReady } from './lib/utils';\n\nfunction init() {\n  const container = document.querySelector('#app');\n\n  Promise.all([\n    getUserList(),\n    getCurrentUser()\n  ]).then((data) => {\n    container.innerHTML += renderUser(data[0]);\n    container.innerHTML += renderUserList(data[1]);\n  });\n}\n\ndomReady().then(init);\n",
           "modules": [
             {
               "id": null,
@@ -174,7 +170,7 @@
                   "moduleName": null,
                   "type": "single entry",
                   "userRequest": "./src/app.js",
-                  "loc": "main"
+                  "loc": "app"
                 }
               ],
               "usedExports": true,
@@ -184,8 +180,8 @@
               ],
               "depth": 0,
               "source": "import { getUserList, getCurrentUser } from './lib/api';\nimport { renderUserList, renderUser } from './lib/render';\nimport { domReady } from './lib/utils';\n\nfunction init() {\n  var container = document.querySelector('#app');\n  Promise.all([getUserList(), getCurrentUser()]).then(function (data) {\n    container.innerHTML += renderUser(data[0]);\n    container.innerHTML += renderUserList(data[1]);\n  });\n}\n\ndomReady().then(init);",
-              "parsedSize": 127,
-              "parsedSource": "then((function(){var n=document.querySelector(\"#app\");Promise.all([then((function(e){n.innerHTML+=o(e[0]),n.innerHTML+=(e[1])&&",
+              "parsedSize": 181,
+              "parsedSource": "function(n,e,t){\"use strict\"; =,=,} ,(=,,}t.r(e),.then((function(){var n=document.querySelector(\"#app\");Promise.all([.then((function(e){;n.innerHTML+=o(e[0]),n.innerHTML+=(=e[1])&&}",
               "originalSize": 438,
               "originalSource": "import { getUserList, getCurrentUser } from './lib/api';\nimport { renderUserList, renderUser } from './lib/render';\nimport { domReady } from './lib/utils';\n\nfunction init() {\n  const container = document.querySelector('#app');\n\n  Promise.all([\n    getUserList(),\n    getCurrentUser()\n  ]).then((data) => {\n    container.innerHTML += renderUser(data[0]);\n    container.innerHTML += renderUserList(data[1]);\n  });\n}\n\ndomReady().then(init);\n",
               "modules": []
@@ -471,7 +467,7 @@
           "moduleName": null,
           "type": "single entry",
           "userRequest": "./src/app.js",
-          "loc": "main"
+          "loc": "app"
         }
       ],
       "usedExports": true,
@@ -479,10 +475,6 @@
       "optimizationBailout": [],
       "depth": 0,
       "filteredModules": 0,
-      "parsedSize": 127,
-      "parsedSource": "then((function(){var n=document.querySelector(\"#app\");Promise.all([then((function(e){n.innerHTML+=o(e[0]),n.innerHTML+=(e[1])&&",
-      "originalSize": 438,
-      "originalSource": "import { getUserList, getCurrentUser } from './lib/api';\nimport { renderUserList, renderUser } from './lib/render';\nimport { domReady } from './lib/utils';\n\nfunction init() {\n  const container = document.querySelector('#app');\n\n  Promise.all([\n    getUserList(),\n    getCurrentUser()\n  ]).then((data) => {\n    container.innerHTML += renderUser(data[0]);\n    container.innerHTML += renderUserList(data[1]);\n  });\n}\n\ndomReady().then(init);\n",
       "modules": [
         {
           "id": null,
@@ -512,7 +504,7 @@
               "moduleName": null,
               "type": "single entry",
               "userRequest": "./src/app.js",
-              "loc": "main"
+              "loc": "app"
             }
           ],
           "usedExports": true,
@@ -522,8 +514,8 @@
           ],
           "depth": 0,
           "source": "import { getUserList, getCurrentUser } from './lib/api';\nimport { renderUserList, renderUser } from './lib/render';\nimport { domReady } from './lib/utils';\n\nfunction init() {\n  var container = document.querySelector('#app');\n  Promise.all([getUserList(), getCurrentUser()]).then(function (data) {\n    container.innerHTML += renderUser(data[0]);\n    container.innerHTML += renderUserList(data[1]);\n  });\n}\n\ndomReady().then(init);",
-          "parsedSize": 127,
-          "parsedSource": "then((function(){var n=document.querySelector(\"#app\");Promise.all([then((function(e){n.innerHTML+=o(e[0]),n.innerHTML+=(e[1])&&",
+          "parsedSize": 181,
+          "parsedSource": "function(n,e,t){\"use strict\"; =,=,} ,(=,,}t.r(e),.then((function(){var n=document.querySelector(\"#app\");Promise.all([.then((function(e){;n.innerHTML+=o(e[0]),n.innerHTML+=(=e[1])&&}",
           "originalSize": 438,
           "originalSource": "import { getUserList, getCurrentUser } from './lib/api';\nimport { renderUserList, renderUser } from './lib/render';\nimport { domReady } from './lib/utils';\n\nfunction init() {\n  const container = document.querySelector('#app');\n\n  Promise.all([\n    getUserList(),\n    getCurrentUser()\n  ]).then((data) => {\n    container.innerHTML += renderUser(data[0]);\n    container.innerHTML += renderUserList(data[1]);\n  });\n}\n\ndomReady().then(init);\n",
           "modules": []

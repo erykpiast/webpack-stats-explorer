@@ -1,4 +1,4 @@
-Minimal example - "b" version
-=============================
+Example - "b" version
+=====================
 
 ES6 features added.

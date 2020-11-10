@@ -11,7 +11,7 @@ module Styles = {
 };
 
 [@react.component]
-let make = (~a, ~b, ~current, ~onSwitch, ~className="") => {
+let make = (~a, ~b, ~current, ~onSwitch, ~className="", ~id="") => {
   let renderSwitchButton = (value, className) => {
     let active = current === fst(value);
     <Button
@@ -22,7 +22,7 @@ let make = (~a, ~b, ~current, ~onSwitch, ~className="") => {
     </Button>;
   };
 
-  <div className>
+  <div className id>
     {renderSwitchButton(a, Styles.aButton)}
     {renderSwitchButton(b, Styles.bButton)}
   </div>;

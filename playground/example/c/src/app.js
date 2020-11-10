@@ -7,12 +7,12 @@ import { domReady } from './lib/utils';
 
   const container = document.querySelector('#app');
   
-  const [userList, currentUser] = await Promise.all([
+  const data = await Promise.all([
     getUserList(),
     getCurrentUser()
   ]);
 
-  container.innerHTML += renderUser(userList);
-  container.innerHTML += renderUserList(currentUser);
+  container.innerHTML += renderUser(data[0]);
+  container.innerHTML += renderUserList(data[1]);
 })();
 

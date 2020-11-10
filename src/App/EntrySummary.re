@@ -44,6 +44,7 @@ module Styles = {
     ]);
 
   let size = style([marginTop(Theme.Space.default)]);
+  let sizeTermWrapper = style([width(`percent(100.0))]);
   let sizeTerm = style([display(`block), marginRight(Theme.Space.default)]);
   let content =
     style([
@@ -188,12 +189,12 @@ let renderSize = (label, data) =>
         </>
       };
 
-    <>
+    <div className={Styles.sizeTermWrapper} id={"entry-size-" ++ (label |> String.uncapitalize_ascii)}>
       <dt className={Cn.fromList([Styles.term, Styles.sizeTerm])}>
         {label |> React.string}
       </dt>
       <dd className=Styles.definition> <Size value=size /> diff </dd>
-    </>;
+    </div>;
   };
 let renderSource = (~formatter, ~columnGuideline, ~language, ~diffMode, data) =>
   switch (data) {
@@ -314,27 +315,27 @@ let make = (~entry, ~onTab, ~tab, ~onDiffMode, ~diffMode, ~kind) => {
   let columnGuideline =
     isPrettyPrintEnabled && isLineWrappingEnabled ? hardLineWrapLimit : 0;
 
-  <div className=Styles.wrapper>
+  <div className=Styles.wrapper id="entry-overview">
     <header className=Styles.header>
       <dl className=Styles.list>
         <div className=Styles.status>
           <dt className=Styles.term>
             {L10N.Summary.status |> React.string}
           </dt>
-          <dd className={Cn.fromList([Styles.definition, kindClassName])}>
+          <dd className={Cn.fromList([Styles.definition, kindClassName])} id="entry-kind">
             {kindLabel |> React.string}
             {nbsp |> React.string}
             {L10N.module_ |> React.string}
           </dd>
         </div>
-        <div className=Styles.name>
+        <div className=Styles.name id="entry-name">
           <dt className=Styles.term> {L10N.Summary.name |> React.string} </dt>
           <dd className=Styles.definition> {id |> React.string} </dd>
         </div>
         {switch (original, stat, parsed) {
          | (None, None, None) => <div className=Styles.tabsPlaceholder />
          | _ =>
-           <Tabs className=Styles.size selectedIndex=tab onChange=switchTab>
+           <Tabs className=Styles.size selectedIndex=tab onChange=switchTab id="entry-sizes">
              [|
                original |> renderSize(L10N.Summary.original),
                stat |> renderSize(L10N.Summary.stat),
@@ -344,7 +345,7 @@ let make = (~entry, ~onTab, ~tab, ~onDiffMode, ~diffMode, ~kind) => {
          }}
       </dl>
     </header>
-    <div className=Styles.content>
+    <div className=Styles.content id="entry-code">
       {switch (original, stat, parsed) {
        | (None, None, None) =>
          <EntryOverview
@@ -396,6 +397,7 @@ let make = (~entry, ~onTab, ~tab, ~onDiffMode, ~diffMode, ~kind) => {
              current=diffMode
              a=(CodeDiff.Unified, "Unified")
              b=(CodeDiff.Split, "Split")
+             id="diff-mode"
            />
          : React.null}
     </form>

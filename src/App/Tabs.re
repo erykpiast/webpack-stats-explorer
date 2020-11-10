@@ -43,8 +43,8 @@ module Styles = {
 };
 
 [@react.component]
-let make = (~className="", ~selectedIndex=0, ~onChange=_ => (), ~children) => {
-  <div className={Cn.fromList([className, Styles.root])}>
+let make = (~className="", ~selectedIndex=0, ~onChange=_ => (), ~id="", ~children) => {
+  <div className={Cn.fromList([className, Styles.root])} id>
     {children
      |> Array.mapi((index, child) =>
           if (child === React.null) {

@@ -12,7 +12,7 @@ let arrow = {js|»|js};
 
 [@react.component]
 let make = (~onToggle, ~isVisible) => {
-  <Button onClick={_ => onToggle()}>
+  <Button onClick={_ => onToggle()} id="show-timeline">
     <span
       className={Cn.fromList([
         Styles.arrow,

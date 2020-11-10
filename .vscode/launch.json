@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [{
+        "type": "node",
+        "request": "launch",
+        "name": "Launch Webpack",
+        "args": [
+            "--inspect",
+            "${fileDirname}/node_modules/.bin/webpack",
+            "--config",
+            "${file}"
+        ],
+        "cwd": "${fileDirname}"
+    }]
+}
