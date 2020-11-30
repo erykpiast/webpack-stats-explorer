@@ -10,6 +10,7 @@ type t =
   ; tab : int
   ; sourceTree : bool
   ; splitView : bool
+  ; timeline : bool
   };;
 
 let urlParameter = "u";;
@@ -18,6 +19,7 @@ let indexParameter = "i";;
 let tabParameter = "t";;
 let sourceTreeParameter = "s";;
 let splitViewParameter = "v";;
+let timelineParameter = "l";;
 let navigationPathSeparator = ",";;
 
 let extractNavigationPath params =
@@ -55,6 +57,13 @@ let extractSplitView params =
   |> Utils.defaultTo true
 ;;
 
+let extractTimeline params =
+  params
+  |> URLSearchParams.get timelineParameter
+  >>= (fun _ -> Some true)
+  |> Utils.defaultTo false
+;;
+
 let read () =
   let params = location |> Location.search |> URLSearchParams.make
   in let urls = params |> URLSearchParams.getAll urlParameter |> Array.to_list
@@ -63,6 +72,7 @@ let read () =
   and tab = extractTab params
   and sourceTree = extractSourceTree params
   and splitView = extractSplitView params
+  and timeline = extractTimeline params
   in
     { urls = urls
     ; navigationPath = navigationPath
@@ -70,9 +80,10 @@ let read () =
     ; tab = tab
     ; sourceTree = sourceTree
     ; splitView = splitView
+    ; timeline = timeline
     };;
 
-let write ({ urls; navigationPath; index; tab; sourceTree; splitView }) =
+let write ({ urls; navigationPath; index; tab; sourceTree; splitView; timeline }) =
   let search = Location.search location |> (Utils.String.slice 1)
   in let params = URLSearchParams.make search
   in let _ = URLSearchParams.delete urlParameter params
@@ -103,6 +114,10 @@ let write ({ urls; navigationPath; index; tab; sourceTree; splitView }) =
       match splitView with
       | true -> URLSearchParams.set splitViewParameter "" params
       | false -> URLSearchParams.delete splitViewParameter params
+    and _ =
+      match timeline with
+      | true -> URLSearchParams.set timelineParameter "" params
+      | false -> URLSearchParams.delete timelineParameter params
     and updatedSearch = URLSearchParams.toString params
   in
     if search != updatedSearch then
@@ -117,6 +132,7 @@ module Make = struct
     ?tab:int ->
     ?sourceTree:bool ->
     ?splitView:bool ->
+    ?timeline:bool ->
     ?urls:string list ->
     unit ->
     unit;;

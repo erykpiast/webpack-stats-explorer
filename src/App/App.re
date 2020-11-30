@@ -223,7 +223,7 @@ let getStateFromUrl = (state, urlState: UrlState.t) => {
     navigationPath:
       urlState.navigationPath
       |> List.map(State.NavigationPath.Segment.fromString),
-    isTimelineVisible: currentState.isTimelineVisible,
+    isTimelineVisible: urlState.timeline,
     isSidebarCollapsed: currentState.isSidebarCollapsed,
     diffMode: urlState.splitView ? CodeDiff.Split : CodeDiff.Unified,
     urls: urlState.urls,
@@ -247,6 +247,7 @@ let make = () => {
         tab: state.tab,
         sourceTree: state.sourceTree,
         splitView: state.diffMode === CodeDiff.Split,
+        timeline: state.isTimelineVisible
       }
       |> UrlState.write;
       None;

@@ -4,7 +4,7 @@ open Rationale.Option;
 module Styles = {
   open Css;
 
-  let root = style([]);
+  let root = style([height(px(300))]);
 
   let clickableArea = style([cursor(`pointer)]);
 };
@@ -204,7 +204,8 @@ let make = (~className="", ~stats=[], ~onChange, ~selectedIndex) => {
       ref={ReactDOMRe.Ref.callbackDomRef(element => {
         setRootElement(_ => element);
         getRootWidth(element) |> ignore;
-      })}>
+      })}
+      id="timeline">
       <AreaChart data width=rootWidth height=300>
         {uniqNames
          |> List.mapi((index, name) =>
