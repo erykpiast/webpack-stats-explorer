@@ -12,7 +12,8 @@ type action =
   | SelectTab(int)
   | SelectDiffMode(CodeDiff.mode)
   | SwitchSourceTree
-  | SetUrlState(State.t);
+  | SetUrlState(State.t)
+  | StartOver;
 
 let updateNavigationPath = (path: list('a), segment, depth): list('a) => {
   let tail =
@@ -188,6 +189,17 @@ let reducer = (state, action) =>
           urls: state.urls,
           sourceTree: state.sourceTree,
         }
+      | StartOver => {
+          tab: state.tab,
+          index: state.index,
+          stats: [],
+          navigationPath: state.navigationPath,
+          isTimelineVisible: state.isTimelineVisible,
+          isSidebarCollapsed: state.isSidebarCollapsed,
+          diffMode: state.diffMode,
+          urls: [],
+          sourceTree: state.sourceTree,
+        }
       | SetUrlState(newState) =>
         if (newState != state) {
           newState;
@@ -247,7 +259,7 @@ let make = () => {
         tab: state.tab,
         sourceTree: state.sourceTree,
         splitView: state.diffMode === CodeDiff.Split,
-        timeline: state.isTimelineVisible
+        timeline: state.isTimelineVisible,
       }
       |> UrlState.write;
       None;
@@ -325,7 +337,15 @@ let make = () => {
          let revPath = navigationPath |> List.rev;
          let topContent =
            <>
-             <Logo onClick={_ => dispatch(NavigateThroughBreadcrumbs(0))} />
+             <Logo
+               onClick={_ =>
+                 if (List.length(navigationPath) === 0) {
+                   dispatch(StartOver);
+                 } else {
+                   dispatch(NavigateThroughBreadcrumbs(0));
+                 }
+               }
+             />
              <Breadcrumbs
                items={state.navigationPath}
                onClick={index => dispatch(NavigateThroughBreadcrumbs(index))}
