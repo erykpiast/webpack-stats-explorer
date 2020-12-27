@@ -9,7 +9,8 @@
   },
   "sources": {
     "dir": "src",
-    "subdirs": [{
+    "subdirs": [
+      {
         "dir": "__tests__",
         "type": "dev"
       },
@@ -20,14 +21,21 @@
         "dir": "Webpack"
       },
       {
-        "dir": "App"
+        "dir": "App",
+        "subdirs": [
+          {
+            "dir": "Tour"
+          }
+        ]
       }
     ]
   },
-  "package-specs": [{
-    "module": "es6",
-    "in-source": true
-  }],
+  "package-specs": [
+    {
+      "module": "es6",
+      "in-source": true
+    }
+  ],
   "suffix": ".bs.js",
   "namespace": true,
   "bs-dependencies": [
@@ -46,13 +54,10 @@
     "re-classnames",
     "bs-react-syntax-highlighter",
     "bs-react-diff-viewer",
-    "bs-js-beautify"
+    "bs-js-beautify",
+    "bs-reactour"
   ],
-  "bs-dev-dependencies": [
-    "@glennsl/bs-jest",
-    "bs-enzyme",
-    "bs-jsverify"
-  ],
+  "bs-dev-dependencies": ["@glennsl/bs-jest", "bs-enzyme", "bs-jsverify"],
   "refmt": 3,
   "warnings": {
     "error": "+5"

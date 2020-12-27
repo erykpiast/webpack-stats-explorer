@@ -165,10 +165,11 @@ let make =
   switch (props) {
   | [] => React.null
   | data =>
-    <ul className=Styles.list>
+    <ul className=Styles.list id="entry-tree">
       {data
-       |> List.map(
+       |> List.mapi(
             (
+              index,
               (
                 state,
                 {after, before, name, level, onExpand, onCollapse, onSelect},
@@ -202,6 +203,7 @@ let make =
                 getFamilyClass(familyRelations),
               ])}
               title=name
+              id={"entry-tree-item-" ++ string_of_int(index)}
               key={
                 string_of_int(level)
                 ++ "_"

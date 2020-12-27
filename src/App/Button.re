@@ -56,6 +56,7 @@ let make =
       ~className="",
       ~type_=Default,
       ~disabled=false,
+      ~id="",
       ~children,
     ) => {
   let typeClassName =
@@ -67,5 +68,5 @@ let make =
     );
   let className = Cn.fromList([Styles.button, typeClassName, className]);
 
-  <button className onClick disabled> children </button>;
+  <button className onClick disabled id> children </button>;
 };

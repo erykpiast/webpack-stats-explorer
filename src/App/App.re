@@ -12,7 +12,8 @@ type action =
   | SelectTab(int)
   | SelectDiffMode(CodeDiff.mode)
   | SwitchSourceTree
-  | SetUrlState(State.t);
+  | SetUrlState(State.t)
+  | StartOver;
 
 let updateNavigationPath = (path: list('a), segment, depth): list('a) => {
   let tail =
@@ -188,13 +189,28 @@ let reducer = (state, action) =>
           urls: state.urls,
           sourceTree: state.sourceTree,
         }
-      | SetUrlState(newState) => {...newState, stats: state.stats}
+      | StartOver => {
+          tab: state.tab,
+          index: state.index,
+          stats: [],
+          navigationPath: state.navigationPath,
+          isTimelineVisible: state.isTimelineVisible,
+          isSidebarCollapsed: state.isSidebarCollapsed,
+          diffMode: state.diffMode,
+          urls: [],
+          sourceTree: state.sourceTree,
+        }
+      | SetUrlState(newState) =>
+        if (newState != state) {
+          newState;
+        } else {
+          state;
+        }
       };
     }
   );
 
-let getStateFromUrl = (state) => {
-  let urlState = UrlState.read();
+let getStateFromUrl = (state, urlState: UrlState.t) => {
   let currentState =
     switch (state) {
     | Some(existingState) => existingState
@@ -219,9 +235,9 @@ let getStateFromUrl = (state) => {
     navigationPath:
       urlState.navigationPath
       |> List.map(State.NavigationPath.Segment.fromString),
-    isTimelineVisible: currentState.isTimelineVisible,
+    isTimelineVisible: urlState.timeline,
     isSidebarCollapsed: currentState.isSidebarCollapsed,
-    diffMode: currentState.diffMode,
+    diffMode: urlState.splitView ? CodeDiff.Split : CodeDiff.Unified,
     urls: urlState.urls,
     sourceTree: urlState.sourceTree,
   };
@@ -229,9 +245,10 @@ let getStateFromUrl = (state) => {
 
 [@react.component]
 let make = () => {
+  let urlState = UrlState.read();
   let (state, dispatch) =
-    React.useReducer(reducer, getStateFromUrl(None));
-  React.useEffect4(
+    React.useReducer(reducer, getStateFromUrl(None, urlState));
+  React.useEffect5(
     () => {
       UrlState.{
         urls: state.urls,
@@ -241,22 +258,31 @@ let make = () => {
         index: state.index,
         tab: state.tab,
         sourceTree: state.sourceTree,
+        splitView: state.diffMode === CodeDiff.Split,
+        timeline: state.isTimelineVisible,
       }
       |> UrlState.write;
       None;
     },
-    (state.urls, state.navigationPath, state.index, state.tab),
+    (
+      state.urls,
+      state.navigationPath,
+      state.index,
+      state.tab,
+      state.sourceTree,
+    ),
   );
-
-  let popstateHandler =
-    React.useCallback0(_ =>
-      dispatch(SetUrlState(getStateFromUrl(Some(state))))
-    );
 
   React.useEffect(
     Webapi.Dom.(
       () => {
         let windowTarget = Window.asEventTarget(window);
+
+        let popstateHandler = _ => {
+          dispatch(
+            SetUrlState(getStateFromUrl(Some(state), UrlState.read())),
+          );
+        };
 
         EventTarget.addEventListener(
           "popstate",
@@ -286,6 +312,23 @@ let make = () => {
     )
     |> CompareStats.make(state.sourceTree);
 
+  let onTourState =
+    React.useCallback5(
+      (tourState: UrlState.t) =>
+        if (tourState.index === (-1)) {
+          dispatch(StartOver);
+        } else {
+          dispatch(SetUrlState(getStateFromUrl(Some(state), tourState)));
+        },
+      (
+        dispatch,
+        state.stats,
+        state.isTimelineVisible,
+        state.isSidebarCollapsed,
+        state.diffMode,
+      ),
+    );
+
   if (List.length(comparisons) === 0) {
     <WelcomeScreen
       onStats={stats => dispatch(AddStats(stats))}
@@ -311,7 +354,15 @@ let make = () => {
          let revPath = navigationPath |> List.rev;
          let topContent =
            <>
-             <Logo onClick={_ => dispatch(NavigateThroughBreadcrumbs(0))} />
+             <Logo
+               onClick={_ =>
+                 if (List.length(navigationPath) === 0) {
+                   dispatch(StartOver);
+                 } else {
+                   dispatch(NavigateThroughBreadcrumbs(0));
+                 }
+               }
+             />
              <Breadcrumbs
                items={state.navigationPath}
                onClick={index => dispatch(NavigateThroughBreadcrumbs(index))}
@@ -407,14 +458,17 @@ let make = () => {
 
          let sideContent = <Sidebar scrollable=entryTree fixed=treeSwitcher />;
 
-         <NavigationLayout
-           side=sideContent
-           main=mainContent
-           top=topContent
-           aboveTop=aboveTopContent
-           isSidebarCollapsed={state.isSidebarCollapsed}
-           onSidebarToggle={() => dispatch(ToggleSidebar)}
-         />;
+         <>
+           <AppTour state=urlState onState=onTourState />
+           <NavigationLayout
+             side=sideContent
+             main=mainContent
+             top=topContent
+             aboveTop=aboveTopContent
+             isSidebarCollapsed={state.isSidebarCollapsed}
+             onSidebarToggle={() => dispatch(ToggleSidebar)}
+           />
+         </>;
        }}
     </AddStats>;
   };

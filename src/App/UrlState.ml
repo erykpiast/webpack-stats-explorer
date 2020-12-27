@@ -9,6 +9,8 @@ type t =
   ; index : int
   ; tab : int
   ; sourceTree : bool
+  ; splitView : bool
+  ; timeline : bool
   };;
 
 let urlParameter = "u";;
@@ -16,6 +18,8 @@ let navigationPathParameters = "p";;
 let indexParameter = "i";;
 let tabParameter = "t";;
 let sourceTreeParameter = "s";;
+let splitViewParameter = "v";;
+let timelineParameter = "l";;
 let navigationPathSeparator = ",";;
 
 let extractNavigationPath params =
@@ -46,6 +50,20 @@ let extractSourceTree params =
   |> Utils.defaultTo true
 ;;
 
+let extractSplitView params =
+  params
+  |> URLSearchParams.get splitViewParameter
+  >>= (fun _ -> Some true)
+  |> Utils.defaultTo true
+;;
+
+let extractTimeline params =
+  params
+  |> URLSearchParams.get timelineParameter
+  >>= (fun _ -> Some true)
+  |> Utils.defaultTo false
+;;
+
 let read () =
   let params = location |> Location.search |> URLSearchParams.make
   in let urls = params |> URLSearchParams.getAll urlParameter |> Array.to_list
@@ -53,15 +71,19 @@ let read () =
   and index = extractIndex params
   and tab = extractTab params
   and sourceTree = extractSourceTree params
+  and splitView = extractSplitView params
+  and timeline = extractTimeline params
   in
     { urls = urls
     ; navigationPath = navigationPath
     ; index = index
     ; tab = tab
     ; sourceTree = sourceTree
+    ; splitView = splitView
+    ; timeline = timeline
     };;
 
-let write ({ urls; navigationPath; index; tab; sourceTree }) =
+let write ({ urls; navigationPath; index; tab; sourceTree; splitView; timeline }) =
   let search = Location.search location |> (Utils.String.slice 1)
   in let params = URLSearchParams.make search
   in let _ = URLSearchParams.delete urlParameter params
@@ -88,9 +110,30 @@ let write ({ urls; navigationPath; index; tab; sourceTree }) =
       match sourceTree with
       | true -> URLSearchParams.set sourceTreeParameter "" params
       | false -> URLSearchParams.delete sourceTreeParameter params
+    and _ =
+      match splitView with
+      | true -> URLSearchParams.set splitViewParameter "" params
+      | false -> URLSearchParams.delete splitViewParameter params
+    and _ =
+      match timeline with
+      | true -> URLSearchParams.set timelineParameter "" params
+      | false -> URLSearchParams.delete timelineParameter params
     and updatedSearch = URLSearchParams.toString params
   in
     if search != updatedSearch then
       let fakeHistoryState: History.state = [%raw "null"]
       in History.pushState fakeHistoryState "" ("?" ^ updatedSearch) history
 ;;
+
+module Make = struct
+  type t =
+    ?navigationPath:string list ->
+    ?index:int ->
+    ?tab:int ->
+    ?sourceTree:bool ->
+    ?splitView:bool ->
+    ?timeline:bool ->
+    ?urls:string list ->
+    unit ->
+    unit;;
+end;;
