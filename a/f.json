@@ -5,8 +5,8 @@
   ],
   "version": "4.44.2",
   "hash": "af7fd6d9980263b74ccf",
-  "time": 4617,
-  "builtAt": 1609029429728,
+  "time": 4435,
+  "builtAt": 1609029565797,
   "publicPath": "",
   "outputPath": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/dist",
   "assetsByChunkName": {
@@ -13799,9 +13799,9 @@
       "optional": false,
       "prefetched": false,
       "chunks": [],
-      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/nanoutils/lib/clamp/index.js",
-      "issuerId": 48,
-      "issuerName": "./node_modules/nanoutils/lib/clamp/index.js",
+      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/nanoutils/lib/ceil/index.js",
+      "issuerId": 45,
+      "issuerName": "./node_modules/nanoutils/lib/ceil/index.js",
       "issuerPath": [
         {
           "id": null,
@@ -13824,9 +13824,9 @@
           "name": "./node_modules/nanoutils/lib/index.js"
         },
         {
-          "id": 48,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/nanoutils/lib/clamp/index.js",
-          "name": "./node_modules/nanoutils/lib/clamp/index.js"
+          "id": 45,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/nanoutils/lib/ceil/index.js",
+          "name": "./node_modules/nanoutils/lib/ceil/index.js"
         }
       ],
       "failed": false,
