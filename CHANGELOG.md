@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.27.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.26.2...v1.27.0) (2020-12-27)
+
+
+### Features
+
+* **dev:** add dashboard to webpack dev mode ([27e4eb0](https://github.com/erykpiast/webpack-stats-explorer/commit/27e4eb0c84f7b515c466ef72bae66bcefca846bc))
+* **ui:** add app tour ([91371bf](https://github.com/erykpiast/webpack-stats-explorer/commit/91371bfc6a2d85f4f7418509ba57ff8a5ca6fbc0))
+* **ui:** add new example ([c2fa7b8](https://github.com/erykpiast/webpack-stats-explorer/commit/c2fa7b83d6a0bb37f96e17239995f1a8406d0ed9))
+* **ui:** save diff mode in URL ([3fbf9fd](https://github.com/erykpiast/webpack-stats-explorer/commit/3fbf9fd77da2e1eeda0948b919b539faff7d535d))
+* **ui:** save timeline state in URL ([17414ee](https://github.com/erykpiast/webpack-stats-explorer/commit/17414ee31b3ac06440038f74ab8c5d273518a17d))
+
+
+### Bug Fixes
+
+* **format:** detect parsed size better ([2c2d509](https://github.com/erykpiast/webpack-stats-explorer/commit/2c2d5093bf3db0542f217420cbd84e98e6ea17bd))
+* **format:** finding the main submodule for entrypoint ([e1b5cb0](https://github.com/erykpiast/webpack-stats-explorer/commit/e1b5cb0356e7792200cd450c8b53651990fef774))
+* **ui:** prevent infinite loops when restoring state from URL ([a01e558](https://github.com/erykpiast/webpack-stats-explorer/commit/a01e558fc09d1e43f888aae51e0ca59a72671936))
+* **ui:** set max width for code in split view ([0d5331b](https://github.com/erykpiast/webpack-stats-explorer/commit/0d5331b447c66aa3d8768fe6fccaceb090ed7ed2))
+
 ### [1.26.2](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.26.1...v1.26.2) (2020-10-29)
 
 
