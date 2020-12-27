@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.27.2](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.27.1...v1.27.2) (2020-12-27)
+
+
+### Bug Fixes
+
+* **ui:** show tour only for example stats ([505a03b](https://github.com/erykpiast/webpack-stats-explorer/commit/505a03b0281f0e221a8b6a3c017a66a13e6f83d7))
+
 ### [1.27.1](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.27.0...v1.27.1) (2020-12-27)
 
 ## [1.27.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.26.2...v1.27.0) (2020-12-27)
