@@ -34,165 +34,48 @@ let reducer = (state, action) =>
       let maxIndex = List.length(state.stats) - 1;
 
       switch (action) {
-      | Next => {
-          tab: state.tab,
-          index: (state.index + 1) mod maxIndex,
-          stats: state.stats,
-          navigationPath: state.navigationPath,
-          isTimelineVisible: state.isTimelineVisible,
-          isSidebarCollapsed: state.isSidebarCollapsed,
-          isTourEnabled: state.isTourEnabled,
-          diffMode: state.diffMode,
-          urls: state.urls,
-          sourceTree: state.sourceTree,
-        }
-      | Prev => {
-          tab: state.tab,
-          index: (state.index - 1 + maxIndex) mod maxIndex,
-          stats: state.stats,
-          navigationPath: state.navigationPath,
-          isTimelineVisible: state.isTimelineVisible,
-          isSidebarCollapsed: state.isSidebarCollapsed,
-          isTourEnabled: state.isTourEnabled,
-          diffMode: state.diffMode,
-          urls: state.urls,
-          sourceTree: state.sourceTree,
-        }
-      | Choose(index) => {
-          tab: state.tab,
-          index,
-          stats: state.stats,
-          navigationPath: state.navigationPath,
-          isTimelineVisible: state.isTimelineVisible,
-          isSidebarCollapsed: state.isSidebarCollapsed,
-          isTourEnabled: state.isTourEnabled,
-          diffMode: state.diffMode,
-          urls: state.urls,
-          sourceTree: state.sourceTree,
-        }
+      | Next => {...state, index: (state.index + 1) mod maxIndex}
+      | Prev => {...state, index: (state.index - 1 + maxIndex) mod maxIndex}
+      | Choose(index) => {...state, index}
       | Navigate(segment, depth) => {
-          tab: state.tab,
-          index: state.index,
-          stats: state.stats,
+          ...state,
           navigationPath:
             updateNavigationPath(state.navigationPath, segment, depth),
-          isTimelineVisible: state.isTimelineVisible,
-          isSidebarCollapsed: state.isSidebarCollapsed,
-          isTourEnabled: state.isTourEnabled,
-          diffMode: state.diffMode,
-          urls: state.urls,
-          sourceTree: state.sourceTree,
         }
       | NavigateThroughBreadcrumbs(index) => {
-          tab: state.tab,
-          index: state.index,
-          stats: state.stats,
+          ...state,
           navigationPath:
             Belt.List.take(state.navigationPath, index)
             |> Utils.defaultTo([]),
-          isTimelineVisible: state.isTimelineVisible,
-          isSidebarCollapsed: state.isSidebarCollapsed,
-          isTourEnabled: state.isTourEnabled,
-          diffMode: state.diffMode,
-          urls: state.urls,
-          sourceTree: state.sourceTree,
         }
-      | NavigateAbsolutely(navigationPath) => {
-          tab: state.tab,
-          index: state.index,
-          stats: state.stats,
-          navigationPath,
-          isTimelineVisible: state.isTimelineVisible,
-          isSidebarCollapsed: state.isSidebarCollapsed,
-          isTourEnabled: state.isTourEnabled,
-          diffMode: state.diffMode,
-          urls: state.urls,
-          sourceTree: state.sourceTree,
-        }
+      | NavigateAbsolutely(navigationPath) => {...state, navigationPath}
       | ToggleTimeline => {
-          tab: state.tab,
-          index: state.index,
-          stats: state.stats,
-          navigationPath: state.navigationPath,
+          ...state,
           isTimelineVisible: !state.isTimelineVisible,
-          isSidebarCollapsed: state.isSidebarCollapsed,
-          isTourEnabled: state.isTourEnabled,
-          diffMode: state.diffMode,
-          urls: state.urls,
-          sourceTree: state.sourceTree,
         }
       | ToggleSidebar => {
-          tab: state.tab,
-          index: state.index,
-          stats: state.stats,
-          navigationPath: state.navigationPath,
-          isTimelineVisible: state.isTimelineVisible,
+          ...state,
           isSidebarCollapsed: !state.isSidebarCollapsed,
-          isTourEnabled: state.isTourEnabled,
-          diffMode: state.diffMode,
-          urls: state.urls,
-          sourceTree: state.sourceTree,
         }
       | AddStats(stats) => {
-          tab: state.tab,
-          index: state.index,
+          ...state,
           stats: List.concat([state.stats, stats]),
-          navigationPath: state.navigationPath,
-          isSidebarCollapsed: state.isSidebarCollapsed,
-          isTourEnabled: state.isTourEnabled,
           isTimelineVisible: false,
-          diffMode: state.diffMode,
-          urls: state.urls,
-          sourceTree: state.sourceTree,
         }
-      | UpdateUrls(urls) => {
-          tab: 1,
-          index: 0,
-          stats: [],
-          navigationPath: state.navigationPath,
-          isTimelineVisible: state.isTimelineVisible,
-          isSidebarCollapsed: state.isSidebarCollapsed,
-          isTourEnabled: state.isTourEnabled,
-          diffMode: state.diffMode,
-          urls,
-          sourceTree: state.sourceTree,
-        }
-      | SelectTab(tab) => {
-          tab,
-          index: state.index,
-          stats: state.stats,
-          navigationPath: state.navigationPath,
-          isTimelineVisible: state.isTimelineVisible,
-          isSidebarCollapsed: state.isSidebarCollapsed,
-          isTourEnabled: state.isTourEnabled,
-          diffMode: state.diffMode,
-          urls: state.urls,
-          sourceTree: state.sourceTree,
-        }
+      | UpdateUrls(urls) => {...state, tab: 1, index: 0, stats: [], urls}
+      | SelectTab(tab) => {...state, tab}
       | SwitchSourceTree => {
-          tab: state.tab,
-          index: state.index,
-          stats: state.stats,
+          ...state,
           navigationPath:
             state.sourceTree
               ? State.NavigationPath.convertFromSourceTree(
                   state.navigationPath,
                 )
               : State.NavigationPath.convertToSourceTree(state.navigationPath),
-          isTimelineVisible: state.isTimelineVisible,
-          isSidebarCollapsed: state.isSidebarCollapsed,
-          isTourEnabled: state.isTourEnabled,
-          diffMode: state.diffMode,
-          urls: state.urls,
           sourceTree: !state.sourceTree,
         }
       | SelectDiffMode(diffMode) => {
-          tab: state.tab,
-          index: state.index,
-          stats: state.stats,
-          navigationPath: state.navigationPath,
-          isTimelineVisible: state.isTimelineVisible,
-          isTourEnabled: state.isTourEnabled,
+          ...state,
           isSidebarCollapsed:
             CodeDiff.(
               switch (diffMode) {
@@ -201,51 +84,16 @@ let reducer = (state, action) =>
               }
             ),
           diffMode,
-          urls: state.urls,
-          sourceTree: state.sourceTree,
         }
-      | StartOver => {
-          tab: state.tab,
-          index: state.index,
-          stats: [],
-          navigationPath: state.navigationPath,
-          isTimelineVisible: state.isTimelineVisible,
-          isSidebarCollapsed: state.isSidebarCollapsed,
-          isTourEnabled: false,
-          diffMode: state.diffMode,
-          urls: [],
-          sourceTree: state.sourceTree,
-        }
+      | StartOver => {...state, stats: [], isTourEnabled: false, urls: []}
       | SetUrlState(newState) =>
         if (newState != state) {
           newState;
         } else {
           state;
         }
-      | EnableTour => {
-          tab: state.tab,
-          index: state.index,
-          stats: state.stats,
-          navigationPath: state.navigationPath,
-          isTimelineVisible: state.isTimelineVisible,
-          isSidebarCollapsed: state.isSidebarCollapsed,
-          isTourEnabled: true,
-          diffMode: state.diffMode,
-          urls: state.urls,
-          sourceTree: state.sourceTree,
-        }
-      | DisableTour => {
-          tab: state.tab,
-          index: state.index,
-          stats: state.stats,
-          navigationPath: state.navigationPath,
-          isTimelineVisible: state.isTimelineVisible,
-          isSidebarCollapsed: state.isSidebarCollapsed,
-          isTourEnabled: false,
-          diffMode: state.diffMode,
-          urls: state.urls,
-          sourceTree: state.sourceTree,
-        }
+      | EnableTour => {...state, isTourEnabled: true}
+      | DisableTour => {...state, isTourEnabled: false}
       };
     }
   );
