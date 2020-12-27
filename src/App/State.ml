@@ -50,6 +50,7 @@ type t =
   ; navigationPath : NavigationPath.t
   ; isTimelineVisible : bool
   ; isSidebarCollapsed : bool
+  ; isTourEnabled : bool
   ; diffMode : CodeDiff.mode
   ; urls : string list
   ; sourceTree : bool

@@ -13,7 +13,9 @@ type action =
   | SelectDiffMode(CodeDiff.mode)
   | SwitchSourceTree
   | SetUrlState(State.t)
-  | StartOver;
+  | StartOver
+  | EnableTour
+  | DisableTour;
 
 let updateNavigationPath = (path: list('a), segment, depth): list('a) => {
   let tail =
@@ -39,6 +41,7 @@ let reducer = (state, action) =>
           navigationPath: state.navigationPath,
           isTimelineVisible: state.isTimelineVisible,
           isSidebarCollapsed: state.isSidebarCollapsed,
+          isTourEnabled: state.isTourEnabled,
           diffMode: state.diffMode,
           urls: state.urls,
           sourceTree: state.sourceTree,
@@ -50,6 +53,7 @@ let reducer = (state, action) =>
           navigationPath: state.navigationPath,
           isTimelineVisible: state.isTimelineVisible,
           isSidebarCollapsed: state.isSidebarCollapsed,
+          isTourEnabled: state.isTourEnabled,
           diffMode: state.diffMode,
           urls: state.urls,
           sourceTree: state.sourceTree,
@@ -61,6 +65,7 @@ let reducer = (state, action) =>
           navigationPath: state.navigationPath,
           isTimelineVisible: state.isTimelineVisible,
           isSidebarCollapsed: state.isSidebarCollapsed,
+          isTourEnabled: state.isTourEnabled,
           diffMode: state.diffMode,
           urls: state.urls,
           sourceTree: state.sourceTree,
@@ -73,6 +78,7 @@ let reducer = (state, action) =>
             updateNavigationPath(state.navigationPath, segment, depth),
           isTimelineVisible: state.isTimelineVisible,
           isSidebarCollapsed: state.isSidebarCollapsed,
+          isTourEnabled: state.isTourEnabled,
           diffMode: state.diffMode,
           urls: state.urls,
           sourceTree: state.sourceTree,
@@ -86,6 +92,7 @@ let reducer = (state, action) =>
             |> Utils.defaultTo([]),
           isTimelineVisible: state.isTimelineVisible,
           isSidebarCollapsed: state.isSidebarCollapsed,
+          isTourEnabled: state.isTourEnabled,
           diffMode: state.diffMode,
           urls: state.urls,
           sourceTree: state.sourceTree,
@@ -97,6 +104,7 @@ let reducer = (state, action) =>
           navigationPath,
           isTimelineVisible: state.isTimelineVisible,
           isSidebarCollapsed: state.isSidebarCollapsed,
+          isTourEnabled: state.isTourEnabled,
           diffMode: state.diffMode,
           urls: state.urls,
           sourceTree: state.sourceTree,
@@ -108,6 +116,7 @@ let reducer = (state, action) =>
           navigationPath: state.navigationPath,
           isTimelineVisible: !state.isTimelineVisible,
           isSidebarCollapsed: state.isSidebarCollapsed,
+          isTourEnabled: state.isTourEnabled,
           diffMode: state.diffMode,
           urls: state.urls,
           sourceTree: state.sourceTree,
@@ -119,6 +128,7 @@ let reducer = (state, action) =>
           navigationPath: state.navigationPath,
           isTimelineVisible: state.isTimelineVisible,
           isSidebarCollapsed: !state.isSidebarCollapsed,
+          isTourEnabled: state.isTourEnabled,
           diffMode: state.diffMode,
           urls: state.urls,
           sourceTree: state.sourceTree,
@@ -129,6 +139,7 @@ let reducer = (state, action) =>
           stats: List.concat([state.stats, stats]),
           navigationPath: state.navigationPath,
           isSidebarCollapsed: state.isSidebarCollapsed,
+          isTourEnabled: state.isTourEnabled,
           isTimelineVisible: false,
           diffMode: state.diffMode,
           urls: state.urls,
@@ -141,6 +152,7 @@ let reducer = (state, action) =>
           navigationPath: state.navigationPath,
           isTimelineVisible: state.isTimelineVisible,
           isSidebarCollapsed: state.isSidebarCollapsed,
+          isTourEnabled: state.isTourEnabled,
           diffMode: state.diffMode,
           urls,
           sourceTree: state.sourceTree,
@@ -152,6 +164,7 @@ let reducer = (state, action) =>
           navigationPath: state.navigationPath,
           isTimelineVisible: state.isTimelineVisible,
           isSidebarCollapsed: state.isSidebarCollapsed,
+          isTourEnabled: state.isTourEnabled,
           diffMode: state.diffMode,
           urls: state.urls,
           sourceTree: state.sourceTree,
@@ -168,6 +181,7 @@ let reducer = (state, action) =>
               : State.NavigationPath.convertToSourceTree(state.navigationPath),
           isTimelineVisible: state.isTimelineVisible,
           isSidebarCollapsed: state.isSidebarCollapsed,
+          isTourEnabled: state.isTourEnabled,
           diffMode: state.diffMode,
           urls: state.urls,
           sourceTree: !state.sourceTree,
@@ -178,6 +192,7 @@ let reducer = (state, action) =>
           stats: state.stats,
           navigationPath: state.navigationPath,
           isTimelineVisible: state.isTimelineVisible,
+          isTourEnabled: state.isTourEnabled,
           isSidebarCollapsed:
             CodeDiff.(
               switch (diffMode) {
@@ -196,6 +211,7 @@ let reducer = (state, action) =>
           navigationPath: state.navigationPath,
           isTimelineVisible: state.isTimelineVisible,
           isSidebarCollapsed: state.isSidebarCollapsed,
+          isTourEnabled: false,
           diffMode: state.diffMode,
           urls: [],
           sourceTree: state.sourceTree,
@@ -205,6 +221,30 @@ let reducer = (state, action) =>
           newState;
         } else {
           state;
+        }
+      | EnableTour => {
+          tab: state.tab,
+          index: state.index,
+          stats: state.stats,
+          navigationPath: state.navigationPath,
+          isTimelineVisible: state.isTimelineVisible,
+          isSidebarCollapsed: state.isSidebarCollapsed,
+          isTourEnabled: true,
+          diffMode: state.diffMode,
+          urls: state.urls,
+          sourceTree: state.sourceTree,
+        }
+      | DisableTour => {
+          tab: state.tab,
+          index: state.index,
+          stats: state.stats,
+          navigationPath: state.navigationPath,
+          isTimelineVisible: state.isTimelineVisible,
+          isSidebarCollapsed: state.isSidebarCollapsed,
+          isTourEnabled: false,
+          diffMode: state.diffMode,
+          urls: state.urls,
+          sourceTree: state.sourceTree,
         }
       };
     }
@@ -222,6 +262,7 @@ let getStateFromUrl = (state, urlState: UrlState.t) => {
         navigationPath: [],
         isTimelineVisible: false,
         isSidebarCollapsed: false,
+        isTourEnabled: false,
         diffMode: CodeDiff.Unified,
         urls: [],
         sourceTree: false,
@@ -237,6 +278,7 @@ let getStateFromUrl = (state, urlState: UrlState.t) => {
       |> List.map(State.NavigationPath.Segment.fromString),
     isTimelineVisible: urlState.timeline,
     isSidebarCollapsed: currentState.isSidebarCollapsed,
+    isTourEnabled: currentState.isTourEnabled,
     diffMode: urlState.splitView ? CodeDiff.Split : CodeDiff.Unified,
     urls: urlState.urls,
     sourceTree: urlState.sourceTree,
@@ -333,6 +375,7 @@ let make = () => {
     <WelcomeScreen
       onStats={stats => dispatch(AddStats(stats))}
       onUrls={urls => dispatch(UpdateUrls(urls))}
+      onExample={() => dispatch(EnableTour)}
       urls={state.urls}>
       {loader =>
          <NavigationLayout
@@ -459,7 +502,12 @@ let make = () => {
          let sideContent = <Sidebar scrollable=entryTree fixed=treeSwitcher />;
 
          <>
-           <AppTour state=urlState onState=onTourState />
+           <AppTour
+             state=urlState
+             onState=onTourState
+             isOpen={state.isTourEnabled}
+             onClose={() => dispatch(DisableTour)}
+           />
            <NavigationLayout
              side=sideContent
              main=mainContent

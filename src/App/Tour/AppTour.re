@@ -1,9 +1,11 @@
 [@react.component]
-let make = (~state: UrlState.t, ~onState: UrlState.t => unit) => {
-  let (isOpen, setIsOpen) = React.useState(() => true);
-  let handleClose =
-    React.useCallback1(() => setIsOpen(_ => false), [|setIsOpen|]);
-
+let make =
+    (
+      ~state: UrlState.t,
+      ~onState: UrlState.t => unit,
+      ~isOpen: bool,
+      ~onClose: unit => unit,
+    ) => {
   let steps =
     React.useMemo1(
       () => {
@@ -74,5 +76,5 @@ let make = (~state: UrlState.t, ~onState: UrlState.t => unit) => {
       [|onState|],
     );
 
-  <Reactour isOpen steps onRequestClose=handleClose />;
+  <Reactour isOpen steps onRequestClose=onClose />;
 };
