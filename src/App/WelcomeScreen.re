@@ -33,7 +33,7 @@ module Styles = {
 let loadExampleData = _ => [Data.a, Data.b, Data.c, Data.d];
 
 [@react.component]
-let make = (~urls, ~onStats, ~onUrls, ~children) => {
+let make = (~urls, ~onStats, ~onUrls, ~onExample, ~children) => {
   <AddStats onStats>
     {(triggerUpload, onFiles) =>
        children(
@@ -57,7 +57,7 @@ let make = (~urls, ~onStats, ~onUrls, ~children) => {
            <p> {L10N.Welcome.or_ |> React.string} </p>
            <div>
              <Button
-               onClick={loadExampleData ||> onStats ||> ignore}
+               onClick={loadExampleData ||> onStats ||> ignore ||> onExample}
                className=Styles.action
                id="load-example">
                {L10N.Welcome.loadExample |> React.string}
