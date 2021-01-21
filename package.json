@@ -74,7 +74,7 @@
     "reason-date-fns": "1.0.2",
     "reason-react": "0.9.1",
     "recharts": "1.8.5",
-    "styled-components": "4.4.1"
+    "styled-components": "5.2.1"
   },
   "devDependencies": {
     "@babel/cli": "7.12.10",
