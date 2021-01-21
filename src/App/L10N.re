@@ -25,7 +25,7 @@ module Welcome = {
   let drag = "click button bellow or drag some files here to";
   let upload = "load your own stats";
   let or_ = "or";
-  let loadExample = "load example data";
+  let loadExample = "load app tour";
 };
 
 module Chunk = {
