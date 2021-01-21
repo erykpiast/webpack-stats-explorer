@@ -2,7 +2,7 @@ module Content = {
   [@react.component]
   let make = () => {
     <p>
-      {"You can see that the code wich was previously de-duplicated and present only in the "
+      {"You can see that the code which was previously de-duplicated and present only in the "
        |> React.string}
       <code> {"app.js" |> React.string} </code>
       {" file, is now placed in both " |> React.string}

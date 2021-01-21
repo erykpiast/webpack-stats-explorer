@@ -3,8 +3,8 @@ module Content = {
   let make = () => {
     <>
       <p>
-        {"This solution is reliable and works despite having two entrypoints, which is good.
-      It doesn't give as good results as automatic module sharing, though. After the optimization the total
+        {"This solution is reliable and works despite having two entrypoints which is good.
+      It doesn't give us as good results as automatic module sharing, though. After the optimization total
       chunk size is still bigger than before we introduced the second chunk."
          |> React.string}
       </p>

@@ -9,7 +9,7 @@ module Content = {
         <code> {"@babel/runtime/regenerator" |> React.string} </code>
         {" package. It is the " |> React.string}
         <code> {"index.js" |> React.string} </code>
-        {" module that we were looking at just a while before." |> React.string}
+        {" module that we were looking at just a while before. " |> React.string}
         {"The higlight color for this line is green, what means it wasn't present
         before and was just added - it's regular diff after all."
          |> React.string}

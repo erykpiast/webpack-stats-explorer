@@ -7,7 +7,7 @@ module Content = {
         of "
          |> React.string}
         <code> {"regenerator-runtime" |> React.string} </code>
-        {". that we've seem a while ago." |> React.string}
+        {". that we've seen a while ago." |> React.string}
       </p>
       <p>
         {"The fact that the module is placed under the " |> React.string}

@@ -2,7 +2,6 @@ module Content = {
   [@react.component]
   let make = () => {
     <p>
-      {"... and " |> React.string}
       <code> {"api.js" |> React.string} </code>
       {" modules." |> React.string}
     </p>;

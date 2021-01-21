@@ -3,7 +3,7 @@ module Content = {
   let make = () => {
     <>
       <p>
-        {"To better understand what changed, you can use the " |> React.string}
+        {"To better understand what has changed, you can use the " |> React.string}
         <code> {"Split" |> React.string} </code>
         {" view." |> React.string}
       </p>
@@ -15,7 +15,7 @@ module Content = {
           )>
           {"modified" |> React.string}
         </code>
-        {" kind of modules, as only these can contain changed code."
+        {" kind of modules, as only these can contain changes in the code."
          |> React.string}
       </p>
     </>;

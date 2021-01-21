@@ -18,7 +18,7 @@ module Content = {
       </p>
       <p>
         {"It doesn't look so good when it comes to the generated code. Let's
-        see at the "
+        see inside the "
          |> React.string}
         <code> {"STAT" |> React.string} </code>
         {" tab." |> React.string}

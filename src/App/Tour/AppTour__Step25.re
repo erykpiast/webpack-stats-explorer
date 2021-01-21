@@ -5,14 +5,14 @@ module Content = {
       <p>
         {"This optimization doesn't work for each application. For bigger
         codebases with more complex dependency tree, modules won't be inlined.
-        In fact, it's better not to rely on Webpack here, as rules are
-        very easy to break. One additional "
+        In fact, it's better not to rely on Webpack here as rules to keep the
+        bundle optimized are very easy to break. One additional "
          |> React.string}
         <code> {"import" |> React.string} </code>
         {" statement may cause unnecessary code duplication." |> React.string}
       </p>
       <p>
-        {"Let's switch to next comparision and see an example of such an
+        {"Let's switch to the next comparision and see an example of such an
         accidentally deoptimised code."
          |> React.string}
       </p>

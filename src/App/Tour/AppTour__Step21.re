@@ -7,7 +7,7 @@ module Content = {
         transpile "
          |> React.string}
         <code> {"async" |> React.string} </code>
-        {" functions to ES5. It also adds quite big " |> React.string}
+        {" functions to ES5. It also imports quite big " |> React.string}
         <code> {"regenerator" |> React.string} </code>
         {" module that we spotted at the start of our analysis."
          |> React.string}

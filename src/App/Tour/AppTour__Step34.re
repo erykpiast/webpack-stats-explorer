@@ -3,9 +3,7 @@ module Content = {
   let make = () => {
     <>
       <p>
-        <code> {"Webpack Stats Explorer" |> React.string} </code>
-        {" can help you find reasons of why your bundle size increased.
-      Unfortunatelly it's very easy to start sending more bytes than necessary
+        {"Unfortunatelly it's very easy to start sending more bytes than necessary
       to the user. Changing the build configuration or upgrading dependencies
       may cause a grow difficult to explaing without digging deeply in the
       contents of minified code. It's much easier with the right tool at your
@@ -13,7 +11,9 @@ module Content = {
          |> React.string}
       </p>
       <p>
-        {"Let's upload your own bundle statss and try it by yourself!"
+        <code> {"Webpack Stats Explorer" |> React.string} </code>
+        {" can help you find reasons of why your bundle size increased.
+        Let's upload your own bundle statss and try it by yourself!"
          |> React.string}
       </p>
     </>;
