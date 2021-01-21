@@ -3,11 +3,11 @@ module Content = {
   let make = () => {
     <>
       <p>
-        {"When you look closely at " |> React.string}
+        {"When you look closely at the " |> React.string}
         <code> {"PARSED" |> React.string} </code>
-        {" tab, you can find a few things missing, like " |> React.string}
+        {" tab, you can find a few things missing like " |> React.string}
         <code> {"asyncToGenerator" |> React.string} </code>
-        {" functions (easy to distinguish thanks to references to global "
+        {" functions (easy to distinguish thanks to references to the global "
          |> React.string}
         <code> {"Promise" |> React.string} </code>
         {" object which name cannot be minified). Why one module needs these
@@ -16,9 +16,9 @@ module Content = {
       </p>
       <p>
         {"The truth is a bit more complicated. Babel generates exactly the same
-        code for both modules, but when Webpck bundles app into a siingle file,
-        it's sometimes able to concatenate (inline) modules and get rid of
-        duplicated code. In such a case only a single copy of "
+        code for both modules, but when Webpck bundles app into a single file,
+        it sometimes can concatenate (inline) modules and get rid of
+        duplicated code. In such cases only a single copy of "
          |> React.string}
         <code> {"asyncToGenerator" |> React.string} </code>
         {" remains in the final bundle." |> React.string}

@@ -7,17 +7,17 @@ module Content = {
         introduce code duplication. See all these bytes added to modules in the "
          |> React.string}
         <code> {"lib" |> React.string} </code>
-        {" directory of " |> React.string}
+        {" directory of the " |> React.string}
         <code> {"app" |> React.string} </code>
-        {" chunk. The size of " |> React.string}
+        {" chunk. The size of the " |> React.string}
         <code> {"app.js" |> React.string} </code>
         {" file itself decreased, but in total the whole chunk grew significantly."
          |> React.string}
       </p>
       <p>
-        {"It happened despite we didn't touch source code of the app itself. Only
+        {"It happened despite we didn't touch the source code of the app itself. Only
         some distant and, at the first sight, unrelated parts of codebase were modified.
-        That's very fragile setup."
+        That's a very fragile setup."
          |> React.string}
       </p>
     </>;

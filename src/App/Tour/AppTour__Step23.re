@@ -7,7 +7,9 @@ module Content = {
       {" module, which grows significantly as well. You can easily spot "
        |> React.string}
       <code> {"switch" |> React.string} </code>
-      {" statements that look almost exactly the same." |> React.string}
+      {" statements that look almost exactly the same as in the " |> React.string}
+      <code> {"app.js" |> React.string} </code>
+      {" module." |> React.string}
     </p>;
   };
 };

@@ -4,7 +4,7 @@ module Content = {
     <p>
       {"It's exactly the same for " |> React.string}
       <code> {"app.js" |> React.string} </code>
-      {" module." |> React.string}
+      {" module, but there is also some other utility module imported." |> React.string}
     </p>;
   };
 };

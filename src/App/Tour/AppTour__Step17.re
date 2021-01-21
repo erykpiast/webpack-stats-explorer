@@ -3,7 +3,7 @@ module Content = {
   let make = () => {
     <>
       <p>
-        {"Notice how different sizes from each other. " |> React.string}
+        {"Notice how sizes differ from each other. " |> React.string}
         <code> {"Stat" |> React.string} </code>
         {" is significantly greater than the " |> React.string}
         <code> {"Original" |> React.string} </code>
