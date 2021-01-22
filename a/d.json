@@ -5,8 +5,8 @@
   ],
   "version": "4.46.0",
   "hash": "d865ffada97d7cd81b11",
-  "time": 5767,
-  "builtAt": 1611305355405,
+  "time": 5757,
+  "builtAt": 1611305928479,
   "publicPath": "",
   "outputPath": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/dist",
   "assetsByChunkName": {
@@ -3509,9 +3509,9 @@
           "chunks": [
             0
           ],
-          "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_listCacheDelete.js",
-          "issuerId": 146,
-          "issuerName": "./node_modules/lodash/_listCacheDelete.js",
+          "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_listCacheGet.js",
+          "issuerId": 147,
+          "issuerName": "./node_modules/lodash/_listCacheGet.js",
           "issuerPath": [
             {
               "id": null,
@@ -3564,9 +3564,9 @@
               "name": "./node_modules/lodash/_ListCache.js"
             },
             {
-              "id": 146,
-              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_listCacheDelete.js",
-              "name": "./node_modules/lodash/_listCacheDelete.js"
+              "id": 147,
+              "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_listCacheGet.js",
+              "name": "./node_modules/lodash/_listCacheGet.js"
             }
           ],
           "failed": false,
@@ -27483,9 +27483,9 @@
       "chunks": [
         0
       ],
-      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_listCacheDelete.js",
-      "issuerId": 146,
-      "issuerName": "./node_modules/lodash/_listCacheDelete.js",
+      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_listCacheGet.js",
+      "issuerId": 147,
+      "issuerName": "./node_modules/lodash/_listCacheGet.js",
       "issuerPath": [
         {
           "id": null,
@@ -27538,9 +27538,9 @@
           "name": "./node_modules/lodash/_ListCache.js"
         },
         {
-          "id": 146,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_listCacheDelete.js",
-          "name": "./node_modules/lodash/_listCacheDelete.js"
+          "id": 147,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/d/node_modules/lodash/_listCacheGet.js",
+          "name": "./node_modules/lodash/_listCacheGet.js"
         }
       ],
       "failed": false,

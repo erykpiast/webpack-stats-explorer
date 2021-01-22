@@ -5,8 +5,8 @@
   ],
   "version": "4.46.0",
   "hash": "af7fd6d9980263b74ccf",
-  "time": 4689,
-  "builtAt": 1611305385820,
+  "time": 4779,
+  "builtAt": 1611305958760,
   "publicPath": "",
   "outputPath": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/dist",
   "assetsByChunkName": {
@@ -11076,9 +11076,9 @@
       "optional": false,
       "prefetched": false,
       "chunks": [],
-      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/nanoutils/lib/assoc/assoc.js",
-      "issuerId": 35,
-      "issuerName": "./node_modules/nanoutils/lib/assoc/assoc.js",
+      "issuer": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/nanoutils/lib/assocPath/assocPath.js",
+      "issuerId": 37,
+      "issuerName": "./node_modules/nanoutils/lib/assocPath/assocPath.js",
       "issuerPath": [
         {
           "id": null,
@@ -11101,14 +11101,14 @@
           "name": "./node_modules/nanoutils/lib/index.js"
         },
         {
-          "id": 36,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/nanoutils/lib/assoc/index.js",
-          "name": "./node_modules/nanoutils/lib/assoc/index.js"
+          "id": 38,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/nanoutils/lib/assocPath/index.js",
+          "name": "./node_modules/nanoutils/lib/assocPath/index.js"
         },
         {
-          "id": 35,
-          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/nanoutils/lib/assoc/assoc.js",
-          "name": "./node_modules/nanoutils/lib/assoc/assoc.js"
+          "id": 37,
+          "identifier": "/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/webpack-enhanced-stats-plugin/loader.js!/home/travis/build/erykpiast/webpack-stats-explorer/playground/article/f/node_modules/nanoutils/lib/assocPath/assocPath.js",
+          "name": "./node_modules/nanoutils/lib/assocPath/assocPath.js"
         }
       ],
       "failed": false,
