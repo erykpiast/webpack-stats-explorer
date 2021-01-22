@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.28.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.27.2...v1.28.0) (2021-01-22)
+
+
+### Features
+
+* **ui:** change label of load example button ([7202209](https://github.com/erykpiast/webpack-stats-explorer/commit/72022090cd01ce79f4c219545174c9fb059bc0d7))
+* **ui:** make logo more different from webpacks ([96cd1a8](https://github.com/erykpiast/webpack-stats-explorer/commit/96cd1a8f50a508b1d659817d41e880ff538cf306))
+
+
+### Bug Fixes
+
+* **ui:** fix typos and grammar in app tour ([40fd4b0](https://github.com/erykpiast/webpack-stats-explorer/commit/40fd4b00391eb81229670ab98954f5dfdd2e918b))
+* **ui:** move github icon to left ([67b6891](https://github.com/erykpiast/webpack-stats-explorer/commit/67b6891ea81aec13f07cb9cfcd8ab80bcd5dbd15))
+
 ### [1.27.2](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.27.1...v1.27.2) (2020-12-27)
 
 
