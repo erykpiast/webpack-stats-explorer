@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.28.1](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.28.0...v1.28.1) (2021-01-22)
+
+
+### Bug Fixes
+
+* **ui:** fix github button positioning ([005f08f](https://github.com/erykpiast/webpack-stats-explorer/commit/005f08fba79885cd6760b385c383d47963eb9080))
+
 ## [1.28.0](https://github.com/erykpiast/webpack-stats-explorer/compare/v1.27.2...v1.28.0) (2021-01-22)
 
 
